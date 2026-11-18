@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-27,
+		date is 2026-11-17,
 		comment is 'Unit tests for the "issue_creator" tool.'
 	]).
 
@@ -171,7 +171,7 @@
 	test(issue_creator_reason_step_failure, deterministic(Atom == '&emsp;cleanup goal failed but should have succeeded')) :-
 		issue_creator<<failure_reason_to_atom(step_failure(cleanup), Atom).
 
-	test(issue_creator_description_quick_check_failure, true) :-
+	test(issue_creator_description_quick_check_failure, deterministic) :-
 		with_flag(
 			tests_base_url,
 			'',
@@ -179,7 +179,7 @@
 		),
 		assertion(sub_atom(Description, _, _, _, 'Failure:  \n&emsp;quick check test failure (at test `3` after 1 shrink with starting seed `123` and test seed `456`): `sample(a)`\n\n')).
 
-	test(issue_creator_description_quick_check_error, true) :-
+	test(issue_creator_description_quick_check_error, deterministic) :-
 		with_flag(
 			tests_base_url,
 			'',
@@ -187,7 +187,7 @@
 		),
 		assertion(sub_atom(Description, _, _, _, 'Failure:  \n&emsp;quick check test error (at test `3` with starting seed `123` and test seed `456`): `instantiation_error`\n\n')).
 
-	test(issue_creator_description_quick_check_broken_error, true) :-
+	test(issue_creator_description_quick_check_broken_error, deterministic) :-
 		with_flag(
 			tests_base_url,
 			'',
@@ -195,7 +195,7 @@
 		),
 		assertion(sub_atom(Description, _, _, _, 'Failure:  \n&emsp;quick check test broken (caused by `generate_test_error(sample)`): `instantiation_error`\n\n')).
 
-	test(issue_creator_description_quick_check_broken_failure, true) :-
+	test(issue_creator_description_quick_check_broken_failure, deterministic) :-
 		with_flag(
 			tests_base_url,
 			'',
@@ -257,7 +257,15 @@
 	test(issue_creator_wiql_apostrophes, deterministic(Query == 'SELECT [System.Id] FROM WorkItems WHERE [System.WorkItemType] = \'Bug\' AND [System.Title] = \'can\'\'t\' AND [System.Tags] CONTAINS \'team-s\'')) :-
 		issue_creator<<azure_wiql('can\'t', 'team-s', Query).
 
-	test(issue_creator_azure_no_matches, true) :-
+	test(issue_creator_command_text_unix, deterministic) :-
+		issue_creator<<command_text(unix, printf, [one, two], Command),
+		assertion(Command == '\'printf\' \'one\' \'two\'').
+
+	test(issue_creator_command_text_unix_no_arguments, deterministic) :-
+		issue_creator<<command_text(unix, printf, [], Command),
+		assertion(Command == '\'printf\'').
+
+	test(issue_creator_azure_no_matches, deterministic) :-
 		issue_creator<<azure_search_command(unix, 'printf Project', 'printf \'"New","Investigating"\'', 'printf 0', '\'SELECT\'', Command),
 		os::shell(Command).
 
@@ -281,7 +289,7 @@
 		issue_creator<<azure_search_command(unix, 'printf Project', true, 'printf 0', '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_literal_query, true) :-
+	test(issue_creator_azure_literal_query, deterministic) :-
 		issue_creator<<command_text(unix, printf, ['%s', 'Project $HOME'], ProjectQuery),
 		issue_creator<<command_text(unix, sh, ['-c', 'test "$#" -eq 2 && test "$2" = \'project=Project $HOME\' && printf "%s" "$1"', sh, '"New","Team\'s review"'], StatesQuery),
 		issue_creator<<command_text(unix, sh, ['-c', 'test "$#" -eq 2 && test "$1" = "$2" && printf 0', sh, 'SELECT $HOME AND [System.TeamProject] = "Project $HOME" AND [System.State] IN ("New","Team\'s review")'], IssueQuery),
@@ -294,7 +302,7 @@
 		atom_concat('powershell -NoLogo -NoProfile -NonInteractive -EncodedCommand ', Encoded, Command),
 		base64::parse(atom(Encoded), Bytes).
 
-	test(issue_creator_azure_command_unix, true) :-
+	test(issue_creator_azure_command_unix, deterministic) :-
 		issue_creator<<azure_list_command(unix, sample, bug, Command),
 		assertion(sub_atom(Command, _, _, _, '\'az\' \'devops\' \'project\' \'show\'')),
 		assertion(sub_atom(Command, _, _, _, '\'--resource\' \'workItemTypeStates\' \'--api-version\' \'7.1\'')),
@@ -303,7 +311,7 @@
 		assertion(sub_atom(Command, _, _, _, '[System.State] IN ($States)')),
 		assertion(\+ sub_atom(Command, _, _, _, 'System.StateCategory')).
 
-	test(issue_creator_azure_command_windows, true) :-
+	test(issue_creator_azure_command_windows, deterministic) :-
 		issue_creator<<azure_list_command(windows, 'sample %PATH% !value! $HOME', bug, Command),
 		atom_concat('powershell -NoLogo -NoProfile -NonInteractive -EncodedCommand ', Encoded, Command),
 		base64::parse(atom(Encoded), Bytes),
@@ -326,12 +334,12 @@
 	test(issue_creator_jql, deterministic(Query == 'issuetype = Bug AND statusCategory != Done AND labels = "bug" AND labels = "auto" AND summary ~ "\\"sample\\""')) :-
 		issue_creator<<jira_jql(sample, 'bug,auto', Query).
 
-	test(issue_creator_jql_unix, true) :-
+	test(issue_creator_jql_unix, deterministic) :-
 		issue_creator<<jira_list_command(unix, sample, bug, Command),
 		assertion(sub_atom(Command, _, _, _, '\'--paginate\' \'1\'')),
 		assertion(sub_atom(Command, _, _, _, '\'-q\' \'issuetype = Bug')).
 
-	test(issue_creator_jql_windows, true) :-
+	test(issue_creator_jql_windows, deterministic) :-
 		issue_creator<<jira_list_command(windows, sample, bug, Command),
 		assertion(sub_atom(Command, 0, _, _, '"jira" "issue" "list"')),
 		assertion(sub_atom(Command, _, _, _, '"--paginate" "1" "-q" "issuetype = Bug AND statusCategory != Done')),
@@ -339,12 +347,12 @@
 		atom_chars(Phrase, ['\\', '"', '\\', '\\', '\\', '"', s, a, m, p, l, e, '\\', '\\', '\\', '"', '\\', '"', '"']),
 		assertion(sub_atom(Command, _, _, 0, Phrase)).
 
-	test(issue_creator_jql_escaped_title, true) :-
+	test(issue_creator_jql_escaped_title, deterministic) :-
 		issue_creator<<jira_jql('a"b\\c', bug, Query),
 		atom_chars(Phrase, ['"', '\\', '"', a, '\\', '\\', '\\', '"', b, '\\', '\\', '\\', '\\', c, '\\', '"', '"']),
 		assertion(sub_atom(Query, _, _, 0, Phrase)).
 
-	test(issue_creator_jql_label, true) :-
+	test(issue_creator_jql_label, deterministic) :-
 		issue_creator<<jira_jql(sample, 'team-label_2', Query),
 		assertion(sub_atom(Query, _, _, _, ' AND labels = "team-label_2"')).
 
@@ -363,7 +371,7 @@
 	test(issue_creator_labels_invalid_blocks_reporting, false) :-
 		with_flag(issue_labels, 'test failures', issue_creator<<create_bug_report(suite, sample, _, 1-1, failure_instead_of_success, '', 0)).
 
-	test(issue_creator_jql_apostrophe, true) :-
+	test(issue_creator_jql_apostrophe, deterministic) :-
 		issue_creator<<jira_list_command(unix, 'can\'t', bug, Command),
 		atom_chars(Fragment, [c, a, n, '\'', '\\', '\'', '\'', t]),
 		assertion(sub_atom(Command, _, _, _, Fragment)).
@@ -484,7 +492,7 @@
 			issue_creator<<tests_url(azure, 'tests.lgt', unknown, _)
 		).
 
-	test(issue_creator_description_url_fallback, true) :-
+	test(issue_creator_description_url_fallback, deterministic) :-
 		with_flag(
 			tests_base_url,
 			'',
@@ -492,7 +500,7 @@
 		),
 		assertion(sub_atom(Description, _, _, _, 'Test file: tests.lgt:10-12\n\n')).
 
-	test(issue_creator_description_position_fallback, true) :-
+	test(issue_creator_description_position_fallback, deterministic) :-
 		with_flag(tests_base_url, 'https://example.com/repo/',
 			issue_creator<<description(github, suite, 'tests.lgt', unknown, failure_instead_of_success, '', 1, main, abc123, author, date, message, Description)),
 		assertion(sub_atom(Description, _, _, _, 'Test file: tests.lgt:unknown\n\n')).
@@ -517,7 +525,7 @@
 			issue_creator<<description(github, suite(_), 'tests.lgt', 10-12, unknown(detail), note(detail), 1, main, abc123, 'A. Author', '2026-10-26', 'Fix sample', Description)
 		).
 
-	test(issue_creator_description_azure_formatted, true) :-
+	test(issue_creator_description_azure_formatted, deterministic) :-
 		with_flag(
 			tests_base_url,
 			'https://dev.azure.com/org/project/_git/repo',
@@ -528,10 +536,10 @@
 		assertion(sub_atom(HTML, _, _, _, 'Test file: https://dev.azure.com/org/project/_git/repo?path=/tests.lgt&line=10<br><br>')),
 		assertion(sub_atom(HTML, _, _, _, 'Note: needs review<br><br>')).
 
-	test(issue_creator_flaky_exact, true) :-
+	test(issue_creator_flaky_exact, deterministic) :-
 		issue_creator<<flaky_test_failure(flaky).
 
-	test(issue_creator_flaky_embedded, true) :-
+	test(issue_creator_flaky_embedded, deterministic) :-
 		issue_creator<<flaky_test_failure('known flaky test').
 
 	test(issue_creator_flaky_empty, false) :-
@@ -588,32 +596,32 @@
 	test(issue_creator_server_flag_unsupported, false) :-
 		with_flag(issue_server, unsupported, issue_creator<<issue_server(_)).
 
-	test(issue_creator_flag_restored_after_success, true) :-
+	test(issue_creator_flag_restored_after_success, deterministic) :-
 		current_logtalk_flag(tests_base_url, Original),
 		with_flag(tests_base_url, 'https://example.com/fixture/', current_logtalk_flag(tests_base_url, 'https://example.com/fixture/')),
 		current_logtalk_flag(tests_base_url, Restored),
 		assertion(Restored == Original).
 
-	test(issue_creator_flag_restored_after_failure, true) :-
+	test(issue_creator_flag_restored_after_failure, deterministic) :-
 		current_logtalk_flag(issue_server, Original),
 		\+ with_flag(issue_server, unsupported, fail),
 		current_logtalk_flag(issue_server, Restored),
 		assertion(Restored == Original).
 
-	test(issue_creator_flag_restored_after_exception, true) :-
+	test(issue_creator_flag_restored_after_exception, deterministic) :-
 		current_logtalk_flag(issue_server, Original),
 		catch(with_flag(issue_server, unsupported, throw(flag_test_error)), Error, true),
 		current_logtalk_flag(issue_server, Restored),
 		assertion(Error == flag_test_error),
 		assertion(Restored == Original).
 
-	test(issue_creator_run_cli_literal_arguments, true) :-
+	test(issue_creator_run_cli_literal_arguments, deterministic) :-
 		issue_creator<<run_cli(unix, sh, ['-c', 'test "$#" -eq 1 && test "$1" = "$(printf "a\\047b \\042\\044HOME\\042")"', sh, 'a\'b "$HOME"']).
 
 	test(issue_creator_run_cli_failure, false) :-
 		issue_creator<<run_cli(unix, sh, ['-c', 'printf partial; exit 1']).
 
-	test(issue_creator_run_cli_empty_success, true) :-
+	test(issue_creator_run_cli_empty_success, deterministic) :-
 		issue_creator<<run_cli(unix, printf, ['%s', '']).
 
 	test(issue_creator_run_cli_missing_executable, false) :-
@@ -652,7 +660,7 @@
 	test(issue_creator_search_linear, deterministic(Arguments == [issue, query, '--search', title, '--state', triage, '--state', backlog, '--state', unstarted, '--state', started, '--limit', '1', '--json', '--no-pager', '--no-input', '-l', bug, '-l', 'test-failures'])) :-
 		issue_creator<<search_arguments(linear, title, 'bug,test-failures', linear, Arguments).
 
-	test(issue_creator_search_count_absent, true) :-
+	test(issue_creator_search_count_absent, deterministic) :-
 		issue_creator<<search_command(unix, github, 'printf "0\\n"', Command),
 		os::shell(Command).
 
@@ -660,7 +668,7 @@
 		issue_creator<<search_command(unix, gitlab, 'printf "1\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_gitea_absent, true) :-
+	test(issue_creator_search_gitea_absent, deterministic) :-
 		issue_creator<<search_command(unix, gitea, 'printf ""', Command),
 		os::shell(Command).
 
@@ -668,7 +676,7 @@
 		issue_creator<<search_command(unix, gitea, 'printf "123\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_linear_absent, true) :-
+	test(issue_creator_search_linear_absent, deterministic) :-
 		issue_creator<<search_command(unix, linear, 'printf "[]\\n"', Command),
 		os::shell(Command).
 
@@ -701,7 +709,7 @@
 	test(issue_creator_title_legacy_format, deterministic(Title == 'Test invoice_creation of test set library/invoices failed')) :-
 		issue_creator<<title(invoice_creation, 'library/invoices', Title).
 
-	test(issue_creator_jira_no_result, true) :-
+	test(issue_creator_jira_no_result, deterministic) :-
 		issue_creator<<command_text(unix, sh, ['-c', 'printf "%s\\n" "$1" >&2; exit 1', sh, 'No result found for given query in project "TEST"'], Query),
 		issue_creator<<jira_search_command(unix, Query, Command),
 		os::shell(Command).

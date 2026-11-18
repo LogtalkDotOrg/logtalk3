@@ -14,8 +14,8 @@ Support for automatically creating bug report issues for failed tests in GitHub,
 |    ``logtalk_load(issue_creator(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:14:0
-| **Date:** 2026-10-27
+| **Version:** 0:14:1
+| **Date:** 2026-11-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -372,9 +372,9 @@ Renders individually quoted command arguments.
 |    ``static``
 
 | **Template:**
-|    ``command_arguments(OperatingSystem,Arguments,Text)``
+|    ``command_arguments(Arguments,OperatingSystem,Text)``
 | **Mode and number of proofs:**
-|    ``command_arguments(+atom,+list(atom),-atom)`` - ``zero_or_one``
+|    ``command_arguments(+list(atom),+atom,-atom)`` - ``zero_or_one``
 
 
 ------------

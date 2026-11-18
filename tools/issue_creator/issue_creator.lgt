@@ -37,9 +37,9 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:14:1,
 		author is 'Paulo Moura',
-		date is 2026-10-27,
+		date is 2026-11-17,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub, GitLab, Azure DevOps, Gitea, Jira, or Linear servers.',
 		remarks is [
 			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script when using its ``-b`` option. See the script man page for details.'
@@ -164,7 +164,6 @@
 		argnames is ['Program', 'Command']
 	]).
 
-
 	:- private(valid_labels/1).
 	:- mode(valid_labels(+atom), zero_or_one).
 	:- info(valid_labels/1, [
@@ -225,10 +224,10 @@
 		], Command).
 
 	:- private(command_arguments/3).
-	:- mode(command_arguments(+atom, +list(atom), -atom), zero_or_one).
+	:- mode(command_arguments(+list(atom), +atom, -atom), zero_or_one).
 	:- info(command_arguments/3, [
 		comment is 'Renders individually quoted command arguments.',
-		argnames is ['OperatingSystem', 'Arguments', 'Text']
+		argnames is ['Arguments', 'OperatingSystem', 'Text']
 	]).
 
 	:- private(run_cli/3).
@@ -317,14 +316,18 @@
 
 	command_text(OperatingSystem, Executable, Arguments, Command) :-
 		shell_quote(OperatingSystem, Executable, QuotedExecutable),
-		command_arguments(OperatingSystem, Arguments, Text),
+		command_arguments(Arguments, OperatingSystem, Text),
 		atom_concat(QuotedExecutable, Text, Command).
 
-	command_arguments(_, [], '').
-	command_arguments(OperatingSystem, [Argument| Arguments], Text) :-
+	command_arguments([], _, '').
+	command_arguments([Argument| Arguments], OperatingSystem, Text) :-
+		command_arguments_([Argument| Arguments], OperatingSystem, Fragments, []),
+		atomic_list_concat(Fragments, Text).
+
+	command_arguments_([], _, Tail, Tail).
+	command_arguments_([Argument| Arguments], OperatingSystem, [' ', Quoted| Fragments], Tail) :-
 		shell_quote(OperatingSystem, Argument, Quoted),
-		command_arguments(OperatingSystem, Arguments, Tail),
-		atomic_list_concat([' ', Quoted, Tail], Text).
+		command_arguments_(Arguments, OperatingSystem, Fragments, Tail).
 
 	run_cli(OperatingSystem, Executable, Arguments) :-
 		command_text(OperatingSystem, Executable, Arguments, Command0),
@@ -419,8 +422,13 @@
 
 	jira_label_conditions([], '').
 	jira_label_conditions([Label| Labels], Conditions) :-
-		jira_label_conditions(Labels, Conditions0),
-		atomic_list_concat([' AND labels = "', Label, '"', Conditions0], Conditions).
+		jira_label_conditions_([Label| Labels], Fragments, []),
+		atomic_list_concat(Fragments, Conditions).
+
+	jira_label_conditions_([], Tail, Tail).
+	jira_label_conditions_([Label| Labels], [Condition| Conditions], Tail) :-
+		atomic_list_concat([' AND labels = "', Label, '"'], Condition),
+		jira_label_conditions_(Labels, Conditions, Tail).
 
 	jira_list_command(OperatingSystem, Title, Labels, Command) :-
 		jira_jql(Title, Labels, JQL),
@@ -541,8 +549,13 @@
 
 	azure_tag_conditions([], '').
 	azure_tag_conditions([Label| Labels], Conditions) :-
-		azure_tag_conditions(Labels, Conditions0),
-		atomic_list_concat([' AND [System.Tags] CONTAINS \'', Label, '\'', Conditions0], Conditions).
+		azure_tag_conditions_([Label| Labels], Fragments, []),
+		atomic_list_concat(Fragments, Conditions).
+
+	azure_tag_conditions_([], Tail, Tail).
+	azure_tag_conditions_([Label| Labels], [Condition| Conditions], Tail) :-
+		atomic_list_concat([' AND [System.Tags] CONTAINS \'', Label, '\''], Condition),
+		azure_tag_conditions_(Labels, Conditions, Tail).
 
 	valid_labels(Labels) :-
 		atom(Labels),
