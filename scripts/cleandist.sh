@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Distribution clean script for packaging
-##   Last updated on November 14, 2026
+##   Last updated on November 18, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -59,6 +59,7 @@ chmod a+x scripts/embedding/eclipse/*.sh
 chmod a+x scripts/embedding/gprolog/*.sh
 chmod a+x scripts/embedding/jiprolog/*.sh
 chmod a+x scripts/embedding/sicstus/*.sh
+chmod a+x scripts/embedding/shumway/*.sh
 chmod a+x scripts/embedding/swipl/*.sh
 chmod a+x scripts/embedding/trealla/*.sh
 chmod a+x scripts/embedding/xsb/*.sh
