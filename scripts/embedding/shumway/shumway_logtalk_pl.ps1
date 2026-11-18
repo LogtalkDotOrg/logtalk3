@@ -334,13 +334,13 @@ if ($l -ne "") {
 	Add-Content -Path "$d/$name.pl" -Value ":- include(application)."
 	shumway-compile --release "$d/$name.pl"
 	Set-Location "$d"
-	shumway-link --strip --allow-undefined --consult --library -o "$name.shum" "$name.pl"
+	shumway-link --strip --allow-undefined --library -o "$name.shum" "$name.pl"
 	shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
 	Pop-Location
 } else {
 	Set-Location "$d"
-	shumway-link --strip --allow-undefined --consult --library -o logtalk.shum logtalk.pl
-	shumway --save-toplevel logtalk --self-contained --goal "'$lgt_print_message'(banner, banner), '$lgt_print_message'(comment(settings), default_flags), ('$lgt_loaded_file_'('settings.lgt', Directory, _, _, _, _, _) -> Result = loaded(Directory); Result = none(allow)), '$lgt_report_settings_file'(Result), '$lgt_print_message'(comment(help), help)" logtalk.shum
+	shumway-link --strip --allow-undefined --library -o logtalk.shum logtalk.pl
+	shumway --save-toplevel logtalk --self-contained logtalk.shum
 	Pop-Location
 }
 
