@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-374 493,-374 493,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object capacity_scaling/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;17, 20:24</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;18, 00:19</text>
 <g id="clust1" class="cluster">
 <title>cluster_capacity_scaling_1_object</title>
 <g id="a_clust1"><a xlink:title="capacity_scaling(Dictionary)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 469,-46 469,-46 475,-46 481,-52 481,-58 481,-58 481,-350 481,-350 481,-356 475,-362 469,-362 469,-362 20,-362 20,-362 14,-362 8,-356 8,-350 8,-350 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-346.46" font-family="monospace" font-size="10.00" fill="dimgray">capacity_scaling(Dictionary)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>maximize/5</title>
 <polygon fill="cornsilk" stroke="black" points="278.41,-326 185.59,-326 185.59,-290 278.41,-290 278.41,-326"/>
 <text xml:space="preserve" text-anchor="start" x="193.59" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="198.99" y="-309.71" font-family="monospace" font-size="11.00">maximize/5</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>max_capacity/3</title>
 <polygon fill="cornsilk" stroke="black" points="137.61,-209 18.39,-209 18.39,-173 137.61,-173 137.61,-209"/>
 <text xml:space="preserve" text-anchor="start" x="26.39" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L51">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="31.79" y="-192.71" font-family="monospace" font-size="11.00">max_capacity/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- maximize/5&#45;&gt;max_capacity/3 -->
 <g id="edge1" class="edge">
 <title>maximize/5&#45;&gt;max_capacity/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M208.61,-289.53C182.42,-269.97 139.79,-238.14 110.4,-216.19"/>
 <polygon fill="black" stroke="black" points="112.68,-213.53 102.57,-210.35 108.49,-219.13 112.68,-213.53"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="159.62" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>initial_threshold/3</title>
 <polygon fill="cornsilk" stroke="black" points="308.11,-209 155.89,-209 155.89,-173 308.11,-173 308.11,-209"/>
 <text xml:space="preserve" text-anchor="start" x="163.89" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L56">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="169.29" y="-192.71" font-family="monospace" font-size="11.00">initial_threshold/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- maximize/5&#45;&gt;initial_threshold/3 -->
 <g id="edge2" class="edge">
 <title>maximize/5&#45;&gt;initial_threshold/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M232,-289.53C232,-271.28 232,-242.33 232,-220.7"/>
 <polygon fill="black" stroke="black" points="235.5,-220.77 232,-210.77 228.5,-220.77 235.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="232" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>scale/8</title>
 <polygon fill="cornsilk" stroke="black" points="399.5,-209 326.5,-209 326.5,-173 399.5,-173 399.5,-209"/>
 <text xml:space="preserve" text-anchor="start" x="334.5" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="339.9" y="-192.71" font-family="monospace" font-size="11.00">scale/8</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- maximize/5&#45;&gt;scale/8 -->
 <g id="edge3" class="edge">
 <title>maximize/5&#45;&gt;scale/8</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M251.9,-289.53C274.05,-270.09 310.02,-238.51 335.01,-216.57"/>
 <polygon fill="black" stroke="black" points="337,-219.48 342.21,-210.25 332.38,-214.22 337,-219.48"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L40">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L40">
 <text xml:space="preserve" text-anchor="start" x="301.43" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- scale/8&#45;&gt;^^bfs/6 -->
 <g id="edge4" class="edge">
 <title>scale/8&#45;&gt;^^bfs/6</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M326.15,-176.24C270.27,-155.38 164.09,-115.73 102.48,-92.73"/>
 <polygon fill="black" stroke="black" points="103.9,-89.52 93.31,-89.3 101.45,-96.08 103.9,-89.52"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="218.24" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -157,12 +157,12 @@
 <!-- scale/8&#45;&gt;^^path_ids/4 -->
 <g id="edge5" class="edge">
 <title>scale/8&#45;&gt;^^path_ids/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M332.62,-172.53C298.02,-152.63 241.32,-120.04 203.11,-98.06"/>
 <polygon fill="black" stroke="black" points="205.06,-95.15 194.65,-93.2 201.57,-101.22 205.06,-95.15"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="269" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -181,12 +181,12 @@
 <!-- scale/8&#45;&gt;^^bottleneck/3 -->
 <g id="edge6" class="edge">
 <title>scale/8&#45;&gt;^^bottleneck/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M352.52,-172.53C341.26,-153.77 323.22,-123.7 310.14,-101.91"/>
 <polygon fill="black" stroke="black" points="313.28,-100.33 305.13,-93.55 307.27,-103.93 313.28,-100.33"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="330.57" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,12 +205,12 @@
 <!-- scale/8&#45;&gt;^^augment/4 -->
 <g id="edge7" class="edge">
 <title>scale/8&#45;&gt;^^augment/4</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M371.81,-172.53C381.19,-153.94 396.16,-124.24 407.13,-102.5"/>
 <polygon fill="black" stroke="black" points="410.24,-104.11 411.62,-93.6 403.99,-100.96 410.24,-104.11"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b7bf2f69ba716d74c5f7a501ed7d56cb934b8b5c/library/flow_networks/capacity_scaling.lgt#L63">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/bcbefb613f77f15b68a6d46423ff1791191e23f9/library/flow_networks/capacity_scaling.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="393.74" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
