@@ -7,7 +7,7 @@
 ##   Logtalk application; creates also application and logtalk self-contained
 ##   executables
 ##
-##   Last updated on November 4, 2026
+##   Last updated on November 18, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -351,7 +351,7 @@ if [ "$loader" != "" ] ; then
 else
 	cd "$directory"
 	shumway-link --strip --allow-undefined --consult --library -o logtalk.shum logtalk.pl
-	shumway --save-toplevel logtalk --self-contained --goal "'\$lgt_print_message'(banner, banner), '\$lgt_print_message'(comment(settings), default_flags), '\$lgt_report_settings_file'(Result), '\$lgt_print_message'(comment(help), help)" logtalk.shum
+	shumway --save-toplevel logtalk --self-contained --goal "'\$lgt_print_message'(banner, banner), '\$lgt_print_message'(comment(settings), default_flags), ('\$lgt_loaded_file_'('settings.lgt', Directory, _, _, _, _, _) -> Result = loaded(Directory); Result = none(allow)), '\$lgt_report_settings_file'(Result), '\$lgt_print_message'(comment(help), help)" logtalk.shum
 fi
 
 function cleanup {
