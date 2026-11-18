@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2026-10-31,
+		date is 2026-11-18,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -1492,10 +1492,13 @@
 		),
 		thresholds_maximum(Thresholds, Maximum1, Maximum).
 
-	merge_file_results([], []).
-	merge_file_results([file_result(File, Language, Source, Mutants)| FileResults], Merged) :-
-		merge_file_results(FileResults, Merged0),
-		merge_one_file_result(file_result(File, Language, Source, Mutants), Merged0, Merged).
+	merge_file_results(FileResults, Merged) :-
+		merge_file_results(FileResults, [], Merged).
+
+	merge_file_results([], Merged, Merged).
+	merge_file_results([FileResult| FileResults], Merged0, Merged) :-
+		merge_one_file_result(FileResult, Merged0, Merged1),
+		merge_file_results(FileResults, Merged1, Merged).
 
 	merge_one_file_result(file_result(File, Language, Source, Mutants), [], [file_result(File, Language, Source, Mutants)]).
 	merge_one_file_result(file_result(File, _Language, _Source, Mutants), [file_result(File, Language0, Source0, Mutants0)| Tail], [file_result(File, Language0, Source0, Mutants1)| Tail]) :-

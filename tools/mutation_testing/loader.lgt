@@ -42,6 +42,7 @@
 			mutator_common,
 			'mutators/fail_insertion',
 			'mutators/body_goal_negation',
+			'mutators/relational_operator_inversion',
 			'mutators/relational_operator_replacement',
 			'mutators/arithmetic_operator_replacement',
 			'mutators/truth_literal_flip',

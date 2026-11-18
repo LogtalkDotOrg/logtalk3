@@ -452,6 +452,9 @@ for creating bug reports at Azure DevOps, Gitea, and Jira servers.
 
 * ADDED: Tests for the `issue_creator` tool.
 
+* ADDED: New `relational_operator_inversion` mutator to the `mutation_testing`
+tool.
+
 * ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts for a `-k` option for passing a file listing expected
 failed tests and broken, timedout, and crashed test sets, which are ignored

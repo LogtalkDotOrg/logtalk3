@@ -2450,6 +2450,7 @@ To load any library (including developer tools, ports, and contributions), use t
    mutator_common <mutator_common_0>
    mutator_protocol <mutator_protocol_0>
    predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
+   relational_operator_inversion(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_inversion_5>
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
    subprocess_coverage_hook <subprocess_coverage_hook_0>

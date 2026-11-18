@@ -61,9 +61,13 @@ The default mutators are:
 - | ``body_goal_negation``
   | Negates the selected predicate/non-terminal clause behavior.
 
+- | ``relational_operator_inversion``
+  | Replaces a relational operator (e.g. ``>``, ``<``, ``@=<``, ``==``)
+    with its inversion (e.g., ``<`` with ``>=``).
+
 - | ``relational_operator_replacement``
   | Replaces a relational operator (e.g. ``>``, ``<``, ``@=<``, ``==``)
-    with a complementary alternative.
+    with an alternative (e.g., ``<`` with ``=<``, ``>``, or ``>=``).
 
 - | ``arithmetic_operator_replacement``
   | Replaces an arithmetic operator in selected expressions.

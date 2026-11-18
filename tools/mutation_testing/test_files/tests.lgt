@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2026-10-27,
+		date is 2026-11-18,
 		comment is 'Unit tests for the "mutation_testing" tool.'
 	]).
 
@@ -43,6 +43,7 @@
 	% default mutators
 	cover(fail_insertion(_, _, _, _, _)).
 	cover(body_goal_negation(_, _, _, _, _)).
+	cover(relational_operator_inversion(_, _, _, _, _)).
 	cover(relational_operator_replacement(_, _, _, _, _)).
 	cover(arithmetic_operator_replacement(_, _, _, _, _)).
 	cover(truth_literal_flip(_, _, _, _, _)).
@@ -340,6 +341,30 @@
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		assertion(mt_dcg_sample::dcg_guard_check).
 
+	test(mt_mutator_relational_operator_inversion_01, true) :-
+		load_with_hook(relational_operator_inversion(mt_sample, target/2, 1, 1, false)),
+		assertion(\+ mt_sample::check(1)),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		assertion(mt_sample::check(1)).
+
+	test(mt_mutator_relational_operator_inversion_02, true) :-
+		load_with_hook(relational_operator_inversion(mt_sample, term_target/2, 1, 1, false)),
+		assertion(\+ mt_sample::term_check),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		assertion(mt_sample::term_check).
+
+	test(mt_mutator_relational_operator_inversion_03, true) :-
+		load_with_hook(relational_operator_inversion(mt_sample, disj_cmp/1, 1, 1, false)),
+		assertion(\+ mt_sample::disj_cmp_check),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		assertion(mt_sample::disj_cmp_check).
+
+	test(mt_mutator_relational_operator_inversion_dcg_01, true) :-
+		load_with_hook(relational_operator_inversion(mt_dcg_sample, dcg_guard//0, 1, 1, false)),
+		assertion(\+ mt_dcg_sample::dcg_guard_check),
+		logtalk_load(test_entities, [reload(always), source_data(on)]),
+		assertion(mt_dcg_sample::dcg_guard_check).
+
 	test(mt_mutator_relational_operator_replacement_01, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, target/2, 1, 1, false)),
 		assertion(\+ mt_sample::check(1)),
@@ -510,30 +535,33 @@
 		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([body_goal_negation])]).
 
 	test(mt_mutators_option_03, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([relational_operator_replacement])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([relational_operator_inversion])]).
 
 	test(mt_mutators_option_04, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([arithmetic_operator_replacement])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([relational_operator_replacement])]).
 
 	test(mt_mutators_option_05, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([truth_literal_flip])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([arithmetic_operator_replacement])]).
 
 	test(mt_mutators_option_06, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([head_arguments_mutation])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([truth_literal_flip])]).
 
 	test(mt_mutators_option_07, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([head_arguments_reordering])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([head_arguments_mutation])]).
 
 	test(mt_mutators_option_08, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([clauses_reordering])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([head_arguments_reordering])]).
 
 	test(mt_mutators_option_09, deterministic) :-
-		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([scope_directive_replacement])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([clauses_reordering])]).
 
 	test(mt_mutators_option_10, deterministic) :-
-		mutation_testing::predicate_mutants(mt_predicate_directives_sample, local_dynamic/1, _, [mutators([predicate_directive_suppression])]).
+		mutation_testing::predicate_mutants(mt_other_sample, check/1, _, [mutators([scope_directive_replacement])]).
 
 	test(mt_mutators_option_11, deterministic) :-
+		mutation_testing::predicate_mutants(mt_predicate_directives_sample, local_dynamic/1, _, [mutators([predicate_directive_suppression])]).
+
+	test(mt_mutators_option_12, deterministic) :-
 		mutation_testing::predicate_mutants(mt_predicate_directives_sample, resource/1, _, [mutators([uses_directive_resource_deletion])]).
 
 	test(mt_max_mutations_per_mutator_option_01, deterministic) :-
@@ -734,14 +762,14 @@
 		assertion(results, Results1 == Results2).
 
 	test(mt_sampling_all_seed_invariance_01, deterministic) :-
-		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
-			mutators([relational_operator_replacement]),
+		mutation_testing::report_predicate(mt_code_coverage, p/2, report(mt_code_coverage, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
+			mutators([relational_operator_inversion]),
 			sampling(all),
 			seed(1),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total2, _Killed2, _Survived2, _Untested2, _Timeout2, _NoCoverage2, _Errors2, _Score2, _Threshold2, _Passed2), Results2), [
-			mutators([relational_operator_replacement]),
+		mutation_testing::report_predicate(mt_code_coverage, p/2, report(mt_code_coverage, summary(Total2, _Killed2, _Survived2, _Untested2, _Timeout2, _NoCoverage2, _Errors2, _Score2, _Threshold2, _Passed2), Results2), [
+			mutators([relational_operator_inversion]),
 			sampling(all),
 			seed(9999),
 			tester_file_name('subprocess_tester.lgt')
