@@ -31,14 +31,15 @@ combinatorial problems that can be stated as finding good paths or
 permutations on a graph, such as the Traveling Salesman Problem (TSP),
 vehicle routing, and scheduling.
 
-The library provides the parametric object `ant_colony(Problem, RandomAlgorithm)`
+The library provides the parametric object `ant_colony(Problem, Random)`
 where `Problem` is an object implementing the `ant_colony_problem_protocol`
-protocol and `RandomAlgorithm` is one of the algorithms supported by the
-`fast_random` library. The algorithm minimizes the solution cost defined
-by the problem.
+protocol and `Random` is a random generator object provided by the
+`random` library. The algorithm minimizes the solution cost defined by the
+problem.
 
 A convenience object `ant_colony(Problem)` is also provided, using the
-Xoshiro128++ random number generator (`xoshiro128pp`) as the default.
+Xoshiro128++ random number generator (`fast_random(xoshiro128pp)`) as the
+default.
 
 
 API documentation
@@ -68,10 +69,8 @@ Features
 --------
 
 - **Configurable random number generator** - the algorithm is parameterized
-  by a `fast_random` algorithm. Available algorithms include `xoshiro128pp`,
-  `xoshiro128ss`, `xoshiro256pp`, `xoshiro256ss`, `well512a`, `splitmix64`,
-  and `as183`. The convenience object `ant_colony(Problem)` defaults to
-  `xoshiro128pp`.
+  by a random object. The convenience object `ant_colony(Problem)` defaults to
+  `fast_random(xoshiro128pp)`.
 - **Classic Ant System pheromone update** - every edge evaporates by factor
   `(1-Rho)`; each ant then deposits `Q / Cost` on the edges of its tour.
 - **MAX-MIN pheromone bounds** - optional `tau_min(T)` and `tau_max(T)`
@@ -204,9 +203,9 @@ For example, a small TSP instance:
 	     ant_colony(tsp6)::run(T2, C2, [seed(42)]).
 	T1 = T2, C1 = C2.
 
-### Using a custom random number generator
+### Using a custom random number generator object
 
-	| ?- ant_colony(tsp6, well512a)::run(Tour, Cost).
+	| ?- ant_colony(tsp6, fast_random(well512a))::run(Tour, Cost).
 
 
 Limitations

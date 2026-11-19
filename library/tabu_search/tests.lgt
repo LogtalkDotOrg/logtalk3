@@ -13,7 +13,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-26,
+		date is 2026-11-19,
 		comment is 'Unit tests for the "tabu_search" library.'
 	]).
 
@@ -219,13 +219,13 @@
 		assertion(Statistics == [steps(2), acceptances(0), improvements(0), final_tabu_size(0)]).
 
 	test(tabu_search_candidate_tie, deterministic) :-
-		tabu_search(tabu_search_fixture(full, [a-2, b-1, c-1], none), xoshiro128pp)<<evaluate_candidates(policy(false, false, false, false, false), [c,b], 2, [], 0, State, Energy, Accepted),
+		tabu_search(tabu_search_fixture(full, [a-2, b-1, c-1], none), fast_random(xoshiro128pp))<<evaluate_candidates(policy(false, false, false, false, false), [c,b], 2, [], 0, State, Energy, Accepted),
 		assertion(State == c),
 		assertion(Energy == 1),
 		assertion(Accepted == true).
 
 	test(tabu_search_all_candidates_tabu, deterministic) :-
-		tabu_search(tabu_search_fixture(full, [a-0, b-1], none), xoshiro128pp)<<evaluate_candidates(policy(false, false, false, false, false), [b], 0, [b-7], 1, _, _, Accepted),
+		tabu_search(tabu_search_fixture(full, [a-0, b-1], none), fast_random(xoshiro128pp))<<evaluate_candidates(policy(false, false, false, false, false), [b], 0, [b-7], 1, _, _, Accepted),
 		assertion(Accepted == false).
 
 	test(tabu_search_tenure_one_blocks_reversal, deterministic) :-
@@ -249,18 +249,18 @@
 		assertion(Statistics == [steps(4), acceptances(2), improvements(0), final_tabu_size(0)]).
 
 	test(tabu_search_tenure_boundaries, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<update_tabu(policy(false, false, false, false, false), a, 5, 0, 0, fixed(2), [], Tabu),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<update_tabu(policy(false, false, false, false, false), a, 5, 0, 0, fixed(2), [], Tabu),
 		assertion(Tabu == [a-8]),
-		assertion(tabu_search(quadratic, xoshiro128pp)<<is_tabu(a, Tabu, 6)),
-		assertion(tabu_search(quadratic, xoshiro128pp)<<is_tabu(a, Tabu, 7)),
-		assertion(\+ (tabu_search(quadratic, xoshiro128pp)<<is_tabu(a, Tabu, 8))),
-		tabu_search(quadratic, xoshiro128pp)<<prune_tabu(Tabu, 8, []),
-		tabu_search(quadratic, xoshiro128pp)<<active_tabu_size(Tabu, 8, 0).
+		assertion(tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(a, Tabu, 6)),
+		assertion(tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(a, Tabu, 7)),
+		assertion(\+ (tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(a, Tabu, 8))),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<prune_tabu(Tabu, 8, []),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<active_tabu_size(Tabu, 8, 0).
 
 	test(tabu_search_random_tenure_bounds, deterministic) :-
 		forall(list::member(Seed, [1,2,3,42,55]), (
 			fast_random(xoshiro128pp)::randomize(Seed),
-			tabu_search(quadratic, xoshiro128pp)<<update_tabu(policy(false, false, false, false, false), a, 5, 0, 0, range(2,4), [], [a-Expire]),
+			tabu_search(quadratic, fast_random(xoshiro128pp))<<update_tabu(policy(false, false, false, false, false), a, 5, 0, 0, range(2,4), [], [a-Expire]),
 			assertion(Expire >= 8),
 			assertion(Expire =< 10)
 		)).
@@ -270,19 +270,19 @@
 		assertion(Statistics == [steps(4), acceptances(2), improvements(0), final_tabu_size(0)]).
 
 	test(tabu_search_unifiable_states_are_distinct, deterministic) :-
-		assertion(\+ (tabu_search(quadratic, xoshiro128pp)<<is_tabu(s(Variable), [s(a)-5], 1))),
+		assertion(\+ (tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(s(Variable), [s(a)-5], 1))),
 		assertion(var(Variable)).
 
 	test(tabu_search_variable_identity, deterministic) :-
-		assertion(\+ (tabu_search(quadratic, xoshiro128pp)<<is_tabu(s(First), [s(Second)-5], 1))),
+		assertion(\+ (tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(s(First), [s(Second)-5], 1))),
 		assertion(var(First)),
 		assertion(var(Second)),
-		tabu_search(quadratic, xoshiro128pp)<<is_tabu(s(First), [s(First)-5], 1),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(s(First), [s(First)-5], 1),
 		assertion(var(First)).
 
 	test(tabu_search_identity_expired_then_active, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<is_tabu(a, [a-1,b-5,a-5], 1),
-		assertion(\+ (tabu_search(quadratic, xoshiro128pp)<<is_tabu(a, [a-1,b-5], 1))).
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(a, [a-1,b-5,a-5], 1),
+		assertion(\+ (tabu_search(quadratic, fast_random(xoshiro128pp))<<is_tabu(a, [a-1,b-5], 1))).
 
 	test(tabu_search_nonground_public_state, deterministic) :-
 		tabu_search(tabu_search_fixture(full, [s(a)-0,s(b)-0,s(Variable)-0], none))::run(_, _, Statistics, [max_steps(2)]),
@@ -358,28 +358,28 @@
 		assertion(Energy < 10).
 
 	test(tabu_search_aspiration_boundaries, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<is_admissible(policy(false, false, false, false, false), a, -1, 0, [a-5], 1, true),
-		tabu_search(quadratic, xoshiro128pp)<<is_admissible(policy(false, false, false, false, false), a, 0, 0, [a-5], 1, false),
-		tabu_search(quadratic, xoshiro128pp)<<is_admissible(policy(false, false, false, false, false), a, 1, 0, [a-5], 1, false),
-		tabu_search(quadratic, xoshiro128pp)<<is_admissible(policy(false, false, false, false, false), b, 1, 0, [a-5], 1, true).
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<is_admissible(policy(false, false, false, false, false), a, -1, 0, [a-5], 1, true),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<is_admissible(policy(false, false, false, false, false), a, 0, 0, [a-5], 1, false),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<is_admissible(policy(false, false, false, false, false), a, 1, 0, [a-5], 1, false),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<is_admissible(policy(false, false, false, false, false), b, 1, 0, [a-5], 1, true).
 
 	test(tabu_search_candidate_pruning_keeps_worsening_best, deterministic) :-
-		tabu_search(tabu_search_fixture(full, [b-3,c-2,d-2], none), xoshiro128pp)<<evaluate_candidates(policy(false, false, false, false, false), [b,c,d], 0, [], 1, State, Energy, Accepted),
+		tabu_search(tabu_search_fixture(full, [b-3,c-2,d-2], none), fast_random(xoshiro128pp))<<evaluate_candidates(policy(false, false, false, false, false), [b,c,d], 0, [], 1, State, Energy, Accepted),
 		assertion(State == c),
 		assertion(Energy == 2),
 		assertion(Accepted == true).
 
 	test(tabu_search_inadmissible_first_candidate, deterministic) :-
-		tabu_search(tabu_search_fixture(full, [b-1,c-2,d-3], none), xoshiro128pp)<<evaluate_candidates(policy(false, false, false, false, false), [b,c,d], 0, [b-5], 1, State, Energy, Accepted),
+		tabu_search(tabu_search_fixture(full, [b-1,c-2,d-3], none), fast_random(xoshiro128pp))<<evaluate_candidates(policy(false, false, false, false, false), [b,c,d], 0, [b-5], 1, State, Energy, Accepted),
 		assertion(State == c),
 		assertion(Energy == 2),
 		assertion(Accepted == true).
 
 	test(tabu_search_active_tabu_counts, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<active_tabu_size([], 0, 0),
-		tabu_search(quadratic, xoshiro128pp)<<active_tabu_size([a-5,b-6], 1, 2),
-		tabu_search(quadratic, xoshiro128pp)<<active_tabu_size([a-1,b-2], 2, 0),
-		tabu_search(quadratic, xoshiro128pp)<<active_tabu_size([a-1,b-5,c-2], 2, 1).
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<active_tabu_size([], 0, 0),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<active_tabu_size([a-5,b-6], 1, 2),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<active_tabu_size([a-1,b-2], 2, 0),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<active_tabu_size([a-1,b-5,c-2], 2, 1).
 
 	test(tabu_search_fixed_tenure_capacity, deterministic) :-
 		check_tenure_capacity(0, 10, fixed(3), [], 3).
@@ -391,7 +391,7 @@
 		tabu_search(tabu_search_fixture(full, [a-0,b-1], 0))::run(a, 0).
 
 	test(tabu_search_alternate_random_algorithm, deterministic) :-
-		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none), as183)::run(_, Energy, [max_steps(2), candidates(2), seed(42)]),
+		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none), fast_random(xoshiro128pp))::run(_, Energy, [max_steps(2), candidates(2), seed(42)]),
 		assertion(Energy < 10).
 
 	test(tabu_search_delta_avoids_energy_recomputation, deterministic) :-
@@ -411,7 +411,7 @@
 	test(tabu_search_evaluates_nonwinning_energy, deterministic) :-
 		Problem = tabu_search_fixture(counted, [a-0,b-1], none),
 		Problem::clear_log,
-		tabu_search(Problem, xoshiro128pp)<<evaluate_candidates(policy(false, false, false, false, false), [b,b,b], 0, [], 1, b, 1, true),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<evaluate_candidates(policy(false, false, false, false, false), [b,b,b], 0, [], 1, b, 1, true),
 		Problem::calls(energy, 3).
 
 	test(tabu_search_missing_progress_hook, deterministic) :-
@@ -424,7 +424,7 @@
 		Problem::reports(Reports).
 
 	test(tabu_search_failing_neighbor_hook, fail) :-
-		tabu_search(tabu_search_fixture(no_neighbor, [a-0], none), xoshiro128pp)<<generate_neighbor(a, 0, _, _, _).
+		tabu_search(tabu_search_fixture(no_neighbor, [a-0], none), fast_random(xoshiro128pp))<<generate_neighbor(a, 0, _, _, _).
 
 	test(tabu_search_repeated_options_use_first, deterministic) :-
 		tabu_search(tabu_search_fixture(full, [a-0,b-1], none))::run(_, _, Statistics, [max_steps(1),max_steps(3),tabu_tenure(0),tabu_tenure(2)]),
@@ -463,10 +463,10 @@
 
 	test(tabu_search_key_compact_storage_and_expiry, deterministic) :-
 		Problem = tabu_search_key_fixture(canonical, full, [s(a,large_payload)-0], none),
-		tabu_search(Problem, xoshiro128pp)<<update_tabu(policy(true, false, false, false, false), s(a,large_payload), 5, 0, 0, fixed(2), [], Tabu),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<update_tabu(policy(true, false, false, false, false), s(a,large_payload), 5, 0, 0, fixed(2), [], Tabu),
 		assertion(Tabu == [key(a)-8]),
-		assertion(tabu_search(Problem, xoshiro128pp)<<candidate_tabu(policy(true, false, false, false, false), s(a,other), Tabu, 7)),
-		assertion(\+ (tabu_search(Problem, xoshiro128pp)<<candidate_tabu(policy(true, false, false, false, false), s(a,other), Tabu, 8))).
+		assertion(tabu_search(Problem, fast_random(xoshiro128pp))<<candidate_tabu(policy(true, false, false, false, false), s(a,other), Tabu, 7)),
+		assertion(\+ (tabu_search(Problem, fast_random(xoshiro128pp))<<candidate_tabu(policy(true, false, false, false, false), s(a,other), Tabu, 8))).
 
 	test(tabu_search_key_sampled_path, deterministic) :-
 		tabu_search(tabu_search_key_fixture(canonical, sampled, [s(a,1)-0,s(b,1)-1,s(a,2)-0], none))::run(s(a,1), 0, Statistics, [max_steps(2),candidates(1)]),
@@ -478,15 +478,15 @@
 
 	test(tabu_search_key_variable_identity, deterministic) :-
 		Problem = tabu_search_key_fixture(canonical, full, [s(Variable,1)-0], none),
-		tabu_search(Problem, xoshiro128pp)<<update_tabu(policy(true, false, false, false, false), s(Variable,1), 0, 0, 0, fixed(2), [], Tabu),
-		assertion(tabu_search(Problem, xoshiro128pp)<<candidate_tabu(policy(true, false, false, false, false), s(Variable,2), Tabu, 1)),
-		assertion(\+ (tabu_search(Problem, xoshiro128pp)<<candidate_tabu(policy(true, false, false, false, false), s(Other,2), Tabu, 1))),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<update_tabu(policy(true, false, false, false, false), s(Variable,1), 0, 0, 0, fixed(2), [], Tabu),
+		assertion(tabu_search(Problem, fast_random(xoshiro128pp))<<candidate_tabu(policy(true, false, false, false, false), s(Variable,2), Tabu, 1)),
+		assertion(\+ (tabu_search(Problem, fast_random(xoshiro128pp))<<candidate_tabu(policy(true, false, false, false, false), s(Other,2), Tabu, 1))),
 		assertion(var(Variable)),
 		assertion(var(Other)).
 
 	test(tabu_search_key_absent_declaration, deterministic) :-
-		tabu_search(quadratic, xoshiro128pp)<<hook_available(quadratic, tabu_key(_, _), false),
-		tabu_search(quadratic, xoshiro128pp)<<hook_available(tabu_search_inherited_key_fixture, tabu_key(_, _), true).
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<hook_available(quadratic, tabu_key(_, _), false),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<hook_available(tabu_search_inherited_key_fixture, tabu_key(_, _), true).
 
 	test(tabu_search_key_failure, error(domain_error(tabu_hook_result, tabu_key/2))) :-
 		tabu_search(tabu_search_key_fixture(fail, full, [a-0,b-1], none))::run(_, _, [max_steps(1)]).
@@ -500,7 +500,7 @@
 	test(tabu_search_key_skipped_when_unneeded, deterministic) :-
 		Problem = tabu_search_key_fixture(fail, full, [a-0,b-1], none),
 		tabu_search(Problem)::run(a, 0, [max_steps(2),tabu_tenure(0)]),
-		tabu_search(Problem, xoshiro128pp)<<is_admissible(policy(true, false, false, false, false), a, -1, 0, [a-5], 1, true).
+		tabu_search(Problem, fast_random(xoshiro128pp))<<is_admissible(policy(true, false, false, false, false), a, -1, 0, [a-5], 1, true).
 
 	test(tabu_search_worse_restart_progress_and_counts, deterministic) :-
 		Problem = tabu_search_restart_fixture(value(b), [a-0,b-1], 0),
@@ -542,8 +542,8 @@
 
 	test(tabu_search_restart_seeded_diversification, deterministic) :-
 		Problem = tabu_search_restart_fixture(random, [a-0,b-1], none),
-		tabu_search(Problem, as183)::run(State, Energy, Statistics, [max_steps(2),candidates(1),restarts(3),seed(42)]),
-		tabu_search(Problem, as183)::run(State, Energy, Statistics, [max_steps(2),candidates(1),restarts(3),seed(42)]).
+		tabu_search(Problem, fast_random(xoshiro128pp))::run(State, Energy, Statistics, [max_steps(2),candidates(1),restarts(3),seed(42)]),
+		tabu_search(Problem, fast_random(xoshiro128pp))::run(State, Energy, Statistics, [max_steps(2),candidates(1),restarts(3),seed(42)]).
 
 	test(tabu_search_custom_tenure_pre_move_and_mixed_expiration, deterministic) :-
 		Problem = tabu_search_tenure_fixture(schedule([4,0,1]), [a-0,b-1,c-2,d-3], none),
@@ -554,7 +554,7 @@
 
 	test(tabu_search_custom_zero_tenure_retains_active_entries, deterministic) :-
 		Problem = tabu_search_tenure_fixture(value(0), [a-0,b-1], none),
-		tabu_search(Problem, xoshiro128pp)<<update_tabu(policy(false,false,true,false,false), a, 1, 0, 1, fixed(7), [old-10,expired-2], Tabu),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<update_tabu(policy(false,false,true,false,false), a, 1, 0, 1, fixed(7), [old-10,expired-2], Tabu),
 		assertion(Tabu == [old-10]).
 
 	test(tabu_search_custom_tenure_calls_only_on_acceptance, deterministic) :-
@@ -571,7 +571,7 @@
 
 	test(tabu_search_custom_tenure_no_unused_random_draw, deterministic) :-
 		Problem = tabu_search_tenure_fixture(value(1), [a-0,b-1], none),
-		tabu_search(Problem, as183)::run(_, _, [max_steps(1),seed(42),tabu_tenure_range(2,9)]),
+		tabu_search(Problem, fast_random(as183))::run(_, _, [max_steps(1),seed(42),tabu_tenure_range(2,9)]),
 		fast_random(as183)::between(1, 1000, Actual),
 		fast_random(as183)::randomize(42),
 		fast_random(as183)::between(1, 1000, Expected),
@@ -605,12 +605,12 @@
 
 	test(tabu_search_custom_aspiration_rejects_improving_tabu, deterministic) :-
 		Problem = tabu_search_aspiration_fixture(reject, full, [a-0,b-1], none),
-		tabu_search(Problem, xoshiro128pp)<<is_admissible(policy(false,false,false,true,false), a, -1, 0, [a-5], 1, false),
-		tabu_search(Problem, xoshiro128pp)<<is_admissible(policy(false,false,false,true,false), b, 1, 0, [a-5], 1, true).
+		tabu_search(Problem, fast_random(xoshiro128pp))<<is_admissible(policy(false,false,false,true,false), a, -1, 0, [a-5], 1, false),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<is_admissible(policy(false,false,false,true,false), b, 1, 0, [a-5], 1, true).
 
 	test(tabu_search_custom_aspiration_permits_worse_tabu, deterministic) :-
 		Problem = tabu_search_aspiration_fixture(permit, full, [a-0,b-1], none),
-		tabu_search(Problem, xoshiro128pp)<<is_admissible(policy(false,false,false,true,false), b, 1, 0, [b-5], 1, true).
+		tabu_search(Problem, fast_random(xoshiro128pp))<<is_admissible(policy(false,false,false,true,false), b, 1, 0, [b-5], 1, true).
 
 	test(tabu_search_custom_aspiration_reject_public_sampled, deterministic) :-
 		Problem = tabu_search_aspiration_fixture(reject, sampled, [a-0,b-1], none),
@@ -626,7 +626,7 @@
 	test(tabu_search_custom_aspiration_skips_nonwinning_candidates, deterministic) :-
 		Problem = tabu_search_aspiration_fixture(permit, counted, [b-1], none),
 		Problem::clear_log,
-		tabu_search(Problem, xoshiro128pp)<<evaluate_candidates(policy(false,false,false,true,false), [b,b,b], 0, [b-5], 1, b, 1, true),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<evaluate_candidates(policy(false,false,false,true,false), [b,b,b], 0, [b-5], 1, b, 1, true),
 		Problem::aspiration_inputs([aspiration(b,1,0)]),
 		Problem::calls(energy, 3).
 
@@ -637,7 +637,7 @@
 
 	test(tabu_search_custom_aspiration_preserves_variables, deterministic) :-
 		Problem = tabu_search_aspiration_fixture(permit, full, [s(Variable)-0], none),
-		tabu_search(Problem, xoshiro128pp)<<is_admissible(policy(false,false,false,true,false), s(Variable), 0, 0, [s(Variable)-5], 1, true),
+		tabu_search(Problem, fast_random(xoshiro128pp))<<is_admissible(policy(false,false,false,true,false), s(Variable), 0, 0, [s(Variable)-5], 1, true),
 		assertion(var(Variable)).
 
 	test(tabu_search_custom_aspiration_exception, ball(aspiration_error)) :-
@@ -688,13 +688,14 @@
 
 	test(tabu_search_exhaustive_repeated_options_first_wins, deterministic) :-
 		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none))::run(d, 2, [max_steps(1),candidates(1),exhaustive(true),exhaustive(false)]),
-		tabu_search(tabu_search_missing_neighborhood_fixture, xoshiro128pp)<<require_neighborhood(false, tabu_search_missing_neighborhood_fixture).
+		tabu_search(tabu_search_missing_neighborhood_fixture, fast_random(xoshiro128pp))<<require_neighborhood(false, tabu_search_missing_neighborhood_fixture).
 
 	test(tabu_search_exhaustive_no_sampling_random_draw, deterministic) :-
-		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none), as183)::run(d, 2, [max_steps(1),candidates(1),exhaustive(true),tabu_tenure(0),seed(42)]),
-		fast_random(as183)::between(1, 1000, Actual),
-		fast_random(as183)::randomize(42),
-		fast_random(as183)::between(1, 1000, Expected),
+		fast_random(xoshiro128pp)::randomize(42),
+		tabu_search(tabu_search_fixture(enumerated, [a-10,b-4,c-3,d-2], none), fast_random(xoshiro128pp))::run(d, 2, [max_steps(1),candidates(1),exhaustive(true),tabu_tenure(0)]),
+		fast_random(xoshiro128pp)::between(1, 1000, Actual),
+		fast_random(xoshiro128pp)::randomize(42),
+		fast_random(xoshiro128pp)::between(1, 1000, Expected),
 		assertion(Actual == Expected).
 
 	test(tabu_search_exhaustive_uses_full_energy_not_delta, deterministic) :-
@@ -705,8 +706,8 @@
 
 	test(tabu_search_combined_policies_both_generators_and_paths, deterministic) :-
 		forall(list::member(Mode, [full,sampled]), (
-			forall(list::member(Algorithm, [xoshiro128pp,as183]), (
-				tabu_search(tabu_search_combined_fixture(Mode), Algorithm)::run(State, Energy, Statistics, [max_steps(2),candidates(1),restarts(1),seed(42),tabu_tenure_range(7,9)]),
+			forall(list::member(Algorithm, [xoshiro128pp, as183]), (
+				tabu_search(tabu_search_combined_fixture(Mode), fast_random(Algorithm))::run(State, Energy, Statistics, [max_steps(2),candidates(1),restarts(1),seed(42),tabu_tenure_range(7,9)]),
 				assertion(State == s(a,2)),
 				assertion(Energy == 0),
 				assertion(Statistics == [steps(4),acceptances(4),improvements(2),final_tabu_size(1)])
@@ -726,12 +727,12 @@
 		Problem = tabu_search_combined_fixture(full),
 		Options = [max_steps(2),candidates(1),restarts(1),seed(42)],
 		tabu_search(Problem)::run(State, Energy, Statistics, Options),
-		tabu_search(Problem, xoshiro128pp)::run(State, Energy, Statistics, Options),
-		tabu_search(Problem, as183)::run(State, Energy, Statistics, Options).
+		tabu_search(Problem, fast_random(xoshiro128pp))::run(State, Energy, Statistics, Options),
+		tabu_search(Problem, fast_random(xoshiro128pp))::run(State, Energy, Statistics, Options).
 
 	test(tabu_search_custom_zero_tenure_skips_key, deterministic) :-
 		Problem = tabu_search_key_fixture(fail, full, [a-0], none),
-		tabu_search(Problem, xoshiro128pp)<<update_tabu(policy(true,false,false,false,false), a, 1, 0, 0, fixed(0), [old-10], [old-10]).
+		tabu_search(Problem, fast_random(xoshiro128pp))<<update_tabu(policy(true,false,false,false,false), a, 1, 0, 0, fixed(0), [old-10], [old-10]).
 
 	test(tabu_search_restart_energy_exception_propagates, ball(restart_energy_error)) :-
 		tabu_search(tabu_search_restart_energy_error_fixture)::run(_, _, [max_steps(1),restarts(1)]).
@@ -739,7 +740,7 @@
 	test(tabu_search_category_key_implementation, deterministic) :-
 		tabu_search(tabu_search_category_key_fixture)::run(a, 0, Statistics, [max_steps(4),tabu_tenure(1)]),
 		assertion(Statistics == [steps(4),acceptances(2),improvements(0),final_tabu_size(0)]),
-		tabu_search(quadratic, xoshiro128pp)<<hook_available(tabu_search_category_key_fixture, tabu_key(_, _), true).
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<hook_available(tabu_search_category_key_fixture, tabu_key(_, _), true).
 
 	test(tabu_search_custom_tenure_overrides_options, deterministic) :-
 		tabu_search(tabu_search_inherited_tenure_fixture)::run(a, 0, Statistics, [max_steps(4),tabu_tenure(0),tabu_tenure_range(7,9)]),
@@ -797,7 +798,7 @@
 	check_tenure_capacity(Limit, Limit, _, _, _) :-
 		!.
 	check_tenure_capacity(Step, Limit, Spec, Tabu, Tenure) :-
-		tabu_search(quadratic, xoshiro128pp)<<update_tabu(policy(false, false, false, false, false), Step, Step, 0, 0, Spec, Tabu, NextTabu),
+		tabu_search(quadratic, fast_random(xoshiro128pp))<<update_tabu(policy(false, false, false, false, false), Step, Step, 0, 0, Spec, Tabu, NextTabu),
 		length(NextTabu, Size),
 		assertion(Size =< Tenure),
 		(	Step >= Tenure - 1 ->

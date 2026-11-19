@@ -28,7 +28,7 @@
 		date is 2026-11-19,
 		comment is 'e-Means clusterer for continuous datasets. Defaults to the published EMA training algorithm with count-weighted donor splitting and last-epoch-mean finalization. Also supports slow-EMA finalization and a hybrid of EMA training and bounded Lloyd refinement. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol.',
 		parameters is [
-			'Random' - 'Random number generator object providing ``random/1``, ``randomize/1``, ``get_seed/1``, and ``set_seed/1``.'
+			'Random' - 'Random number generator object providing ``random/1``, ``randomize/1``, ``get_seed/1``, and ``set_seed/1`` predicates.'
 		],
 		see_also is [clusterer_protocol, clustering_dataset_protocol, nearest_centroid_classifier, kmeans_clusterer]
 	]).

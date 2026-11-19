@@ -50,7 +50,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    ant_colony(Problem) <ant_colony_1>
-   ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
+   ant_colony(Problem,Random) <ant_colony_2>
    ant_colony_problem_protocol <ant_colony_problem_protocol_0>
 
 :ref:`application <library_application>`
@@ -772,7 +772,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    differential_evolution(Problem) <differential_evolution_1>
-   differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
+   differential_evolution(Problem,Random) <differential_evolution_2>
    differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
 
 :ref:`dimension_reduction_protocols <library_dimension_reduction_protocols>`
@@ -1017,7 +1017,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    genetic_algorithm(Problem) <genetic_algorithm_1>
-   genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
+   genetic_algorithm(Problem,Random) <genetic_algorithm_2>
    genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
 
 :ref:`genint <library_genint>`
@@ -2710,7 +2710,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
-   particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
+   particle_swarm_optimization(Problem,Random) <particle_swarm_optimization_2>
    particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
 
 :ref:`partitions <library_partitions>`
@@ -3162,7 +3162,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    simulated_annealing(Problem) <simulated_annealing_1>
-   simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+   simulated_annealing(Problem,Random) <simulated_annealing_2>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
 
 :ref:`slope_one_recommender <library_slope_one_recommender>`
@@ -3396,7 +3396,7 @@ To load any library (including developer tools, ports, and contributions), use t
    :maxdepth: 1
 
    tabu_search(Problem) <tabu_search_1>
-   tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
+   tabu_search(Problem,Random) <tabu_search_2>
    tabu_search_problem_protocol <tabu_search_problem_protocol_0>
 
 :ref:`term_io <library_term_io>`

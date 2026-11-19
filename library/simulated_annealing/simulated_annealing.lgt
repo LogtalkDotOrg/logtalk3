@@ -19,17 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(simulated_annealing(_Problem_, _RandomAlgorithm_),
+:- object(simulated_annealing(_Problem_, _Random_),
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-24,
+		date is 2026-11-19,
 		comment is 'Simulated annealing optimization algorithm. Parameterized by a problem object implementing the ``simulated_annealing_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem. Custom cooling schedules, stop conditions, delta-energy neighbor generation, progress reporting, and reheating restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``simulated_annealing_protocol``.',
-			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).'
+			'Random' - 'Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.'
 		],
 		remarks is [
 			'Algorithm' - 'Simulated annealing is a probabilistic metaheuristic for global optimization. It explores the solution space by iteratively generating neighbor states and accepting them based on an energy-dependent probability that decreases over time as the temperature cools.',
@@ -100,7 +100,7 @@
 		cooling_schedule/3, neighbor_state/2, neighbor_state/3
 	]).
 
-	:- uses(fast_random(_RandomAlgorithm_), [
+	:- uses(_Random_, [
 		random/1, randomize/1
 	]).
 
@@ -398,32 +398,38 @@
 	% --- Option validation ---
 
 	valid_option(max_steps(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(min_temperature(T)) :-
-		valid(positive_float, T).
+		float(T),
+		T > 0.
 	valid_option(updates(N)) :-
-		valid(non_negative_integer, N).
+		integer(N),
+		N >= 0.
 	valid_option(restarts(N)) :-
-		valid(non_negative_integer, N).
-	valid_option(seed(S)) :-
-		valid(positive_integer, S).
+		integer(N),
+		N >= 0.
+	valid_option(seed(Seed)) :-
+		integer(Seed),
+		Seed > 0.
 	valid_option(samples(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(acceptance_rate(P)) :-
-		valid(positive_integer, P),
-		P < 100.
+		integer(P),
+		0 < P, P < 100.
 
 :- end_object.
 
 
 :- object(simulated_annealing(_Problem_),
-	extends(simulated_annealing(_Problem_, xoshiro128pp))).
+	extends(simulated_annealing(_Problem_, fast_random(xoshiro128pp)))).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-22,
-		comment is 'Simulated annealing optimization algorithm using the Xoshiro128++ random number generator. Convenience object that extends ``simulated_annealing/2`` with the random algorithm bound to ``xoshiro128pp``.',
+		date is 2026-11-19,
+		comment is 'Simulated annealing optimization algorithm using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``simulated_annealing_protocol``.'
 		],

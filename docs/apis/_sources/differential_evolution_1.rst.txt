@@ -11,21 +11,21 @@
 * ``Problem`` - Problem object implementing ``differential_evolution_problem_protocol``.
 
 
-Differential Evolution using the Xoshiro128++ random number generator.
+Differential Evolution using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.
 
 | **Availability:** 
 |    ``logtalk_load(differential_evolution(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-13
+| **Version:** 2:0:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`differential_evolution(Problem,xoshiro128pp) <differential_evolution/2>`
+|    ``public`` :ref:`differential_evolution(Problem,fast_random(xoshiro128pp)) <differential_evolution/2>`
 
 | **Remarks:**
 |    (none)
@@ -59,5 +59,5 @@ Operators
 
 .. seealso::
 
-   :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2>`, :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0>`
+   :ref:`differential_evolution(Problem,Random) <differential_evolution/2>`, :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0>`
 

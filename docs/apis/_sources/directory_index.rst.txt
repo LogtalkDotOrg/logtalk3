@@ -233,13 +233,13 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       ant_colony(Problem) <ant_colony_1>
-      ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
+      ant_colony(Problem,Random) <ant_colony_2>
       ant_colony_problem_protocol <ant_colony_problem_protocol_0>
 
 .. only:: latex
 
    * :doc:`ant_colony(Problem) <ant_colony_1>`
-   * :doc:`ant_colony(Problem,RandomAlgorithm) <ant_colony_2>`
+   * :doc:`ant_colony(Problem,Random) <ant_colony_2>`
    * :doc:`ant_colony_problem_protocol <ant_colony_problem_protocol_0>`
 
 ``library/application/``
@@ -1313,13 +1313,13 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       differential_evolution(Problem) <differential_evolution_1>
-      differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
+      differential_evolution(Problem,Random) <differential_evolution_2>
       differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
 
 .. only:: latex
 
    * :doc:`differential_evolution(Problem) <differential_evolution_1>`
-   * :doc:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>`
+   * :doc:`differential_evolution(Problem,Random) <differential_evolution_2>`
    * :doc:`differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>`
 
 ``library/dimension_reduction_protocols/``
@@ -1713,13 +1713,13 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       genetic_algorithm(Problem) <genetic_algorithm_1>
-      genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
+      genetic_algorithm(Problem,Random) <genetic_algorithm_2>
       genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
 
 .. only:: latex
 
    * :doc:`genetic_algorithm(Problem) <genetic_algorithm_1>`
-   * :doc:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>`
+   * :doc:`genetic_algorithm(Problem,Random) <genetic_algorithm_2>`
    * :doc:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>`
 
 ``library/genint/``
@@ -4585,13 +4585,13 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
-      particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
+      particle_swarm_optimization(Problem,Random) <particle_swarm_optimization_2>
       particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
 
 .. only:: latex
 
    * :doc:`particle_swarm_optimization(Problem) <particle_swarm_optimization_1>`
-   * :doc:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>`
+   * :doc:`particle_swarm_optimization(Problem,Random) <particle_swarm_optimization_2>`
    * :doc:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>`
 
 ``library/partitions/``
@@ -5337,13 +5337,13 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       simulated_annealing(Problem) <simulated_annealing_1>
-      simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+      simulated_annealing(Problem,Random) <simulated_annealing_2>
       simulated_annealing_protocol <simulated_annealing_protocol_0>
 
 .. only:: latex
 
    * :doc:`simulated_annealing(Problem) <simulated_annealing_1>`
-   * :doc:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>`
+   * :doc:`simulated_annealing(Problem,Random) <simulated_annealing_2>`
    * :doc:`simulated_annealing_protocol <simulated_annealing_protocol_0>`
 
 ``library/slope_one_recommender/``
@@ -5781,13 +5781,13 @@ To load an entity, always load the library that includes it using the goal ``log
       :maxdepth: 1
 
       tabu_search(Problem) <tabu_search_1>
-      tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
+      tabu_search(Problem,Random) <tabu_search_2>
       tabu_search_problem_protocol <tabu_search_problem_protocol_0>
 
 .. only:: latex
 
    * :doc:`tabu_search(Problem) <tabu_search_1>`
-   * :doc:`tabu_search(Problem,RandomAlgorithm) <tabu_search_2>`
+   * :doc:`tabu_search(Problem,Random) <tabu_search_2>`
    * :doc:`tabu_search_problem_protocol <tabu_search_problem_protocol_0>`
 
 ``library/term_io/``

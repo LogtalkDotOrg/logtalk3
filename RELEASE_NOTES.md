@@ -69,6 +69,11 @@ compact styling, adding internal links, and reducing the number of pages.
 Library
 -------
 
+* CHANGED: The `ant_colony`, `differential_evolution`, `genetic_algorithm`,
+`particle_swarm_optimization`, `simulated_annealing`, and `tabu_search`
+libraries to take as parameter a random generator object instead of a
+random generator algorithm for additional flexibility.
+
 * ADDED: New `flow_networks` library implementing network flow algorithms over
 capacitated directed graphs: maximum flow, minimum cut, and minimum cost flow,
 with flow verification and decomposition, Gomory-Hu cut trees, convex arc costs,

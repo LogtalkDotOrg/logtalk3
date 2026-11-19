@@ -1,15 +1,15 @@
-.. index:: single: differential_evolution(Problem,RandomAlgorithm)
+.. index:: single: differential_evolution(Problem,Random)
 .. _differential_evolution/2:
 
 .. rst-class:: right
 
 **object**
 
-``differential_evolution(Problem,RandomAlgorithm)``
-===================================================
+``differential_evolution(Problem,Random)``
+==========================================
 
 * ``Problem`` - Problem object implementing ``differential_evolution_problem_protocol``.
-* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library.
+* ``Random`` - Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.
 
 
 Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.
@@ -19,7 +19,7 @@ Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/curr
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-10-11
+| **Date:** 2026-10-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,6 @@ Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/curr
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`

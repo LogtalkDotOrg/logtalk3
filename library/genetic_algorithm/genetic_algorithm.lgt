@@ -19,17 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(genetic_algorithm(_Problem_, _RandomAlgorithm_),
+:- object(genetic_algorithm(_Problem_, _Random_),
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-25,
+		date is 2026-11-19,
 		comment is 'Genetic algorithm meta-heuristic optimizer. Parameterized by a problem object implementing the ``genetic_algorithm_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem by default; maximization is supported via options. Custom stop conditions, diversity measures, progress reporting, and selection pressure can be defined by the problem object or configured via options; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``genetic_algorithm_problem_protocol``.',
-			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).'
+			'Random' - 'Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.'
 		],
 		remarks is [
 			'Algorithm' - 'A generational genetic algorithm that maintains a population of individuals. Each generation applies selection, crossover, and mutation to produce the next population. Optional elitism preserves the best individuals across generations.',
@@ -85,7 +85,7 @@
 		progress/5, diversity/2, crossover_rate/4, mutation_rate/4
 	]).
 
-	:- uses(fast_random(_RandomAlgorithm_), [
+	:- uses(_Random_, [
 		between/3, random/1, randomize/1
 	]).
 
@@ -534,9 +534,10 @@
 	% option validation
 
 	valid_option(max_generations(MaxGenerations)) :-
-		valid(positive_integer, MaxGenerations).
+		integer(MaxGenerations),
+		MaxGenerations > 0.
 	valid_option(population_size(PopulationSize)) :-
-		valid(positive_integer, PopulationSize),
+		integer(PopulationSize),
 		PopulationSize >= 2.
 	valid_option(crossover_rate(CrossoverRate)) :-
 		number(CrossoverRate),
@@ -570,25 +571,28 @@
 			number(Factor), Factor > 0.0
 		)).
 	valid_option(elite_size(EliteSize)) :-
-		valid(non_negative_integer, EliteSize).
+		integer(EliteSize),
+		EliteSize >= 0.
 	valid_option(objective(Objective)) :-
 		once((Objective == minimize; Objective == maximize)).
 	valid_option(updates(Updates)) :-
-		valid(non_negative_integer, Updates).
+		integer(Updates),
+		Updates >= 0.
 	valid_option(seed(Seed)) :-
-		valid(positive_integer, Seed).
+		integer(Seed),
+		Seed > 0.
 
 :- end_object.
 
 
 :- object(genetic_algorithm(_Problem_),
-	extends(genetic_algorithm(_Problem_, xoshiro128pp))).
+	extends(genetic_algorithm(_Problem_, fast_random(xoshiro128pp)))).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-16,
-		comment is 'Genetic algorithm meta-heuristic optimizer using the Xoshiro128++ random number generator. Convenience object that extends ``genetic_algorithm/2`` with the random algorithm bound to ``xoshiro128pp``.',
+		date is 2026-11-19,
+		comment is 'Genetic algorithm meta-heuristic optimizer using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``genetic_algorithm_problem_protocol``.'
 		],

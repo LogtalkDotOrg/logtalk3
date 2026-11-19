@@ -1,15 +1,15 @@
-.. index:: single: ant_colony(Problem,RandomAlgorithm)
+.. index:: single: ant_colony(Problem,Random)
 .. _ant_colony/2:
 
 .. rst-class:: right
 
 **object**
 
-``ant_colony(Problem,RandomAlgorithm)``
-=======================================
+``ant_colony(Problem,Random)``
+==============================
 
 * ``Problem`` - Problem object implementing ``ant_colony_problem_protocol``.
-* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).
+* ``Random`` - Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.
 
 
 Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem object implementing the ``ant_colony_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the solution cost defined by the problem. Classic Ant System pheromone update, optional MAX-MIN pheromone bounds, candidate construction by probabilistic state transition, optional elitist reinforcement, progress reporting, and seed control are supported; suitable defaults are used otherwise.
@@ -18,8 +18,8 @@ Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem o
 |    ``logtalk_load(ant_colony(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:1
-| **Date:** 2026-10-07
+| **Version:** 2:0:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,6 @@ Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem o
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
 

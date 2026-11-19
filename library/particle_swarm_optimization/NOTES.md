@@ -27,11 +27,11 @@ continuous, bounded, synchronous global-best PSO for minimization and
 maximization problems.
 
 The library provides the parametric object
-`particle_swarm_optimization(Problem, RandomAlgorithm)`, where `Problem` is
+`particle_swarm_optimization(Problem, Random)`, where `Problem` is
 an object implementing the `particle_swarm_optimization_protocol` protocol
-and `RandomAlgorithm` is one of the algorithms supported by the `fast_random`
-library. A convenience object `particle_swarm_optimization(Problem)` uses
-the Xoshiro128++ random number generator (`xoshiro128pp`).
+and `Random` is one of the objects supported by the `random` library.
+A convenience object `particle_swarm_optimization(Problem)` uses
+the Xoshiro128++ random number generator (`fast_random(xoshiro128pp)`).
 
 
 API documentation
@@ -217,9 +217,9 @@ Usage
 	         [target_fitness(0.001), seed(42)]
 	     ).
 
-### Using a custom random number generator
+### Using a custom random number generator object
 
-	| ?- particle_swarm_optimization(sphere, well512a)::run(
+	| ?- particle_swarm_optimization(sphere, fast_random(well512a))::run(
 	         Position, Fitness, [seed(42)]
 	     ).
 

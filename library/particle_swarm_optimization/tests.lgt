@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-13,
+		date is 2026-11-19,
 		comment is 'Unit tests for the "particle_swarm_optimization" library.'
 	]).
 
@@ -67,7 +67,7 @@
 		particle_swarm_optimization(sphere_stop)::run(Position, Fitness).
 
 	test(pso_explicit_random_algorithm, deterministic(Fitness < 0.01)) :-
-		particle_swarm_optimization(sphere, as183)::run(_Position, Fitness, [seed(42), max_iterations(100)]).
+		particle_swarm_optimization(sphere, fast_random(as183))::run(_Position, Fitness, [seed(42), max_iterations(100)]).
 
 	test(pso_supplied_velocity_movement, deterministic((Position == [0.5], Fitness =:= 0.5))) :-
 		particle_swarm_optimization(supplied_velocity(movement))::run(Position, Fitness, [seed(42), objective(maximize), max_iterations(1), inertia_weight(1.0), cognitive_coefficient(0.0), social_coefficient(0.0)]).

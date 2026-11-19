@@ -1,15 +1,15 @@
-.. index:: single: particle_swarm_optimization(Problem,RandomAlgorithm)
+.. index:: single: particle_swarm_optimization(Problem,Random)
 .. _particle_swarm_optimization/2:
 
 .. rst-class:: right
 
 **object**
 
-``particle_swarm_optimization(Problem,RandomAlgorithm)``
-========================================================
+``particle_swarm_optimization(Problem,Random)``
+===============================================
 
 * ``Problem`` - Problem object implementing ``particle_swarm_optimization_protocol``.
-* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library.
+* ``Random`` - Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.
 
 
 Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes or maximizes the fitness function defined by the problem.
@@ -18,8 +18,8 @@ Continuous bounded global-best particle swarm optimization algorithm. Parameteri
 |    ``logtalk_load(particle_swarm_optimization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-19
+| **Version:** 2:0:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,6 @@ Continuous bounded global-best particle swarm optimization algorithm. Parameteri
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`numberlist <numberlist/0>`
 |    :ref:`type <type/0>`

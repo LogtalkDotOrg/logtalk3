@@ -474,7 +474,7 @@
 <section id="emeans-clusterer-random">
 <h1><code class="docutils literal notranslate"><span class="pre">emeans_clusterer(Random)</span></code><a class="headerlink" href="#emeans-clusterer-random" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Random</span></code> - Random number generator object providing <code class="docutils literal notranslate"><span class="pre">random/1</span></code>, <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code>, <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Random</span></code> - Random number generator object providing <code class="docutils literal notranslate"><span class="pre">random/1</span></code>, <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code>, <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates.</p></li>
 </ul>
 <p>e-Means clusterer for continuous datasets. Defaults to the published EMA training algorithm with count-weighted donor splitting and last-epoch-mean finalization. Also supports slow-EMA finalization and a hybrid of EMA training and bounded Lloyd refinement. Learns from a dataset object implementing the <code class="docutils literal notranslate"><span class="pre">clustering_dataset_protocol</span></code> protocol.</p>
 <div class="line-block">

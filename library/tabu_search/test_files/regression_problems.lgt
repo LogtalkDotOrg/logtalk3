@@ -18,23 +18,57 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 :- object(tabu_search_fixture(_Mode_, _States_, _Stop_),
 	implements(tabu_search_problem_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-10,
+		date is 2026-11-19,
 		comment is 'Deterministic tabu search regression problems.'
 	]).
 
-	:- public([clear_log/0, reports/1, calls/2, numbers/2, sampling_benchmark/4, candidate_benchmark/4]).
+	:- public(clear_log/0).
 	:- mode(clear_log, one).
+	:- info(clear_log/0, [
+		comment is 'Clears the recorded progress reports and fixture events.'
+	]).
+
+	:- public(reports/1).
 	:- mode(reports(-list), one).
+	:- info(reports/1, [
+		comment is 'Returns the recorded progress reports.',
+		argnames is ['Reports']
+	]).
+
+	:- public(calls/2).
 	:- mode(calls(+atom, -non_negative_integer), one).
+	:- info(calls/2, [
+		comment is 'Returns the number of recorded calls for the given event kind.',
+		argnames is ['Kind', 'Count']
+	]).
+
+	:- public(numbers/2).
 	:- mode(numbers(+non_negative_integer, -list(integer)), one).
+	:- info(numbers/2, [
+		comment is 'Returns the descending sequence of integers from the given number to one.',
+		argnames is ['Count', 'Numbers']
+	]).
+
+	:- public(sampling_benchmark/4).
 	:- mode(sampling_benchmark(+positive_integer, +positive_integer, +positive_integer, -number), one).
+	:- info(sampling_benchmark/4, [
+		comment is 'Measures the CPU time for repeated candidate sampling and permutation.',
+		argnames is ['Size', 'Count', 'Repeats', 'Seconds']
+	]).
+
+	:- public(candidate_benchmark/4).
 	:- mode(candidate_benchmark(+positive_integer, +positive_integer, +positive_integer, -number), one).
+	:- info(candidate_benchmark/4, [
+		comment is 'Measures the CPU time for repeated candidate evaluation.',
+		argnames is ['Tenure', 'Count', 'Repeats', 'Seconds']
+	]).
 
 	:- private(report_/5).
 	:- dynamic(report_/5).
@@ -161,7 +195,7 @@
 	repeat_evaluation(0, _, _) :-
 		!.
 	repeat_evaluation(Repeats, Candidates, Tabu) :-
-		tabu_search(tabu_search_fixture(full, [a-1], none), xoshiro128pp)<<evaluate_candidates(policy(false, false, false, false, false), Candidates, 0, Tabu, 1, _, _, _),
+		tabu_search(tabu_search_fixture(full, [a-1], none), fast_random(xoshiro128pp))<<evaluate_candidates(policy(false, false, false, false, false), Candidates, 0, Tabu, 1, _, _, _),
 		Next is Repeats - 1,
 		repeat_evaluation(Next, Candidates, Tabu).
 
@@ -198,6 +232,10 @@
 
 	:- public(restart_inputs/1).
 	:- mode(restart_inputs(-list), one).
+	:- info(restart_inputs/1, [
+		comment is 'Returns the states passed to the restart hook.',
+		argnames is ['Inputs']
+	]).
 
 	:- private(restart_/1).
 	:- dynamic(restart_/1).
@@ -230,6 +268,7 @@
 
 :- object(tabu_search_inherited_restart_fixture,
 	extends(tabu_search_restart_fixture(value(b), [a-2,b-1], 0))).
+
 :- end_object.
 
 
@@ -238,6 +277,10 @@
 
 	:- public(tenure_inputs/1).
 	:- mode(tenure_inputs(-list), one).
+	:- info(tenure_inputs/1, [
+		comment is 'Returns the arguments recorded by the tabu tenure hook.',
+		argnames is ['Inputs']
+	]).
 
 	:- private(tenure_/3).
 	:- dynamic(tenure_/3).
@@ -266,6 +309,7 @@
 
 :- object(tabu_search_inherited_tenure_fixture,
 	extends(tabu_search_tenure_fixture(value(1), [a-0,b-1], none))).
+
 :- end_object.
 
 
@@ -274,6 +318,12 @@
 
 	:- public(aspiration_inputs/1).
 	:- mode(aspiration_inputs(-list), one).
+	:- info(aspiration_inputs/1, [
+		comment is 'Returns the arguments recorded by the aspiration hook.',
+		argnames is ['Inputs']
+	]).
+
+	:- private(aspiration_/3).
 	:- dynamic(aspiration_/3).
 
 	aspiration(State, Energy, Best) :-
@@ -295,6 +345,7 @@
 
 :- object(tabu_search_inherited_aspiration_fixture,
 	extends(tabu_search_aspiration_fixture(permit, full, [a-0,b-1], none))).
+
 :- end_object.
 
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>simulated_annealing(Problem,RandomAlgorithm) &mdash; Logtalk 3.103.0</title>
+  <title>simulated_annealing(Problem,Random) &mdash; Logtalk 3.103.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -362,7 +362,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#simple-temporal-networks"><span class="xref std std-ref">simple_temporal_networks</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#simulated-annealing"><span class="xref std std-ref">simulated_annealing</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="simulated_annealing_1.html">simulated_annealing(Problem)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">simulated_annealing(Problem,RandomAlgorithm)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">simulated_annealing(Problem,Random)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="simulated_annealing_protocol_0.html">simulated_annealing_protocol</a></li>
 </ul>
 </li>
@@ -461,7 +461,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem,RandomAlgorithm)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem,Random)</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/simulated_annealing_2.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -472,11 +472,11 @@
            <div itemprop="articleBody">
              
   <p class="right" id="simulated-annealing-2"><span id="index-0"></span><strong>object</strong></p>
-<section id="simulated-annealing-problem-randomalgorithm">
-<h1><code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem,RandomAlgorithm)</span></code><a class="headerlink" href="#simulated-annealing-problem-randomalgorithm" title="Link to this heading"></a></h1>
+<section id="simulated-annealing-problem-random">
+<h1><code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem,Random)</span></code><a class="headerlink" href="#simulated-annealing-problem-random" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">simulated_annealing_protocol</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> - Random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library (e.g. <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, …).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Random</span></code> - Random number generator object providing <code class="docutils literal notranslate"><span class="pre">between/3</span></code>, <code class="docutils literal notranslate"><span class="pre">random/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code> predicates.</p></li>
 </ul>
 <p>Simulated annealing optimization algorithm. Parameterized by a problem object implementing the <code class="docutils literal notranslate"><span class="pre">simulated_annealing_protocol</span></code> protocol and by a random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library. The algorithm minimizes the energy (cost) function defined by the problem. Custom cooling schedules, stop conditions, delta-energy neighbor generation, progress reporting, and reheating restarts can be defined by the problem object or configured via options; suitable defaults are used otherwise.</p>
 <div class="line-block">
@@ -487,8 +487,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-10-24</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-11-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -503,7 +503,6 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>

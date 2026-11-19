@@ -19,17 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(particle_swarm_optimization(_Problem_, _RandomAlgorithm_),
+:- object(particle_swarm_optimization(_Problem_, _Random_),
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-11-19,
 		comment is 'Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes or maximizes the fitness function defined by the problem.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``particle_swarm_optimization_protocol``.',
-			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library.'
+			'Random' - 'Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.'
 		],
 		remarks is [
 			'Algorithm' - 'Uses synchronous global-best particle swarm optimization. Every particle update in an iteration uses the global best from the start of that iteration.',
@@ -83,7 +83,7 @@
 		initial_positions/1, position_bounds/1, initial_velocities/1, fitness/2, stop_condition/3, progress/5
 	]).
 
-	:- uses(fast_random(_RandomAlgorithm_), [
+	:- uses(_Random_, [
 		random/1, random/3, randomize/1
 	]).
 
@@ -438,31 +438,38 @@
 	valid_option(target_fitness(TargetFitness)) :-
 		once((TargetFitness == none; number(TargetFitness))).
 	valid_option(max_iterations(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(stagnation_iterations(N)) :-
-		valid(non_negative_integer, N).
+		integer(N),
+		N >= 0.
 	valid_option(inertia_weight(Weight)) :-
-		valid(non_negative_float, Weight).
+		float(Weight),
+		Weight >= 0.
 	valid_option(cognitive_coefficient(Coefficient)) :-
-		valid(non_negative_float, Coefficient).
+		float(Coefficient),
+		Coefficient >= 0.
 	valid_option(social_coefficient(Coefficient)) :-
-		valid(non_negative_float, Coefficient).
+		float(Coefficient),
+		Coefficient >= 0.
 	valid_option(updates(N)) :-
-		valid(non_negative_integer, N).
+		integer(N),
+		N >= 0.
 	valid_option(seed(Seed)) :-
-		valid(positive_integer, Seed).
+		integer(Seed),
+		Seed > 0.
 
 :- end_object.
 
 
 :- object(particle_swarm_optimization(_Problem_),
-	extends(particle_swarm_optimization(_Problem_, xoshiro128pp))).
+	extends(particle_swarm_optimization(_Problem_, fast_random(xoshiro128pp)))).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-05,
-		comment is 'Particle swarm optimization algorithm using the Xoshiro128++ random number generator.',
+		date is 2026-11-19,
+		comment is 'Particle swarm optimization algorithm using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``particle_swarm_optimization_protocol``.'
 		],

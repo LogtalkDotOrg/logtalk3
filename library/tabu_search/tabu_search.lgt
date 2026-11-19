@@ -19,17 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tabu_search(_Problem_, _RandomAlgorithm_),
+:- object(tabu_search(_Problem_, _Random_),
 	imports(options)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-16,
+		date is 2026-11-19,
 		comment is 'Tabu search optimization algorithm. Parameterized by a problem object implementing the ``tabu_search_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. Minimizes energy with optional problem-defined tabu keys, tenure, aspiration, restart states, neighbor generation, stopping, and progress reporting.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``tabu_search_problem_protocol``.',
-			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).'
+			'Random' - 'Random number generator object providing ``between/3``, ``randomize/1``, ``permutation/2``, and ``sample/4`` predicates.'
 		],
 		see_also is [tabu_search(_), tabu_search_problem_protocol]
 	]).
@@ -86,8 +86,8 @@
 		neighbors/2
 	]).
 
-	:- uses(fast_random(_RandomAlgorithm_), [
-		between/3, randomize/1, permutation/2, sample/4
+	:- uses(_Random_, [
+		between/3, permutation/2, randomize/1, sample/4
 	]).
 
 	:- uses(type, [
@@ -539,21 +539,29 @@
 	% option validation
 
 	valid_option(max_steps(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(tabu_tenure(T)) :-
-		valid(non_negative_integer, T).
+		integer(T),
+		T >= 0.
 	valid_option(tabu_tenure_range(Min, Max)) :-
-		valid(positive_integer, Min),
-		valid(positive_integer, Max),
+		integer(Min),
+		integer(Max),
+		Min > 0,
+		Max > 0,
 		Min =< Max.
 	valid_option(candidates(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(updates(N)) :-
-		valid(non_negative_integer, N).
+		integer(N),
+		N >= 0.
 	valid_option(restarts(N)) :-
-		valid(non_negative_integer, N).
-	valid_option(seed(S)) :-
-		valid(positive_integer, S).
+		integer(N),
+		N >= 0.
+	valid_option(seed(Seed)) :-
+		integer(Seed),
+		Seed > 0.
 	valid_option(exhaustive(Boolean)) :-
 		once((Boolean == true; Boolean == false)).
 
@@ -561,13 +569,13 @@
 
 
 :- object(tabu_search(_Problem_),
-	extends(tabu_search(_Problem_, xoshiro128pp))).
+	extends(tabu_search(_Problem_, fast_random(xoshiro128pp)))).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-15,
-		comment is 'Tabu search optimization algorithm using the Xoshiro128++ random number generator. Convenience object that extends ``tabu_search/2`` with the random algorithm bound to ``xoshiro128pp``.',
+		date is 2026-11-19,
+		comment is 'Tabu search optimization algorithm using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``tabu_search_problem_protocol``.'
 		],

@@ -315,7 +315,7 @@ Objects
       amqp <amqp_0>
       anova_f_score <anova_f_score_0>
       ant_colony(Problem) <ant_colony_1>
-      ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
+      ant_colony(Problem,Random) <ant_colony_2>
       apriori_pattern_miner <apriori_pattern_miner_0>
       ar_language_profile <ar_language_profile_0>
       arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
@@ -483,7 +483,7 @@ Objects
       diagrams(Format) <diagrams_1>
       dif <dif_0>
       differential_evolution(Problem) <differential_evolution_1>
-      differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
+      differential_evolution(Problem,Random) <differential_evolution_2>
       difflist <difflist_0>
       dinic <dinic_0>
       dinic(Dictionary) <dinic_1>
@@ -554,7 +554,7 @@ Objects
       gaussian_process_regression <gaussian_process_regression_0>
       generalized_ripple_down_rules <generalized_ripple_down_rules_0>
       genetic_algorithm(Problem) <genetic_algorithm_1>
-      genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
+      genetic_algorithm(Problem,Random) <genetic_algorithm_2>
       genint <genint_0>
       gensym <gensym_0>
       geohash <geohash_0>
@@ -901,7 +901,7 @@ Objects
       pairing_heap_min <pairing_heap_min_0>
       pairs <pairs_0>
       particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
-      particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
+      particle_swarm_optimization(Problem,Random) <particle_swarm_optimization_2>
       partitions <partitions_0>
       paseto <paseto_0>
       paseto_claims <paseto_claims_0>
@@ -1013,7 +1013,7 @@ Objects
       shell_expansion(Mode) <shell_expansion_1>
       simplex <simplex_0>
       simulated_annealing(Problem) <simulated_annealing_1>
-      simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+      simulated_annealing(Problem,Random) <simulated_annealing_2>
       single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
       siphash_2_4 <siphash_2_4_0>
       siphash_2_4(Key) <siphash_2_4_1>
@@ -1133,7 +1133,7 @@ Objects
       symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>
       symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>
       tabu_search(Problem) <tabu_search_1>
-      tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
+      tabu_search(Problem,Random) <tabu_search_2>
       tap_output <tap_output_0>
       tap_report <tap_report_0>
       term <term_0>
@@ -1260,7 +1260,7 @@ Objects
    * :doc:`amqp <amqp_0>`
    * :doc:`anova_f_score <anova_f_score_0>`
    * :doc:`ant_colony(Problem) <ant_colony_1>`
-   * :doc:`ant_colony(Problem,RandomAlgorithm) <ant_colony_2>`
+   * :doc:`ant_colony(Problem,Random) <ant_colony_2>`
    * :doc:`apriori_pattern_miner <apriori_pattern_miner_0>`
    * :doc:`ar_language_profile <ar_language_profile_0>`
    * :doc:`arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>`
@@ -1428,7 +1428,7 @@ Objects
    * :doc:`diagrams(Format) <diagrams_1>`
    * :doc:`dif <dif_0>`
    * :doc:`differential_evolution(Problem) <differential_evolution_1>`
-   * :doc:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>`
+   * :doc:`differential_evolution(Problem,Random) <differential_evolution_2>`
    * :doc:`difflist <difflist_0>`
    * :doc:`dinic <dinic_0>`
    * :doc:`dinic(Dictionary) <dinic_1>`
@@ -1499,7 +1499,7 @@ Objects
    * :doc:`gaussian_process_regression <gaussian_process_regression_0>`
    * :doc:`generalized_ripple_down_rules <generalized_ripple_down_rules_0>`
    * :doc:`genetic_algorithm(Problem) <genetic_algorithm_1>`
-   * :doc:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>`
+   * :doc:`genetic_algorithm(Problem,Random) <genetic_algorithm_2>`
    * :doc:`genint <genint_0>`
    * :doc:`gensym <gensym_0>`
    * :doc:`geohash <geohash_0>`
@@ -1846,7 +1846,7 @@ Objects
    * :doc:`pairing_heap_min <pairing_heap_min_0>`
    * :doc:`pairs <pairs_0>`
    * :doc:`particle_swarm_optimization(Problem) <particle_swarm_optimization_1>`
-   * :doc:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>`
+   * :doc:`particle_swarm_optimization(Problem,Random) <particle_swarm_optimization_2>`
    * :doc:`partitions <partitions_0>`
    * :doc:`paseto <paseto_0>`
    * :doc:`paseto_claims <paseto_claims_0>`
@@ -1958,7 +1958,7 @@ Objects
    * :doc:`shell_expansion(Mode) <shell_expansion_1>`
    * :doc:`simplex <simplex_0>`
    * :doc:`simulated_annealing(Problem) <simulated_annealing_1>`
-   * :doc:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>`
+   * :doc:`simulated_annealing(Problem,Random) <simulated_annealing_2>`
    * :doc:`single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>`
    * :doc:`siphash_2_4 <siphash_2_4_0>`
    * :doc:`siphash_2_4(Key) <siphash_2_4_1>`
@@ -2078,7 +2078,7 @@ Objects
    * :doc:`symmetrical_uncertainty_score <symmetrical_uncertainty_score_0>`
    * :doc:`symmetrical_uncertainty_score(Discretization) <symmetrical_uncertainty_score_1>`
    * :doc:`tabu_search(Problem) <tabu_search_1>`
-   * :doc:`tabu_search(Problem,RandomAlgorithm) <tabu_search_2>`
+   * :doc:`tabu_search(Problem,Random) <tabu_search_2>`
    * :doc:`tap_output <tap_output_0>`
    * :doc:`tap_report <tap_report_0>`
    * :doc:`term <term_0>`

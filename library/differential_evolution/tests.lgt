@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2026-10-22,
+		date is 2026-11-19,
 		comment is 'Unit tests for the "differential_evolution" library.'
 	]).
 
@@ -150,7 +150,7 @@
 	%---------------------------------------------------------------------
 
 	test(de_explicit_random_algorithm, deterministic(Fitness < 0.05)) :-
-		differential_evolution(sphere, as183)::run(_Position, Fitness, [seed(42), max_generations(60), target_fitness(0.049)]).
+		differential_evolution(sphere, fast_random(as183))::run(_Position, Fitness, [seed(42), max_generations(60), target_fitness(0.049)]).
 
 	%---------------------------------------------------------------------
 	% Target fitness stopping
@@ -266,7 +266,7 @@
 			A-B-C,
 			(	integer::between(1, 64, _),
 				integer::between(1, 8, Forbidden),
-				differential_evolution(sphere, xoshiro128pp)<<random_distinct_indices_3(8, Forbidden, A, B, C),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<random_distinct_indices_3(8, Forbidden, A, B, C),
 				assertion(A =\= Forbidden),
 				assertion(B =\= Forbidden),
 				assertion(C =\= Forbidden),
@@ -282,7 +282,7 @@
 			A-B-C,
 			(	integer::between(1, 64, _),
 				integer::between(1, 8, Forbidden),
-				differential_evolution(sphere, xoshiro128pp)<<random_distinct_indices_3(8, Forbidden, A, B, C)
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<random_distinct_indices_3(8, Forbidden, A, B, C)
 			),
 			Repeated
 		),
@@ -292,14 +292,14 @@
 		fast_random(xoshiro128pp)::randomize(42),
 		forall(
 			integer::between(1, 4, Forbidden),
-			(	differential_evolution(sphere, xoshiro128pp)<<random_distinct_indices_3(4, Forbidden, A, B, C),
+			(	differential_evolution(sphere, fast_random(xoshiro128pp))<<random_distinct_indices_3(4, Forbidden, A, B, C),
 				assertion(A =\= Forbidden),
 				assertion(B =\= Forbidden),
 				assertion(C =\= Forbidden),
 				assertion(A =\= B),
 				assertion(A =\= C),
 				assertion(B =\= C),
-				differential_evolution(sphere, xoshiro128pp)<<random_distinct_indices_2(4, Forbidden, D, E),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<random_distinct_indices_2(4, Forbidden, D, E),
 				assertion(D =\= Forbidden),
 				assertion(E =\= Forbidden),
 				assertion(D =\= E)
@@ -313,16 +313,16 @@
 				findall(
 					Trial,
 					(	integer::between(1, 32, _),
-						differential_evolution(sphere, xoshiro128pp)<<rand_trial(Kind, [0,0], [1,1], [0,0], [0,0], [0-1,0-1], 0, 1, 2, Trial)
+						differential_evolution(sphere, fast_random(xoshiro128pp))<<rand_trial(Kind, [0,0], [1,1], [0,0], [0,0], [0-1,0-1], 0, 1, 2, Trial)
 					),
 					Trials
 				),
 				assertion(member([1,0], Trials)),
 				assertion(member([0,1], Trials)),
 				forall(member(Trial, Trials), memberchk(Trial, [[1,0], [0,1]])),
-				differential_evolution(sphere, xoshiro128pp)<<rand_trial(Kind, [0,0], [1,1], [0,0], [0,0], [0-1,0-1], 1, 1, 2, Full),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<rand_trial(Kind, [0,0], [1,1], [0,0], [0,0], [0-1,0-1], 1, 1, 2, Full),
 				assertion(Full == [1,1]),
-				differential_evolution(sphere, xoshiro128pp)<<rand_trial(Kind, [0], [1], [0], [0], [0-1], 0, 1, 1, Single),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<rand_trial(Kind, [0], [1], [0], [0], [0-1], 0, 1, 1, Single),
 				assertion(Single == [1])
 			)
 		).
@@ -344,7 +344,7 @@
 		forall(
 			member(Bounds, [[0-1], [0.0-1.0], [0-1.0], [0.0-1], [(-2)-(-1)], [3-3]]),
 			(	fast_random(xoshiro128pp)::randomize(42),
-				differential_evolution(sphere, xoshiro128pp)<<random_individual(1, Bounds, [X]),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<random_individual(1, Bounds, [X]),
 				Bounds = [Low-High],
 				assertion(X >= Low),
 				assertion(X =< High),
@@ -379,24 +379,24 @@
 		differential_evolution(differential_evolution_fixture(fitness))::run(_, _, [population_size(4)]).
 
 	test(differential_evolution_invalid_later_fitness, error(domain_error(fitness, invalid))) :-
-		differential_evolution(differential_evolution_fixture(later_fitness), xoshiro128pp)<<evaluate_population([[0], [1]], minimize, _, _, _).
+		differential_evolution(differential_evolution_fixture(later_fitness), fast_random(xoshiro128pp))<<evaluate_population([[0], [1]], minimize, _, _, _).
 
 	test(differential_evolution_invalid_trial_fitness, error(domain_error(fitness, invalid))) :-
-		differential_evolution(differential_evolution_fixture(fitness), xoshiro128pp)<<select_population([[0]-1], [[1]], minimize, _, _, _).
+		differential_evolution(differential_evolution_fixture(fitness), fast_random(xoshiro128pp))<<select_population([[0]-1], [[1]], minimize, _, _, _).
 
 	test(differential_evolution_selection_ordering, deterministic) :-
 		forall(
 			member(Objective, [minimize, maximize]),
 			(	forall(
 					member(Value, [0, 1, 2]),
-					(	differential_evolution(differential_evolution_fixture(mapped), xoshiro128pp)<<select_population([[1]-1], [[Value]], Objective, Selected, _, _),
+					(	differential_evolution(differential_evolution_fixture(mapped), fast_random(xoshiro128pp))<<select_population([[1]-1], [[Value]], Objective, Selected, _, _),
 						(	(Objective == minimize, Value =< 1; Objective == maximize, Value >= 1) ->
 							assertion(Selected == [[Value]-Value])
 						;	assertion(Selected == [[1]-1])
 						)
 					)
 				),
-				differential_evolution(differential_evolution_fixture(supplied), xoshiro128pp)<<select_population([[0]-1.0], [[1]], Objective, Tied, _, _),
+				differential_evolution(differential_evolution_fixture(supplied), fast_random(xoshiro128pp))<<select_population([[0]-1.0], [[1]], Objective, Tied, _, _),
 				assertion(Tied == [[1]-1])
 			)
 		).
@@ -433,16 +433,16 @@
 		differential_evolution(sphere)::run(_, _, [seed(42), max_generations(3), updates(2)]).
 
 	test(differential_evolution_mutation_formulas, deterministic) :-
-		differential_evolution(sphere, xoshiro128pp)<<mutate_rand([1,2], [3,4], [5,6], 2, [(-10)-10,(-10)-10], Rand),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<mutate_rand([1,2], [3,4], [5,6], 2, [(-10)-10,(-10)-10], Rand),
 		assertion(Rand == [-3,-2]),
-		differential_evolution(sphere, xoshiro128pp)<<best_bin(1, [0,0], [1,2], [3,4], [5,6], [(-10)-10,(-10)-10], 1, 2, 1, Best),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<best_bin(1, [0,0], [1,2], [3,4], [5,6], [(-10)-10,(-10)-10], 1, 2, 1, Best),
 		assertion(Best == [-3,-2]),
-		differential_evolution(sphere, xoshiro128pp)<<current_bin(1, [1,2], [3,4], [5,6], [7,8], [(-10)-10,(-10)-10], 1, 2, 1, Current),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<current_bin(1, [1,2], [3,4], [5,6], [7,8], [(-10)-10,(-10)-10], 1, 2, 1, Current),
 		assertion(Current == [1,2]).
 
 	test(differential_evolution_exponential_segments, all(Trial == Expected)) :-
 		member(Start-Length-Expected, [1-1-[1,0,0,0], 2-2-[0,1,1,0], 4-2-[1,0,0,1], 3-4-[1,1,1,1]]),
-		differential_evolution(sphere, xoshiro128pp)<<crossover_segment(1, [0,0,0,0], [1,1,1,1], Start, Length, 4, Trial).
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<crossover_segment(1, [0,0,0,0], [1,1,1,1], Start, Length, 4, Trial).
 
 	test(differential_evolution_corrected_reference, deterministic) :-
 		forall(
@@ -462,10 +462,10 @@
 		forall(
 			member(NP, [4,16,17,256,257]),
 			(	findall([I]-I, integer::between(1, NP, I), Population),
-				differential_evolution(sphere, xoshiro128pp)<<population_index(Population, Index),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<population_index(Population, Index),
 				forall(
 					integer::between(1, NP, I),
-					(	differential_evolution(sphere, xoshiro128pp)<<indexed_position(Index, I, Position),
+					(	differential_evolution(sphere, fast_random(xoshiro128pp))<<indexed_position(Index, I, Position),
 						assertion(Position == [I])
 					)
 				)
@@ -473,20 +473,20 @@
 		).
 
 	test(differential_evolution_fused_bounds, deterministic) :-
-		differential_evolution(sphere, xoshiro128pp)<<rand_bin(1, [0,0,0], [-2,0,2], [0,0,0], [0,0,0], [(-1)-1,0-0,(-1)-1], 1, 1, 1, Rand),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<rand_bin(1, [0,0,0], [-2,0,2], [0,0,0], [0,0,0], [(-1)-1,0-0,(-1)-1], 1, 1, 1, Rand),
 		assertion(Rand == [-1,0,1]),
-		differential_evolution(sphere, xoshiro128pp)<<best_bin(1, [0,0,0], [-2,0,2], [0,0,0], [0,0,0], [(-1)-1,0-0,(-1)-1], 1, 1, 1, Best),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<best_bin(1, [0,0,0], [-2,0,2], [0,0,0], [0,0,0], [(-1)-1,0-0,(-1)-1], 1, 1, 1, Best),
 		assertion(Best == [-1,0,1]),
-		differential_evolution(sphere, xoshiro128pp)<<current_bin(1, [0,0,0], [-2,0,2], [0,0,0], [0,0,0], [(-1)-1,0-0,(-1)-1], 1, 1, 1, Current),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<current_bin(1, [0,0,0], [-2,0,2], [0,0,0], [0,0,0], [(-1)-1,0-0,(-1)-1], 1, 1, 1, Current),
 		assertion(Current == [-1,0,1]).
 
 	test(differential_evolution_selection_best, deterministic) :-
 		forall(
 			member(Objective-Expected, [minimize-0, maximize-2]),
-			(	differential_evolution(differential_evolution_fixture(mapped), xoshiro128pp)<<select_population([[1]-1,[1]-1,[1]-1], [[0],[2],[0]], Objective, _, Position, Fitness),
+			(	differential_evolution(differential_evolution_fixture(mapped), fast_random(xoshiro128pp))<<select_population([[1]-1,[1]-1,[1]-1], [[0],[2],[0]], Objective, _, Position, Fitness),
 				assertion(Position == [Expected]),
 				assertion(Fitness =:= Expected),
-				differential_evolution(differential_evolution_fixture(supplied), xoshiro128pp)<<select_population([[0]-1,[0]-1], [[1],[0]], Objective, _, Tied, _),
+				differential_evolution(differential_evolution_fixture(supplied), fast_random(xoshiro128pp))<<select_population([[0]-1,[0]-1], [[1],[0]], Objective, _, Tied, _),
 				assertion(Tied == [1])
 			)
 		).
@@ -501,10 +501,10 @@
 		check_evaluation_batches(Calls).
 
 	test(differential_evolution_metrics_values, deterministic) :-
-		differential_evolution(sphere, xoshiro128pp)<<population_metrics([[0,0]-1, [2,0]-3], Mean, Diversity),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<population_metrics([[0,0]-1, [2,0]-3], Mean, Diversity),
 		assertion(Mean =~= 2),
 		assertion(Diversity =~= 1),
-		differential_evolution(sphere, xoshiro128pp)<<population_metrics([[3,4]-2, [3,4]-2], SameMean, SameDiversity),
+		differential_evolution(sphere, fast_random(xoshiro128pp))<<population_metrics([[3,4]-2, [3,4]-2], SameMean, SameDiversity),
 		assertion(SameMean =~= 2),
 		assertion(SameDiversity =~= 0).
 
@@ -529,7 +529,7 @@
 		findall(
 			A-B,
 			(	integer::between(1, 64, _),
-				differential_evolution(sphere, xoshiro128pp)<<random_distinct_indices_2(8, 1, A, B),
+				differential_evolution(sphere, fast_random(xoshiro128pp))<<random_distinct_indices_2(8, 1, A, B),
 				assertion(A >= 2),
 				assertion(A =< 8),
 				assertion(B >= 2),
@@ -545,7 +545,7 @@
 
 	test(differential_evolution_open_bounds_preserved, variant(Reported, Bounds)) :-
 		Bounds = [0-1| Tail],
-		catch(differential_evolution(sphere, xoshiro128pp)<<validate_bounds(Bounds), Error, true),
+		catch(differential_evolution(sphere, fast_random(xoshiro128pp))<<validate_bounds(Bounds), Error, true),
 		assertion(nonvar(Error)),
 		assertion(var(Tail)),
 		Error = error(domain_error(position_bounds, Reported), _).

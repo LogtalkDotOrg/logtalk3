@@ -11,21 +11,21 @@
 * ``Problem`` - Problem object implementing ``particle_swarm_optimization_protocol``.
 
 
-Particle swarm optimization algorithm using the Xoshiro128++ random number generator.
+Particle swarm optimization algorithm using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.
 
 | **Availability:** 
 |    ``logtalk_load(particle_swarm_optimization(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-05
+| **Version:** 2:0:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`particle_swarm_optimization(Problem,xoshiro128pp) <particle_swarm_optimization/2>`
+|    ``public`` :ref:`particle_swarm_optimization(Problem,fast_random(xoshiro128pp)) <particle_swarm_optimization/2>`
 
 | **Remarks:**
 |    (none)
@@ -59,5 +59,5 @@ Operators
 
 .. seealso::
 
-   :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2>`, :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0>`
+   :ref:`particle_swarm_optimization(Problem,Random) <particle_swarm_optimization/2>`, :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0>`
 

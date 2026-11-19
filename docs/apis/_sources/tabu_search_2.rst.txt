@@ -1,15 +1,15 @@
-.. index:: single: tabu_search(Problem,RandomAlgorithm)
+.. index:: single: tabu_search(Problem,Random)
 .. _tabu_search/2:
 
 .. rst-class:: right
 
 **object**
 
-``tabu_search(Problem,RandomAlgorithm)``
-========================================
+``tabu_search(Problem,Random)``
+===============================
 
 * ``Problem`` - Problem object implementing ``tabu_search_problem_protocol``.
-* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).
+* ``Random`` - Random number generator object providing ``between/3``, ``randomize/1``, ``permutation/2``, and ``sample/4`` predicates.
 
 
 Tabu search optimization algorithm. Parameterized by a problem object implementing the ``tabu_search_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. Minimizes energy with optional problem-defined tabu keys, tenure, aspiration, restart states, neighbor generation, stopping, and progress reporting.
@@ -19,7 +19,7 @@ Tabu search optimization algorithm. Parameterized by a problem object implementi
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-10-16
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,6 @@ Tabu search optimization algorithm. Parameterized by a problem object implementi
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
 

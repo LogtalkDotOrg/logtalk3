@@ -11,21 +11,21 @@
 * ``Problem`` - Problem object implementing ``ant_colony_problem_protocol``.
 
 
-Ant colony optimization algorithm using the Xoshiro128++ random number generator. Convenience object that extends ``ant_colony/2`` with the random algorithm bound to ``xoshiro128pp``.
+Ant colony optimization algorithm using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.
 
 | **Availability:** 
 |    ``logtalk_load(ant_colony(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-16
+| **Version:** 2:0:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`ant_colony(Problem,xoshiro128pp) <ant_colony/2>`
+|    ``public`` :ref:`ant_colony(Problem,fast_random(xoshiro128pp)) <ant_colony/2>`
 
 | **Remarks:**
 |    (none)
@@ -59,5 +59,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2>`, :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0>`
+   :ref:`ant_colony(Problem,Random) <ant_colony/2>`, :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0>`
 

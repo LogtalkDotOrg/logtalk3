@@ -19,17 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(differential_evolution(_Problem_, _RandomAlgorithm_),
+:- object(differential_evolution(_Problem_, _Random_),
 	imports(options)).
 
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-11,
+		date is 2026-10-19,
 		comment is 'Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``differential_evolution_problem_protocol``.',
-			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library.'
+			'Random' - 'Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.'
 		],
 		remarks is [
 			'Strategies' - 'The ``strategy(rand/1/bin)`` (default), ``strategy(rand/1/exp)``, ``strategy(best/1/bin)``, and ``strategy(current-to-best/1/bin)`` options select the classic mutation strategies.',
@@ -102,8 +102,8 @@
 		position_bounds/1, fitness/2, initial_positions/1, stop_condition/3, progress/5
 	]).
 
-	:- uses(fast_random(_RandomAlgorithm_), [
-		random/1, randomize/1, between/3
+	:- uses(_Random_, [
+		between/3, random/1, randomize/1
 	]).
 
 	:- uses(linear_algebra, [
@@ -658,31 +658,39 @@
 	valid_option(target_fitness(Target)) :-
 		once((Target == none ; number(Target))).
 	valid_option(population_size(N)) :-
-		valid(positive_integer, N), N >= 4.		% need at least 4 for rand/1/bin
+		integer(N),
+		% need at least 4 for rand/1/bin
+		N >= 4.
 	valid_option(max_generations(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(crossover_probability(CR)) :-
-		number(CR), CR >= 0.0, CR =< 1.0.
+		number(CR),
+		0.0 =< CR, CR =< 1.0.
 	valid_option(differential_weight(F)) :-
-		number(F), F > 0.0.
+		number(F),
+		F > 0.0.
 	valid_option(stagnation_generations(N)) :-
-		valid(non_negative_integer, N).
+		integer(N),
+		N >= 0.
 	valid_option(updates(N)) :-
-		valid(non_negative_integer, N).
+		integer(N),
+		N >= 0.
 	valid_option(seed(Seed)) :-
-		valid(positive_integer, Seed).
+		integer(Seed),
+		Seed > 0.
 
 :- end_object.
 
 
 :- object(differential_evolution(_Problem_),
-	extends(differential_evolution(_Problem_, xoshiro128pp))).
+	extends(differential_evolution(_Problem_, fast_random(xoshiro128pp)))).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-13,
-		comment is 'Differential Evolution using the Xoshiro128++ random number generator.',
+		date is 2026-11-19,
+		comment is 'Differential Evolution using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``differential_evolution_problem_protocol``.'
 		],

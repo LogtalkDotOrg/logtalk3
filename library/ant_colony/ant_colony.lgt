@@ -19,17 +19,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(ant_colony(_Problem_, _RandomAlgorithm_),
+:- object(ant_colony(_Problem_, _Random_),
 	imports(options)).
 
 	:- info([
-		version is 1:1:1,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-10-07,
+		date is 2026-11-19,
 		comment is 'Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem object implementing the ``ant_colony_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the solution cost defined by the problem. Classic Ant System pheromone update, optional MAX-MIN pheromone bounds, candidate construction by probabilistic state transition, optional elitist reinforcement, progress reporting, and seed control are supported; suitable defaults are used otherwise.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``ant_colony_problem_protocol``.',
-			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).'
+			'Random' - 'Random number generator object providing ``between/3``, ``random/1``, and ``randomize/1`` predicates.'
 		],
 		remarks is [
 			'Algorithm' - 'Ant Colony Optimization is a constructive metaheuristic inspired by the foraging behaviour of real ants. Artificial ants build solutions component by component on a construction graph, guided by pheromone trails and heuristic information. After each iteration the pheromone is evaporated and reinforced according to the quality of the constructed solutions.',
@@ -86,7 +86,7 @@
 		nodes/1, heuristic/3, solution_cost/2, stop_condition/3, progress/5
 	]).
 
-	:- uses(fast_random(_RandomAlgorithm_), [
+	:- uses(_Random_, [
 		between/3, random/1, randomize/1
 	]).
 
@@ -403,9 +403,11 @@
 	% option validation
 
 	valid_option(max_iterations(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(ants(N)) :-
-		valid(positive_integer, N).
+		integer(N),
+		N > 0.
 	valid_option(alpha(A)) :-
 		number(A), A >= 0.0.
 	valid_option(beta(B)) :-
@@ -415,7 +417,8 @@
 	valid_option(q(Q)) :-
 		number(Q), Q > 0.0.
 	valid_option(elite(E)) :-
-		valid(non_negative_integer, E).
+		integer(E),
+		E >= 0.
 	valid_option(tau0(T)) :-
 		number(T), T > 0.0.
 	valid_option(tau_min(T)) :-
@@ -423,21 +426,23 @@
 	valid_option(tau_max(T)) :-
 		number(T), T > 0.0.
 	valid_option(updates(N)) :-
-		valid(non_negative_integer, N).
-	valid_option(seed(S)) :-
-		valid(positive_integer, S).
+		integer(N),
+		N >= 0.
+	valid_option(seed(Seed)) :-
+		integer(Seed),
+		Seed > 0.
 
 :- end_object.
 
 
 :- object(ant_colony(_Problem_),
-	extends(ant_colony(_Problem_, xoshiro128pp))).
+	extends(ant_colony(_Problem_, fast_random(xoshiro128pp)))).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-16,
-		comment is 'Ant colony optimization algorithm using the Xoshiro128++ random number generator. Convenience object that extends ``ant_colony/2`` with the random algorithm bound to ``xoshiro128pp``.',
+		date is 2026-11-19,
+		comment is 'Ant colony optimization algorithm using the Xoshiro128++ random number generator via ``fast_random(xoshiro128pp)``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``ant_colony_problem_protocol``.'
 		],
