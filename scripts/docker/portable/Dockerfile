@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on November 13, 2026
+##   Last updated on November 19, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
@@ -306,7 +306,7 @@ WORKDIR /downloads
 RUN if [ "$SHUMWAY_VERSION" != "none" ] ; then \
         git clone --depth 1 --branch ${SHUMWAY_VERSION} https://github.com/gusbro/Shumway \
         && cd Shumway \
-        && dotnet build -c Release Shumway.slnx ; \
+        && dotnet build -c Release Shumway.slnx -p:ShumwayReadyToRun=false ; \
     fi
 ENV PATH=$PATH:/downloads/Shumway/dist/Release
 

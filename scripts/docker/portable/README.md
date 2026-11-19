@@ -33,6 +33,7 @@ Prolog backends:
 - Tau Prolog
 - Trealla Prolog
 - XSB
+- YAP
 
 Includes Jupyter, JupyterLab, and the Logtalk kernel.
 
