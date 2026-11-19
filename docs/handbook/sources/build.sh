@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 16, 2026
+##   Last updated on November 19, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -150,6 +150,7 @@ sed '1,19d' ../../../library/eclat_pattern_miner/NOTES.md | pandoc -f gfm -t rst
 sed '1,19d' ../../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst
 sed '1,19d' ../../../library/elastic_net_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/elastic_net_regression.rst
 sed '1,19d' ../../../library/elo_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/elo_ranker.rst
+sed '1,19d' ../../../library/emeans_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/emeans_clusterer.rst
 sed '1,19d' ../../../library/events/NOTES.md | pandoc -f gfm -t rst -o libraries/events.rst
 sed '1,19d' ../../../library/ewma_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/ewma_anomaly_detector.rst
 sed '1,19d' ../../../library/expand_library_alias_paths/NOTES.md | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst

@@ -1400,6 +1400,22 @@ To load an entity, always load the library that includes it using the goal ``log
 
    * :doc:`elo_ranker <elo_ranker_0>`
 
+``library/emeans_clusterer/``
+-----------------------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      emeans_clusterer <emeans_clusterer_0>
+      emeans_clusterer(Random) <emeans_clusterer_1>
+
+.. only:: latex
+
+   * :doc:`emeans_clusterer <emeans_clusterer_0>`
+   * :doc:`emeans_clusterer(Random) <emeans_clusterer_1>`
+
 ``library/events/``
 -------------------
 

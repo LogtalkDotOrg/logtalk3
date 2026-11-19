@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on November 16, 2026
+%  Last updated on November 19, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -104,6 +104,7 @@ logtalk_library_path(eclat_pattern_miner, library('eclat_pattern_miner/')).
 logtalk_library_path(edcg, library('edcg/')).
 logtalk_library_path(elastic_net_regression, library('elastic_net_regression/')).
 logtalk_library_path(elo_ranker, library('elo_ranker/')).
+logtalk_library_path(emeans_clusterer, library('emeans_clusterer/')).
 logtalk_library_path(events, library('events/')).
 logtalk_library_path(ewma_anomaly_detector, library('ewma_anomaly_detector/')).
 logtalk_library_path(expand_library_alias_paths, library('expand_library_alias_paths/')).

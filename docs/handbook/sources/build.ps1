@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 16, 2026
+##   Last updated on November 19, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -150,6 +150,7 @@ Foreach-Object {
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst
 (Get-Content ../../../library/elastic_net_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/elastic_net_regression.rst
 (Get-Content ../../../library/elo_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/elo_ranker.rst
+(Get-Content ../../../library/emeans_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/emeans_clusterer.rst
 (Get-Content ../../../library/events/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/events.rst
 (Get-Content ../../../library/ewma_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ewma_anomaly_detector.rst
 (Get-Content ../../../library/expand_library_alias_paths/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/expand_library_alias_paths.rst

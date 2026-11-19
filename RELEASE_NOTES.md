@@ -111,6 +111,9 @@ Networks (STNs).
 * ADDED: New `atms` library implementing the Horn fragment of Johan de Kleer's
 Assumption-based Truth Maintenance System (ATMS).
 
+* ADDED: New `emeans_clusterer` library implementing Meta FAIR e-means
+algorithm.
+
 * ADDED: New `time_series_protocols` library defining protocols, common
 predicates, and test datasets for implementing time series forecasting
 algorithms.

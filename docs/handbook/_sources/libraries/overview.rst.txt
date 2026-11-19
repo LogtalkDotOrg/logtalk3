@@ -116,12 +116,13 @@ Library groups
     ``regularized_bradley_terry_ranker``, ``schulze_ranker``,
     ``thurstone_mosteller_ranker``, and ``trueskill_ranker``.
   - Clustering: ``clustering_protocols``, ``agglomerative_clusterer``,
-    ``dbscan_clusterer``, ``gaussian_mixture_clusterer``,
-    ``hdbscan_clusterer``, ``hierarchical_clustering``,
-    ``kcenters_clusterer``, ``kmeans_clusterer``,
-    ``kmedians_clusterer``, ``kmedoids_clusterer``,
-    ``kmodes_clusterer``, ``kprototypes_clusterer``,
-    ``optics_clusterer``, and ``spectral_clusterer``.
+    ``dbscan_clusterer``, ``emeans_clusterer``,
+    ``gaussian_mixture_clusterer``, ``hdbscan_clusterer``,
+    ``hierarchical_clustering``, ``kcenters_clusterer``,
+    ``kmeans_clusterer``, ``kmedians_clusterer``,
+    ``kmedoids_clusterer``, ``kmodes_clusterer``,
+    ``kprototypes_clusterer``, ``optics_clusterer``, and
+    ``spectral_clusterer``.
   - Dimension reduction: ``dimension_reduction_protocols``,
     ``ica_projection``, ``kernel_pca_projection``, ``lda_projection``,
     ``nmf_projection``, ``pca_projection``, ``pls_projection``,

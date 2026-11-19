@@ -170,6 +170,7 @@
 		clustering_protocols(loader),
 		agglomerative_clusterer(loader),
 		dbscan_clusterer(loader),
+		emeans_clusterer(loader),
 		gaussian_mixture_clusterer(loader),
 		hdbscan_clusterer(loader),
 		hierarchical_clustering(loader),

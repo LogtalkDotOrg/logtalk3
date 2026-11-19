@@ -119,7 +119,7 @@ Library groups
 		`ranked_pairs`, `regularized_bradley_terry_ranker`, `schulze_ranker`,
 		`thurstone_mosteller_ranker`, and `trueskill_ranker`.
 	- Clustering:
-		`clustering_protocols`, `agglomerative_clusterer`, `dbscan_clusterer`,
+		`clustering_protocols`, `agglomerative_clusterer`, `dbscan_clusterer`, `emeans_clusterer`,
 		`gaussian_mixture_clusterer`, `hdbscan_clusterer`, `hierarchical_clustering`,
 		`kcenters_clusterer`, `kmeans_clusterer`, `kmedians_clusterer`,
         `kmedoids_clusterer`, `kmodes_clusterer`, `kprototypes_clusterer`,

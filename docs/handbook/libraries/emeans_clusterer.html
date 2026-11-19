@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>emeans_clusterer &mdash; Logtalk 3.103.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4823beec"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.103.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">emeans_clusterer</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/emeans_clusterer.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="emeans-clusterer">
+<span id="library-emeans-clusterer"></span><h1><code class="docutils literal notranslate"><span class="pre">emeans_clusterer</span></code><a class="headerlink" href="#emeans-clusterer" title="Link to this heading"></a></h1>
+<p>e-Means clusterer for continuous attributes. The default implementation
+follows <a class="reference external" href="https://arxiv.org/html/2611.09501v1#S3">Algorithm 1 from Bessa et
+al.</a>, an EMA mini-batch
+alternative to Lloyd’s k-means. Use the <code class="docutils literal notranslate"><span class="pre">algorithm(ema_lloyd)</span></code> option
+for EMA training followed by bounded Lloyd refinement.</p>
+<p>The library implements the <code class="docutils literal notranslate"><span class="pre">clusterer_protocol</span></code> defined in the
+<code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library. It provides predicates for learning a
+clusterer from a dataset, assigning new instances to clusters, and
+exporting the learned clusterer as a list of predicate clauses or to a
+file.</p>
+<p>Datasets are represented as objects implementing the
+<code class="docutils literal notranslate"><span class="pre">clustering_dataset_protocol</span></code> protocol from the
+<code class="docutils literal notranslate"><span class="pre">clustering_protocols</span></code> library.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#emeans-clusterer">../../apis/library_index.html#emeans-clusterer</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load this library, load its <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(emeans_clusterer(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load its <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(emeans_clusterer(tester)).
+</pre></div>
+</div>
+<p>To run the performance benchmark suite, load the
+<code class="docutils literal notranslate"><span class="pre">tester_performance.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(emeans_clusterer(tester_performance)).
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> scaled benchmark varies the number of rows and
+clusters and reports timings for both the default refinement cap and a
+one-update cap.</p>
+<p>On a 5,120-row fixture, the one-update cap stops with changed
+assignments, while the default cap verifies stability after two updates
+(three assignment passes).</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">emeans_clusterer(Random)</span></code> object to select a random generator
+object and algorithm that provides the <code class="docutils literal notranslate"><span class="pre">random/1</span></code>, <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> emeans_clusterer(fast_random(as183))<span class="o">::</span>learn(<span class="nv">Dataset</span>, <span class="nv">Model</span>, [seed(<span class="m">42</span>)]).
+</pre></div>
+</div>
+<p>The convenience object <code class="docutils literal notranslate"><span class="pre">emeans_clusterer</span></code> uses
+<code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code>.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Continuous Datasets</strong>: Accepts datasets containing only continuous
+attributes.</p></li>
+<li><p><strong>EMA Mini-batch Updates</strong>: Centroids are maintained as the ratio of
+exponentially-decayed sums and counts; older assignments are forgotten
+at a controlled rate.</p></li>
+<li><p><strong>Automatic Hyper-parameters</strong>: Batch size and peak step size are set
+from the published scaling laws (no extra knobs beyond <code class="docutils literal notranslate"><span class="pre">k</span></code> and
+<code class="docutils literal notranslate"><span class="pre">epochs</span></code>).</p></li>
+<li><p><strong>Cosine Annealing</strong>: The cosine schedule targets a minimum step size
+of 10 % of the peak.</p></li>
+<li><p><strong>Dead-cluster Revival</strong>: The published mode splits count-weighted
+donor clusters every five batches when a cluster falls below 10% of
+mean EMA mass.</p></li>
+<li><p><strong>Finalization Stage</strong>: The published mode computes means from the
+last epoch’s assignments or returns a separate slow EMA, without a new
+assignment pass.</p></li>
+<li><p><strong>Initialization</strong>: Random training rows by default; <code class="docutils literal notranslate"><span class="pre">first_k</span></code> and
+deterministic <code class="docutils literal notranslate"><span class="pre">spread</span></code> are also available.</p></li>
+<li><p><strong>Reproducible Mini-batches</strong>: A user-supplied seed controls the
+Fisher-Yates shuffle used for mini-batch order. The shuffle uses the
+portable <code class="docutils literal notranslate"><span class="pre">avltree</span></code> dictionary without destructive updates.</p></li>
+<li><p><strong>Optional Feature Scaling</strong>: Continuous attributes can be
+standardized using z-score scaling.</p></li>
+<li><p><strong>Rich Training Diagnostics</strong>: Learned clusterers report training
+example count, convergence status, epoch count, and final centroid
+shift.</p></li>
+<li><p><strong>Portable Export</strong>: Learned clusterers can be exported as clauses or
+files and reused later.</p></li>
+</ul>
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The following options can be passed to the <code class="docutils literal notranslate"><span class="pre">learn/3</span></code> predicate:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">k(K)</span></code>: Number of clusters to learn. Default is <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">algorithm(Algorithm)</span></code>: <code class="docutils literal notranslate"><span class="pre">published</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code>
+(EMA training followed by bounded Lloyd refinement).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs(Epochs)</span></code>: Number of epochs, or the epoch cap in
+<code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> mode. Default is <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tolerance(Tolerance)</span></code>: <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> only. Maximum net centroid
+shift for early stopping, checked after the second epoch and skipped
+when revival reseeds a cluster. Default is <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initialization(Initialization)</span></code>: <code class="docutils literal notranslate"><span class="pre">random</span></code> (published default),
+<code class="docutils literal notranslate"><span class="pre">spread</span></code> (<code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> default), or <code class="docutils literal notranslate"><span class="pre">first_k</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature_scaling(FeatureScaling)</span></code>: <code class="docutils literal notranslate"><span class="pre">off</span></code> (published default) or
+<code class="docutils literal notranslate"><span class="pre">on</span></code> (<code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> default) for z-score standardization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finalization(Method)</span></code>: Published mode only. <code class="docutils literal notranslate"><span class="pre">last_epoch_mean</span></code>
+(default) or <code class="docutils literal notranslate"><span class="pre">slow_ema(HalfLife)</span></code>, with a positive half-life
+measured in batch updates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(Seed)</span></code>: An integer passed to the generator’s <code class="docutils literal notranslate"><span class="pre">randomize/1</span></code>
+or a state returned by its <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">1</span></code>. The
+clusterer checks only that the seed is ground and leaves its
+interpretation to the generator. Training initializes and advances the
+shared state; callers can save it with <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and restore it
+with <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> if needed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refinement_iterations(N)</span></code>: <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> only. Positive cap on
+Lloyd centroid updates after training. Default is <code class="docutils literal notranslate"><span class="pre">5</span></code>. An assignment
+check can follow the last update.</p></li>
+</ul>
+</section>
+<section id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate returns a list containing:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model(emeans_clusterer)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">centroid_count(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">training_example_count(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convergence(Reason)</span></code> (<code class="docutils literal notranslate"><span class="pre">tolerance</span></code> or <code class="docutils literal notranslate"><span class="pre">maximum_epochs</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs(Count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epoch_shift(Shift)</span></code>: Maximum net centroid shift over the last
+training epoch, including revival.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_shift(Shift)</span></code>: In published mode, the maximum distance
+between an end-of-training centroid and its final value. In
+<code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> mode, the maximum centroid movement in any individual
+refinement update.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finalization(Method)</span></code>: Published mode only. <code class="docutils literal notranslate"><span class="pre">last_epoch_mean</span></code> or
+<code class="docutils literal notranslate"><span class="pre">slow_ema</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">last_epoch_occupied_cluster_count(Count)</span></code>: Last-epoch mean only.
+Number of clusters that received at least one assignment during the
+final training epoch. It is not a reassignment count for the returned
+model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refinement_status(Status)</span></code>: <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> only. <code class="docutils literal notranslate"><span class="pre">stable</span></code> when the
+returned model preserves the assignments used to compute its means and
+the last update did not reseed a cluster; otherwise
+<code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refinement_updates(Count)</span></code>: <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> only. Number of completed
+refinement updates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">occupied_cluster_count(Count)</span></code>: <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> only. Number of
+clusters assigned at least one training row by the returned model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options(Options)</span></code></p></li>
+</ul>
+</section>
+<section id="clusterer-representation">
+<h2>Clusterer representation<a class="headerlink" href="#clusterer-representation" title="Link to this heading"></a></h2>
+<p>The learned clusterer is represented as a compound term with the functor
+chosen by the user when exporting the clusterer and arity 4. For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>emeans_clusterer(<span class="nv">Encoders</span>, <span class="nv">Centroids</span>, <span class="nv">Options</span>, <span class="nv">Diagnostics</span>)
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Encoders</span></code>: List of continuous attribute encoders storing attribute
+name, mean, and scale.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Centroids</span></code>: List of centroid vectors in cluster-id order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Options</span></code>: Effective training options used to learn the clusterer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: Training diagnostics metadata returned by the
+<code class="docutils literal notranslate"><span class="pre">diagnostics/2</span></code> predicate.</p></li>
+</ul>
+</section>
+<section id="algorithm-summary">
+<h2>Algorithm summary<a class="headerlink" href="#algorithm-summary" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Sample <code class="docutils literal notranslate"><span class="pre">k</span></code> training rows without replacement unless another
+initialization is selected.</p></li>
+<li><p>Initialise per-cluster sum/count with a tiny mass on the seeds.</p></li>
+<li><p>Shuffle each epoch and process complete batches. Following the
+paper’s floor-based update count, each epoch omits its shuffled
+remainder. The batch law is rounded to a power of two and capped at
+<code class="docutils literal notranslate"><span class="pre">n</span></code>, with the paper’s factor-of-eight reduction above two million
+rows.</p></li>
+<li><p>Assign to the nearest centroids, accumulate sums and counts, and
+apply the EMA update with Equation 5’s cosine schedule. Every fifth
+batch, sample live donors without replacement in proportion to their
+EMA counts, and split their mass with alternating coordinate
+perturbations (Appendix H).</p></li>
+<li><p>Return the means of the assignments made during the last epoch. For
+clusters not assigned any row that epoch, retain the trained
+centroid. With slow-EMA finalization, return the separate EMA that
+tracked the same batch assignments and donor splits instead.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> mode processes partial batches, checks convergence and
+reseeds low-mass clusters at high-residual rows at epoch boundaries, and
+finishes with bounded Lloyd refinement.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Bessa et al. (2026) – “e-means: outperforming k-means (in one-tenth
+the epochs)”. arXiv:2611.09501.</p></li>
+<li><p>van den Oord et al. (2017) – VQ-VAE EMA centroid updates (original
+inspiration).</p></li>
+<li><p>Lloyd (1982) – Least Squares Quantization in PCM.</p></li>
+<li><p>MacQueen (1967) – Some Methods for Classification and Analysis of
+Multivariate Observations.</p></li>
+</ol>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Revival does not guarantee ``k`` occupied clusters.</strong> The published
+donor perturbation leaves an all-zero centroid unchanged, and there
+may be fewer donors than dead clusters. In <code class="docutils literal notranslate"><span class="pre">ema_lloyd</span></code> mode, there
+may be no distinct row with a positive residual.</p></li>
+<li><p><strong>In ``ema_lloyd`` mode, convergence is local and refinement is
+bounded.</strong> Epoch tolerance is about centroid movement, not
+assignments. Refinement reports assignment stability separately and
+may reach its cap first. A single scheduled mini-batch uses the peak
+learning rate; early stopping may end before the planned floor.</p></li>
+<li><p><strong>Mini-batches do not make training streaming or reduce the number of
+distance comparisons per epoch.</strong> Training materializes the dataset
+and its encoded rows. Shared preprocessing validates and orders the
+raw bindings once for ordinary rows and, when scaling is enabled,
+collects numeric columns to fit the encoders. With <code class="docutils literal notranslate"><span class="pre">n</span></code> rows, <code class="docutils literal notranslate"><span class="pre">k</span></code>
+clusters, and <code class="docutils literal notranslate"><span class="pre">d</span></code> features, nearest-centroid assignment costs
+<code class="docutils literal notranslate"><span class="pre">O(n*k*d)</span></code> per epoch, and the AVL shuffle adds <code class="docutils literal notranslate"><span class="pre">O(n*log(n))</span></code> time
+and allocation in the worst case despite reusing the initial index.
+Batch updates also traverse all cluster states.</p></li>
+<li><p><strong>Initialization, revival, and refinement in ``ema_lloyd`` mode can be
+substantial.</strong> <code class="docutils literal notranslate"><span class="pre">spread</span></code> initialization caches nearest-centroid
+distances but still takes up to <code class="docutils literal notranslate"><span class="pre">O(n*k*d)</span></code> work. Each refinement
+update needs a full exact assignment pass, with indexed statistics
+accumulated in <code class="docutils literal notranslate"><span class="pre">O(n*log(k))</span></code> extra time for <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> instead of
+rescanning assignments for each cluster. The final verification is
+another full assignment pass. An attempt to reseed clusters adds a
+residual pass and ranks candidates by residual.</p></li>
+<li><p><strong>The library does not reproduce the paper’s GPU benchmarks.</strong> It uses
+exact, in-memory CPU assignments rather than the optional approximate
+assignment path for very large cluster counts.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
