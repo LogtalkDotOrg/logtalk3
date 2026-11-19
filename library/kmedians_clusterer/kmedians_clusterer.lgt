@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-11-19,
 		comment is 'k-Medians clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, kmedoids_clusterer]
 	]).
@@ -42,10 +42,6 @@
 		manhattan_distance/3, median/2
 	]).
 
-	:- uses(pairs, [
-		keys/2
-	]).
-
 	:- uses(type, [
 		valid/2
 	]).
@@ -55,15 +51,12 @@
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		^^check_continuous_attributes(Attributes),
-		keys(Attributes, AttributeNames),
 		findall(
 			Id-AttributeValues,
 			Dataset::example(Id, AttributeValues),
 			Examples
 		),
-		^^check_examples(Dataset, AttributeNames, Examples),
-		^^build_encoders(AttributeNames, Examples, Options, Encoders),
-		^^examples_to_rows(Examples, Encoders, Rows),
+		^^prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows),
 		length(Rows, Count),
 		^^option(k(K), Options),
 		^^check_cluster_count(K, Count),

@@ -66,6 +66,7 @@
 		common_check_attribute_bindings/2,
 		common_check_encoded_attribute_bindings/2,
 		common_build_encoders/4,
+		common_prepare_training_rows/6,
 		common_examples_to_rows/3,
 		common_encode_instance/3,
 		common_check_cluster_count/2,
@@ -100,6 +101,9 @@
 
 	common_build_encoders(AttributeNames, Examples, Options, Encoders) :-
 		^^build_encoders(AttributeNames, Examples, Options, Encoders).
+
+	common_prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows) :-
+		^^prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows).
 
 	common_examples_to_rows(Examples, Encoders, Rows) :-
 		^^examples_to_rows(Examples, Encoders, Rows).

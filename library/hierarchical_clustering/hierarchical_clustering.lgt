@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-11-19,
 		comment is 'Hierarchical clusterer for continuous datasets. Learns a full agglomerative_clusterer merge tree from a dataset object implementing the ``clustering_dataset_protocol`` protocol and then cuts the hierarchy to the requested number of clusters for prediction and export.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, agglomerative_clusterer]
 	]).
@@ -52,10 +52,6 @@
 		euclidean_distance/3, manhattan_distance/3, rescale/3
 	]).
 
-	:- uses(pairs, [
-		keys/2
-	]).
-
 	:- uses(type, [
 		valid/2
 	]).
@@ -72,15 +68,12 @@
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		^^check_continuous_attributes(Attributes),
-		keys(Attributes, AttributeNames),
 		findall(
 			Id-AttributeValues,
 			Dataset::example(Id, AttributeValues),
 			Examples
 		),
-		^^check_examples(Dataset, AttributeNames, Examples),
-		^^build_encoders(AttributeNames, Examples, Options, Encoders),
-		^^examples_to_rows(Examples, Encoders, Rows),
+		^^prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows),
 		length(Rows, Count),
 		next_internal_node_id(Examples, NextNodeId),
 		^^option(k(K), Options),

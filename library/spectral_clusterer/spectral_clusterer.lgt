@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-10-12,
+		date is 2026-11-19,
 		comment is 'Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nystroem extension for assigning new instances to clusters.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, linear_algebra]
 	]).
@@ -50,7 +50,7 @@
 	]).
 
 	:- uses(pairs, [
-		keys/2, values/2
+		values/2
 	]).
 
 	:- uses(type, [
@@ -70,15 +70,12 @@
 			domain_error(non_empty_attributes, Dataset)
 		;	true
 		),
-		keys(Attributes, AttributeNames),
 		findall(
 			Id-AttributeValues,
 			Dataset::example(Id, AttributeValues),
 			Examples
 		),
-		^^check_examples(Dataset, AttributeNames, Examples),
-		^^build_encoders(AttributeNames, Examples, Options, Encoders),
-		^^examples_to_rows(Examples, Encoders, Rows),
+		^^prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows),
 		values(Rows, TrainingRows),
 		length(TrainingRows, Count),
 		^^option(k(K), Options),

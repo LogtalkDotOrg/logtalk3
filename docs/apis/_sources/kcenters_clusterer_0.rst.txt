@@ -14,8 +14,8 @@ k-Centers clusterer for continuous datasets. Learns from a dataset object implem
 |    ``logtalk_load(kcenters_clusterer(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-06
+| **Version:** 1:1:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,7 +27,6 @@ k-Centers clusterer for continuous datasets. Learns from a dataset object implem
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
-|    :ref:`pairs <pairs/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**

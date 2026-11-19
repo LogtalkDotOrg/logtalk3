@@ -14,8 +14,8 @@ Shared predicates for clusterer learning defaults, export, and common dataset an
 |    ``logtalk_load(clustering_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-30
+| **Version:** 1:1:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static``
@@ -26,8 +26,10 @@ Shared predicates for clusterer learning defaults, export, and common dataset an
 | **Extends:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`avltree <avltree/0>`
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
 |    :ref:`population <population/0>`
 |    :ref:`type <type/0>`
 
@@ -406,6 +408,44 @@ Encodes training examples into `Id-Features` rows using the object-local or impo
 |    ``examples_to_rows(Examples,Encoders,Rows)``
 | **Mode and number of proofs:**
 |    ``examples_to_rows(+list,+list(compound),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: prepare_training_rows/6
+.. _clusterer_common/0::prepare_training_rows/6:
+
+``prepare_training_rows/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates training examples, fits the encoders, and returns encoded rows in dataset order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_training_rows(Dataset,Attributes,Examples,Options,Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``prepare_training_rows(+object_identifier,+list(pair),+list,+list(compound),-list(compound),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: prepare_training_rows/7
+.. _clusterer_common/0::prepare_training_rows/7:
+
+``prepare_training_rows/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prepares training rows for a mixed or discrete-only schema.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_training_rows(Kind,Dataset,Attributes,Examples,Options,Encoders,Rows)``
+| **Mode and number of proofs:**
+|    ``prepare_training_rows(+atom,+object_identifier,+list(pair),+list,+list(compound),-list(compound),-list(pair))`` - ``one``
 
 
 ------------

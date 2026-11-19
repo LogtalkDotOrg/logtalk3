@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-11-19,
 		comment is 'k-Prototypes clusterer for mixed datasets with continuous and discrete attributes. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, kmedoids_clusterer]
 	]).
@@ -38,12 +38,8 @@
 		length/2, member/2
 	]).
 
-	:- uses(pairs, [
-		keys/2
-	]).
-
 	:- uses(population, [
-		arithmetic_mean/2, variance/2
+		arithmetic_mean/2
 	]).
 
 	:- uses(type, [
@@ -54,15 +50,12 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
-		keys(Attributes, AttributeNames),
 		findall(
 			Id-AttributeValues,
 			Dataset::example(Id, AttributeValues),
 			Examples
 		),
-		check_examples(Dataset, Attributes, AttributeNames, Examples),
-		build_encoders(Attributes, Examples, Options, Encoders),
-		^^examples_to_rows(Examples, Encoders, Rows),
+		^^prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows),
 		length(Rows, Count),
 		^^option(k(K), Options),
 		^^check_cluster_count(K, Count),
@@ -106,42 +99,6 @@
 		;	domain_error(clusterer, Clusterer)
 		).
 
-	check_examples(Dataset, Attributes, AttributeNames, Examples) :-
-		^^check_examples_non_empty(Dataset, Examples),
-		check_example_values(Examples, Attributes, AttributeNames).
-
-	check_example_values([], _, _).
-	check_example_values([_-AttributeValues| Examples], Attributes, AttributeNames) :-
-		check_example_attributes(AttributeNames, Attributes, AttributeValues),
-		check_example_values(Examples, Attributes, AttributeNames).
-
-	check_example_attributes(AttributeNames, Attributes, AttributeValues) :-
-		^^check_attribute_bindings(AttributeNames, AttributeValues),
-		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
-
-	check_example_attributes_checked([], _, _).
-	check_example_attributes_checked([Attribute| AttributeNames], Attributes, AttributeValues) :-
-		attribute_spec(Attribute, Attributes, Spec),
-		^^attribute_value(Attribute, AttributeValues, Value),
-		check_attribute_value(Attribute, Spec, Value),
-		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
-
-	attribute_spec(Attribute, Attributes, Spec) :-
-		(	member(Attribute-Spec, Attributes) ->
-			true
-		;	existence_error(attribute, Attribute)
-		).
-
-	check_attribute_value(_Attribute, continuous, Value) :-
-		!,
-		(	nonvar(Value) ->
-			true
-		;	instantiation_error
-		),
-		(	number(Value) ->
-			true
-		;	type_error(number, Value)
-		).
 	check_attribute_value(Attribute, AllowedValues, Value) :-
 		(	nonvar(Value) ->
 			true
@@ -150,32 +107,6 @@
 		(	member(Value, AllowedValues) ->
 			true
 		;	domain_error(attribute_value(Attribute, AllowedValues), Value)
-		).
-
-	build_encoders([], _, _, []).
-	build_encoders([Attribute-continuous| Attributes], Examples, Options, [continuous(Attribute, Mean, Scale)| Encoders]) :-
-		!,
-		continuous_stats(Attribute, Examples, Options, Mean, Scale),
-		build_encoders(Attributes, Examples, Options, Encoders).
-	build_encoders([Attribute-Values| Attributes], Examples, Options, [discrete(Attribute, Values)| Encoders]) :-
-		build_encoders(Attributes, Examples, Options, Encoders).
-
-	continuous_stats(Attribute, Examples, Options, Mean, Scale) :-
-		^^option(feature_scaling(FeatureScaling), Options),
-		(	FeatureScaling == on ->
-			^^known_attribute_values(Examples, Attribute, Values),
-			arithmetic_mean(Values, Mean),
-			length(Values, Count),
-			(	Count > 1 ->
-				variance(Values, Variance)
-			;	Variance = 0.0
-			),
-			(	Variance > 0.0 ->
-				Scale is sqrt(Variance)
-			;	Scale = 1.0
-			)
-		;	Mean = 0.0,
-			Scale = 1.0
 		).
 
 	encode_instance(Encoders, AttributeValues, Features) :-

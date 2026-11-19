@@ -18,6 +18,15 @@ Concrete clustering algorithms are intentionally out of scope for this
 package. The goal is to provide a portable foundation for future
 libraries such as ``kmeans_clusterer``.
 
+The shared training preprocessing validates and indexes each ordinary
+row's bindings once, then collects the values in declaration order. With
+feature scaling enabled, it fits continuous encoders from the collected
+columns using population variance; with scaling disabled, it does not
+collect columns. The final encoding pass uses the ordered values rather
+than the original bindings. Noncanonical bindings retain the original
+unification-based validation. Prediction and exported model formats are
+unchanged.
+
 API documentation
 -----------------
 

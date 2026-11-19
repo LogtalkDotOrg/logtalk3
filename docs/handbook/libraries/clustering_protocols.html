@@ -458,6 +458,14 @@ and validation failures to be checked in one place.</p>
 <p>Concrete clustering algorithms are intentionally out of scope for this
 package. The goal is to provide a portable foundation for future
 libraries such as <code class="docutils literal notranslate"><span class="pre">kmeans_clusterer</span></code>.</p>
+<p>The shared training preprocessing validates and indexes each ordinary
+row’s bindings once, then collects the values in declaration order. With
+feature scaling enabled, it fits continuous encoders from the collected
+columns using population variance; with scaling disabled, it does not
+collect columns. The final encoding pass uses the ordered values rather
+than the original bindings. Noncanonical bindings retain the original
+unification-based validation. Prediction and exported model formats are
+unchanged.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

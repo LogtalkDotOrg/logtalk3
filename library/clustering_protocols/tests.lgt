@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-12,
+		date is 2026-11-19,
 		comment is 'Smoke tests for the "clustering_protocols" library.'
 	]).
 
@@ -187,6 +187,66 @@
 	test(common_encoding_pipeline_scaled, deterministic((Mean > 1.99, Mean < 2.01, Scale > 0.0))) :-
 		Examples = [a-[x-1.0], b-[x-3.0]],
 		clustering_protocols_test_adapter::common_build_encoders([x], Examples, [feature_scaling(on), cell_size(1.0)], [continuous(x, Mean, Scale)]).
+
+	test(common_training_baseline_declared_before_unknown_and_value, error(existence_error(attribute, y))) :-
+		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x, y], [a-[x-bad, extra-0]]).
+
+	test(common_training_baseline_first_unknown_before_value, error(domain_error(declared_attribute([x,y]), z))) :-
+		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x,y], [a-[z-0, x-bad, w-0, y-1]]).
+
+	test(common_training_baseline_nonground_key, deterministic(Key == x)) :-
+		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x,y], [a-[y-2, Key-1]]).
+
+	test(common_training_baseline_malformed_pair, fail) :-
+		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x], [a-[x-1, bad]]).
+
+	test(common_training_scaling_off_parity, deterministic) :-
+		training_parity([a-[y-4,x-2], b-[x-3.5,y-7.5]], off).
+
+	test(common_training_scaling_on_parity, deterministic) :-
+		training_parity([a-[y-4,x-2], b-[x-3.5,y-4], c-[y-4,x-0.1]], on).
+
+	test(common_training_singleton_parity, deterministic) :-
+		training_parity([a-[y-4,x-2]], on).
+
+	test(common_training_mixed, deterministic((Encoders == [discrete(channel,[retail,online]),continuous(x,2.0,1.0)], Rows == [a-[online,-1.0],b-[retail,1.0]]))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs,
+			[channel-[retail,online],x-continuous], [a-[x-1,channel-online],b-[channel-retail,x-3]], [feature_scaling(on)], Encoders, Rows).
+
+	test(common_training_categorical_unification, deterministic((Color == blue, Encoders == [discrete(color,[shade(blue),shade(red)])], Rows == [a-[shade(blue)]]))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs,
+			[color-[shade(blue),shade(red)]], [a-[color-shade(Color)]], [], Encoders, Rows).
+
+	test(common_training_nonground_mixed_declaration, deterministic((Spec == continuous, Encoders == [continuous(x,0.0,1.0)], Rows == [a-[2.0]]))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs,
+			[x-Spec], [a-[x-2]], [feature_scaling(off)], Encoders, Rows).
+
+	test(common_training_declared_before_unknown_and_value, error(existence_error(attribute, y))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], [a-[x-bad,extra-0]], [], _, _).
+
+	test(common_training_duplicate_before_missing, error(domain_error(attribute_occurrences(x,1),3))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], [a-[x-bad,z-0,x-3,x-4]], [], _, _).
+
+	test(common_training_first_unknown_before_value, error(domain_error(declared_attribute([x,y]), z))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], [a-[z-0,x-bad,w-0,y-1]], [], _, _).
+
+	test(common_training_value_order, error(domain_error(attribute_value(channel,[online]), retail))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [channel-[online],x-continuous], [a-[x-bad,channel-retail],b-[]], [], _, _).
+
+	test(common_training_nonground_key, deterministic((Key == x, Rows == [a-[1.0,2.0]]))) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], [a-[y-2,Key-1]], [feature_scaling(off)], _, Rows).
+
+	test(common_training_malformed_pair, fail) :-
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous], [a-[x-1,bad]], [], _, _).
+
+	training_parity(Examples, Scaling) :-
+		Options = [feature_scaling(Scaling)],
+		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x,y], Examples),
+		clustering_protocols_test_adapter::common_build_encoders([x,y], Examples, Options, OldEncoders),
+		clustering_protocols_test_adapter::common_examples_to_rows(Examples, OldEncoders, OldRows),
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], Examples, Options, Encoders, Rows),
+		Encoders == OldEncoders,
+		Rows == OldRows.
 
 	test(common_check_cluster_count_error, error(domain_error(cluster_count(1, 2), 3))) :-
 		clustering_protocols_test_adapter::common_check_cluster_count(3, 2).

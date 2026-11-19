@@ -14,8 +14,8 @@ OPTICS clusterer for continuous datasets. Learns an ordering from a dataset obje
 |    ``logtalk_load(optics_clusterer(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-09-12
+| **Version:** 1:3:0
+| **Date:** 2026-11-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,7 +30,6 @@ OPTICS clusterer for continuous datasets. Learns an ordering from a dataset obje
 |    :ref:`format <format/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
-|    :ref:`pairs <pairs/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**

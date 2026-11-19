@@ -24,9 +24,9 @@
 	extends(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-30,
+		date is 2026-11-19,
 		comment is 'Shared predicates for clusterer learning defaults, export, and common dataset and encoding helpers.'
 	]).
 
@@ -163,6 +163,20 @@
 		argnames is ['Examples', 'Encoders', 'Rows']
 	]).
 
+	:- protected(prepare_training_rows/6).
+	:- mode(prepare_training_rows(+object_identifier, +list(pair), +list, +list(compound), -list(compound), -list(pair)), one).
+	:- info(prepare_training_rows/6, [
+		comment is 'Validates training examples, fits the encoders, and returns encoded rows in dataset order.',
+		argnames is ['Dataset', 'Attributes', 'Examples', 'Options', 'Encoders', 'Rows']
+	]).
+
+	:- protected(prepare_training_rows/7).
+	:- mode(prepare_training_rows(+atom, +object_identifier, +list(pair), +list, +list(compound), -list(compound), -list(pair)), one).
+	:- info(prepare_training_rows/7, [
+		comment is 'Prepares training rows for a mixed or discrete-only schema.',
+		argnames is ['Kind', 'Dataset', 'Attributes', 'Examples', 'Options', 'Encoders', 'Rows']
+	]).
+
 	:- protected(encode_instance/3).
 	:- mode(encode_instance(+list(compound), +list(pair), -list(number)), one).
 	:- info(encode_instance/3, [
@@ -212,6 +226,10 @@
 		argnames is ['Clusterer', 'Diagnostics']
 	]).
 
+	:- uses(avltree, [
+		as_dictionary/2, lookup/3
+	]).
+
 	:- uses(format, [
 		format/3
 	]).
@@ -222,6 +240,10 @@
 
 	:- uses(population, [
 		arithmetic_mean/2, variance/2
+	]).
+
+	:- uses(pairs, [
+		keys/2
 	]).
 
 	:- uses(type, [
@@ -365,14 +387,7 @@
 	check_example_attributes_checked([], _AttributeValues).
 	check_example_attributes_checked([Attribute| Attributes], AttributeValues) :-
 		::attribute_value(Attribute, AttributeValues, Value),
-		(	nonvar(Value) ->
-			true
-		;	instantiation_error
-		),
-		(	number(Value) ->
-			true
-		;	type_error(number, Value)
-		),
+		check_continuous_value(Value),
 		check_example_attributes_checked(Attributes, AttributeValues).
 
 	check_attribute_bindings(AttributeNames, AttributeValues) :-
@@ -421,18 +436,20 @@
 		^^option(feature_scaling(FeatureScaling), Options),
 		(	FeatureScaling == on ->
 			::known_attribute_values(Examples, Attribute, Values),
-			arithmetic_mean(Values, Mean),
-			length(Values, Count),
-			(	Count > 1 ->
-				variance(Values, Variance)
-			;	Variance = 0.0
-			),
-			(	Variance > 0.0 ->
-				Scale is sqrt(Variance)
-			;	Scale = 1.0
-			)
+			scaling_parameters(Values, Mean, Scale)
 		;	Mean = 0.0,
 			Scale = 1.0
+		).
+
+	scaling_parameters(Values, Mean, Scale) :-
+		arithmetic_mean(Values, Mean),
+		(	Values = [_,_| _] ->
+			variance(Values, Variance)
+		;	Variance = 0.0
+		),
+		(	Variance > 0.0 ->
+			Scale is sqrt(Variance)
+		;	Scale = 1.0
 		).
 
 	known_attribute_values([], _Attribute, []).
@@ -444,6 +461,181 @@
 	examples_to_rows([Id-AttributeValues| Examples], Encoders, [Id-Features| Rows]) :-
 		::encode_instance(Encoders, AttributeValues, Features),
 		examples_to_rows(Examples, Encoders, Rows).
+
+	prepare_training_rows(Dataset, Attributes, Examples, Options, Encoders, Rows) :-
+		::prepare_training_rows(mixed, Dataset, Attributes, Examples, Options, Encoders, Rows).
+
+	prepare_training_rows(Kind, Dataset, Attributes, Examples, Options, Encoders, Rows) :-
+		::check_examples_non_empty(Dataset, Examples),
+		keys(Attributes, Names),
+		^^option(feature_scaling(Scaling), Options, feature_scaling(off)),
+		(	ground(Attributes),
+			training_layout(Attributes, Scaling, Pairs, Slots, Columns),
+			as_dictionary(Pairs, Index),
+			collect_training_rows(Examples, Attributes, Names, Index-Slots, Columns, Ordered) ->
+			fit_training_encoders(Attributes, Columns, Encoders),
+			encode_ordered_rows(Ordered, Encoders, Rows)
+		;	% Preserve unification-based validation for noncanonical bindings.
+			check_legacy_training_rows(Examples, Names, Attributes, Kind),
+			fit_legacy_training_encoders(Attributes, Examples, Options, Kind, Encoders),
+			examples_to_rows(Examples, Encoders, Rows)
+		).
+
+	training_layout([], _, [], [], []).
+	training_layout([Name-Spec| Attributes], Scaling, [Name-Slot| Pairs], [Slot| Slots], [Column| Columns]) :-
+		atom(Name),
+		(	Spec == continuous, Scaling == on ->
+			Column = values(_)
+		;	Column = skip
+		),
+		training_layout(Attributes, Scaling, Pairs, Slots, Columns).
+
+	collect_training_rows([], _, _, _, Columns, []) :-
+		close_training_columns(Columns).
+	collect_training_rows([Id-Bindings| Examples], Attributes, Names, Template, Columns0, [Id-Values| Rows]) :-
+		% Each copy shares its fresh slots between the lookup tree and the ordered list.
+		copy_term(Template, Index-Slots),
+		index_training_bindings(Bindings, Index, none, Unknown, Duplicates),
+		check_training_slots(Names, Slots, Duplicates),
+		(	Unknown == none ->
+			true
+		;	Unknown = extra(Name),
+			domain_error(declared_attribute(Names), Name)
+		),
+		collect_training_values(Attributes, Slots, Columns0, Columns, Values),
+		collect_training_rows(Examples, Attributes, Names, Template, Columns, Rows).
+
+	index_training_bindings(Bindings, Index, Unknown0, Unknown, Duplicates) :-
+		nonvar(Bindings),
+		(	Bindings == [] ->
+			Unknown = Unknown0,
+			Duplicates = []
+		;	Bindings = [Binding| Tail],
+			nonvar(Binding),
+			Binding = Name-Value,
+			atom(Name),
+			(	lookup(Name, Slot, Index) ->
+				(	var(Slot) ->
+					Slot = found(Value, _),
+					Rest = Duplicates
+				;	Slot = found(_, repeated),
+					Duplicates = [Name| Rest]
+				),
+				Unknown1 = Unknown0
+			;	Unknown0 == none ->
+				Unknown1 = extra(Name),
+				Rest = Duplicates
+			;	Unknown1 = Unknown0,
+				Rest = Duplicates
+			),
+			index_training_bindings(Tail, Index, Unknown1, Unknown, Rest)
+		).
+
+	check_training_slots([], [], _).
+	check_training_slots([Name| Names], [Slot| Slots], Duplicates) :-
+		(	var(Slot) ->
+			existence_error(attribute, Name)
+		;	Slot = found(_, Repeated),
+			(	var(Repeated) ->
+				true
+			;	count_training_duplicates(Duplicates, Name, 1, Count),
+				domain_error(attribute_occurrences(Name, 1), Count)
+			)
+		),
+		check_training_slots(Names, Slots, Duplicates).
+
+	count_training_duplicates([], _, Count, Count).
+	count_training_duplicates([Duplicate| Duplicates], Name, Count0, Count) :-
+		(	Duplicate == Name ->
+			Count1 is Count0 + 1,
+			count_training_duplicates(Duplicates, Name, Count1, Count)
+		;	count_training_duplicates(Duplicates, Name, Count0, Count)
+		).
+
+	collect_training_values([], [], [], [], []).
+	collect_training_values([Name-Spec| Attributes], [found(Value, _)| Slots], [Column0| Columns0], [Column| Columns], [Value| Values]) :-
+		check_training_value(Name, Spec, Value),
+		(	Column0 = values([Value| Tail]) ->
+			Column = values(Tail)
+		;	Column = skip
+		),
+		collect_training_values(Attributes, Slots, Columns0, Columns, Values).
+
+	close_training_columns([]).
+	close_training_columns([Column| Columns]) :-
+		(	Column == skip ->
+			true
+		;	Column = values([])
+		),
+		close_training_columns(Columns).
+
+	fit_training_encoders([], [], []).
+	fit_training_encoders([Name-Spec| Attributes], [Column| Columns], [Encoder| Encoders]) :-
+		(	Spec == continuous ->
+			Encoder = continuous(Name, Mean, Scale),
+			(	Column = values(Values) ->
+				scaling_parameters(Values, Mean, Scale)
+			;	Mean = 0.0,
+				Scale = 1.0
+			)
+		;	Encoder = discrete(Name, Spec)
+		),
+		fit_training_encoders(Attributes, Columns, Encoders).
+
+	encode_ordered_rows([], _, []).
+	encode_ordered_rows([Id-Values| Ordered], Encoders, [Id-Features| Rows]) :-
+		encode_ordered_values(Encoders, Values, Features),
+		encode_ordered_rows(Ordered, Encoders, Rows).
+
+	encode_ordered_values([], [], []).
+	encode_ordered_values([Encoder| Encoders], [Value| Values], [Feature| Features]) :-
+		(	Encoder = continuous(_, Mean, Scale) ->
+			Feature is float((Value - Mean) / Scale)
+		;	Feature = Value
+		),
+		encode_ordered_values(Encoders, Values, Features).
+
+	check_legacy_training_rows([], _, _, _).
+	check_legacy_training_rows([_-Bindings| Examples], Names, Attributes, Kind) :-
+		::check_attribute_bindings(Names, Bindings),
+		check_legacy_training_values(Names, Attributes, Bindings, Kind),
+		check_legacy_training_rows(Examples, Names, Attributes, Kind).
+
+	check_legacy_training_values([], _, _, _).
+	check_legacy_training_values([Name| Names], Attributes, Bindings, Kind) :-
+		(	member(Name-Spec, Attributes) ->
+			true
+		;	existence_error(attribute, Name)
+		),
+		::attribute_value(Name, Bindings, Value),
+		(	Kind == mixed, Spec = continuous ->
+			check_continuous_value(Value)
+		;	check_discrete_training_value(Name, Spec, Value)
+		),
+		check_legacy_training_values(Names, Attributes, Bindings, Kind).
+
+	fit_legacy_training_encoders([], _, _, _, []).
+	fit_legacy_training_encoders([Name-Spec| Attributes], Examples, Options, Kind, [Encoder| Encoders]) :-
+		(	Kind == mixed, Spec = continuous ->
+			Encoder = continuous(Name, Mean, Scale),
+			continuous_stats(Name, Examples, Options, Mean, Scale)
+		;	Encoder = discrete(Name, Spec)
+		),
+		fit_legacy_training_encoders(Attributes, Examples, Options, Kind, Encoders).
+
+	check_training_value(Name, Spec, Value) :-
+		(	Spec == continuous ->
+			check_continuous_value(Value)
+		;	check_discrete_training_value(Name, Spec, Value)
+		).
+
+	check_discrete_training_value(Name, Spec, Value) :-
+		(	var(Value) ->
+			instantiation_error
+		;	member(Value, Spec) ->
+			true
+		;	domain_error(attribute_value(Name, Spec), Value)
+		).
 
 	encode_instance(Encoders, AttributeValues, Features) :-
 		::check_encoded_attribute_bindings(Encoders, AttributeValues),
@@ -467,6 +659,10 @@
 		encode_instance_checked(Encoders, AttributeValues, Features).
 
 	normalize_continuous(Value, Mean, Scale, Feature) :-
+		check_continuous_value(Value),
+		Feature is float((Value - Mean) / Scale).
+
+	check_continuous_value(Value) :-
 		(	nonvar(Value) ->
 			true
 		;	instantiation_error
@@ -474,8 +670,7 @@
 		(	number(Value) ->
 			true
 		;	type_error(number, Value)
-		),
-		Feature is float((Value - Mean) / Scale).
+		).
 
 	check_cluster_count(K, Count) :-
 		(	K =< Count ->

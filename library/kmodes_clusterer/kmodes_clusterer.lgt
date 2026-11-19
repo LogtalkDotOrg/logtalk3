@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-11-19,
 		comment is 'k-Modes clusterer for discrete datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kprototypes_clusterer]
 	]).
@@ -38,10 +38,6 @@
 		length/2, member/2
 	]).
 
-	:- uses(pairs, [
-		keys/2
-	]).
-
 	:- uses(type, [
 		valid/2
 	]).
@@ -51,15 +47,12 @@
 		^^merge_options(UserOptions, Options),
 		^^dataset_attributes(Dataset, Attributes),
 		check_discrete_attributes(Attributes),
-		keys(Attributes, AttributeNames),
 		findall(
 			Id-AttributeValues,
 			Dataset::example(Id, AttributeValues),
 			Examples
 		),
-		check_examples(Dataset, Attributes, AttributeNames, Examples),
-		build_encoders(Attributes, Encoders),
-		^^examples_to_rows(Examples, Encoders, Rows),
+		^^prepare_training_rows(discrete, Dataset, Attributes, Examples, Options, Encoders, Rows),
 		length(Rows, Count),
 		^^option(k(K), Options),
 		^^check_cluster_count(K, Count),
@@ -112,32 +105,6 @@
 		),
 		check_discrete_attributes(Attributes).
 
-	check_examples(Dataset, Attributes, AttributeNames, Examples) :-
-		^^check_examples_non_empty(Dataset, Examples),
-		check_example_values(Examples, Attributes, AttributeNames).
-
-	check_example_values([], _, _).
-	check_example_values([_-AttributeValues| Examples], Attributes, AttributeNames) :-
-		check_example_attributes(AttributeNames, Attributes, AttributeValues),
-		check_example_values(Examples, Attributes, AttributeNames).
-
-	check_example_attributes(AttributeNames, Attributes, AttributeValues) :-
-		^^check_attribute_bindings(AttributeNames, AttributeValues),
-		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
-
-	check_example_attributes_checked([], _, _).
-	check_example_attributes_checked([Attribute| AttributeNames], Attributes, AttributeValues) :-
-		attribute_spec(Attribute, Attributes, AllowedValues),
-		^^attribute_value(Attribute, AttributeValues, Value),
-		check_attribute_value(Attribute, AllowedValues, Value),
-		check_example_attributes_checked(AttributeNames, Attributes, AttributeValues).
-
-	attribute_spec(Attribute, Attributes, Spec) :-
-		(	member(Attribute-Spec, Attributes) ->
-			true
-		;	existence_error(attribute, Attribute)
-		).
-
 	check_attribute_value(Attribute, AllowedValues, Value) :-
 		(	nonvar(Value) ->
 			true
@@ -147,10 +114,6 @@
 			true
 		;	domain_error(attribute_value(Attribute, AllowedValues), Value)
 		).
-
-	build_encoders([], []).
-	build_encoders([Attribute-Values| Attributes], [discrete(Attribute, Values)| Encoders]) :-
-		build_encoders(Attributes, Encoders).
 
 	encode_instance(Encoders, AttributeValues, Features) :-
 		^^check_encoded_attribute_bindings(Encoders, AttributeValues),

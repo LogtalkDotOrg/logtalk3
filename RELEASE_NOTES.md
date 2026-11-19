@@ -262,6 +262,13 @@ larger-workload benchmarks, and updated documentation.
 * IMPROVED: Performance of the `random` library `circular_uniform_polar/3`,
 `logseries/2`, `standard_normal/1`, and `von_mises/3` sampling predicates.
 
+* IMPROVED: Faster training data preprocessing across the clustering
+libraries. A shared pass validates and orders attribute values in ordinary
+training rows and collects numeric columns only when feature scaling is
+enabled. Encoding reuses the ordered values instead of rereading the raw
+bindings. Validation error precedence, numerical results, prediction behavior,
+and exported model formats are unchanged.
+
 * IMPROVED: Performance of the `adaptive_boosting_classifier`, `ant_colony`,
 `arbitrary`, `ccsds_packets`, `c45_classifier`, `crypto`, `cuid2`,
 `differential_evolution`, `genetic_algorithm`, `gradient_boosting_classifier`,
