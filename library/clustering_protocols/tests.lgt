@@ -239,15 +239,6 @@
 	test(common_training_malformed_pair, fail) :-
 		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous], [a-[x-1,bad]], [], _, _).
 
-	training_parity(Examples, Scaling) :-
-		Options = [feature_scaling(Scaling)],
-		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x,y], Examples),
-		clustering_protocols_test_adapter::common_build_encoders([x,y], Examples, Options, OldEncoders),
-		clustering_protocols_test_adapter::common_examples_to_rows(Examples, OldEncoders, OldRows),
-		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], Examples, Options, Encoders, Rows),
-		Encoders == OldEncoders,
-		Rows == OldRows.
-
 	test(common_check_cluster_count_error, error(domain_error(cluster_count(1, 2), 3))) :-
 		clustering_protocols_test_adapter::common_check_cluster_count(3, 2).
 
@@ -305,6 +296,15 @@
 		clustering_protocols_test_adapter::index_range_query(Index, [1.5, 0.0], [], 0.6, Neighbors).
 
 	% auxiliary predicates
+
+	training_parity(Examples, Scaling) :-
+		Options = [feature_scaling(Scaling)],
+		clustering_protocols_test_adapter::common_check_examples(two_blobs, [x,y], Examples),
+		clustering_protocols_test_adapter::common_build_encoders([x,y], Examples, Options, OldEncoders),
+		clustering_protocols_test_adapter::common_examples_to_rows(Examples, OldEncoders, OldRows),
+		clustering_protocols_test_adapter::common_prepare_training_rows(two_blobs, [x-continuous,y-continuous], Examples, Options, Encoders, Rows),
+		^^assertion(Encoders == OldEncoders),
+		^^assertion(Rows == OldRows).
 
 	indexed_rows(Index, Last, []) :-
 		Index > Last,
