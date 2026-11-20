@@ -26,9 +26,9 @@ copyright = u'1998-2026, Paulo Moura'
 author = u'Paulo Moura'
 
 # The short X.Y version
-version = '3.103.0'
+version = '3.104.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.103.0'
+release = u'v3.104.0'
 
 
 # -- General configuration ---------------------------------------------------

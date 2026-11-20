@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.104.0 - December ??, 2026
+===========================
+
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: Building of the latest Shumway Prolog git version in the portable
+Docker image.
+
+
 3.103.0 - November 19, 2026
 ===========================
 
