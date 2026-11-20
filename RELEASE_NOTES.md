@@ -31,6 +31,30 @@ Prolog adapter and integration files
 * UPDATED: The Trealla Prolog adapter to use when available the built-in
 predicate `prolog_to_os_filename/2` added in version 3.15.21.
 
+Library
+-------
+
+* FIXED: The `csv`, `format`, `hook_objects`, `http_directory_listing`,
+`listing`, and `reader` library tests for Trealla Prolog running on Windows.
+
+Tools
+-----
+
+* FIXED: The `debug_messages` tool tests for Trealla Prolog running on Windows.
+
+Examples
+--------
+
+* FIXED: The `around_methods`, `books`, `hailstone`, `hello_world`,
+`localizations`, `patches`, and `slides` example tests for Trealla Prolog
+running on Windows.
+
+Tests
+-----
+
+* FIXED: Prolog conformance tests that check end-of-lines for Trealla Prolog
+running on Windows.
+
 Installers and installation scripts
 -----------------------------------
 

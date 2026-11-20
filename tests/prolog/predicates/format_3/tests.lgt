@@ -271,6 +271,7 @@
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
 		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, trealla),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
@@ -834,6 +835,7 @@
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
 		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, trealla),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
@@ -1001,6 +1003,7 @@
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
 		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, trealla),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 

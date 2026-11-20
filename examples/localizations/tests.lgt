@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2026-10-31,
+		date is 2026-11-20,
 		comment is 'Unit tests for the "localizations" example.'
 	]).
 
@@ -43,6 +43,7 @@
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
 		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, trealla),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 

@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Jacinto Dávila',
-		date is 2026-10-31,
+		date is 2026-11-20,
 		comment is 'Tests for the CSV library.'
 	]).
 
@@ -178,6 +178,7 @@
 		\+ current_logtalk_flag(prolog_dialect, sicstus),
 		\+ current_logtalk_flag(prolog_dialect, shumway),
 		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, trealla),
 		\+ current_logtalk_flag(prolog_dialect, xsb)
 	)).
 
