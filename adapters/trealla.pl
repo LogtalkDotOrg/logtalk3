@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 3.9.64 and later versions
-%  Last updated on November 2, 2026
+%  Last updated on November 20, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -377,7 +377,12 @@
 %
 % converts between Prolog internal file paths and operating-system paths
 
-'$lgt_prolog_os_file_name'(Path, Path).
+:- if(predicate_property(prolog_to_os_filename(_, _), built_in)).
+	'$lgt_prolog_os_file_name'(PrologPath, OSPath) :-
+		prolog_to_os_filename(PrologPath, OSPath).
+:- else.
+	'$lgt_prolog_os_file_name'(Path, Path).
+:- endif.
 
 
 % '$lgt_expand_path'(+atom, -atom)
