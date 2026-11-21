@@ -229,9 +229,9 @@
 :- category(flags).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Theofrastos Mantadelis',
-		date is 2010-11-27,
+		date is 2026-11-21,
 		comment is 'Implementation of persistent object flags.'
 	]).
 
@@ -366,6 +366,10 @@
 	:- info(is_validator/1, [
 		comment is 'True if the argument is a built-in flag type or an object implementing the flags_validator protocol.',
 		argnames is ['Type']
+	]).
+
+	:- uses(format, [
+		format/2
 	]).
 
 	get_flag_value(Flag, Value) :-
@@ -547,40 +551,17 @@
 		fail.
 	print_flags.
 
-	:- if((
-		% GNU Prolog format/2-3 doesn't support setting tabs
-		\+ current_logtalk_flag(prolog_dialect, gnu),
-		% format/2-3 are not standard Prolog predicates
-		predicate_property(format(_, _), built_in)
-	)).
-
-		print_flags(Group) :-
-			format('~w:~n~w~38+ ~w~19+ ~w~10+ ~w~10+~n', [Group, 'Description', 'Domain', 'Flag', 'Value']),
-			fail.
-		print_flags(Group) :-
-			::defined_flag_(Flag, Group, Type, _Default, Description, Access),
-			Access \== hidden,
-			Access \== hidden_read_only,
-			::get_flag_value(Flag, Value),
-			format('~w~38+ ~w~19+ ~w~10+ ~q~10+~n', [Description, Type, Flag, Value]),
-			fail.
-		print_flags(_).
-
-	:- else.
-
-		print_flags(Group) :-
-			write(Group), nl, write(' Description             Domain        Flag       Value'), nl,
-			fail.
-		print_flags(Group) :-
-			::defined_flag_(Flag, Group, Type, _Default, Description, Access),
-			Access \== hidden,
-			Access \== hidden_read_only,
-			::get_flag_value(Flag, Value),
-			write(Description), write('     '), write(Type), write('     '), write(Flag), write('     '), write(Value), nl,
-			fail.
-		print_flags(_).
-
-	:- endif.
+	print_flags(Group) :-
+		format('~w:~n~w~38+ ~w~19+ ~w~10+ ~w~10+~n', [Group, 'Description', 'Domain', 'Flag', 'Value']),
+		fail.
+	print_flags(Group) :-
+		::defined_flag_(Flag, Group, Type, _Default, Description, Access),
+		Access \== hidden,
+		Access \== hidden_read_only,
+		::get_flag_value(Flag, Value),
+		format('~w~38+ ~w~19+ ~w~10+ ~q~10+~n', [Description, Type, Flag, Value]),
+		fail.
+	print_flags(_).
 
 	defined_flag(Flag, Group, Type, Default, Description, Access) :-
 		::defined_flag_(Flag, Group, Type, Default, Description, Access),
@@ -591,7 +572,8 @@
 		nonvar(Group),
 		::defined_flag_(Flag, Group, Type, Default, Description, Access).
 
-	is_proper_list(-) :-		% catch variables and lists with unbound tails
+	is_proper_list(-) :-
+		% catch variables and lists with unbound tails
 		!,
 		fail.
 	is_proper_list([]).

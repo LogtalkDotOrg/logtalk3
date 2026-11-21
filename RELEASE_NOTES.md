@@ -55,6 +55,12 @@ Tests
 * FIXED: Prolog conformance tests that check end-of-lines for Trealla Prolog
 running on Windows.
 
+Contributions
+-------------
+
+* FIXED: Portability issue with the `format/2` predicate in the `flags`
+contribution.
+
 Installers and installation scripts
 -----------------------------------
 
