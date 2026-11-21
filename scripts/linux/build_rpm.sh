@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk RPM package build script
-##   Last updated on April 15, 2025
+##   Last updated on November 21, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ mkdir -p ~/rpmbuild/RPMS/noarch
 
 cd "$directory" || exit 1
 sed -e 's/LOGTALK_VERSION/'$version_clean'/g' -e 's/LOGTALK_INSTALL_DIRECTORY/'$archive'/g' logtalk.spec.in > logtalk.spec
-rpmbuild -ba --target=noarch-*-linux logtalk.spec
+LC_ALL=C rpmbuild -ba --target=noarch-*-linux logtalk.spec
 
 cd "$HOME/rpmbuild/RPMS/noarch" || exit 1
 echo "$PWD"

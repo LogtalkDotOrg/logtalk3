@@ -64,6 +64,8 @@ contribution.
 Installers and installation scripts
 -----------------------------------
 
+* FIXED: Build script for the RPM installer to set `LC_ALL=C`.
+
 * FIXED: Building of the latest Shumway Prolog git version in the portable
 Docker image.
 
