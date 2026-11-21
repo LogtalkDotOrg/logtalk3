@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:86:0,
+		version is 2:87:0,
 		author is 'Paulo Moura',
-		date is 2026-03-12,
+		date is 2026-11-21,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [caller_diagram(_), entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -148,7 +148,8 @@
 		),
 		predicate_kind_caption(Kind, Properties, PredicateKind, Caption),
 		add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions),
-		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, PredicateOptions),
+		add_predicate_comment(Properties, PredicateOptions, CommentOptions),
+		^^output_node(Predicate, Predicate, Caption, [], PredicateKind, CommentOptions),
 		remember_included_predicate(Predicate0),
 		fail.
 	process_entity(Kind, Entity, Options) :-
@@ -193,13 +194,16 @@
 			;	ToKind = category
 			),
 			entity_property(ToKind, To, declares(Predicate, DeclaresProperties)),
-			member(non_terminal(NonTerminal), DeclaresProperties) ->
-			add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
-			^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, PredicateOptions),
-			remember_included_predicate(To::Predicate)
-		;	add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
-			^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, PredicateOptions),
-			remember_included_predicate(To::Predicate)
+			(	member(non_terminal(NonTerminal), DeclaresProperties) ->
+				add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
+				add_predicate_comment(Properties, PredicateOptions, CommentOptions),
+				^^output_node(To::NonTerminal, To::NonTerminal, (multifile), [], multifile_predicate, CommentOptions),
+				remember_included_predicate(To::Predicate)
+			;	add_predicate_code_url(Options, Kind, Entity, ProvidesProperties, PredicateOptions),
+				add_predicate_comment(Properties, PredicateOptions, CommentOptions),
+				^^output_node(To::Predicate, To::Predicate, (multifile), [], multifile_predicate, CommentOptions),
+				remember_included_predicate(To::Predicate)
+			)
 		),
 		fail.
 	process_entity(Kind, Entity, Options) :-
@@ -372,6 +376,13 @@
 			atomic_list_concat([Functor, '/', Arity], TargetValue)
 		;	Predicate = Functor//Arity,
 			atomic_list_concat([Functor, '//', Arity], TargetValue)
+		).
+
+	add_predicate_comment(Properties, PredicateOptions, CommentOptions) :-
+		(	member(info(Info), Properties),
+			member(comment(Comment), Info) ->
+			CommentOptions = [comment(Comment)| PredicateOptions]
+		;	CommentOptions = PredicateOptions
 		).
 
 	add_predicate_code_url(Options, Kind, Entity, Properties, PredicateOptions) :-

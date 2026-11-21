@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>diagrams &mdash; Logtalk 3.103.0</title>
+  <title>diagrams &mdash; Logtalk 3.104.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=4823beec"></script>
+        <script src="../_static/documentation_options.js?v=c6784f22"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.103.0
+                3.104.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -490,7 +490,12 @@ links, which can be used for showing, e.g., entity types, relation
 types, file paths, and for navigating to files and directories of files
 (libraries) or to API documentation. See the relevant diagram options
 below in order to take advantage of these features (see the discussion
-below on “linking diagrams”).</p>
+below on “linking diagrams”). Entity and predicate comments are also
+used as node tooltips in DOT, d2, and Cytoscape entity and predicate
+diagrams. In the Cytoscape viewer, hovering over a node’s name shows its
+URL or node tooltip, while hovering elsewhere on the node shows the
+comment. In d2 SVG output, a tooltip is additionally indicated by an
+information icon.</p>
 <p>To convert to formats other than SVG, you will need to use the d2 and
 Graphviz executables directly. For example, using the Graphviz <code class="docutils literal notranslate"><span class="pre">dot</span></code>
 executable, we can generate a PDF with the command:</p>

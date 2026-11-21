@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2026-11-04,
+		date is 2026-11-21,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -167,6 +167,14 @@
 		write_key_value(Stream, shape, Shape),
 		write_key_value(Stream, 'style.fill', Color),
 		write_key_value(Stream, 'style.stroke-dash', Dash),
+		(	member(comment(Comment), Options),
+			Comment \== '' ->
+			write(Stream, 'tooltip: "'),
+			write_term_to_chars(Comment, CommentChars, []),
+			write_quoted_chars(CommentChars, Stream),
+			write(Stream, '"\n')
+		;	true
+		),
 		write(Stream, 'label: ""\n'),
 		write(Stream, 'text: |md\n'),
 		(	member(zoom_url(Diagram), Options) ->
@@ -332,6 +340,22 @@
 		write(Stream, Value),
 		nl(Stream).
 
+	% handle D2 quoted strings
+	write_quoted_chars([], _).
+	write_quoted_chars([Char| Chars], Stream) :-
+		(	Char == '\n' ->
+			write(Stream, '\\n')
+		;	Char == '\r' ->
+			write(Stream, '\\r')
+		;	Char == '\t' ->
+			write(Stream, '\\t')
+		;	(Char == '\\'; Char == '"'; Char == '$') ->
+			put_char(Stream, '\\'),
+			put_char(Stream, Char)
+		;	put_char(Stream, Char)
+		),
+		write_quoted_chars(Chars, Stream).
+
 	write_node_lines([], _, _).
 	write_node_lines([Line| Lines], Stream, Options) :-
 		write_node_line(Line, Stream, Options),
@@ -342,6 +366,7 @@
 		write_term_to_chars(Line, Chars, Options),
 		write_escaped_chars(Chars, Stream).
 
+	% handle Markdown content
 	write_escaped_chars([], _).
 	write_escaped_chars([Char| Chars], Stream) :-
 		(	escaped_char(Char) ->

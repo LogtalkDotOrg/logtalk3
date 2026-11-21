@@ -11,16 +11,16 @@ continuous optimization problems such as the Traveling Salesman Problem
 (TSP), scheduling, and parameter tuning.
 
 The library provides the parametric object
-``genetic_algorithm(Problem, RandomAlgorithm)`` where ``Problem`` is an
-object implementing the ``genetic_algorithm_problem_protocol`` protocol
-and ``RandomAlgorithm`` is one of the algorithms supported by the
-``fast_random`` library. The algorithm minimizes the energy (cost)
-function defined by the problem by default; maximization is supported
-via the ``objective/1`` option.
+``genetic_algorithm(Problem, Random)`` where ``Problem`` is an object
+implementing the ``genetic_algorithm_problem_protocol`` protocol and
+``Random`` is one of the objects supported by the ``random`` library.
+The algorithm minimizes the energy (cost) function defined by the
+problem by default; maximization is supported via the ``objective/1``
+option.
 
 A convenience object ``genetic_algorithm(Problem)`` is also provided,
-using the Xoshiro128++ random number generator (``xoshiro128pp``) as the
-default.
+using the Xoshiro128++ random number generator
+(``fast_random(xoshiro128pp)``) as the default.
 
 API documentation
 -----------------
@@ -51,11 +51,9 @@ Features
 --------
 
 - **Configurable random number generator** - the algorithm is
-  parameterized by a ``fast_random`` algorithm. Available algorithms
-  include ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``,
-  ``xoshiro256ss``, ``well512a``, ``splitmix64``, and ``as183``. The
-  convenience object ``genetic_algorithm(Problem)`` defaults to
-  ``xoshiro128pp``.
+  parameterized by a random object. The convenience object
+  ``genetic_algorithm(Problem)`` defaults to
+  ``fast_random(xoshiro128pp)``.
 - **Configurable selection** - parent selection is controlled by the
   ``selection/1`` option. Supported schemes are ``tournament(K)``
   (default ``tournament(3)``), ``roulette`` (fitness-proportionate), and
@@ -257,12 +255,12 @@ Maximization
    | ?- genetic_algorithm(quadratic)::run(State, Energy, [objective(maximize)]).
    % (would climb away from the minimum if the landscape allowed)
 
-Using a custom random number generator
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using a custom random number generator object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-   | ?- genetic_algorithm(quadratic, well512a)::run(State, Energy).
+   | ?- genetic_algorithm(quadratic, fast_random(well512a))::run(State, Energy).
    State = 3.00..., Energy = 0.000...
 
 Limitations

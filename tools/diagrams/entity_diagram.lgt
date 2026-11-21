@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:63:0,
+		version is 2:64:0,
 		author is 'Paulo Moura',
-		date is 2026-03-14,
+		date is 2026-11-21,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), caller_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -333,6 +333,19 @@
 			EntityOptions = [url('')| Options]
 		).
 
+	add_comment_option(Kind, Entity, NodeOptions, CommentOptions) :-
+		(	(	Kind == object ->
+				object_property(Entity, info(Info))
+			;	Kind == protocol ->
+				protocol_property(Entity, info(Info))
+			;	Kind == category,
+				category_property(Entity, info(Info))
+			),
+			member(comment(Comment), Info) ->
+			CommentOptions = [comment(Comment)| NodeOptions]
+		;	CommentOptions = NodeOptions
+		).
+
 	add_metrics_overlay_option(Entity, Options, MetricsOptions) :-
 		(	member(metrics_overlay(true), Options),
 			coupling_metric::entity_score(Entity, ce_ca_i_a_d(Ce,Ca,I,A,D)) ->
@@ -357,7 +370,8 @@
 		;	% no locally declared predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		add_metrics_overlay_option(Protocol, NodeOptions, MetricsOptions),
+		add_comment_option(protocol, Protocol, NodeOptions, CommentOptions),
+		add_metrics_overlay_option(Protocol, CommentOptions, MetricsOptions),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| MetricsOptions]),
 		output_protocol_relations(Protocol, Options).
 
@@ -400,7 +414,8 @@
 		;	% no locally declared/defined/provided predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		add_metrics_overlay_option(Object, NodeOptions, MetricsOptions),
+		add_comment_option(object, Object, NodeOptions, CommentOptions),
+		add_metrics_overlay_option(Object, CommentOptions, MetricsOptions),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| MetricsOptions]),
 		output_object_relations(Object, Options).
 
@@ -443,7 +458,8 @@
 		;	% no locally declared/defined/provided predicates; xref diagram empty
 			NodeOptions = Options
 		),
-		add_metrics_overlay_option(Category, NodeOptions, MetricsOptions),
+		add_comment_option(category, Category, NodeOptions, CommentOptions),
+		add_metrics_overlay_option(Category, CommentOptions, MetricsOptions),
 		^^output_node(Name, Name, Caption, Resources, Kind, [tooltip(Caption)| MetricsOptions]),
 		output_category_relations(Category, Options).
 

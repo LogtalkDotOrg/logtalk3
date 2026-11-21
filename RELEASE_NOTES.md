@@ -40,6 +40,10 @@ Library
 Tools
 -----
 
+* ADDED: Support to the `diagrams` tool for displaying entity and predicate
+comments as node tooltips when exporting diagrams in D2, Cytoscape, or
+Graphviz formats.
+
 * FIXED: The `debug_messages` tool tests for Trealla Prolog running on Windows.
 
 Examples

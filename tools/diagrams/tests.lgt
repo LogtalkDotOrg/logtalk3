@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2026-10-22,
+		date is 2026-11-21,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -61,7 +61,43 @@
 		os::path_concat(ScratchDirectory, 'dot_dias', OutputDirectory),
 		os::delete_directory_and_contents(OutputDirectory).
 
-	% the following tests ony check (for now) that the called
+	test(d2_node_comment_tooltip, true) :-
+		d2_node_output(
+			[comment('He said "hi": ${value}\\path\nnext'), url('https://example.com')],
+			Output
+		),
+		sub_atom(Output, _, _, _, 'tooltip: "He said \\"hi\\": \\${value}\\\\path\\nnext"\n'),
+		sub_atom(Output, _, _, _, '## [entity](https://example.com)\n').
+
+	test(d2_node_no_comment_tooltip, true) :-
+		d2_node_output([url('https://example.com')], Output),
+		\+ sub_atom(Output, _, _, _, 'tooltip:'),
+		sub_atom(Output, _, _, _, '## [entity](https://example.com)\n').
+
+	test(d2_node_empty_comment_tooltip, true) :-
+		d2_node_output([comment('')], Output),
+		\+ sub_atom(Output, _, _, _, 'tooltip:').
+
+	test(cx2_node_comment_tooltip, true) :-
+		cx2_node_output(
+			[comment('A "comment"\\path\nnext'), tooltip(object), url('https://example.com')],
+			Output
+		),
+		sub_atom(Output, _, _, _, '"comment": "A \\"comment\\"\\\\path\\nnext"'),
+		sub_atom(Output, _, _, _, '"url": "https://example.com"'),
+		sub_atom(Output, _, _, _, '"tooltip": "object"').
+
+	test(cx2_node_no_comment_tooltip, true) :-
+		cx2_node_output([tooltip(object)], Output),
+		\+ sub_atom(Output, _, _, _, '"comment": "'),
+		sub_atom(Output, _, _, _, '"tooltip": "object"').
+
+	test(cx2_node_empty_comment_tooltip, true) :-
+		cx2_node_output([comment(''), tooltip(object)], Output),
+		\+ sub_atom(Output, _, _, _, '"comment": "'),
+		sub_atom(Output, _, _, _, '"tooltip": "object"').
+
+	% the following tests only check (for now) that the called
 	% predicates succeed as expected and are deterministic
 
 	% entity_diagram tests
@@ -520,6 +556,42 @@
 
 	test(caller_diagram_predicate_1_01, deterministic) :-
 		caller_diagram(_Format_)::predicate(list::member/2).
+
+	% auxiliary predicates
+
+	d2_node_output(Options, Output) :-
+		File = 'd2_node_tooltip_test.tmp',
+		\+ os::file_exists(File),
+		open(File, write, Stream),
+		d2_graph_language::node(Stream, entity, entity, object, [predicate/1], prototype, Options),
+		close(Stream),
+		open(File, read, Input),
+		read_node_output_chars(Input, Chars),
+		close(Input),
+		os::delete_file(File),
+		atom_chars(Output, Chars).
+
+	cx2_node_output(Options, Output) :-
+		File = 'cx2_node_tooltip_test.tmp',
+		\+ os::file_exists(File),
+		open(File, write, Stream),
+		cytoscapejs_graph_language::file_header(Stream, test, [title(''), description('')]),
+		cytoscapejs_graph_language::node(Stream, entity, entity, object, [predicate/1], prototype, Options),
+		cytoscapejs_graph_language::file_footer(Stream, test, []),
+		close(Stream),
+		open(File, read, Input),
+		read_node_output_chars(Input, Chars),
+		close(Input),
+		os::delete_file(File),
+		atom_chars(Output, Chars).
+
+	read_node_output_chars(Stream, Chars) :-
+		get_char(Stream, Char),
+		(	Char == end_of_file ->
+			Chars = []
+		;	Chars = [Char| Rest],
+			read_node_output_chars(Stream, Rest)
+		).
 
 	% suppress all messages from the "diagrams" tool
 	% component to not pollute the unit tests output

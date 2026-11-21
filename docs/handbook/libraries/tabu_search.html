@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tabu_search &mdash; Logtalk 3.103.0</title>
+  <title>tabu_search &mdash; Logtalk 3.104.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=4823beec"></script>
+        <script src="../_static/documentation_options.js?v=c6784f22"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.103.0
+                3.104.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -475,14 +475,14 @@ Traveling Salesman Problem (TSP), graph coloring, and scheduling.</p>
 <p>At each iteration, a set of candidate neighbors is examined and the best
 admissible neighbor (non-tabu or allowed by aspiration) is selected.</p>
 <p>The library provides the parametric object
-<code class="docutils literal notranslate"><span class="pre">tabu_search(Problem,</span> <span class="pre">RandomAlgorithm)</span></code> where <code class="docutils literal notranslate"><span class="pre">Problem</span></code> is an object
+<code class="docutils literal notranslate"><span class="pre">tabu_search(Problem,</span> <span class="pre">Random)</span></code> where <code class="docutils literal notranslate"><span class="pre">Problem</span></code> is an object
 implementing the <code class="docutils literal notranslate"><span class="pre">tabu_search_problem_protocol</span></code> protocol and
-<code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> is one of the algorithms supported by the
-<code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library. The algorithm minimizes the energy (cost)
-function defined by the problem.</p>
+<code class="docutils literal notranslate"><span class="pre">Random</span></code> is one of the objects supported by the <code class="docutils literal notranslate"><span class="pre">random</span></code> library.
+The random generator algorithm minimizes the energy (cost) function
+defined by the problem.</p>
 <p>A convenience object <code class="docutils literal notranslate"><span class="pre">tabu_search(Problem)</span></code> is also provided, using
-the Xoshiro128++ random number generator (<code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>) as the
-default.</p>
+the Xoshiro128++ random number generator via the
+<code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code> object as the default.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -507,11 +507,8 @@ link in a web browser.</p>
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>Configurable random number generator</strong> - the algorithm is
-parameterized by a <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> algorithm. Available algorithms
-include <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro128ss</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro256pp</span></code>,
-<code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, <code class="docutils literal notranslate"><span class="pre">splitmix64</span></code>, and <code class="docutils literal notranslate"><span class="pre">as183</span></code>. The
-convenience object <code class="docutils literal notranslate"><span class="pre">tabu_search(Problem)</span></code> defaults to
-<code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>.</p></li>
+parameterized by a random object and algorithm. The convenience object
+<code class="docutils literal notranslate"><span class="pre">tabu_search(Problem)</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code>.</p></li>
 <li><p><strong>Tabu list (short-term memory)</strong> - recently visited states or their
 <code class="docutils literal notranslate"><span class="pre">tabu_key/2</span></code> keys are stored with an expiration step. A state left
 by a move is forbidden during the next <code class="docutils literal notranslate"><span class="pre">T</span></code> candidate-selection
@@ -823,12 +820,12 @@ a tabu contender rather than falling back to that default.</p>
 </section>
 <section id="using-a-custom-random-number-generator">
 <h3>Using a custom random number generator<a class="headerlink" href="#using-a-custom-random-number-generator" title="Link to this heading"></a></h3>
-<p>Use the two-parameter version to select a specific <code class="docutils literal notranslate"><span class="pre">fast_random</span></code>
-algorithm:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tabu_search(quadratic, well512a)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>).
+<p>Use the two-parameter version to select a specific random generator
+object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tabu_search(quadratic, fast_random(well512a))<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>).
 <span class="nv">State</span> <span class="o">=</span> <span class="m">3.00</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
 
-| <span class="o">?-</span> tabu_search(quadratic, xoshiro256ss)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [seed(<span class="m">42</span>)]).
+| <span class="o">?-</span> tabu_search(quadratic, fast_random(xoshiro256ss))<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [seed(<span class="m">42</span>)]).
 <span class="nv">State</span> <span class="o">=</span> <span class="m">3.00</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
 </pre></div>
 </div>

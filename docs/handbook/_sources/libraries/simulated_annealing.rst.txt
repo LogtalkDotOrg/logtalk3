@@ -9,15 +9,15 @@ combinatorial optimization problems such as the Traveling Salesman
 Problem (TSP), graph coloring, and scheduling.
 
 The library provides the parametric object
-``simulated_annealing(Problem, RandomAlgorithm)`` where ``Problem`` is
-an object implementing the ``simulated_annealing_protocol`` protocol and
-``RandomAlgorithm`` is one of the algorithms supported by the
-``fast_random`` library. The algorithm minimizes the energy (cost)
-function defined by the problem.
+``simulated_annealing(Problem, Random)`` where ``Problem`` is an object
+implementing the ``simulated_annealing_protocol`` protocol and
+``Random`` is one of the objects supported by the ``random`` library.
+The algorithm minimizes the energy (cost) function defined by the
+problem.
 
 A convenience object ``simulated_annealing(Problem)`` is also provided,
-using the Xoshiro128++ random number generator (``xoshiro128pp``) as the
-default.
+using the Xoshiro128++ random number generator
+(``fast_random(xoshiro128pp)``) as the default.
 
 API documentation
 -----------------
@@ -48,11 +48,9 @@ Features
 --------
 
 - **Configurable random number generator** - the algorithm is
-  parameterized by a ``fast_random`` algorithm. Available algorithms
-  include ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``,
-  ``xoshiro256ss``, ``well512a``, ``splitmix64``, and ``as183``. The
-  convenience object ``simulated_annealing(Problem)`` defaults to
-  ``xoshiro128pp``.
+  parameterized by a random generator object. The convenience object
+  ``simulated_annealing(Problem)`` defaults to
+  ``fast_random(xoshiro128pp)``.
 - **Boltzmann acceptance criterion** - a worse neighbor is accepted with
   probability ``exp(-DeltaE / Temperature)``, allowing the search to
   escape local minima early in the run while converging as the
@@ -252,12 +250,12 @@ With custom parameters (500 samples, 90% target acceptance rate):
 Using a custom random number generator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the two-parameter version to select a specific ``fast_random``
-algorithm:
+Use the two-parameter version to select a specific random generator
+object and algorithm:
 
 ::
 
-   | ?- simulated_annealing(quadratic, well512a)::run(State, Energy).
+   | ?- simulated_annealing(quadratic, fast_random(well512a))::run(State, Energy).
    State = 3.001..., Energy = 0.000...
 
    | ?- simulated_annealing(quadratic, xoshiro256ss)::run(State, Energy, [seed(42)]).

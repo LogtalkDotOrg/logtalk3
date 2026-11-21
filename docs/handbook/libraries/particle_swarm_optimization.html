@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>particle_swarm_optimization &mdash; Logtalk 3.103.0</title>
+  <title>particle_swarm_optimization &mdash; Logtalk 3.104.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=4823beec"></script>
+        <script src="../_static/documentation_options.js?v=c6784f22"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.103.0
+                3.104.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -315,7 +315,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#maximization">Maximization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#stopping-after-stagnation">Stopping after stagnation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#stopping-at-a-target-fitness">Stopping at a target fitness</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator-object">Using a custom random number generator object</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -466,13 +466,12 @@ for approximating the global optimum of a function. This library
 implements continuous, bounded, synchronous global-best PSO for
 minimization and maximization problems.</p>
 <p>The library provides the parametric object
-<code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization(Problem,</span> <span class="pre">RandomAlgorithm)</span></code>, where
-<code class="docutils literal notranslate"><span class="pre">Problem</span></code> is an object implementing the
-<code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization_protocol</span></code> protocol and
-<code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> is one of the algorithms supported by the
-<code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library. A convenience object
+<code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization(Problem,</span> <span class="pre">Random)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Problem</span></code> is
+an object implementing the <code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization_protocol</span></code>
+protocol and <code class="docutils literal notranslate"><span class="pre">Random</span></code> is one of the objects supported by the
+<code class="docutils literal notranslate"><span class="pre">random</span></code> library. A convenience object
 <code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization(Problem)</span></code> uses the Xoshiro128++ random
-number generator (<code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>).</p>
+number generator (<code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code>).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -667,9 +666,9 @@ improvement.</p>
 </pre></div>
 </div>
 </section>
-<section id="using-a-custom-random-number-generator">
-<h3>Using a custom random number generator<a class="headerlink" href="#using-a-custom-random-number-generator" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> particle_swarm_optimization(sphere, well512a)<span class="o">::</span>run(
+<section id="using-a-custom-random-number-generator-object">
+<h3>Using a custom random number generator object<a class="headerlink" href="#using-a-custom-random-number-generator-object" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> particle_swarm_optimization(sphere, fast_random(well512a))<span class="o">::</span>run(
          <span class="nv">Position</span>, <span class="nv">Fitness</span>, [seed(<span class="m">42</span>)]
      ).
 </pre></div>

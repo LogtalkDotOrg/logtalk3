@@ -10,13 +10,12 @@ DE/current-to-best/1/bin strategies for bounded minimization and
 maximization problems.
 
 The library provides the parametric object
-``differential_evolution(Problem, RandomAlgorithm)``, where ``Problem``
-is an object implementing the
-``differential_evolution_problem_protocol`` protocol and
-``RandomAlgorithm`` is one of the algorithms supported by the
-``fast_random`` library. A convenience object
+``differential_evolution(Problem, Random)``, where ``Problem`` is an
+object implementing the ``differential_evolution_problem_protocol``
+protocol and ``Random`` is one of the random generator objects supported
+by the ``random`` library. A convenience object
 ``differential_evolution(Problem)`` uses the Xoshiro128++ random number
-generator (``xoshiro128pp``).
+generator (``fast_random(xoshiro128pp)``).
 
 API documentation
 -----------------
@@ -81,9 +80,9 @@ Binomial crossover mixes the mutant with the target; at least one
 component is always taken from the mutant. Exponential crossover takes a
 consecutive circular segment of mutant components, starting at a
 uniformly chosen coordinate and continuing while random draws are below
-``CR``. Donor and crossover indices use the inclusive
-``fast_random::between/3`` predicate. Trial vectors that leave the box
-constraints are clamped to the nearest bound.
+``CR``. Donor and crossover indices use the inclusive random
+``between/3`` predicate. Trial vectors that leave the box constraints
+are clamped to the nearest bound.
 
 Convergence speed comparison
 ----------------------------
@@ -273,12 +272,12 @@ Stopping after stagnation
             [stagnation_generations(25), seed(42)]
         ).
 
-Using a custom random number generator
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using a custom random number generator object
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-   | ?- differential_evolution(sphere, well512a)::run(
+   | ?- differential_evolution(sphere, fast_random(well512a))::run(
             Position, Fitness, [seed(42)]
         ).
 

@@ -13,15 +13,15 @@ At each iteration, a set of candidate neighbors is examined and the best
 admissible neighbor (non-tabu or allowed by aspiration) is selected.
 
 The library provides the parametric object
-``tabu_search(Problem, RandomAlgorithm)`` where ``Problem`` is an object
+``tabu_search(Problem, Random)`` where ``Problem`` is an object
 implementing the ``tabu_search_problem_protocol`` protocol and
-``RandomAlgorithm`` is one of the algorithms supported by the
-``fast_random`` library. The algorithm minimizes the energy (cost)
-function defined by the problem.
+``Random`` is one of the objects supported by the ``random`` library.
+The random generator algorithm minimizes the energy (cost) function
+defined by the problem.
 
 A convenience object ``tabu_search(Problem)`` is also provided, using
-the Xoshiro128++ random number generator (``xoshiro128pp``) as the
-default.
+the Xoshiro128++ random number generator via the
+``fast_random(xoshiro128pp)`` object as the default.
 
 API documentation
 -----------------
@@ -52,11 +52,8 @@ Features
 --------
 
 - **Configurable random number generator** - the algorithm is
-  parameterized by a ``fast_random`` algorithm. Available algorithms
-  include ``xoshiro128pp``, ``xoshiro128ss``, ``xoshiro256pp``,
-  ``xoshiro256ss``, ``well512a``, ``splitmix64``, and ``as183``. The
-  convenience object ``tabu_search(Problem)`` defaults to
-  ``xoshiro128pp``.
+  parameterized by a random object and algorithm. The convenience object
+  ``tabu_search(Problem)`` defaults to ``fast_random(xoshiro128pp)``.
 - **Tabu list (short-term memory)** - recently visited states or their
   ``tabu_key/2`` keys are stored with an expiration step. A state left
   by a move is forbidden during the next ``T`` candidate-selection
@@ -394,15 +391,15 @@ a tabu contender rather than falling back to that default.
 Using a custom random number generator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the two-parameter version to select a specific ``fast_random``
-algorithm:
+Use the two-parameter version to select a specific random generator
+object:
 
 ::
 
-   | ?- tabu_search(quadratic, well512a)::run(State, Energy).
+   | ?- tabu_search(quadratic, fast_random(well512a))::run(State, Energy).
    State = 3.00..., Energy = 0.000...
 
-   | ?- tabu_search(quadratic, xoshiro256ss)::run(State, Energy, [seed(42)]).
+   | ?- tabu_search(quadratic, fast_random(xoshiro256ss))::run(State, Energy, [seed(42)]).
    State = 3.00..., Energy = 0.000...
 
 Limitations

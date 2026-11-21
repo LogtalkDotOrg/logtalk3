@@ -313,7 +313,12 @@ links, which can be used for showing, e.g., entity types, relation
 types, file paths, and for navigating to files and directories of files
 (libraries) or to API documentation. See the relevant diagram options
 below in order to take advantage of these features (see the discussion
-below on "linking diagrams").
+below on "linking diagrams"). Entity and predicate comments are also
+used as node tooltips in DOT, d2, and Cytoscape entity and predicate
+diagrams. In the Cytoscape viewer, hovering over a node's name shows its
+URL or node tooltip, while hovering elsewhere on the node shows the
+comment. In d2 SVG output, a tooltip is additionally indicated by an
+information icon.
 
 To convert to formats other than SVG, you will need to use the d2 and
 Graphviz executables directly. For example, using the Graphviz ``dot``

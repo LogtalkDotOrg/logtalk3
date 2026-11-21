@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:15:2,
+		version is 3:16:0,
 		author is 'Paulo Moura',
-		date is 2026-11-12,
+		date is 2026-11-21,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -195,6 +195,11 @@
 		write_key_value_comma(Stream, shape, Shape),
 		write_key_value_comma(Stream, style, Style),
 		write_key_value_comma(Stream, fillcolor, Color),
+		(	member(comment(Comment), Options),
+    		Comment \== '' ->
+			write_key_value_comma(Stream, tooltip, Comment)
+		;	true
+		),
 		write(Stream, 'label=<<TABLE border="0" cellborder="0" cellspacing="0" cellpadding="0">'),
 		(	member(zoom_url(Diagram), Options) ->
 			write(Stream, '<TR><TD width="11" height="11" fixedsize="true" align="left" tooltip="Zoom" href="'),

@@ -156,7 +156,6 @@ try { if (window.cytoscapeNodeHtmlLabel) { cytoscape.use(window.cytoscapeNodeHtm
 let cy = null;
 const hoverTooltip = document.getElementById('hoverTooltip');
 const zoomLayer = document.getElementById('zoomLayer');
-let hoveredElementId = null;
 let zoomGlyphRenderPending = false;
 let currentDiagramUrl = null;
 let currentRawData = null;
@@ -632,6 +631,7 @@ function parseCx2(cx2) {
       url: value.url || '',
       code_url: value.code_url || '',
       zoom_url: value.zoom_url || '',
+      comment: value.comment || '',
       tooltip: value.tooltip || '',
       metrics: value.metrics || '',
     };
@@ -747,7 +747,7 @@ function nodeHtmlContent(data) {
   const bodyHtml = body ? '<div class="cx2-label-body">' + body + '</div>' : '';
   const metricsHtml = metrics ? '<div class="cx2-label-metrics">' + metrics + '</div>' : '';
   return '<div class="cx2-label-wrap">' +
-    '<div class="cx2-label-title">' + title + '</div>' +
+    '<div class="cx2-label-title" id="cx2-label-title-' + escapeHtml(data.id) + '">' + title + '</div>' +
     captionHtml +
     bodyHtml +
     metricsHtml +
@@ -1002,6 +1002,15 @@ function preferredElementLink(ele) {
   return null;
 }
 
+function nodeZoomHit(ele, renderedPosition) {
+  if (!renderedPosition || !String(ele.data('zoom_url') || '').trim()) return false;
+  const center = ele.renderedPosition();
+  const x = renderedPosition.x - (center.x - ele.renderedWidth() / 2);
+  const y = renderedPosition.y - (center.y - ele.renderedHeight() / 2);
+  const zoomHitSize = Math.max(10, 22 * (cy ? cy.zoom() : 1));
+  return x >= 0 && y >= 0 && x <= zoomHitSize && y <= zoomHitSize;
+}
+
 function preferredNodeLink(ele, renderedPosition) {
   const diagram = String(ele.data('zoom_url') || '').trim();
   const docs = String(ele.data('url') || '').trim();
@@ -1018,20 +1027,16 @@ function preferredNodeLink(ele, renderedPosition) {
     return null;
   }
 
-  const center = ele.renderedPosition();
-  const width = ele.renderedWidth();
-  const height = ele.renderedHeight();
-  const left = center.x - width / 2;
-  const top = center.y - height / 2;
-  const x = renderedPosition.x - left;
-  const y = renderedPosition.y - top;
-
-  const zoomHitSize = Math.max(10, 22 * (cy ? cy.zoom() : 1));
-  if (diagram && x >= 0 && y >= 0 && x <= zoomHitSize && y <= zoomHitSize) {
+  if (nodeZoomHit(ele, renderedPosition)) {
     return { url: diagram, inViewer: true };
   }
 
   if (docs && code) {
+    const center = ele.renderedPosition();
+    const width = ele.renderedWidth();
+    const height = ele.renderedHeight();
+    const x = renderedPosition.x - (center.x - width / 2);
+    const y = renderedPosition.y - (center.y - height / 2);
     const lines = Array.isArray(ele.data('lines')) ? ele.data('lines') : [];
     const caption = String(ele.data('caption') || '').trim();
     const estimatedTextHeight = Math.min(
@@ -1175,8 +1180,41 @@ async function loadDiagramFromUrl(url) {
   render(data, resolved, null);
 }
 
-function elementTooltipText(ele) {
+function nodeLabelHit(ele, renderedPosition) {
+  if (!renderedPosition) return false;
+  const title = document.getElementById('cx2-label-title-' + ele.id());
+  if (title) {
+    const container = cy.container().getBoundingClientRect();
+    const x = container.left + renderedPosition.x;
+    const y = container.top + renderedPosition.y;
+    const range = document.createRange();
+    range.selectNodeContents(title);
+    return Array.from(range.getClientRects()).some(bounds =>
+      x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom
+    );
+  }
+  const bounds = ele.renderedBoundingBox({ includeNodes: false, includeLabels: true, includeOverlays: false });
+  if (ele.data('rich_label')) {
+    const fontSize = parseFloat(ele.style('font-size'));
+    bounds.y2 = Math.min(bounds.y2, bounds.y1 + (fontSize + 4) * cy.zoom());
+  }
+  return renderedPosition.x >= bounds.x1 && renderedPosition.x <= bounds.x2 &&
+    renderedPosition.y >= bounds.y1 && renderedPosition.y <= bounds.y2;
+}
+
+function elementTooltipText(ele, renderedPosition) {
   const tooltip = String(ele.data('tooltip') || '').trim();
+  const comment = String(ele.data('comment') || '').trim();
+  if (ele.isNode() && comment) {
+    if (nodeZoomHit(ele, renderedPosition)) return 'Zoom';
+    if (nodeLabelHit(ele, renderedPosition)) {
+      const hasLabelLink = String(ele.data('url') || '').trim() ||
+        String(ele.data('code_url') || '').trim();
+      const link = hasLabelLink && preferredNodeLink(ele, renderedPosition);
+      return (link && link.url) || tooltip || comment;
+    }
+    return comment;
+  }
   const preferred = preferredElementLink(ele);
 
   const lines = [];
@@ -1187,7 +1225,7 @@ function elementTooltipText(ele) {
     lines.push(preferred.url);
   }
 
-  return lines.join('\n');
+  return lines.join('\n\n');
 }
 
 function positionHoverTooltip(renderedPosition) {
@@ -1202,20 +1240,18 @@ function positionHoverTooltip(renderedPosition) {
 
 function hideHoverTooltip() {
   if (!hoverTooltip) return;
-  hoveredElementId = null;
   hoverTooltip.style.display = 'none';
   hoverTooltip.textContent = '';
 }
 
 function showHoverTooltip(ele, renderedPosition) {
   if (!hoverTooltip) return;
-  const text = elementTooltipText(ele);
+  const text = elementTooltipText(ele, renderedPosition);
   if (!text) {
     hideHoverTooltip();
     return;
   }
-  hoveredElementId = ele.id();
-  hoverTooltip.textContent = text;
+  if (hoverTooltip.textContent !== text) hoverTooltip.textContent = text;
   hoverTooltip.style.display = 'block';
   positionHoverTooltip(renderedPosition);
 }
@@ -1265,9 +1301,7 @@ function render(rawData, sourceUrl, sourceNativePath) {
   });
 
   cy.on('mousemove', 'node, edge', evt => {
-    if (hoveredElementId === evt.target.id()) {
-      positionHoverTooltip(evt.renderedPosition);
-    }
+    showHoverTooltip(evt.target, evt.renderedPosition);
   });
 
   cy.on('mouseout', 'node, edge', () => {

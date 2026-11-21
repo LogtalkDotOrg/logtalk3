@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-11-04,
+		date is 2026-11-21,
 		comment is 'Predicates for generating diagram files in the Cytoscape Exchange (CX2) JSON format.'
 	]).
 
@@ -262,6 +262,12 @@
 			write_json_id(Stream, NormalizedZoomURL)
 		;	true
 		),
+		(	member(comment(Comment), Options),
+			Comment \== '' ->
+			write(Stream, ', "comment": '),
+			write_json_id(Stream, Comment)
+		;	true
+		),
 		(	member(tooltip(Tooltip), Options) ->
 			write(Stream, ', "tooltip": '),
 			write_json_id(Stream, Tooltip)
@@ -412,6 +418,7 @@
 		write(Stream, '        "url": {"d": "string"},\n'),
 		write(Stream, '        "code_url": {"d": "string"},\n'),
 		write(Stream, '        "zoom_url": {"d": "string"},\n'),
+		write(Stream, '        "comment": {"d": "string"},\n'),
 		write(Stream, '        "tooltip": {"d": "string"}\n'),
 		write(Stream, '      },\n'),
 		write(Stream, '      "edges": {\n'),
