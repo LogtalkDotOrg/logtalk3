@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 452,-140 452,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol otp_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 21:23</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:26</text>
 <g id="clust1" class="cluster">
 <title>cluster_otp_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="otp_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 428,-46 428,-46 434,-46 440,-52 440,-58 440,-58 440,-116 440,-116 440,-122 434,-128 428,-128 428,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">otp_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Computes an HOTP value for the given hash object, secret, moving counter, and number of digits. The secret can be either a raw byte list or a Base32 wrapper term of the form ``base32(atom(Atom))``, ``base32(chars(Chars))``, or ``base32(codes(Codes))``.">
 <polygon fill="springgreen" stroke="black" points="84.2,-92 17.8,-92 17.8,-56 84.2,-56 84.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.2" y="-75.71" font-family="monospace" font-size="11.00">hotp/5</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Computes a TOTP value using the standard 30&#45;second time step and Unix epoch ``T0 = 0`` for the given hash object, secret, Unix time, and number of digits.">
 <polygon fill="springgreen" stroke="black" points="168.2,-92 101.8,-92 101.8,-56 168.2,-56 168.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="109.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="115.2" y="-75.71" font-family="monospace" font-size="11.00">totp/5</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Verifies an HOTP value by searching from the given counter through the bounded forward counter window. Returns the matched counter on success.">
 <polygon fill="springgreen" stroke="black" points="299.31,-92 186.69,-92 186.69,-56 299.31,-56 299.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="194.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="200.09" y="-75.71" font-family="monospace" font-size="11.00">hotp_verify/7</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Verifies a TOTP value by searching within the bounded symmetric time&#45;step window around the current time step. Returns the matched time step on success.">
 <polygon fill="springgreen" stroke="black" points="430.31,-92 317.69,-92 317.69,-56 430.31,-56 430.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="325.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/otp/otp_protocol.lgt#L68">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/otp/otp_protocol.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="331.09" y="-75.71" font-family="monospace" font-size="11.00">totp_verify/7</text>
 </a>
 </g>

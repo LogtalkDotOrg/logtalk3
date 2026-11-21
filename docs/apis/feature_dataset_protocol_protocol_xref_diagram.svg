@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 434,-140 434,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol feature_dataset_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 21:22</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:25</text>
 <g id="clust1" class="cluster">
 <title>cluster_feature_dataset_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="feature_dataset_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 410,-46 410,-46 416,-46 422,-52 422,-58 422,-58 422,-116 422,-116 422,-122 416,-128 410,-128 410,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">feature_dataset_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Enumerates by backtracking the candidate features and their possible values. Each atomic feature name must be declared once. For discrete features, ``Values`` is a list of possible values. For continuous (numeric) features, ``Values`` is the atom ``continuous``. Never includes the target.">
 <polygon fill="springgreen" stroke="black" points="163.81,-92 18.19,-92 18.19,-56 163.81,-56 163.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.59" y="-75.71" font-family="monospace" font-size="11.00">attribute_values/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Returns the number of examples. The declared count must match the number of examples enumerated by example/3.">
 <polygon fill="springgreen" stroke="black" points="307.91,-92 182.09,-92 182.09,-56 307.91,-56 307.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="190.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="195.49" y="-75.71" font-family="monospace" font-size="11.00">example_count/1</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Enumerates by backtracking the examples in the dataset. Each example has an ``Id``, a list of ``Feature&#45;Value`` pairs with distinct declared feature names, and a ``Target`` value. A missing feature is omitted or has an unbound value. ``Target`` is an atom for classification, a number for regression, or an unbound variable when unknown.">
 <polygon fill="springgreen" stroke="black" points="412.11,-92 325.89,-92 325.89,-56 412.11,-56 412.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="333.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/feature_selection_protocols/feature_dataset_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/feature_selection_protocols/feature_dataset_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="339.3" y="-75.71" font-family="monospace" font-size="11.00">example/3</text>
 </a>
 </g>

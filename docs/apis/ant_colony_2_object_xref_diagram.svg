@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1220 868,-1220 868,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object ant_colony/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 21:22</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:25</text>
 <g id="clust1" class="cluster">
 <title>cluster_ant_colony_2_object</title>
 <g id="a_clust1"><a xlink:title="ant_colony(Problem,Random)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 844,-46 844,-46 850,-46 856,-52 856,-58 856,-58 856,-1196 856,-1196 856,-1202 850,-1208 844,-1208 844,-1208 20,-1208 20,-1208 14,-1208 8,-1202 8,-1196 8,-1196 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1192.46" font-family="monospace" font-size="10.00" fill="dimgray">ant_colony(Problem,Random)</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Runs the ant colony algorithm using default options and returns the best solution found and its cost.">
 <polygon fill="springgreen" stroke="black" points="394.9,-1172 335.1,-1172 335.1,-1136 394.9,-1136 394.9,-1172"/>
 <text xml:space="preserve" text-anchor="start" x="343.1" y="-1156.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L47">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="348.5" y="-1155.71" font-family="monospace" font-size="11.00">run/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node3"><a xlink:title="Runs the ant colony algorithm using the given options, returns the best solution found and its cost, and returns run statistics.">
 <polygon fill="springgreen" stroke="black" points="453.9,-1055 394.1,-1055 394.1,-1019 453.9,-1019 453.9,-1055"/>
 <text xml:space="preserve" text-anchor="start" x="402.1" y="-1039.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L75">
+<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="407.5" y="-1038.71" font-family="monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -61,12 +61,12 @@
 <!-- run/2&#45;&gt;run/4 -->
 <g id="edge1" class="edge">
 <title>run/2&#45;&gt;run/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L101" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M373.96,-1135.53C383.55,-1116.85 398.87,-1086.97 410.04,-1065.2"/>
 <polygon fill="black" stroke="black" points="413.01,-1067.1 414.46,-1056.6 406.78,-1063.9 413.01,-1067.1"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L101">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="396.27" y="-1093.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -77,7 +77,7 @@
 <g id="a_node2"><a xlink:title="Runs the ant colony algorithm using the given options and returns the best solution found and its cost.">
 <polygon fill="springgreen" stroke="black" points="472.9,-1172 413.1,-1172 413.1,-1136 472.9,-1136 472.9,-1172"/>
 <text xml:space="preserve" text-anchor="start" x="421.1" y="-1156.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L54">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="426.5" y="-1155.71" font-family="monospace" font-size="11.00">run/3</text>
 </a>
 </g>
@@ -91,12 +91,12 @@
 <!-- run/3&#45;&gt;run/4 -->
 <g id="edge2" class="edge">
 <title>run/3&#45;&gt;run/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L104" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L104" xlink:title="calls">
 <path fill="none" stroke="black" d="M440.11,-1135.53C437.08,-1117.19 432.27,-1088.06 428.69,-1066.4"/>
 <polygon fill="black" stroke="black" points="432.18,-1066.04 427.1,-1056.75 425.27,-1067.18 432.18,-1066.04"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L104">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="434.07" y="-1093.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,7 +106,7 @@
 <title>loop/21</title>
 <polygon fill="cornsilk" stroke="black" points="360.5,-938 287.5,-938 287.5,-902 360.5,-902 360.5,-938"/>
 <text xml:space="preserve" text-anchor="start" x="295.5" y="-922.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L165">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="300.9" y="-921.71" font-family="monospace" font-size="11.00">loop/21</text>
 </a>
 </g>
@@ -118,12 +118,12 @@
 <!-- run/4&#45;&gt;loop/21 -->
 <g id="edge5" class="edge">
 <title>run/4&#45;&gt;loop/21</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M393.67,-1020.55C378.24,-1011.41 360.21,-998.56 348,-983 340.24,-973.13 334.75,-960.45 330.99,-949.14"/>
 <polygon fill="black" stroke="black" points="334.44,-948.47 328.23,-939.89 327.73,-950.47 334.44,-948.47"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="348" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,7 +133,7 @@
 <title>construct_tour/5</title>
 <polygon fill="cornsilk" stroke="black" points="763.21,-677 630.79,-677 630.79,-641 763.21,-641 763.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="638.79" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228">
+<g id="a_node6_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="644.19" y="-660.71" font-family="monospace" font-size="11.00">construct_tour/5</text>
 </a>
 </g>
@@ -145,12 +145,12 @@
 <!-- run/4&#45;&gt;construct_tour/5 -->
 <g id="edge4" class="edge">
 <title>run/4&#45;&gt;construct_tour/5</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M412.01,-1018.57C394.43,-990.68 366.67,-935.71 395,-902 454.8,-830.85 519.48,-910.64 601,-866 620.04,-855.58 615.33,-841.07 634,-830 691.48,-795.91 738.78,-846.61 780,-794 808.19,-758.01 764.24,-711.92 730.3,-684.25"/>
 <polygon fill="black" stroke="black" points="732.7,-681.68 722.68,-678.23 728.36,-687.18 732.7,-681.68"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="634" y="-845.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,7 +160,7 @@
 <title>init_pheromone/3</title>
 <polygon fill="cornsilk" stroke="black" points="809.21,-866 676.79,-866 676.79,-830 809.21,-830 809.21,-866"/>
 <text xml:space="preserve" text-anchor="start" x="684.79" y="-850.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L289">
+<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L289">
 <text xml:space="preserve" text-anchor="start" x="690.19" y="-849.71" font-family="monospace" font-size="11.00">init_pheromone/3</text>
 </a>
 </g>
@@ -172,12 +172,12 @@
 <!-- run/4&#45;&gt;init_pheromone/3 -->
 <g id="edge3" class="edge">
 <title>run/4&#45;&gt;init_pheromone/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M418.6,-1018.64C410.97,-990.33 401,-934.17 430,-902 464.13,-864.14 600.46,-874.72 665.15,-866.68"/>
 <polygon fill="black" stroke="black" points="665.51,-870.16 674.86,-865.17 664.44,-863.25 665.51,-870.16"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="411.48" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -199,12 +199,12 @@
 <!-- run/4&#45;&gt;list::length/2 -->
 <g id="edge29" class="edge">
 <title>run/4&#45;&gt;list::length/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M414.75,-1018.71C401.07,-990.51 380.02,-934.49 409,-902 484.31,-817.57 576.01,-940.68 661,-866 673.47,-855.04 659.39,-841.88 671,-830 709.62,-790.48 757.07,-838.37 790,-794 844.13,-721.07 772.38,-429.61 747.75,-337.24"/>
 <polygon fill="black" stroke="black" points="751.17,-336.48 745.19,-327.73 744.41,-338.3 751.17,-336.48"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="809.2" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -223,12 +223,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge26" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M436.91,-1018.53C450.91,-999.6 473.41,-969.16 489.55,-947.32"/>
 <polygon fill="black" stroke="black" points="492.22,-949.59 495.35,-939.47 486.59,-945.43 492.22,-949.59"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="469.05" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -247,12 +247,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge27" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M454.16,-1021.67C495.59,-1001.98 570.51,-966.38 619.25,-943.22"/>
 <polygon fill="black" stroke="black" points="620.63,-946.44 628.16,-938.98 617.62,-940.11 620.63,-946.44"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="552.26" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge28" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M454.1,-1026.85C509.19,-1010.09 630.18,-973.25 742.37,-938.8"/>
 <polygon fill="black" stroke="black" points="743.22,-942.21 751.75,-935.92 741.16,-935.51 743.22,-942.21"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L107">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L107">
 <text xml:space="preserve" text-anchor="start" x="621.5" y="-976.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,7 +286,7 @@
 <title>construct_colony/6</title>
 <polygon fill="cornsilk" stroke="black" points="770.81,-794 625.19,-794 625.19,-758 770.81,-758 770.81,-794"/>
 <text xml:space="preserve" text-anchor="start" x="633.19" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L218">
+<g id="a_node5_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L218" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L218">
 <text xml:space="preserve" text-anchor="start" x="638.59" y="-777.71" font-family="monospace" font-size="11.00">construct_colony/6</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- loop/21&#45;&gt;construct_colony/6 -->
 <g id="edge7" class="edge">
 <title>loop/21&#45;&gt;construct_colony/6</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M360.73,-906.62C365.52,-905.04 370.37,-903.47 375,-902 427.66,-885.26 442.25,-885.38 494,-866 530.51,-852.33 538.29,-845.66 574,-830 597.58,-819.65 623.79,-808.41 646.02,-798.96"/>
 <polygon fill="black" stroke="black" points="647.35,-802.19 655.19,-795.06 644.62,-795.75 647.35,-802.19"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="574" y="-845.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>evaluate_tours/5</title>
 <polygon fill="cornsilk" stroke="black" points="150.21,-794 17.79,-794 17.79,-758 150.21,-758 150.21,-794"/>
 <text xml:space="preserve" text-anchor="start" x="25.79" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L278" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L278">
+<g id="a_node11_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L278" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L278">
 <text xml:space="preserve" text-anchor="start" x="31.19" y="-777.71" font-family="monospace" font-size="11.00">evaluate_tours/5</text>
 </a>
 </g>
@@ -325,12 +325,12 @@
 <!-- loop/21&#45;&gt;evaluate_tours/5 -->
 <g id="edge8" class="edge">
 <title>loop/21&#45;&gt;evaluate_tours/5</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M294.57,-901.59C251.45,-876.08 171.03,-828.49 123.02,-800.09"/>
 <polygon fill="black" stroke="black" points="124.98,-797.18 114.6,-795.1 121.42,-803.21 124.98,-797.18"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="232.55" y="-845.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -340,7 +340,7 @@
 <title>update_pheromone/9</title>
 <polygon fill="cornsilk" stroke="black" points="313.81,-794 168.19,-794 168.19,-758 313.81,-758 313.81,-794"/>
 <text xml:space="preserve" text-anchor="start" x="176.19" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304">
+<g id="a_node14_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="181.59" y="-777.71" font-family="monospace" font-size="11.00">update_pheromone/9</text>
 </a>
 </g>
@@ -352,12 +352,12 @@
 <!-- loop/21&#45;&gt;update_pheromone/9 -->
 <g id="edge9" class="edge">
 <title>loop/21&#45;&gt;update_pheromone/9</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M313.82,-901.59C299.56,-877.18 273.49,-832.58 256.72,-803.89"/>
 <polygon fill="black" stroke="black" points="259.83,-802.28 251.77,-795.42 253.79,-805.82 259.83,-802.28"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="292.38" y="-845.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -367,7 +367,7 @@
 <title>report_progress/6</title>
 <polygon fill="cornsilk" stroke="black" points="470.51,-794 331.49,-794 331.49,-758 470.51,-758 470.51,-794"/>
 <text xml:space="preserve" text-anchor="start" x="339.49" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L364">
+<g id="a_node21_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L364">
 <text xml:space="preserve" text-anchor="start" x="344.89" y="-777.71" font-family="monospace" font-size="11.00">report_progress/6</text>
 </a>
 </g>
@@ -379,12 +379,12 @@
 <!-- loop/21&#45;&gt;report_progress/6 -->
 <g id="edge10" class="edge">
 <title>loop/21&#45;&gt;report_progress/6</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="calls">
 <path fill="none" stroke="black" d="M333.44,-901.59C346.68,-877.18 370.86,-832.58 386.42,-803.89"/>
 <polygon fill="black" stroke="black" points="389.31,-805.9 391,-795.44 383.16,-802.56 389.31,-805.9"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L184">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="371.66" y="-845.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -394,7 +394,7 @@
 <title>report_final/6</title>
 <polygon fill="cornsilk" stroke="black" points="607.61,-794 488.39,-794 488.39,-758 607.61,-758 607.61,-794"/>
 <text xml:space="preserve" text-anchor="start" x="496.39" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L372" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L372">
+<g id="a_node22_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L372" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L372">
 <text xml:space="preserve" text-anchor="start" x="501.79" y="-777.71" font-family="monospace" font-size="11.00">report_final/6</text>
 </a>
 </g>
@@ -406,12 +406,12 @@
 <!-- loop/21&#45;&gt;report_final/6 -->
 <g id="edge6" class="edge">
 <title>loop/21&#45;&gt;report_final/6</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L165" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L165" xlink:title="calls">
 <path fill="none" stroke="black" d="M351.47,-901.59C391.54,-876.18 466.15,-828.89 511.02,-800.44"/>
 <polygon fill="black" stroke="black" points="512.81,-803.45 519.38,-795.14 509.06,-797.54 512.81,-803.45"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L165">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="462.65" y="-845.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -419,12 +419,12 @@
 <!-- construct_colony/6&#45;&gt;construct_tour/5 -->
 <g id="edge11" class="edge">
 <title>construct_colony/6&#45;&gt;construct_tour/5</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L220" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L220" xlink:title="calls">
 <path fill="none" stroke="black" d="M697.85,-757.53C697.69,-739.28 697.44,-710.33 697.25,-688.7"/>
 <polygon fill="black" stroke="black" points="700.75,-688.74 697.16,-678.77 693.75,-688.8 700.75,-688.74"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L220">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L220">
 <text xml:space="preserve" text-anchor="start" x="697.53" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -434,7 +434,7 @@
 <title>construct_tour/7</title>
 <polygon fill="cornsilk" stroke="black" points="622.21,-560 489.79,-560 489.79,-524 622.21,-524 622.21,-560"/>
 <text xml:space="preserve" text-anchor="start" x="497.79" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L235">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L235">
 <text xml:space="preserve" text-anchor="start" x="503.19" y="-543.71" font-family="monospace" font-size="11.00">construct_tour/7</text>
 </a>
 </g>
@@ -446,12 +446,12 @@
 <!-- construct_tour/5&#45;&gt;construct_tour/7 -->
 <g id="edge12" class="edge">
 <title>construct_tour/5&#45;&gt;construct_tour/7</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M672.62,-640.58C658.74,-630.47 641.15,-617.33 626,-605 611.47,-593.18 595.82,-579.42 583.01,-567.87"/>
 <polygon fill="black" stroke="black" points="585.52,-565.42 575.76,-561.3 580.82,-570.61 585.52,-565.42"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="626" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -459,12 +459,12 @@
 <!-- construct_tour/5&#45;&gt;list::length/2 -->
 <g id="edge30" class="edge">
 <title>construct_tour/5&#45;&gt;list::length/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M701.02,-640.84C703.41,-630.48 706.46,-617 709,-605 719.96,-553.15 725.69,-540.62 732,-488 738.33,-435.23 739.77,-373.17 740.03,-337.72"/>
 <polygon fill="black" stroke="black" points="743.53,-337.88 740.08,-327.86 736.53,-337.85 743.53,-337.88"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="732.84" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -486,12 +486,12 @@
 <!-- construct_tour/5&#45;&gt;list::nth1/3 -->
 <g id="edge31" class="edge">
 <title>construct_tour/5&#45;&gt;list::nth1/3</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M697.48,-640.6C698.86,-587.3 702.23,-428.64 694,-407 682.99,-378.02 659.25,-351.88 639.65,-333.9"/>
 <polygon fill="black" stroke="black" points="642.21,-331.49 632.41,-327.47 637.56,-336.72 642.21,-331.49"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="699.23" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -513,12 +513,12 @@
 <!-- construct_tour/5&#45;&gt;list::selectchk/3 -->
 <g id="edge32" class="edge">
 <title>construct_tour/5&#45;&gt;list::selectchk/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M690.84,-640.56C676.73,-600.66 642.01,-502.43 624.88,-453.96"/>
 <polygon fill="black" stroke="black" points="628.26,-453.01 621.63,-444.75 621.66,-455.35 628.26,-453.01"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L228">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="661.45" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -528,7 +528,7 @@
 <title>select_next/6</title>
 <polygon fill="cornsilk" stroke="black" points="527.31,-443 414.69,-443 414.69,-407 527.31,-407 527.31,-443"/>
 <text xml:space="preserve" text-anchor="start" x="422.69" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247">
+<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="428.09" y="-426.71" font-family="monospace" font-size="11.00">select_next/6</text>
 </a>
 </g>
@@ -540,12 +540,12 @@
 <!-- construct_tour/7&#45;&gt;select_next/6 -->
 <g id="edge13" class="edge">
 <title>construct_tour/7&#45;&gt;select_next/6</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L239" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L239" xlink:title="calls">
 <path fill="none" stroke="black" d="M543.09,-523.53C529.09,-504.6 506.59,-474.16 490.45,-452.32"/>
 <polygon fill="black" stroke="black" points="493.41,-450.43 484.65,-444.47 487.78,-454.59 493.41,-450.43"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L239">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="516.05" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -553,12 +553,12 @@
 <!-- construct_tour/7&#45;&gt;list::selectchk/3 -->
 <g id="edge33" class="edge">
 <title>construct_tour/7&#45;&gt;list::selectchk/3</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L239" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L239" xlink:title="calls">
 <path fill="none" stroke="black" d="M564.96,-523.53C574.55,-504.85 589.87,-474.97 601.04,-453.2"/>
 <polygon fill="black" stroke="black" points="604.01,-455.1 605.46,-444.6 597.78,-451.9 604.01,-455.1"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L239">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L239" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L239">
 <text xml:space="preserve" text-anchor="start" x="587.27" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -568,7 +568,7 @@
 <title>scores/8</title>
 <polygon fill="cornsilk" stroke="black" points="537.81,-326 458.19,-326 458.19,-290 537.81,-290 537.81,-326"/>
 <text xml:space="preserve" text-anchor="start" x="466.19" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L259">
+<g id="a_node9_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L259">
 <text xml:space="preserve" text-anchor="start" x="471.6" y="-309.71" font-family="monospace" font-size="11.00">scores/8</text>
 </a>
 </g>
@@ -580,12 +580,12 @@
 <!-- select_next/6&#45;&gt;scores/8 -->
 <g id="edge14" class="edge">
 <title>select_next/6&#45;&gt;scores/8</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M475.1,-406.53C479.41,-388.19 486.25,-359.06 491.33,-337.4"/>
 <polygon fill="black" stroke="black" points="494.72,-338.26 493.6,-327.73 487.91,-336.66 494.72,-338.26"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="485.31" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -595,7 +595,7 @@
 <title>pick_by_score/4</title>
 <polygon fill="cornsilk" stroke="black" points="439.91,-326 314.09,-326 314.09,-290 439.91,-290 439.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="322.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L267">
+<g id="a_node10_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L267">
 <text xml:space="preserve" text-anchor="start" x="327.49" y="-309.71" font-family="monospace" font-size="11.00">pick_by_score/4</text>
 </a>
 </g>
@@ -607,12 +607,12 @@
 <!-- select_next/6&#45;&gt;pick_by_score/4 -->
 <g id="edge15" class="edge">
 <title>select_next/6&#45;&gt;pick_by_score/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M456.72,-406.53C441.17,-387.51 416.14,-356.88 398.27,-335.02"/>
 <polygon fill="black" stroke="black" points="401.1,-332.95 392.06,-327.43 395.68,-337.38 401.1,-332.95"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="426.82" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -620,12 +620,12 @@
 <!-- select_next/6&#45;&gt;list::length/2 -->
 <g id="edge34" class="edge">
 <title>select_next/6&#45;&gt;list::length/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M511.86,-406.53C559.19,-386.3 637.26,-352.92 688.66,-330.95"/>
 <polygon fill="black" stroke="black" points="689.99,-334.19 697.81,-327.04 687.24,-327.75 689.99,-334.19"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="613.57" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -633,12 +633,12 @@
 <!-- select_next/6&#45;&gt;list::nth1/3 -->
 <g id="edge35" class="edge">
 <title>select_next/6&#45;&gt;list::nth1/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="calls">
 <path fill="none" stroke="black" d="M491.96,-406.53C515.3,-387.09 553.19,-355.51 579.51,-333.57"/>
 <polygon fill="black" stroke="black" points="581.69,-336.31 587.13,-327.22 577.21,-330.94 581.69,-336.31"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L247">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="544.14" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -648,7 +648,7 @@
 <title>pheromone_lookup/4</title>
 <polygon fill="cornsilk" stroke="black" points="685.81,-209 540.19,-209 540.19,-173 685.81,-173 685.81,-209"/>
 <text xml:space="preserve" text-anchor="start" x="548.19" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L298">
+<g id="a_node13_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="553.59" y="-192.71" font-family="monospace" font-size="11.00">pheromone_lookup/4</text>
 </a>
 </g>
@@ -660,12 +660,12 @@
 <!-- scores/8&#45;&gt;pheromone_lookup/4 -->
 <g id="edge16" class="edge">
 <title>scores/8&#45;&gt;pheromone_lookup/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L260" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L260" xlink:title="calls">
 <path fill="none" stroke="black" d="M515.47,-289.53C534.74,-270.26 565.94,-239.06 587.85,-217.15"/>
 <polygon fill="black" stroke="black" points="590.08,-219.87 594.68,-210.32 585.13,-214.92 590.08,-219.87"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L260">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L260" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L260">
 <text xml:space="preserve" text-anchor="start" x="558.95" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -687,12 +687,12 @@
 <!-- init_pheromone/3&#45;&gt;list::member/2 -->
 <g id="edge36" class="edge">
 <title>init_pheromone/3&#45;&gt;list::member/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L289" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L289" xlink:title="calls">
 <path fill="none" stroke="black" d="M767.93,-829.51C779.69,-820.16 793.07,-807.74 802,-794 831.8,-748.16 831.45,-731 840,-677 842.5,-661.2 840.78,-656.98 840,-641 835.33,-545.1 819,-522.01 819,-426 819,-426 819,-426 819,-190 819,-148.6 781.3,-117.37 748.34,-97.98"/>
 <polygon fill="black" stroke="black" points="750.06,-94.93 739.63,-93.09 746.63,-101.04 750.06,-94.93"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L289">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L289">
 <text xml:space="preserve" text-anchor="start" x="821.69" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -700,12 +700,12 @@
 <!-- pheromone_lookup/4&#45;&gt;list::member/2 -->
 <g id="edge37" class="edge">
 <title>pheromone_lookup/4&#45;&gt;list::member/2</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L298" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L298" xlink:title="calls">
 <path fill="none" stroke="black" d="M626.21,-172.53C640.54,-153.6 663.57,-123.16 680.09,-101.32"/>
 <polygon fill="black" stroke="black" points="682.79,-103.55 686.03,-93.46 677.21,-99.32 682.79,-103.55"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L298">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="659.11" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -715,7 +715,7 @@
 <title>evaporate/4</title>
 <polygon fill="cornsilk" stroke="black" points="468.71,-677 369.29,-677 369.29,-641 468.71,-641 468.71,-677"/>
 <text xml:space="preserve" text-anchor="start" x="377.29" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L319">
+<g id="a_node15_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="382.69" y="-660.71" font-family="monospace" font-size="11.00">evaporate/4</text>
 </a>
 </g>
@@ -727,12 +727,12 @@
 <!-- update_pheromone/9&#45;&gt;evaporate/4 -->
 <g id="edge17" class="edge">
 <title>update_pheromone/9&#45;&gt;evaporate/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M271.01,-757.54C288.16,-747.41 309.96,-734.27 329,-722 347.93,-709.8 368.65,-695.58 385.44,-683.84"/>
 <polygon fill="black" stroke="black" points="387.41,-686.73 393.59,-678.12 383.39,-681 387.41,-686.73"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="341.44" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -742,7 +742,7 @@
 <title>clamp_pheromone/4</title>
 <polygon fill="cornsilk" stroke="black" points="157.51,-677 18.49,-677 18.49,-641 157.51,-641 157.51,-677"/>
 <text xml:space="preserve" text-anchor="start" x="26.49" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L328">
+<g id="a_node16_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L328">
 <text xml:space="preserve" text-anchor="start" x="31.89" y="-660.71" font-family="monospace" font-size="11.00">clamp_pheromone/4</text>
 </a>
 </g>
@@ -754,12 +754,12 @@
 <!-- update_pheromone/9&#45;&gt;clamp_pheromone/4 -->
 <g id="edge20" class="edge">
 <title>update_pheromone/9&#45;&gt;clamp_pheromone/4</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M217.76,-757.53C191.66,-737.92 149.14,-705.96 119.93,-684"/>
 <polygon fill="black" stroke="black" points="122.26,-681.37 112.16,-678.16 118.06,-686.97 122.26,-681.37"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="169.09" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -769,7 +769,7 @@
 <title>deposit_all/4</title>
 <polygon fill="cornsilk" stroke="black" points="288.31,-677 175.69,-677 175.69,-641 288.31,-641 288.31,-677"/>
 <text xml:space="preserve" text-anchor="start" x="183.69" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L338">
+<g id="a_node17_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="189.09" y="-660.71" font-family="monospace" font-size="11.00">deposit_all/4</text>
 </a>
 </g>
@@ -781,12 +781,12 @@
 <!-- update_pheromone/9&#45;&gt;deposit_all/4 -->
 <g id="edge18" class="edge">
 <title>update_pheromone/9&#45;&gt;deposit_all/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M239.63,-757.53C238.2,-739.28 235.94,-710.33 234.25,-688.7"/>
 <polygon fill="black" stroke="black" points="237.74,-688.46 233.47,-678.76 230.76,-689.01 237.74,-688.46"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="236.77" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -796,7 +796,7 @@
 <title>deposit_tour/4</title>
 <polygon fill="cornsilk" stroke="black" points="291.61,-560 172.39,-560 172.39,-524 291.61,-524 291.61,-560"/>
 <text xml:space="preserve" text-anchor="start" x="180.39" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L344">
+<g id="a_node18_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L344">
 <text xml:space="preserve" text-anchor="start" x="185.79" y="-543.71" font-family="monospace" font-size="11.00">deposit_tour/4</text>
 </a>
 </g>
@@ -808,12 +808,12 @@
 <!-- update_pheromone/9&#45;&gt;deposit_tour/4 -->
 <g id="edge19" class="edge">
 <title>update_pheromone/9&#45;&gt;deposit_tour/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M256.69,-757.65C277.46,-732.51 310.03,-684.21 297,-641 288.88,-614.08 270.69,-587.76 255.6,-569.18"/>
 <polygon fill="black" stroke="black" points="258.37,-567.04 249.26,-561.63 253.01,-571.54 258.37,-567.04"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L304">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L304">
 <text xml:space="preserve" text-anchor="start" x="299.99" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -821,12 +821,12 @@
 <!-- deposit_all/4&#45;&gt;deposit_tour/4 -->
 <g id="edge21" class="edge">
 <title>deposit_all/4&#45;&gt;deposit_tour/4</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L339" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L339" xlink:title="calls">
 <path fill="none" stroke="black" d="M232,-640.53C232,-622.28 232,-593.33 232,-571.7"/>
 <polygon fill="black" stroke="black" points="235.5,-571.77 232,-561.77 228.5,-571.77 235.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L339">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L339" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L339">
 <text xml:space="preserve" text-anchor="start" x="232" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -836,7 +836,7 @@
 <title>deposit_edges/5</title>
 <polygon fill="cornsilk" stroke="black" points="294.91,-443 169.09,-443 169.09,-407 294.91,-407 294.91,-443"/>
 <text xml:space="preserve" text-anchor="start" x="177.09" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L348">
+<g id="a_node19_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L348">
 <text xml:space="preserve" text-anchor="start" x="182.49" y="-426.71" font-family="monospace" font-size="11.00">deposit_edges/5</text>
 </a>
 </g>
@@ -848,12 +848,12 @@
 <!-- deposit_tour/4&#45;&gt;deposit_edges/5 -->
 <g id="edge22" class="edge">
 <title>deposit_tour/4&#45;&gt;deposit_edges/5</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L344" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L344" xlink:title="calls">
 <path fill="none" stroke="black" d="M232,-523.53C232,-505.28 232,-476.33 232,-454.7"/>
 <polygon fill="black" stroke="black" points="235.5,-454.77 232,-444.77 228.5,-454.77 235.5,-454.77"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L344">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L344">
 <text xml:space="preserve" text-anchor="start" x="232" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -863,7 +863,7 @@
 <title>add_pheromone/5</title>
 <polygon fill="cornsilk" stroke="black" points="294.91,-326 169.09,-326 169.09,-290 294.91,-290 294.91,-326"/>
 <text xml:space="preserve" text-anchor="start" x="177.09" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L355" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L355">
+<g id="a_node20_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L355" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L355">
 <text xml:space="preserve" text-anchor="start" x="182.49" y="-309.71" font-family="monospace" font-size="11.00">add_pheromone/5</text>
 </a>
 </g>
@@ -875,12 +875,12 @@
 <!-- deposit_edges/5&#45;&gt;add_pheromone/5 -->
 <g id="edge23" class="edge">
 <title>deposit_edges/5&#45;&gt;add_pheromone/5</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L348" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L348" xlink:title="calls">
 <path fill="none" stroke="black" d="M232,-406.53C232,-388.28 232,-359.33 232,-337.7"/>
 <polygon fill="black" stroke="black" points="235.5,-337.77 232,-327.77 228.5,-337.77 235.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L348">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L348">
 <text xml:space="preserve" text-anchor="start" x="232" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -902,12 +902,12 @@
 <!-- add_pheromone/5&#45;&gt;list::select/3 -->
 <g id="edge38" class="edge">
 <title>add_pheromone/5&#45;&gt;list::select/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L355" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L355" xlink:title="calls">
 <path fill="none" stroke="black" d="M232,-289.53C232,-271.28 232,-242.33 232,-220.7"/>
 <polygon fill="black" stroke="black" points="235.5,-220.77 232,-210.77 228.5,-220.77 235.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L355" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L355">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L355" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L355">
 <text xml:space="preserve" text-anchor="start" x="232" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -917,7 +917,7 @@
 <title>call_progress/5</title>
 <polygon fill="cornsilk" stroke="black" points="612.91,-677 487.09,-677 487.09,-641 612.91,-641 612.91,-677"/>
 <text xml:space="preserve" text-anchor="start" x="495.09" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L378">
+<g id="a_node23_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L378" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L378">
 <text xml:space="preserve" text-anchor="start" x="500.49" y="-660.71" font-family="monospace" font-size="11.00">call_progress/5</text>
 </a>
 </g>
@@ -929,12 +929,12 @@
 <!-- report_progress/6&#45;&gt;call_progress/5 -->
 <g id="edge24" class="edge">
 <title>report_progress/6&#45;&gt;call_progress/5</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L364" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L364" xlink:title="calls">
 <path fill="none" stroke="black" d="M423.63,-757.53C448.94,-738 490.1,-706.23 518.53,-684.29"/>
 <polygon fill="black" stroke="black" points="520.67,-687.06 526.45,-678.18 516.39,-681.52 520.67,-687.06"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L364">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L364">
 <text xml:space="preserve" text-anchor="start" x="479.97" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -942,12 +942,12 @@
 <!-- report_final/6&#45;&gt;call_progress/5 -->
 <g id="edge25" class="edge">
 <title>report_final/6&#45;&gt;call_progress/5</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L372" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L372" xlink:title="calls">
 <path fill="none" stroke="black" d="M548.3,-757.53C548.62,-739.28 549.12,-710.33 549.5,-688.7"/>
 <polygon fill="black" stroke="black" points="553,-688.83 549.67,-678.77 546,-688.7 553,-688.83"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L372" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L372">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L372" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L372">
 <text xml:space="preserve" text-anchor="start" x="549.06" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -957,7 +957,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="675.21,-1172 542.79,-1172 542.79,-1136 675.21,-1136 675.21,-1172"/>
 <text xml:space="preserve" text-anchor="start" x="550.79" y="-1156.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L391">
+<g id="a_node24_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L391" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L391">
 <text xml:space="preserve" text-anchor="start" x="556.19" y="-1155.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -971,7 +971,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="838.61,-1172 719.39,-1172 719.39,-1136 838.61,-1136 838.61,-1172"/>
 <text xml:space="preserve" text-anchor="start" x="727.39" y="-1156.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L405" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/ant_colony/ant_colony.lgt#L405">
+<g id="a_node25_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L405" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ant_colony/ant_colony.lgt#L405">
 <text xml:space="preserve" text-anchor="start" x="732.79" y="-1155.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1147,-140 1147,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol json_pointer_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 21:22</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:26</text>
 <g id="clust1" class="cluster">
 <title>cluster_json_pointer_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="json_pointer_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1123,-46 1123,-46 1129,-46 1135,-52 1135,-58 1135,-58 1135,-116 1135,-116 1135,-122 1129,-128 1123,-128 1123,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">json_pointer_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Parses a JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a list of reference tokens. Fails if the pointer cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Generates a JSON Pointer using the representation specified in the first argument (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) for the list of reference tokens in the second argument.">
 <polygon fill="springgreen" stroke="black" points="202.41,-92 109.59,-92 109.59,-56 202.41,-56 202.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="122.99" y="-75.71" font-family="monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Parses a URI fragment representation of a JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a list of reference tokens. Fails if the fragment cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="353.21,-92 220.79,-92 220.79,-56 353.21,-56 353.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="228.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L55">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="234.19" y="-75.71" font-family="monospace" font-size="11.00">parse_fragment/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Generates the URI fragment representation of a JSON Pointer using the representation specified in the first argument (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) for the list of reference tokens in the second argument.">
 <polygon fill="springgreen" stroke="black" points="523.11,-92 370.89,-92 370.89,-56 523.11,-56 523.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="378.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L66">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="384.29" y="-75.71" font-family="monospace" font-size="11.00">generate_fragment/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Parses a Relative JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a canonical term ``relative(Up, Shift, Suffix)`` where ``Up`` is the number of ancestor steps, ``Shift`` is the optional array index adjustment, and ``Suffix`` is either a list of reference tokens or the atom ``&#39;#&#39;``.">
 <polygon fill="springgreen" stroke="black" points="673.21,-92 540.79,-92 540.79,-56 673.21,-56 673.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="548.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L79">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="554.19" y="-75.71" font-family="monospace" font-size="11.00">parse_relative/2</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Generates a Relative JSON Pointer using the representation specified in the first argument (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from a canonical term ``relative(Up, Shift, Suffix)`` where ``Suffix`` is either a list of reference tokens or the atom ``&#39;#&#39;``.">
 <polygon fill="springgreen" stroke="black" points="843.11,-92 690.89,-92 690.89,-56 843.11,-56 843.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="698.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L90">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="704.29" y="-75.71" font-family="monospace" font-size="11.00">generate_relative/2</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Evaluates a parsed JSON Pointer against a JSON term. Fails if the pointer does not identify a value in the given JSON term.">
 <polygon fill="springgreen" stroke="black" points="954.41,-92 861.59,-92 861.59,-56 954.41,-56 954.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="869.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L103">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L103">
 <text xml:space="preserve" text-anchor="start" x="874.99" y="-75.71" font-family="monospace" font-size="11.00">evaluate/3</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Evaluates a parsed Relative JSON Pointer term against a JSON term, using the second argument as the absolute JSON Pointer to the current context value. Fails if either the context or the relative pointer does not identify a value in the given JSON term.">
 <polygon fill="springgreen" stroke="black" points="1125.11,-92 972.89,-92 972.89,-56 1125.11,-56 1125.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="980.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8d73c4c748ca439e8cfe4272f7cd78dc617184e9/library/json_pointer/json_pointer_protocol.lgt#L116">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/json_pointer/json_pointer_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="986.29" y="-75.71" font-family="monospace" font-size="11.00">evaluate_relative/4</text>
 </a>
 </g>
