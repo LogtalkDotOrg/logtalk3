@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2026-11-21,
+		date is 2026-11-22,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -179,8 +179,8 @@
 		write(Stream, 'text: |md\n'),
 		(	member(zoom_url(Diagram), Options) ->
 			write(Stream, '[&#128269;]('),
-			write(Stream, Diagram),
-			write(Stream, ')\n\n')
+			write_markdown_destination(Diagram, Stream),
+			write(Stream, ' "Zoom")\n\n')
 		;	true
 		),
 		write(Stream, '## '),
@@ -189,8 +189,10 @@
 			write(Stream, '['),
 			write_node_line(Label, Stream, [quoted(Quoted)]),
 			write(Stream, ']('),
-			write(Stream, URL),
-			write(Stream, ')')
+			write_markdown_destination(URL, Stream),
+			write(Stream, ' "'),
+			write_markdown_title(URL, Stream),
+			write(Stream, '")')
 		;	write_node_line(Label, Stream, [quoted(Quoted)])
 		),
 		write(Stream, '\n'),
@@ -355,6 +357,50 @@
 		;	put_char(Stream, Char)
 		),
 		write_quoted_chars(Chars, Stream).
+
+	write_markdown_destination(Destination, Stream) :-
+		write_term_to_chars(Destination, Chars, []),
+		write_markdown_destination_chars(Chars, Stream).
+
+	write_markdown_destination_chars([], _).
+	write_markdown_destination_chars([Char| Chars], Stream) :-
+		(	Char == ' ' ->
+			write(Stream, '%20')
+		;	Char == '\n' ->
+			write(Stream, '%0A')
+		;	Char == '\r' ->
+			write(Stream, '%0D')
+		;	Char == '\t' ->
+			write(Stream, '%09')
+		;	Char == '&' ->
+			write(Stream, '&amp;')
+		;	(Char == '\\'; Char == '('; Char == ')'; Char == '<'; Char == '>'; Char == '"') ->
+			put_char(Stream, '\\'),
+			put_char(Stream, Char)
+		;	put_char(Stream, Char)
+		),
+		write_markdown_destination_chars(Chars, Stream).
+
+	write_markdown_title(Title, Stream) :-
+		write_term_to_chars(Title, Chars, []),
+		write_markdown_title_chars(Chars, Stream).
+
+	write_markdown_title_chars([], _).
+	write_markdown_title_chars([Char| Chars], Stream) :-
+		(	Char == '&' ->
+			write(Stream, '&amp;')
+		;	Char == '\n' ->
+			write(Stream, '&#10;')
+		;	Char == '\r' ->
+			write(Stream, '&#13;')
+		;	Char == '\t' ->
+			write(Stream, '&#9;')
+		;	(Char == '\\'; Char == '"') ->
+			put_char(Stream, '\\'),
+			put_char(Stream, Char)
+		;	put_char(Stream, Char)
+		),
+		write_markdown_title_chars(Chars, Stream).
 
 	write_node_lines([], _, _).
 	write_node_lines([Line| Lines], Stream, Options) :-

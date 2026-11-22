@@ -44,6 +44,9 @@ Tools
 comments as node tooltips when exporting diagrams in D2, Cytoscape, or
 Graphviz formats.
 
+* IMPROVED: The `diagrams` tool experimental support for generating Mermaid
+diagrams.
+
 * FIXED: The `debug_messages` tool tests for Trealla Prolog running on Windows.
 
 * FIXED: The `issue_creator` tool tests when running on Windows.

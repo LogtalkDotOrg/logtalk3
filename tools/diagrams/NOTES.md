@@ -30,10 +30,11 @@ generate predicate cross-referencing diagrams for plain Prolog files.
 
 Linking *library diagrams* to *entity diagrams* to *predicate cross-referencing
 diagrams* and linking *directory diagrams* to *file diagrams* is also supported
-when using SVG output. This feature allows using diagrams for understanding
-the architecture of applications by navigating complex code and zooming into
-details. SVG output can also easily link to both source code repositories and
-API documentation. This allows diagrams to be used for source code navigation.
+when using SVG or Mermaid HTML output. This feature allows using diagrams for
+understanding the architecture of applications by navigating complex code and
+zooming into details. SVG output can also easily link to both source code
+repositories and API documentation. This allows diagrams to be used for source
+code navigation.
 
 Diagrams can also be used to uncover code issues. For example, comparing
 *loading diagrams* with *dependency diagrams* can reveal implicit dependencies.
@@ -283,7 +284,7 @@ files:
 The scripts assume that the d2 and Graphviz command-line executables are
 available from the system path. For Graphviz, the default is the `dot`
 executable, but the scripts accept a command-line option to select in
-alternative the `circo`, `fdp`, or `neato` executables). For d2, the default
+alternative the `circo`, `fdp`, or `neato` executables. For d2, the default
 layout engine is `elk`, but the scripts accept a command-line option to select
 in alternative the `dagre` or `tala` layout engines.
 
@@ -292,11 +293,10 @@ which can be used for showing, e.g., entity types, relation types, file paths,
 and for navigating to files and directories of files (libraries) or to API
 documentation. See the relevant diagram options below in order to take
 advantage of these features (see the discussion below on "linking diagrams").
-Entity and predicate comments are also used as node tooltips in DOT, d2, and
-Cytoscape entity and predicate diagrams. In the Cytoscape viewer, hovering
-over a node's name shows its URL or node tooltip, while hovering elsewhere
-on the node shows the comment. In d2 SVG output, a tooltip is additionally
-indicated by an information icon.
+Entity and predicate comments are also used as node tooltips in DOT, d2,
+Mermaid, and Cytoscape entity and predicate diagrams. Separate Mermaid tooltips
+require a browser with CSS `:has()` support. By default, Mermaid zoom links
+point to generated HTML diagrams.
 
 To convert to formats other than SVG, you will need to use the d2 and Graphviz
 executables directly. For example, using the Graphviz `dot` executable, we can
@@ -425,7 +425,7 @@ generated diagrams. For entity diagrams, the options are:
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 
 - `zoom_url_suffix(Suffix)`  
-	extension for linked diagrams (an atom; default is `'.svg'`)
+	extension for linked diagrams (an atom; default is `'.svg'`; the Mermaid exporter replaces it with `'.html'`)
 
 In the particular case of cross-referencing diagrams, there are also the options:
 
@@ -490,7 +490,7 @@ For directory and file diagrams, the options are:
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 
 - `zoom_url_suffix(Suffix)`  
-	extension for linked diagrams (an atom; default is `'.svg'`)
+	extension for linked diagrams (an atom; default is `'.svg'`; the Mermaid exporter replaces it with `'.html'`)
 
 For directory dependency diagrams, there is also the option:
 
@@ -548,7 +548,7 @@ For library diagrams, the options are:
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)
 
 - `zoom_url_suffix(Suffix)`  
-	extension for linked diagrams (an atom; default is `'.svg'`)
+	extension for linked diagrams (an atom; default is `'.svg'`; the Mermaid exporter replaces it with `'.html'`)
 
 For library dependency diagrams, there is also the option:
 
@@ -586,9 +586,9 @@ Logtalk applications:
 Linking diagrams
 ----------------
 
-When using SVG output, it's possible to generate diagrams that link to other
-diagrams, to API documentation, to local files and directories, and to source
-code repositories.
+When using SVG or Mermaid HTML output, it's possible to generate diagrams that
+link to other diagrams, to API documentation, to local files and directories,
+and to source code repositories.
 
 For generating links between diagrams, use the `zoom(true)` option. This
 option allows (1) linking library diagrams to entity diagrams to predicate

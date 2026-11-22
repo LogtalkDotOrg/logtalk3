@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2026-11-21,
+		date is 2026-11-22,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -63,16 +63,27 @@
 
 	test(d2_node_comment_tooltip, true) :-
 		d2_node_output(
-			[comment('He said "hi": ${value}\\path\nnext'), url('https://example.com')],
+			[comment('He said "hi": ${value}\\path\nnext'), tooltip(object), url('https://example.com'), zoom_url('entity.svg')],
 			Output
 		),
 		sub_atom(Output, _, _, _, 'tooltip: "He said \\"hi\\": \\${value}\\\\path\\nnext"\n'),
-		sub_atom(Output, _, _, _, '## [entity](https://example.com)\n').
+		sub_atom(Output, _, _, _, '[&#128269;](entity.svg "Zoom")\n'),
+		sub_atom(Output, _, _, _, '## [entity](https://example.com "https://example.com")\n').
 
 	test(d2_node_no_comment_tooltip, true) :-
 		d2_node_output([url('https://example.com')], Output),
 		\+ sub_atom(Output, _, _, _, 'tooltip:'),
-		sub_atom(Output, _, _, _, '## [entity](https://example.com)\n').
+		sub_atom(Output, _, _, _, '## [entity](https://example.com "https://example.com")\n').
+
+	test(d2_node_link_tooltip_escaping, true) :-
+		d2_node_output([url('https://example.com/a(b)?q="x"&v=1'), zoom_url('some (entity).svg')], Output),
+		sub_atom(Output, _, _, _, '[&#128269;](some%20\\(entity\\).svg "Zoom")\n'),
+		sub_atom(Output, _, _, _, '## [entity](https://example.com/a\\(b\\)?q=\\"x\\"&amp;v=1 "https://example.com/a(b)?q=\\"x\\"&amp;v=1")\n').
+
+	test(d2_node_unlinked, true) :-
+		d2_node_output([comment('Comment'), tooltip(object), url('')], Output),
+		sub_atom(Output, _, _, _, 'tooltip: "Comment"\n'),
+		sub_atom(Output, _, _, _, '## entity\n').
 
 	test(d2_node_empty_comment_tooltip, true) :-
 		d2_node_output([comment('')], Output),
@@ -96,6 +107,83 @@
 		cx2_node_output([comment(''), tooltip(object)], Output),
 		\+ sub_atom(Output, _, _, _, '"comment": "'),
 		sub_atom(Output, _, _, _, '"tooltip": "object"').
+
+	test(mermaid_node_comment_tooltips, true) :-
+		mermaid_node_output(
+			[comment('O\'Reilly "A" <x>\nnext'), tooltip(object), url('https://example.com')],
+			Output
+		),
+		sub_atom(Output, _, _, _, '<b title=\'https://example.com\'>'),
+		sub_atom(Output, _, _, _, 'click \'entity\' "https://example.com" "O#39;Reilly #quot;A#quot; #amp;lt;x#amp;gt;#10;next"').
+
+	test(mermaid_node_comment_without_url, true) :-
+		mermaid_node_output([comment('Comment'), tooltip('An "object"\nnext')], Output),
+		sub_atom(Output, _, _, _, '<b title=\'An #quot;object#quot;#10;next\'>'),
+		sub_atom(Output, _, _, _, 'click \'entity\' noop "Comment"').
+
+	test(mermaid_node_comment_only, true) :-
+		mermaid_node_output([comment('Comment')], Output),
+		\+ sub_atom(Output, _, _, _, '<b title='),
+		sub_atom(Output, _, _, _, 'click \'entity\' noop "Comment"').
+
+	test(mermaid_node_empty_comment, true) :-
+		mermaid_node_output([comment(''), tooltip(object)], Output),
+		\+ sub_atom(Output, _, _, _, '<b title='),
+		sub_atom(Output, _, _, _, 'click \'entity\' noop "object"').
+
+	test(mermaid_node_url_tooltip_line_number, true) :-
+		mermaid_node_output(
+			[url('vscode://file/path/file.lgt:58:0'), tooltip('vscode://file/path/file.lgt')],
+			Output
+		),
+		sub_atom(Output, _, _, _, 'click \'entity\' "vscode://file/path/file.lgt:58:0" "vscode://file/path/file.lgt:58:0"').
+
+	test(mermaid_node_zoom_tooltips, true) :-
+		mermaid_node_output(
+			[zoom_url('entity\'s.html?x=1&y=2'), comment('Comment'), url('https://example.com')],
+			Output
+		),
+		sub_atom(Output, _, _, _, '<a href=\'entity#39;s.html?x=1#amp;y=2\' title=\'Zoom\'>&#128269;</a><br/>'),
+		sub_atom(Output, _, _, _, '<b title=\'https://example.com\'>'),
+		sub_atom(Output, _, _, _, 'click \'entity\' "https://example.com" "Comment"').
+
+	test(mermaid_node_zoom_without_url, true) :-
+		mermaid_node_output([zoom_url('entity.svg'), comment('Comment')], Output),
+		sub_atom(Output, _, _, _, '<a href=\'entity.html\' title=\'Zoom\'>&#128269;</a>'),
+		sub_atom(Output, _, _, _, 'click \'entity\' noop "Comment"').
+
+	test(mermaid_node_without_zoom, true) :-
+		mermaid_node_output([comment('Comment'), url('https://example.com')], Output),
+		\+ sub_atom(Output, _, _, _, 'title=\'Zoom\''),
+		sub_atom(Output, _, _, _, 'click \'entity\' "https://example.com" "Comment"').
+
+	test(mermaid_zoom_generated_subdiagram, true) :-
+		object_property(d2_graph_language, file(File)),
+		entity_diagram(mermaid)::file(File, [zoom(true)]),
+		os::file_exists('./dot_dias/d2_graph_language_object_xref_diagram.html'),
+		open('./dot_dias/d2_graph_language_entity_diagram.html', read, Stream),
+		read_node_output_chars(Stream, Chars),
+		close(Stream),
+		atom_chars(Output, Chars),
+		sub_atom(Output, _, _, _, 'href=\'d2_graph_language_object_xref_diagram.html\' title=\'Zoom\'').
+
+	test(mermaid_zoom_explicit_suffix, true) :-
+		object_property(d2_graph_language, file(File)),
+		entity_diagram(mermaid)::file(File, [zoom(true), zoom_url_suffix('.custom')]),
+		open('./dot_dias/d2_graph_language_entity_diagram.html', read, Stream),
+		read_node_output_chars(Stream, Chars),
+		close(Stream),
+		atom_chars(Output, Chars),
+		sub_atom(Output, _, _, _, 'href=\'d2_graph_language_object_xref_diagram.custom\' title=\'Zoom\'').
+
+	test(mermaid_zoom_library_subdiagram, true) :-
+		library_dependency_diagram(mermaid)::libraries(test, [options], [zoom(true)]),
+		os::file_exists('./dot_dias/options_entity_diagram.html'),
+		open('./dot_dias/test_library_dependency_diagram.html', read, Stream),
+		read_node_output_chars(Stream, Chars),
+		close(Stream),
+		atom_chars(Output, Chars),
+		sub_atom(Output, _, _, _, 'href=\'options_entity_diagram.html\' title=\'Zoom\'').
 
 	% the following tests only check (for now) that the called
 	% predicates succeed as expected and are deterministic
@@ -578,6 +666,18 @@
 		cytoscapejs_graph_language::file_header(Stream, test, [title(''), description('')]),
 		cytoscapejs_graph_language::node(Stream, entity, entity, object, [predicate/1], prototype, Options),
 		cytoscapejs_graph_language::file_footer(Stream, test, []),
+		close(Stream),
+		open(File, read, Input),
+		read_node_output_chars(Input, Chars),
+		close(Input),
+		os::delete_file(File),
+		atom_chars(Output, Chars).
+
+	mermaid_node_output(Options, Output) :-
+		File = 'mermaid_node_tooltip_test.tmp',
+		\+ os::file_exists(File),
+		open(File, write, Stream),
+		mermaid_graph_language::node(Stream, entity, entity, object, [predicate/1], prototype, Options),
 		close(Stream),
 		open(File, read, Input),
 		read_node_output_chars(Input, Chars),

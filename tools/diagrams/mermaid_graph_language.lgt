@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2026-11-11,
+		date is 2026-11-22,
 		comment is 'Predicates for generating graph files using Mermaid. Requires Mermaid 12 or later.'
 	]).
 
@@ -65,8 +65,8 @@
 		% Mermaid creates the tooltip element with an inline max-width of 200px, which
 		% truncates long paths; the stylesheet overrides it so that the tooltip box
 		% fits the tooltip text
-		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { max-width: none !important; white-space: nowrap; }\n</style>\n</head>\n<body>\n'),
-		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs\';\nwindow.noop = function() {};\n// keep tooltips, which Mermaid anchors at the node center, inside the window\ndocument.addEventListener(\'mouseover\', function() { var t = document.querySelector(\'.mermaidTooltip\'); if (t) { var m = window.scrollX + document.documentElement.clientWidth - t.offsetWidth - 4, l = parseFloat(t.style.left); if (l > m) { t.style.left = Math.max(window.scrollX, m) + \'px\'; } } });\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true, htmlLabels: true });\n</script>\n'),
+		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { max-width: none !important; white-space: pre-wrap; }\n.nodeLabel a[title="Zoom"] { float: left; }\nbody:has(.nodeLabel b[title]:hover, .nodeLabel a[title]:hover) div.mermaidTooltip { visibility: hidden; }\n</style>\n</head>\n<body>\n'),
+		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs\';\nwindow.noop = function() {};\n// keep tooltips, which Mermaid anchors at the node center, inside the window\ndocument.addEventListener(\'mouseover\', function() { var t = document.querySelector(\'.mermaidTooltip\'); if (t) { var m = window.scrollX + document.documentElement.clientWidth - t.offsetWidth - 4, l = parseFloat(t.style.left); if (l > m) { t.style.left = Math.max(window.scrollX, m) + \'px\'; } } });\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true, htmlLabels: true, flowchart: { useMaxWidth: false } });\n</script>\n'),
 		write(Stream, '<pre class="mermaid">\n'),
 		write(Stream, 'graph '),
 		^^option(layout(Layout), Options),
@@ -176,7 +176,30 @@
 		write_escaped_identifier(Stream, Identifier),
 		write(Stream, '@{ shape: '),
 		write(Stream, Shape),
-		write(Stream, ', label: "<b>'),
+		write(Stream, ', label: "'),
+		(	member(zoom_url(Diagram), Options) ->
+			normalize_zoom_url(Diagram, ZoomURL),
+			write(Stream, '<a href=\''),
+			write_html_escaped(Stream, ZoomURL, false),
+			write(Stream, '\' title=\'Zoom\'>&#128269;</a><br/>')
+		;	true
+		),
+		write(Stream, '<b'),
+		(	member(comment(Comment), Options),
+			Comment \== '',
+			(	^^option(url(URL), Options),
+				URL \== '' ->
+				LabelTooltip = URL
+			;	member(tooltip(Tooltip), Options),
+				Tooltip \== '',
+				LabelTooltip = Tooltip
+			) ->
+			write(Stream, ' title=\''),
+			write_html_escaped(Stream, LabelTooltip, false),
+			write(Stream, '\'')
+		;	true
+		),
+		write(Stream, '>'),
 		write_html_escaped(Stream, Label, false),
 		write(Stream, '</b>'),
 		(	^^option(node_type_captions(true), Options),
@@ -217,27 +240,40 @@
 	% alone must use the callback form as a single quoted string is always read
 	% by Mermaid as a link; the "noop" callback is defined in the page header
 	node_click(Stream, Identifier, Options) :-
+		(	member(comment(Comment), Options),
+			Comment \== '' ->
+			NodeTooltip = Comment,
+			CommentTooltip = true
+		;	^^option(url(URL), Options),
+			URL \== '' ->
+			NodeTooltip = URL,
+			CommentTooltip = false
+		;	member(tooltip(Tooltip), Options),
+			Tooltip \== '' ->
+			NodeTooltip = Tooltip,
+			CommentTooltip = false
+		;	NodeTooltip = '',
+			CommentTooltip = false
+		),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write(Stream, 'click '),
 			write_escaped_identifier(Stream, Identifier),
 			write(Stream, ' "'),
-			write(Stream, URL),
+			write_html_escaped(Stream, URL, false),
 			write(Stream, '"'),
-			(	member(tooltip(Tooltip), Options),
-				Tooltip \== '' ->
+			(	NodeTooltip \== '' ->
 				write(Stream, ' "'),
-				write(Stream, Tooltip),
+				write_node_tooltip(Stream, NodeTooltip, CommentTooltip),
 				write(Stream, '"')
 			;	true
 			),
 			nl(Stream)
-		;	member(tooltip(Tooltip), Options),
-			Tooltip \== '' ->
+		;	NodeTooltip \== '' ->
 			write(Stream, 'click '),
 			write_escaped_identifier(Stream, Identifier),
 			write(Stream, ' noop "'),
-			write(Stream, Tooltip),
+			write_node_tooltip(Stream, NodeTooltip, CommentTooltip),
 			write(Stream, '"'),
 			nl(Stream)
 		;	true
@@ -391,6 +427,13 @@
 	safe_identifier_code(0'/).
 	safe_identifier_code(0'.).
 
+	normalize_zoom_url(ZoomURL, NormalizedZoomURL) :-
+		(	atom(ZoomURL),
+			atom_concat(Base, '.svg', ZoomURL) ->
+			atom_concat(Base, '.html', NormalizedZoomURL)
+		;	NormalizedZoomURL = ZoomURL
+		).
+
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
 		write(Stream, '<br/>'),
@@ -419,6 +462,30 @@
 	html_entity('&',  '#amp;').
 	html_entity('"',  '#quot;').
 	html_entity('\\',  '#92;').
+	html_entity('\'', '#39;').
+	html_entity('\n', '#10;').
+	html_entity('\r', '#13;').
+	html_entity('\t', '#9;').
+
+	write_node_tooltip(Stream, Tooltip, true) :-
+		write_term_to_chars(Tooltip, Chars, [quoted(false)]),
+		write_node_tooltip_chars(Chars, Stream).
+	write_node_tooltip(Stream, Tooltip, false) :-
+		write_html_escaped(Stream, Tooltip, false).
+
+	write_node_tooltip_chars([], _).
+	write_node_tooltip_chars([Char| Chars], Stream) :-
+		(	Char == '<' ->
+			write(Stream, '#amp;lt;')
+		;	Char == '>' ->
+			write(Stream, '#amp;gt;')
+		;	Char == '&' ->
+			write(Stream, '#amp;amp;')
+		;	html_entity(Char, Entity) ->
+			write(Stream, Entity)
+		;	put_char(Stream, Char)
+		),
+		write_node_tooltip_chars(Chars, Stream).
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-
