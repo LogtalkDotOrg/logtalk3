@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-11-17,
+		date is 2026-11-22,
 		comment is 'Unit tests for the "issue_creator" tool.'
 	]).
 
@@ -265,31 +265,31 @@
 		issue_creator<<command_text(unix, printf, [], Command),
 		assertion(Command == '\'printf\'').
 
-	test(issue_creator_azure_no_matches, deterministic) :-
+	test(issue_creator_azure_no_matches, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<azure_search_command(unix, 'printf Project', 'printf \'"New","Investigating"\'', 'printf 0', '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_existing, false) :-
+	test(issue_creator_azure_existing, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<azure_search_command(unix, 'printf Project', 'printf \'"New"\'', 'printf 1', '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_project_error, false) :-
+	test(issue_creator_azure_project_error, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<azure_search_command(unix, false, 'printf \'"New"\'', 'printf 0', '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_states_error, false) :-
+	test(issue_creator_azure_states_error, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<azure_search_command(unix, 'printf Project', false, 'printf 0', '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_query_error, false) :-
+	test(issue_creator_azure_query_error, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<azure_search_command(unix, 'printf Project', 'printf \'"New"\'', false, '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_empty_states, false) :-
+	test(issue_creator_azure_empty_states, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<azure_search_command(unix, 'printf Project', true, 'printf 0', '\'SELECT\'', Command),
 		os::shell(Command).
 
-	test(issue_creator_azure_literal_query, deterministic) :-
+	test(issue_creator_azure_literal_query, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<command_text(unix, printf, ['%s', 'Project $HOME'], ProjectQuery),
 		issue_creator<<command_text(unix, sh, ['-c', 'test "$#" -eq 2 && test "$2" = \'project=Project $HOME\' && printf "%s" "$1"', sh, '"New","Team\'s review"'], StatesQuery),
 		issue_creator<<command_text(unix, sh, ['-c', 'test "$#" -eq 2 && test "$1" = "$2" && printf 0', sh, 'SELECT $HOME AND [System.TeamProject] = "Project $HOME" AND [System.State] IN ("New","Team\'s review")'], IssueQuery),
@@ -615,16 +615,16 @@
 		assertion(Error == flag_test_error),
 		assertion(Restored == Original).
 
-	test(issue_creator_run_cli_literal_arguments, deterministic) :-
+	test(issue_creator_run_cli_literal_arguments, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<run_cli(unix, sh, ['-c', 'test "$#" -eq 1 && test "$1" = "$(printf "a\\047b \\042\\044HOME\\042")"', sh, 'a\'b "$HOME"']).
 
-	test(issue_creator_run_cli_failure, false) :-
+	test(issue_creator_run_cli_failure, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<run_cli(unix, sh, ['-c', 'printf partial; exit 1']).
 
-	test(issue_creator_run_cli_empty_success, deterministic) :-
+	test(issue_creator_run_cli_empty_success, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<run_cli(unix, printf, ['%s', '']).
 
-	test(issue_creator_run_cli_missing_executable, false) :-
+	test(issue_creator_run_cli_missing_executable, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<run_cli(unix, logtalk_issue_creator_nonexistent_executable, []).
 
 	test(issue_creator_create_arguments_literal_labels, deterministic(Arguments == [issue, create, '--title', 'can\'t', '--description', 'body\nnext', '--yes', '--no-input', '-l', bug, '-l', 'test-failures', '--assignee', 'author@example.com'])) :-
@@ -660,43 +660,43 @@
 	test(issue_creator_search_linear, deterministic(Arguments == [issue, query, '--search', title, '--state', triage, '--state', backlog, '--state', unstarted, '--state', started, '--limit', '1', '--json', '--no-pager', '--no-input', '-l', bug, '-l', 'test-failures'])) :-
 		issue_creator<<search_arguments(linear, title, 'bug,test-failures', linear, Arguments).
 
-	test(issue_creator_search_count_absent, deterministic) :-
+	test(issue_creator_search_count_absent, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, github, 'printf "0\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_count_existing, false) :-
+	test(issue_creator_search_count_existing, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, gitlab, 'printf "1\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_gitea_absent, deterministic) :-
+	test(issue_creator_search_gitea_absent, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, gitea, 'printf ""', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_gitea_existing, false) :-
+	test(issue_creator_search_gitea_existing, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, gitea, 'printf "123\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_linear_absent, deterministic) :-
+	test(issue_creator_search_linear_absent, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, linear, 'printf "[]\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_linear_existing, false) :-
+	test(issue_creator_search_linear_existing, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, linear, 'printf "[{issue}]\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_failure_closed, false) :-
+	test(issue_creator_search_failure_closed, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, github, '(printf "0\\n"; exit 1)', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_empty_output_closed, false) :-
+	test(issue_creator_search_empty_output_closed, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, github, 'printf ""', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_gitea_failure_closed, false) :-
+	test(issue_creator_search_gitea_failure_closed, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, gitea, 'false', Command),
 		os::shell(Command).
 
-	test(issue_creator_search_linear_failure_closed, false) :-
+	test(issue_creator_search_linear_failure_closed, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<search_command(unix, linear, '(printf "[]\\n"; exit 1)', Command),
 		os::shell(Command).
 
@@ -709,25 +709,25 @@
 	test(issue_creator_title_legacy_format, deterministic(Title == 'Test invoice_creation of test set library/invoices failed')) :-
 		issue_creator<<title(invoice_creation, 'library/invoices', Title).
 
-	test(issue_creator_jira_no_result, deterministic) :-
+	test(issue_creator_jira_no_result, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<command_text(unix, sh, ['-c', 'printf "%s\\n" "$1" >&2; exit 1', sh, 'No result found for given query in project "TEST"'], Query),
 		issue_creator<<jira_search_command(unix, Query, Command),
 		os::shell(Command).
 
-	test(issue_creator_jira_authentication_error, false) :-
+	test(issue_creator_jira_authentication_error, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<command_text(unix, sh, ['-c', 'printf "%s\\n" "Error: authentication failed" >&2; exit 1'], Query),
 		issue_creator<<jira_search_command(unix, Query, Command),
 		os::shell(Command).
 
-	test(issue_creator_jira_existing, false) :-
+	test(issue_creator_jira_existing, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<jira_search_command(unix, 'printf "TEST-1\\n"', Command),
 		os::shell(Command).
 
-	test(issue_creator_jira_silent_failure, false) :-
+	test(issue_creator_jira_silent_failure, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<jira_search_command(unix, 'false', Command),
 		os::shell(Command).
 
-	test(issue_creator_jira_missing_executable, false) :-
+	test(issue_creator_jira_missing_executable, false, [condition(\+ os::operating_system_type(windows))]) :-
 		issue_creator<<jira_search_command(unix, logtalk_issue_creator_nonexistent_executable, Command),
 		os::shell(Command).
 
@@ -742,7 +742,6 @@
 		issue_creator<<title(sample, '', Title).
 
 	% auxiliary predicates
-
 
 	:- meta_predicate(with_flag(*, *, 0)).
 

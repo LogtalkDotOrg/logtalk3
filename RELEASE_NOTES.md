@@ -46,6 +46,8 @@ Graphviz formats.
 
 * FIXED: The `debug_messages` tool tests for Trealla Prolog running on Windows.
 
+* FIXED: The `issue_creator` tool tests when running on Windows.
+
 Examples
 --------
 
