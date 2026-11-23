@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 589,-140 589,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol ulid_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:26</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:16</text>
 <g id="clust1" class="cluster">
 <title>cluster_ulid_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="ulid_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 565,-46 565,-46 571,-46 577,-52 577,-58 577,-58 577,-116 577,-116 577,-122 571,-128 565,-128 565,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">ulid_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Generates a new ULID.">
 <polygon fill="springgreen" stroke="black" points="110.41,-92 17.59,-92 17.59,-56 110.41,-56 110.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="30.99" y="-75.71" font-family="monospace" font-size="11.00">generate/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Generates a new ULID from a timestamp (number of milliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).">
 <polygon fill="springgreen" stroke="black" points="221.41,-92 128.59,-92 128.59,-56 221.41,-56 221.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="136.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="141.99" y="-75.71" font-family="monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Generates a new ULID from a timestamp discrete components.">
 <polygon fill="springgreen" stroke="black" points="332.41,-92 239.59,-92 239.59,-56 332.41,-56 332.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="247.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L56">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="252.99" y="-75.71" font-family="monospace" font-size="11.00">generate/8</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Returns the given ULID timestamp (number of milliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).">
 <polygon fill="springgreen" stroke="black" points="449.71,-92 350.29,-92 350.29,-56 449.71,-56 449.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="358.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L71">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="363.69" y="-75.71" font-family="monospace" font-size="11.00">timestamp/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Decodes a ULID into its timestamp discrete components.">
 <polygon fill="springgreen" stroke="black" points="566.71,-92 467.29,-92 467.29,-56 566.71,-56 566.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="475.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/ulid/ulid_protocol.lgt#L87">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/ulid/ulid_protocol.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="480.69" y="-75.71" font-family="monospace" font-size="11.00">timestamp/8</text>
 </a>
 </g>

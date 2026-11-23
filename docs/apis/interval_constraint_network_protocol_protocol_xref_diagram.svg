@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3422,-140 3422,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol interval_constraint_network_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:26</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_interval_constraint_network_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="interval_constraint_network_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3398,-46 3398,-46 3404,-46 3410,-52 3410,-58 3410,-58 3410,-116 3410,-116 3410,-122 3404,-128 3398,-128 3398,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">interval_constraint_network_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="True if Network is a valid interval constraint network represented as a network(Nodes, Constraints) term.">
 <polygon fill="springgreen" stroke="black" points="104.11,-92 17.89,-92 17.89,-56 104.11,-56 104.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.3" y="-75.71" font-family="monospace" font-size="11.00">network/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Constructs a new network for a list of distinct nodes. Distinct node pairs are initialized with the universal relation set.">
 <polygon fill="springgreen" stroke="black" points="181.9,-92 122.1,-92 122.1,-56 181.9,-56 181.9,-92"/>
 <text xml:space="preserve" text-anchor="start" x="130.1" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="135.5" y="-75.71" font-family="monospace" font-size="11.00">new/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Returns the list of nodes in a network.">
 <polygon fill="springgreen" stroke="black" points="272.5,-92 199.5,-92 199.5,-56 272.5,-56 272.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="207.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="212.9" y="-75.71" font-family="monospace" font-size="11.00">nodes/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Returns the current relation set between two nodes in a network. A node is always equal to itself.">
 <polygon fill="springgreen" stroke="black" points="383.41,-92 290.59,-92 290.59,-56 383.41,-56 383.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="298.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="303.99" y="-75.71" font-family="monospace" font-size="11.00">relation/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="True if the current relation set between two nodes is a subset of a queried relation set.">
 <polygon fill="springgreen" stroke="black" points="488.11,-92 401.89,-92 401.89,-56 488.11,-56 488.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="409.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="415.3" y="-75.71" font-family="monospace" font-size="11.00">entails/4</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="True if the current relation set between two nodes is a subset of a queried relation set and returns an explanation term describing either a direct constraint or a supporting propagation path.">
 <polygon fill="springgreen" stroke="black" points="592.11,-92 505.89,-92 505.89,-56 592.11,-56 592.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="513.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="519.3" y="-75.71" font-family="monospace" font-size="11.00">entails/5</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="True if the current relation set between two nodes intersects a queried relation set.">
 <polygon fill="springgreen" stroke="black" points="703.41,-92 610.59,-92 610.59,-56 703.41,-56 703.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="618.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="623.99" y="-75.71" font-family="monospace" font-size="11.00">possible/4</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="True if the current relation set between two nodes is disjoint from a queried relation set.">
 <polygon fill="springgreen" stroke="black" points="814.41,-92 721.59,-92 721.59,-56 814.41,-56 814.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="729.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="734.99" y="-75.71" font-family="monospace" font-size="11.00">excluded/4</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Returns a simple contradiction explanation for an inconsistent network as contradiction(Node1, Node2, Cause).">
 <polygon fill="springgreen" stroke="black" points="957.91,-92 832.09,-92 832.09,-56 957.91,-56 957.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="840.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="845.49" y="-75.71" font-family="monospace" font-size="11.00">contradiction/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Returns the list of immediate explanations supporting an entailed relation query, using identity, direct, and propagated explanation terms.">
 <polygon fill="springgreen" stroke="black" points="1167.91,-92 976.09,-92 976.09,-56 1167.91,-56 1167.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="984.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="989.49" y="-75.71" font-family="monospace" font-size="11.00">entailment_explanations/5</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Returns the list of contradiction explanations for all empty explicit pair constraints in a network.">
 <polygon fill="springgreen" stroke="black" points="1397.82,-92 1186.18,-92 1186.18,-56 1397.82,-56 1397.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1194.18" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L102">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1199.58" y="-75.71" font-family="monospace" font-size="11.00">contradiction_explanations/2</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="a_node12"><a xlink:title="Refines the relation set between two distinct nodes by intersecting it with a new relation set.">
 <polygon fill="springgreen" stroke="black" points="1495.81,-92 1416.19,-92 1416.19,-56 1495.81,-56 1495.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1424.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L109">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1429.6" y="-75.71" font-family="monospace" font-size="11.00">refine/5</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <g id="a_node13"><a xlink:title="True if all explicit pair constraints in a network are non&#45;empty.">
 <polygon fill="springgreen" stroke="black" points="1620.01,-92 1513.99,-92 1513.99,-56 1620.01,-56 1620.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1521.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L116">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1527.39" y="-75.71" font-family="monospace" font-size="11.00">consistent/1</text>
 </a>
 </g>
@@ -251,7 +251,7 @@
 <g id="a_node14"><a xlink:title="Computes a path&#45;consistency closure and succeeds only if the resulting network is consistent. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="1737.71,-92 1638.29,-92 1638.29,-56 1737.71,-56 1737.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1646.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L123">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="1651.69" y="-75.71" font-family="monospace" font-size="11.00">propagate/2</text>
 </a>
 </g>
@@ -268,7 +268,7 @@
 <g id="a_node15"><a xlink:title="Computes a path&#45;consistency closure, returns the list of propagated changes, and succeeds only if the resulting network is consistent. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="1854.71,-92 1755.29,-92 1755.29,-56 1854.71,-56 1854.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1763.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L130">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="1768.69" y="-75.71" font-family="monospace" font-size="11.00">propagate/3</text>
 </a>
 </g>
@@ -285,7 +285,7 @@
 <g id="a_node16"><a xlink:title="Refines the relation set between two distinct nodes and then propagates the consequences, succeeding only if the resulting network is consistent. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="2018.81,-92 1873.19,-92 1873.19,-56 2018.81,-56 2018.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1881.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L137">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="1886.59" y="-75.71" font-family="monospace" font-size="11.00">refine_propagate/5</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <g id="a_node17"><a xlink:title="Refines the relation set between two distinct nodes, propagates the consequences incrementally, and returns the list of direct and propagated changes, succeeding only if the resulting network is consistent. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="2182.81,-92 2037.19,-92 2037.19,-56 2182.81,-56 2182.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2045.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L144">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="2050.59" y="-75.71" font-family="monospace" font-size="11.00">refine_propagate/6</text>
 </a>
 </g>
@@ -319,7 +319,7 @@
 <g id="a_node18"><a xlink:title="Applies a batch of relation&#45;set refinements represented as constraint(Node1, Node2, RelationSet) terms and then propagates the combined consequences, succeeding only if the resulting network is consistent. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="2346.81,-92 2201.19,-92 2201.19,-56 2346.81,-56 2346.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2209.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L151">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="2214.59" y="-75.71" font-family="monospace" font-size="11.00">refine_propagate/3</text>
 </a>
 </g>
@@ -336,7 +336,7 @@
 <g id="a_node19"><a xlink:title="Applies a batch of relation&#45;set refinements, propagates the combined consequences incrementally, and returns the list of direct and propagated changes, succeeding only if the resulting network is consistent. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="2510.81,-92 2365.19,-92 2365.19,-56 2510.81,-56 2510.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2373.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L158">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="2378.59" y="-75.71" font-family="monospace" font-size="11.00">refine_propagate/4</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <g id="a_node20"><a xlink:title="Extracts the causing node triple triple(Node1, Node3, Node2) from a propagated change term.">
 <polygon fill="springgreen" stroke="black" points="2687.41,-92 2528.59,-92 2528.59,-56 2687.41,-56 2687.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2536.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L165">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="2541.99" y="-75.71" font-family="monospace" font-size="11.00">propagation_triple/2</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <g id="a_node21"><a xlink:title="Collects the unique node triples that caused propagated refinements in a list of change terms.">
 <polygon fill="springgreen" stroke="black" points="2870.71,-92 2705.29,-92 2705.29,-56 2870.71,-56 2870.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2713.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L172">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L172">
 <text xml:space="preserve" text-anchor="start" x="2718.69" y="-75.71" font-family="monospace" font-size="11.00">propagation_triples/2</text>
 </a>
 </g>
@@ -387,7 +387,7 @@
 <g id="a_node22"><a xlink:title="Computes the path&#45;consistency closure of a network by iterative refinement using relation&#45;set composition and intersection. Intended for small&#45;to&#45;medium symbolic networks; not a large&#45;scale temporal CSP solver.">
 <polygon fill="springgreen" stroke="black" points="3034.81,-92 2889.19,-92 2889.19,-56 3034.81,-56 3034.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2897.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L179">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="2902.59" y="-75.71" font-family="monospace" font-size="11.00">path_consistency/2</text>
 </a>
 </g>
@@ -404,7 +404,7 @@
 <g id="a_node23"><a xlink:title="Returns the explicit pair constraints in canonical storage order using constraint(Node1, Node2, RelationSet) terms.">
 <polygon fill="springgreen" stroke="black" points="3165.31,-92 3052.69,-92 3052.69,-56 3165.31,-56 3165.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3060.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L186">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="3066.09" y="-75.71" font-family="monospace" font-size="11.00">constraints/2</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <g id="a_node24"><a xlink:title="True if the first network is at least as general as the second network, i.e. every pair relation set in the second network is a subset of the corresponding relation set in the first network.">
 <polygon fill="springgreen" stroke="black" points="3276.41,-92 3183.59,-92 3183.59,-56 3276.41,-56 3276.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3191.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L193">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="3196.99" y="-75.71" font-family="monospace" font-size="11.00">subsumes/2</text>
 </a>
 </g>
@@ -438,7 +438,7 @@
 <g id="a_node25"><a xlink:title="True if two networks contain the same nodes and mutually subsume each other.">
 <polygon fill="springgreen" stroke="black" points="3400.01,-92 3293.99,-92 3293.99,-56 3400.01,-56 3400.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3301.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/intervals/interval_constraint_network_protocol.lgt#L200">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/intervals/interval_constraint_network_protocol.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="3307.39" y="-75.71" font-family="monospace" font-size="11.00">equivalent/2</text>
 </a>
 </g>

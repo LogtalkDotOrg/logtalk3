@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 993,-140 993,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol dates_tz_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:25</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_dates_tz_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="dates_tz_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 969,-46 969,-46 975,-46 981,-52 981,-58 981,-58 981,-116 981,-116 981,-122 975,-128 969,-128 969,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">dates_tz_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Converts a UTC date&#45;time to the civil local date&#45;time in the named zone. Requires the zone to be present in the cached TZif data.">
 <polygon fill="springgreen" stroke="black" points="157.51,-92 18.49,-92 18.49,-56 157.51,-56 157.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.89" y="-75.71" font-family="monospace" font-size="11.00">utc_to_local_tz/3</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Converts a civil local date&#45;time in the named zone to UTC. This strict variant fails silently if the local time falls in a DST gap (non&#45;existent time) or a DST fold (ambiguous time). Requires the zone to be present in the cached TZif data.">
 <polygon fill="springgreen" stroke="black" points="314.51,-92 175.49,-92 175.49,-56 314.51,-56 314.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="183.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="188.89" y="-75.71" font-family="monospace" font-size="11.00">local_to_utc_tz/3</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Converts a civil local date&#45;time in the named zone to UTC using an explicit resolution mode for ambiguous or non&#45;existent times. The resolution mode can be ``strict`` (fail unless exactly one interpretation), ``first`` (prefer the earliest valid interpretation), ``second`` (prefer the latest valid interpretation), or ``all`` (enumerate all valid interpretations). Requires the zone to be present in the cached TZif data.">
 <polygon fill="springgreen" stroke="black" points="577.32,-92 332.68,-92 332.68,-56 577.32,-56 577.32,-92"/>
 <text xml:space="preserve" text-anchor="start" x="340.68" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L54">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="346.08" y="-75.71" font-family="monospace" font-size="11.00">local_to_utc_tz_with_resolution/4</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Converts a civil local date&#45;time in one zone to the civil local date&#45;time in another zone. Uses strict interpretation: fails if the source local time is in a DST gap or fold. Requires both zones to be present in the cached TZif data.">
 <polygon fill="springgreen" stroke="black" points="720.91,-92 595.09,-92 595.09,-56 720.91,-56 720.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="603.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L61">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L61">
 <text xml:space="preserve" text-anchor="start" x="608.49" y="-75.71" font-family="monospace" font-size="11.00">convert_zones/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Converts a civil local date&#45;time in one zone to the civil local date&#45;time in another zone using an explicit resolution mode for the source zone. The resolution mode is applied when the source local time is ambiguous or non&#45;existent. Requires both zones to be present in the cached TZif data.">
 <polygon fill="springgreen" stroke="black" points="970.72,-92 739.28,-92 739.28,-56 970.72,-56 970.72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="747.28" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/dates_tz/dates_tz_protocol.lgt#L74">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dates_tz/dates_tz_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="752.68" y="-75.71" font-family="monospace" font-size="11.00">convert_zones_with_resolution/5</text>
 </a>
 </g>

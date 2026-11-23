@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 414,-140 414,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol http_body_codec_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:25</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_http_body_codec_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="http_body_codec_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 390,-46 390,-46 396,-46 402,-52 402,-58 402,-58 402,-116 402,-116 402,-122 396,-128 390,-128 390,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">http_body_codec_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Returns the media types supported by this body codec.">
 <polygon fill="springgreen" stroke="black" points="130.31,-92 17.69,-92 17.69,-56 130.31,-56 130.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.09" y="-75.71" font-family="monospace" font-size="11.00">media_types/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Encodes a semantic payload term for the given media type and options into a normalized HTTP body term.">
 <polygon fill="springgreen" stroke="black" points="261.31,-92 148.69,-92 148.69,-56 261.31,-56 261.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="156.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="162.09" y="-75.71" font-family="monospace" font-size="11.00">encode_body/4</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Decodes a normalized HTTP body term for the given media type and options into a semantic payload term.">
 <polygon fill="springgreen" stroke="black" points="392.31,-92 279.69,-92 279.69,-56 392.31,-56 392.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="287.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/http_core/http_body_codec_protocol.lgt#L51">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/http_core/http_body_codec_protocol.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="293.09" y="-75.71" font-family="monospace" font-size="11.00">decode_body/4</text>
 </a>
 </g>

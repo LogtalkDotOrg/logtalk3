@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1730,-140 1730,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object validation</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:26</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:16</text>
 <g id="clust1" class="cluster">
 <title>cluster_validation_object</title>
 <g id="a_clust1"><a xlink:title="validation">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1706,-46 1706,-46 1712,-46 1718,-52 1718,-58 1718,-58 1718,-116 1718,-116 1718,-122 1712,-128 1706,-128 1706,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">validation</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Constructs a validation term holding a valid value.">
 <polygon fill="springgreen" stroke="black" points="110.41,-92 17.59,-92 17.59,-56 110.41,-56 110.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L35">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L35">
 <text xml:space="preserve" text-anchor="start" x="30.99" y="-75.71" font-family="monospace" font-size="11.00">of_valid/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Constructs a validation term holding a single error.">
 <polygon fill="springgreen" stroke="black" points="234.01,-92 127.99,-92 127.99,-56 234.01,-56 234.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="135.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="141.39" y="-75.71" font-family="monospace" font-size="11.00">of_invalid/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Constructs a validation term holding a list of errors.">
 <polygon fill="springgreen" stroke="black" points="364.31,-92 251.69,-92 251.69,-56 364.31,-56 364.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="259.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L49">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L49">
 <text xml:space="preserve" text-anchor="start" x="265.09" y="-75.71" font-family="monospace" font-size="11.00">of_invalids/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Constructs a validation term holding a value bound by calling the given goal. Otherwise returns a validation term with a single error represented by the ``Error`` argument.">
 <polygon fill="springgreen" stroke="black" points="481.71,-92 382.29,-92 382.29,-56 481.71,-56 481.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="390.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L56">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="395.69" y="-75.71" font-family="monospace" font-size="11.00">from_goal/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Constructs a validation term holding a value bound by calling the given goal. Otherwise returns a validation term with a single error being the goal error or the atom ``fail`` representing goal failure.">
 <polygon fill="springgreen" stroke="black" points="598.71,-92 499.29,-92 499.29,-56 598.71,-56 598.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="507.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L64">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="512.69" y="-75.71" font-family="monospace" font-size="11.00">from_goal/3</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Constructs a validation term holding a value bound by calling the given closure. Otherwise returns a validation term with a single error being the closure error or the atom ``fail`` representing closure failure.">
 <polygon fill="springgreen" stroke="black" points="715.71,-92 616.29,-92 616.29,-56 715.71,-56 715.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="624.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L72">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L72">
 <text xml:space="preserve" text-anchor="start" x="629.69" y="-75.71" font-family="monospace" font-size="11.00">from_goal/2</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Constructs validation terms with the values generated by calling the given goal. On goal error or failure, returns a validation term with a single error represented by the ``Error`` argument.">
 <polygon fill="springgreen" stroke="black" points="866.21,-92 733.79,-92 733.79,-56 866.21,-56 866.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="741.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L80">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="747.19" y="-75.71" font-family="monospace" font-size="11.00">from_generator/4</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Constructs validation terms with the values generated by calling the given goal. On goal error or failure, returns a validation term with, respectively, a single error being the goal error or the atom ``fail`` representing goal failure.">
 <polygon fill="springgreen" stroke="black" points="1016.21,-92 883.79,-92 883.79,-56 1016.21,-56 1016.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="891.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L88">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="897.19" y="-75.71" font-family="monospace" font-size="11.00">from_generator/3</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Constructs validation terms with the values generated by calling the given closure. On closure error or failure, returns a validation term with, respectively, a single error being the closure error or the atom ``fail`` representing closure failure.">
 <polygon fill="springgreen" stroke="black" points="1166.21,-92 1033.79,-92 1033.79,-56 1166.21,-56 1166.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1041.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L96">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L96">
 <text xml:space="preserve" text-anchor="start" x="1047.19" y="-75.71" font-family="monospace" font-size="11.00">from_generator/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Converts an optional term to a validation term. Returns a valid term holding the value if the optional term is not empty. Returns an invalid term with the given error otherwise.">
 <polygon fill="springgreen" stroke="black" points="1309.91,-92 1184.09,-92 1184.09,-56 1309.91,-56 1309.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1192.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L104">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="1197.49" y="-75.71" font-family="monospace" font-size="11.00">from_optional/3</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Converts an expected term to a validation term. Returns a valid term holding the value if the expected term holds a value. Returns an invalid term with the expected term error otherwise.">
 <polygon fill="springgreen" stroke="black" points="1453.91,-92 1328.09,-92 1328.09,-56 1453.91,-56 1453.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1336.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L111">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="1341.49" y="-75.71" font-family="monospace" font-size="11.00">from_expected/2</text>
 </a>
 </g>
@@ -214,10 +214,10 @@
 <!-- type::type/1 -->
 <g id="node12" class="node">
 <title>type::type/1</title>
-<g id="a_node12"><a xlink:title="_254168">
+<g id="a_node12"><a xlink:title="_254238">
 <polygon fill="skyblue" stroke="black" points="1578.01,-92 1471.99,-92 1471.99,-56 1578.01,-56 1578.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1479.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L192">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L192">
 <text xml:space="preserve" text-anchor="start" x="1485.39" y="-75.71" font-family="monospace" font-size="11.00">type::type/1</text>
 </a>
 </g>
@@ -231,10 +231,10 @@
 <!-- type::check/2 -->
 <g id="node13" class="node">
 <title>type::check/2</title>
-<g id="a_node13"><a xlink:title="_254272">
+<g id="a_node13"><a xlink:title="_254342">
 <polygon fill="skyblue" stroke="black" points="1708.31,-92 1595.69,-92 1595.69,-56 1708.31,-56 1708.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1603.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/validations/validation.lgt#L195">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/validations/validation.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="1609.09" y="-75.71" font-family="monospace" font-size="11.00">type::check/2</text>
 </a>
 </g>

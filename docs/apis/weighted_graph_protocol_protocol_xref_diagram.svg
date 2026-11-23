@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 845,-140 845,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol weighted_graph_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;21, 22:25</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_weighted_graph_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="weighted_graph_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 821,-46 821,-46 827,-46 833,-52 833,-58 833,-58 833,-116 833,-116 833,-122 827,-128 821,-128 821,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">weighted_graph_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="True iff there is an edge between ``Vertex1`` and ``Vertex2`` with weight ``Weight`` in ``Graph``.">
 <polygon fill="springgreen" stroke="black" points="84.2,-92 17.8,-92 17.8,-56 84.2,-56 84.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.2" y="-75.71" font-family="monospace" font-size="11.00">edge/4</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Adds a weighted edge between ``Vertex1`` and ``Vertex2`` with weight ``Weight``.">
 <polygon fill="springgreen" stroke="black" points="195.41,-92 102.59,-92 102.59,-56 195.41,-56 195.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="110.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="115.99" y="-75.71" font-family="monospace" font-size="11.00">add_edge/5</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Deletes the weighted edge between ``Vertex1`` and ``Vertex2``. Unifies ``Weight`` with the weight of the deleted edge. The graph is unchanged if the edge does not exist.">
 <polygon fill="springgreen" stroke="black" points="326.31,-92 213.69,-92 213.69,-56 326.31,-56 326.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="221.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="227.09" y="-75.71" font-family="monospace" font-size="11.00">delete_edge/5</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Unifies ``WNeighbors`` with a list of ``NeighborVertex&#45;Weight`` pairs for the neighbors of ``Vertex``. Fails if ``Vertex`` is not in the graph.">
 <polygon fill="springgreen" stroke="black" points="450.01,-92 343.99,-92 343.99,-56 450.01,-56 450.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="351.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="357.39" y="-75.71" font-family="monospace" font-size="11.00">wneighbors/3</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Finds the minimum cost path from ``Vertex1`` to ``Vertex2`` using the Bellman&#45;Ford algorithm. Supports negative edge weights and fails if no path exists or if a reachable negative cycle makes the optimum undefined.">
 <polygon fill="springgreen" stroke="black" points="646.31,-92 467.69,-92 467.69,-56 646.31,-56 646.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="475.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="481.09" y="-75.71" font-family="monospace" font-size="11.00">min_path_bellman_ford/5</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="True iff ``Graph`` contains a negative&#45;weight cycle.">
 <polygon fill="springgreen" stroke="black" points="823.41,-92 664.59,-92 664.59,-56 823.41,-56 823.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="672.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/00b21a6c2c2f3877bd6315fde28f4601655ca054/library/graphs/weighted_graph_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/graphs/weighted_graph_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="677.99" y="-75.71" font-family="monospace" font-size="11.00">has_negative_cycle/1</text>
 </a>
 </g>
