@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 19, 2026
+##   Last updated on November 23, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -276,6 +276,7 @@ sed '1,19d' ../../../library/logistic_regression_classifier/NOTES.md | pandoc -f
 sed '1,19d' ../../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loops.rst
 sed '1,19d' ../../../library/lru_caches/NOTES.md | pandoc -f gfm -t rst -o libraries/lru_caches.rst
 sed '1,19d' ../../../library/massey_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/massey_ranker.rst
+sed '1,19d' ../../../library/max_sat/NOTES.md | pandoc -f gfm -t rst -o libraries/max_sat.rst
 sed '1,19d' ../../../library/mcp_server/NOTES.md | pandoc -f gfm -t rst -o libraries/mcp_server.rst
 sed '1,19d' ../../../library/memcached/NOTES.md | pandoc -f gfm -t rst -o libraries/memcached.rst
 sed '1,19d' ../../../library/message_pack/NOTES.md | pandoc -f gfm -t rst -o libraries/message_pack.rst

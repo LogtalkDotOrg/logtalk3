@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 19, 2026
+##   Last updated on November 23, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -276,6 +276,7 @@ Foreach-Object {
 (Get-Content ../../../library/loops/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/loops.rst
 (Get-Content ../../../library/lru_caches/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lru_caches.rst
 (Get-Content ../../../library/massey_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/massey_ranker.rst
+(Get-Content ../../../library/max_sat/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/max_sat.rst
 (Get-Content ../../../library/mcp_server/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mcp_server.rst
 (Get-Content ../../../library/memcached/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/memcached.rst
 (Get-Content ../../../library/message_pack/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/message_pack.rst

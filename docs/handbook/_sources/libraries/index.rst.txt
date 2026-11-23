@@ -225,6 +225,7 @@ directory in the ``NOTES.md`` file.
    loops
    lru_caches
    massey_ranker
+   max_sat
    mcp_server
    memcached
    message_pack

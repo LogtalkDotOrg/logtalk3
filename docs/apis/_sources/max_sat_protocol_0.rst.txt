@@ -1,0 +1,279 @@
+.. index:: single: max_sat_protocol
+.. _max_sat_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``max_sat_protocol``
+====================
+
+Protocol for process-backed RC2, Open-WBO, and Z3 CLI weighted partial MaxSAT solving, WCNF source generation, and result inspection.
+
+| **Availability:** 
+|    ``logtalk_load(max_sat(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: solve/2
+.. _max_sat_protocol/0::solve/2:
+
+``solve/2``
+^^^^^^^^^^^
+
+Solves a source with default options using the external MaxSAT solver CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Result)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not a ground term:
+|        ``instantiation_error``
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``max_sat_problem_protocol``:
+|        ``domain_error(max_sat_source,Source)``
+|    A statement is not a valid statement:
+|        ``domain_error(max_sat_statement,Statement)``
+|    The selected solver executable or a shell dependency does not exist:
+|        ``existence_error(command,Command)``
+|    A launcher operation fails:
+|        ``max_sat_transport(Stage,Status,Details)``
+|    Solver output is invalid or inconsistent with its exit status:
+|        ``max_sat_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: solve/3
+.. _max_sat_protocol/0::solve/3:
+
+``solve/3``
+^^^^^^^^^^^
+
+Solves a source using the ``solver/1``, ``executable/1``, ``time_limit/1``, ``anytime/1``, and ``wcnf_format/1`` options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. File sources are read and passed to the solver as a ``.wcnf`` file as some solvers select the input format from the file name extension.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Source,Result,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is not a ground term:
+|        ``instantiation_error``
+|    ``Source`` is ground but not a supported source, or is ``object(Object)`` where ``Object`` does not implement ``max_sat_problem_protocol``:
+|        ``domain_error(max_sat_source,Source)``
+|    A statement is not a valid statement:
+|        ``domain_error(max_sat_statement,Statement)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected solver executable or a shell dependency does not exist:
+|        ``existence_error(command,Command)``
+|    A launcher operation fails:
+|        ``max_sat_transport(Stage,Status,Details)``
+|    Solver output is invalid or inconsistent with its exit status:
+|        ``max_sat_solver_error(Formal,Status,Diagnostics,SourceMap)``
+
+
+------------
+
+.. index:: program/1
+.. _max_sat_protocol/0::program/1:
+
+``program/1``
+^^^^^^^^^^^^^
+
+Generates and prints WCNF source to the current output using default options, without invoking the solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source)``
+| **Mode and number of proofs:**
+|    ``program(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: program/2
+.. _max_sat_protocol/0::program/2:
+
+``program/2``
+^^^^^^^^^^^^^
+
+Returns WCNF source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` using default options, without invoking the solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source,Codes)``
+| **Mode and number of proofs:**
+|    ``program(+compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: program/3
+.. _max_sat_protocol/0::program/3:
+
+``program/3``
+^^^^^^^^^^^^^
+
+Returns WCNF source codes using the ``embed_variables/1`` and ``wcnf_format/1`` options, without invoking the solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``program(Source,Codes,Options)``
+| **Mode and number of proofs:**
+|    ``program(+compound,-list(integer),+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: print_program/1
+.. _max_sat_protocol/0::print_program/1:
+
+``print_program/1``
+^^^^^^^^^^^^^^^^^^^
+
+Prints WCNF character codes to the current output without adding a newline or invoking the solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_program(Codes)``
+| **Mode and number of proofs:**
+|    ``print_program(+list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: literal/2
+.. _max_sat_protocol/0::literal/2:
+
+``literal/2``
+^^^^^^^^^^^^^
+
+Enumerates, by backtracking, the collected model literals (``+Term`` or ``-Term``) without starting a process. Fails when the result has no model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``literal(Result,Literal)``
+| **Mode and number of proofs:**
+|    ``literal(+compound,-compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: cost/2
+.. _max_sat_protocol/0::cost/2:
+
+``cost/2``
+^^^^^^^^^^
+
+Returns the cost (sum of the weights of the falsified soft clauses) of the collected model. The cost is optimal for an ``optimal`` result and an upper bound for a ``satisfiable`` (best-known) result. Fails when the result has no cost.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cost(Result,Cost)``
+| **Mode and number of proofs:**
+|    ``cost(+compound,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: result_property/2
+.. _max_sat_protocol/0::result_property/2:
+
+``result_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, ``status(Status)`` and the stored result properties (``cost/1``, ``solver/1``, ``termination/1``, ``anytime/1``, ``variables/1``, ``variable_count/1``, ``diagnostics/1``, ``source_map/1``, ``raw_status/1``, ``process_status/1``, and ``raw_output/1``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``result_property(Result,Property)``
+| **Mode and number of proofs:**
+|    ``result_property(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: print_result/1
+.. _max_sat_protocol/0::print_result/1:
+
+``print_result/1``
+^^^^^^^^^^^^^^^^^^
+
+Prints the collected cost, status, and, when present, the model literals to the current output using MaxSAT Evaluation style ``o``/``s``/``v`` labels, without invoking the solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_result(Result)``
+| **Mode and number of proofs:**
+|    ``print_result(+compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

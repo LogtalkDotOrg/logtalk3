@@ -34,6 +34,9 @@ predicate `prolog_to_os_filename/2` added in version 3.15.21.
 Library
 -------
 
+* ADDED: New `max_sat` library providing weighted partial MaxSAT solving by
+interfacing with external solver command-line tools.
+
 * FIXED: The `csv`, `format`, `hook_objects`, `http_directory_listing`,
 `listing`, and `reader` library tests for Trealla Prolog running on Windows.
 

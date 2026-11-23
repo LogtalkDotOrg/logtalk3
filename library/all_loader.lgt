@@ -278,6 +278,7 @@
 		minizinc(loader),
 		problog(loader),
 		sat(loader),
+		max_sat(loader),
 		smt(loader),
 		omt(loader),
 		souffle(loader),

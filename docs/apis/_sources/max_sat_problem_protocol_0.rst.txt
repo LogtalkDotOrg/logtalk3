@@ -1,0 +1,82 @@
+.. index:: single: max_sat_problem_protocol
+.. _max_sat_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``max_sat_problem_protocol``
+============================
+
+Protocol for ordered, ground weighted partial MaxSAT statement providers.
+
+| **Availability:** 
+|    ``logtalk_load(max_sat(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: wcnf_statement/2
+.. _max_sat_problem_protocol/0::wcnf_statement/2:
+
+``wcnf_statement/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, canonical weighted partial MaxSAT statements in source order and their origins.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wcnf_statement(Statement,Origin)``
+| **Mode and number of proofs:**
+|    ``wcnf_statement(-compound,-term)`` - ``zero_or_more``
+
+| **Remarks:**
+
+    - Hard clauses: A disjunction of literals (``Literal ; Literal ; ...``) where a literal is ``+Term``, ``-Term``, or a bare ground ``Term`` (equivalent to ``+Term``). The constant ``false`` is the empty hard clause.
+    - Soft clauses: ``soft(Weight, Disjunction)`` where ``Weight`` is a positive integer, or ``soft(Disjunction)`` for the weight 1. The solver minimizes the sum of the weights of the falsified soft clauses. Note that a disjunction used as an argument must be parenthesized, as in ``soft(2, (p ; -q))``, to be portable across backend Prolog compilers.
+    - Comments and raw source: ``comment(Text)`` and ``raw(Text)``, as in the ``sat_problem_protocol`` protocol.
+    - Reserved functors: The functors ``soft/1``, ``soft/2``, ``comment/1``, and ``raw/1`` and the constant ``false`` cannot be used as bare propositional terms; wrap them in ``+``/``-`` (e.g., ``+soft(a)``) if necessary.
+    - Origin: Either ``source(File, Start, End)`` or ``unknown``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

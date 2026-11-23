@@ -514,6 +514,7 @@
 <li><a class="reference internal" href="#correct-spelling-codes-3"><code class="docutils literal notranslate"><span class="pre">correct_spelling_codes/3</span></code></a></li>
 <li><a class="reference internal" href="#correlation-3"><code class="docutils literal notranslate"><span class="pre">correlation/3</span></code></a></li>
 <li><a class="reference internal" href="#cosine-similarity-3"><code class="docutils literal notranslate"><span class="pre">cosine_similarity/3</span></code></a></li>
+<li><a class="reference internal" href="#cost-2"><code class="docutils literal notranslate"><span class="pre">cost/2</span></code></a></li>
 <li><a class="reference internal" href="#count-2"><code class="docutils literal notranslate"><span class="pre">count/2</span></code></a></li>
 <li><a class="reference internal" href="#count-3"><code class="docutils literal notranslate"><span class="pre">count/3</span></code></a></li>
 <li><a class="reference internal" href="#count-arrangements-3"><code class="docutils literal notranslate"><span class="pre">count_arrangements/3</span></code></a></li>
@@ -610,6 +611,7 @@
 <li><a class="reference internal" href="#decode-6"><code class="docutils literal notranslate"><span class="pre">decode/6</span></code></a></li>
 <li><a class="reference internal" href="#decode-7"><code class="docutils literal notranslate"><span class="pre">decode/7</span></code></a></li>
 <li><a class="reference internal" href="#decode-8"><code class="docutils literal notranslate"><span class="pre">decode/8</span></code></a></li>
+<li><a class="reference internal" href="#decode-9"><code class="docutils literal notranslate"><span class="pre">decode/9</span></code></a></li>
 <li><a class="reference internal" href="#decode-bits-3"><code class="docutils literal notranslate"><span class="pre">decode_bits/3</span></code></a></li>
 <li><a class="reference internal" href="#decode-body-4"><code class="docutils literal notranslate"><span class="pre">decode_body/4</span></code></a></li>
 <li><a class="reference internal" href="#decode-entities-2"><code class="docutils literal notranslate"><span class="pre">decode_entities/2</span></code></a></li>
@@ -2729,7 +2731,9 @@
 <li><a class="reference internal" href="#sequential-occurrences-2"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/2</span></code></a></li>
 <li><a class="reference internal" href="#sequential-occurrences-3"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/3</span></code></a></li>
 <li><a class="reference internal" href="#serialize-2"><code class="docutils literal notranslate"><span class="pre">serialize/2</span></code></a></li>
+<li><a class="reference internal" href="#serialize-3"><code class="docutils literal notranslate"><span class="pre">serialize/3</span></code></a></li>
 <li><a class="reference internal" href="#serialize-4"><code class="docutils literal notranslate"><span class="pre">serialize/4</span></code></a></li>
+<li><a class="reference internal" href="#serialize-5"><code class="docutils literal notranslate"><span class="pre">serialize/5</span></code></a></li>
 <li><a class="reference internal" href="#series-length-1"><code class="docutils literal notranslate"><span class="pre">series_length/1</span></code></a></li>
 <li><a class="reference internal" href="#serve-3"><code class="docutils literal notranslate"><span class="pre">serve/3</span></code></a></li>
 <li><a class="reference internal" href="#serve-4"><code class="docutils literal notranslate"><span class="pre">serve/4</span></code></a></li>
@@ -3052,6 +3056,7 @@
 <li><a class="reference internal" href="#tools-1"><code class="docutils literal notranslate"><span class="pre">tools/1</span></code></a></li>
 <li><a class="reference internal" href="#top-3"><code class="docutils literal notranslate"><span class="pre">top/3</span></code></a></li>
 <li><a class="reference internal" href="#top-next-5"><code class="docutils literal notranslate"><span class="pre">top_next/5</span></code></a></li>
+<li><a class="reference internal" href="#top-weight-2"><code class="docutils literal notranslate"><span class="pre">top_weight/2</span></code></a></li>
 <li><a class="reference internal" href="#topological-sort-2"><code class="docutils literal notranslate"><span class="pre">topological_sort/2</span></code></a></li>
 <li><a class="reference internal" href="#topological-sort-3"><code class="docutils literal notranslate"><span class="pre">topological_sort/3</span></code></a></li>
 <li><a class="reference internal" href="#totp-5"><code class="docutils literal notranslate"><span class="pre">totp/5</span></code></a></li>
@@ -3268,6 +3273,7 @@
 <li><a class="reference internal" href="#wall-time-1"><code class="docutils literal notranslate"><span class="pre">wall_time/1</span></code></a></li>
 <li><a class="reference internal" href="#warning-1"><code class="docutils literal notranslate"><span class="pre">warning/1</span></code></a></li>
 <li><a class="reference internal" href="#warnings-1"><code class="docutils literal notranslate"><span class="pre">warnings/1</span></code></a></li>
+<li><a class="reference internal" href="#wcnf-statement-2"><code class="docutils literal notranslate"><span class="pre">wcnf_statement/2</span></code></a></li>
 <li><a class="reference internal" href="#weakly-connected-components-2"><code class="docutils literal notranslate"><span class="pre">weakly_connected_components/2</span></code></a></li>
 <li><a class="reference internal" href="#websocket-accept-2"><code class="docutils literal notranslate"><span class="pre">websocket_accept/2</span></code></a></li>
 <li><a class="reference internal" href="#websocket-opening-key-1"><code class="docutils literal notranslate"><span class="pre">websocket_opening_key/1</span></code></a></li>
@@ -6181,6 +6187,12 @@
 <li><p><a class="reference internal" href="string_distance_1.html#string-distance-1-cosine-similarity-3"><span class="std std-ref">string_distance(Representation)</span></a></p></li>
 </ul>
 </section>
+<section id="cost-2">
+<h2><code class="docutils literal notranslate"><span class="pre">cost/2</span></code><a class="headerlink" href="#cost-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-cost-2"><span class="std std-ref">max_sat_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="count-2">
 <h2><code class="docutils literal notranslate"><span class="pre">count/2</span></code><a class="headerlink" href="#count-2" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -6780,6 +6792,12 @@
 <li><p><a class="reference internal" href="asp_output_0.html#asp-output-0-decode-8"><span class="std std-ref">asp_output</span></a></p></li>
 <li><p><a class="reference internal" href="sat_output_0.html#sat-output-0-decode-8"><span class="std std-ref">sat_output</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_output_0.html#souffle-output-0-decode-8"><span class="std std-ref">souffle_output</span></a></p></li>
+</ul>
+</section>
+<section id="decode-9">
+<h2><code class="docutils literal notranslate"><span class="pre">decode/9</span></code><a class="headerlink" href="#decode-9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_sat_output_0.html#max-sat-output-0-decode-9"><span class="std std-ref">max_sat_output</span></a></p></li>
 </ul>
 </section>
 <section id="decode-bits-3">
@@ -12844,6 +12862,7 @@
 <section id="literal-2">
 <h2><code class="docutils literal notranslate"><span class="pre">literal/2</span></code><a class="headerlink" href="#literal-2" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-literal-2"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-literal-2"><span class="std std-ref">sat_protocol</span></a></p></li>
 </ul>
 </section>
@@ -17336,6 +17355,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">print_program/1</span></code><a class="headerlink" href="#print-program-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-print-program-1"><span class="std std-ref">asp_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-print-program-1"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-print-program-1"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-print-program-1"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-print-program-1"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -17366,6 +17386,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">print_result/1</span></code><a class="headerlink" href="#print-result-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-print-result-1"><span class="std std-ref">asp_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-print-result-1"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-print-result-1"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-print-result-1"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-print-result-1"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -17477,6 +17498,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">program/1</span></code><a class="headerlink" href="#program-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-program-1"><span class="std std-ref">asp_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-program-1"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-program-1"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-program-1"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-program-1"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -17489,6 +17511,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">program/2</span></code><a class="headerlink" href="#program-2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-program-2"><span class="std std-ref">asp_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-program-2"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-program-2"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-program-2"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-program-2"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -17500,6 +17523,7 @@
 <section id="program-3">
 <h2><code class="docutils literal notranslate"><span class="pre">program/3</span></code><a class="headerlink" href="#program-3" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-program-3"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="sat_protocol_0.html#sat-protocol-0-program-3"><span class="std std-ref">sat_protocol</span></a></p></li>
 </ul>
 </section>
@@ -17917,6 +17941,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">quote/3</span></code><a class="headerlink" href="#quote-3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_process_0.html#asp-process-0-quote-3"><span class="std std-ref">asp_process</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_process_0.html#max-sat-process-0-quote-3"><span class="std std-ref">max_sat_process</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_process_0.html#minizinc-process-0-quote-3"><span class="std std-ref">minizinc_process</span></a></p></li>
 <li><p><a class="reference internal" href="problog_process_0.html#problog-process-0-quote-3"><span class="std std-ref">problog_process</span></a></p></li>
 <li><p><a class="reference internal" href="sat_process_0.html#sat-process-0-quote-3"><span class="std std-ref">sat_process</span></a></p></li>
@@ -19298,6 +19323,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">result_property/2</span></code><a class="headerlink" href="#result-property-2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-result-property-2"><span class="std std-ref">asp_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-result-property-2"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-result-property-2"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-result-property-2"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-result-property-2"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -19590,6 +19616,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">run/7</span></code><a class="headerlink" href="#run-7" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_process_0.html#asp-process-0-run-7"><span class="std std-ref">asp_process</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_process_0.html#max-sat-process-0-run-7"><span class="std std-ref">max_sat_process</span></a></p></li>
 <li><p><a class="reference internal" href="problog_process_0.html#problog-process-0-run-7"><span class="std std-ref">problog_process</span></a></p></li>
 <li><p><a class="reference internal" href="sat_process_0.html#sat-process-0-run-7"><span class="std std-ref">sat_process</span></a></p></li>
 <li><p><a class="reference internal" href="smt_process_0.html#smt-process-0-run-7"><span class="std std-ref">smt_process</span></a></p></li>
@@ -20249,11 +20276,18 @@
 <h2><code class="docutils literal notranslate"><span class="pre">serialize/2</span></code><a class="headerlink" href="#serialize-2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_program_0.html#asp-program-0-serialize-2"><span class="std std-ref">asp_program</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_program_0.html#max-sat-program-0-serialize-2"><span class="std std-ref">max_sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_program_0.html#minizinc-program-0-serialize-2"><span class="std std-ref">minizinc_program</span></a></p></li>
 <li><p><a class="reference internal" href="problog_program_0.html#problog-program-0-serialize-2"><span class="std std-ref">problog_program</span></a></p></li>
 <li><p><a class="reference internal" href="sat_program_0.html#sat-program-0-serialize-2"><span class="std std-ref">sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="smt_program_0.html#smt-program-0-serialize-2"><span class="std std-ref">smt_program</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_program_0.html#souffle-program-0-serialize-2"><span class="std std-ref">souffle_program</span></a></p></li>
+</ul>
+</section>
+<section id="serialize-3">
+<h2><code class="docutils literal notranslate"><span class="pre">serialize/3</span></code><a class="headerlink" href="#serialize-3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_sat_program_0.html#max-sat-program-0-serialize-3"><span class="std std-ref">max_sat_program</span></a></p></li>
 </ul>
 </section>
 <section id="serialize-4">
@@ -20265,6 +20299,12 @@
 <li><p><a class="reference internal" href="sat_program_0.html#sat-program-0-serialize-4"><span class="std std-ref">sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="smt_program_0.html#smt-program-0-serialize-4"><span class="std std-ref">smt_program</span></a></p></li>
 <li><p><a class="reference internal" href="souffle_program_0.html#souffle-program-0-serialize-4"><span class="std std-ref">souffle_program</span></a></p></li>
+</ul>
+</section>
+<section id="serialize-5">
+<h2><code class="docutils literal notranslate"><span class="pre">serialize/5</span></code><a class="headerlink" href="#serialize-5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_sat_program_0.html#max-sat-program-0-serialize-5"><span class="std std-ref">max_sat_program</span></a></p></li>
 </ul>
 </section>
 <section id="series-length-1">
@@ -20783,6 +20823,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-solve-2"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-solve-2"><span class="std std-ref">linear_programming_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-solve-2"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-solve-2"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-solve-2"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-solve-2"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -20796,6 +20837,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="asp_protocol_0.html#asp-protocol-0-solve-3"><span class="std std-ref">asp_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-solve-3"><span class="std std-ref">linear_programming_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="max_sat_protocol_0.html#max-sat-protocol-0-solve-3"><span class="std std-ref">max_sat_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="minizinc_protocol_0.html#minizinc-protocol-0-solve-3"><span class="std std-ref">minizinc_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="omt_protocol_0.html#omt-protocol-0-solve-3"><span class="std std-ref">omt_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="problog_protocol_0.html#problog-protocol-0-solve-3"><span class="std std-ref">problog_protocol</span></a></p></li>
@@ -22278,6 +22320,12 @@
 <li><p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-top-next-5"><span class="std std-ref">heap_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="top-weight-2">
+<h2><code class="docutils literal notranslate"><span class="pre">top_weight/2</span></code><a class="headerlink" href="#top-weight-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_sat_program_0.html#max-sat-program-0-top-weight-2"><span class="std std-ref">max_sat_program</span></a></p></li>
+</ul>
+</section>
 <section id="topological-sort-2">
 <h2><code class="docutils literal notranslate"><span class="pre">topological_sort/2</span></code><a class="headerlink" href="#topological-sort-2" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -23436,6 +23484,7 @@
 <section id="variables-2">
 <h2><code class="docutils literal notranslate"><span class="pre">variables/2</span></code><a class="headerlink" href="#variables-2" title="Link to this heading"></a></h2>
 <ul class="simple">
+<li><p><a class="reference internal" href="max_sat_program_0.html#max-sat-program-0-variables-2"><span class="std std-ref">max_sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="sat_program_0.html#sat-program-0-variables-2"><span class="std std-ref">sat_program</span></a></p></li>
 <li><p><a class="reference internal" href="termp_0.html#termp-0-variables-2"><span class="std std-ref">termp</span></a></p></li>
 <li><p><a class="reference internal" href="uri_template_1.html#uri-template-1-variables-2"><span class="std std-ref">uri_template(Representation)</span></a></p></li>
@@ -23671,6 +23720,12 @@
 <h2><code class="docutils literal notranslate"><span class="pre">warnings/1</span></code><a class="headerlink" href="#warnings-1" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="linter_reporter_0.html#linter-reporter-0-warnings-1"><span class="std std-ref">linter_reporter</span></a></p></li>
+</ul>
+</section>
+<section id="wcnf-statement-2">
+<h2><code class="docutils literal notranslate"><span class="pre">wcnf_statement/2</span></code><a class="headerlink" href="#wcnf-statement-2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="max_sat_problem_protocol_0.html#max-sat-problem-protocol-0-wcnf-statement-2"><span class="std std-ref">max_sat_problem_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="weakly-connected-components-2">

@@ -1,0 +1,188 @@
+.. index:: single: max_sat_program
+.. _max_sat_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``max_sat_program``
+===================
+
+Canonical weighted partial MaxSAT statement validation, WCNF source generation, and variable table computation.
+
+| **Availability:** 
+|    ``logtalk_load(max_sat(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _max_sat_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes ground canonical statements to WCNF character codes using the classic ``p wcnf`` format, assigning sequential variable numbers by first occurrence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,-list(code))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(max_sat_statement,Statement)``
+
+
+------------
+
+.. index:: serialize/3
+.. _max_sat_program/0::serialize/3:
+
+``serialize/3``
+^^^^^^^^^^^^^^^
+
+Serializes statements using the given WCNF format: ``old`` (``p wcnf`` header with a top weight, hard clauses carrying the top weight) or ``new`` (the format of the MaxSAT Evaluations from 2022, without header, with ``h`` for hard clauses).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Format,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,+atom,-list(code))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(max_sat_statement,Statement)``
+|    ``Format`` is neither ``old`` nor ``new``:
+|        ``domain_error(wcnf_format,Format)``
+
+
+------------
+
+.. index:: serialize/5
+.. _max_sat_program/0::serialize/5:
+
+``serialize/5``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries; with the ``old`` format the generated header occupies line 1.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Format,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,+list,+atom,-list(code),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(max_sat_statement,Statement)``
+|    ``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``:
+|        ``domain_error(max_sat_origins,Origins)``
+|    ``Format`` is neither ``old`` nor ``new``:
+|        ``domain_error(wcnf_format,Format)``
+
+
+------------
+
+.. index:: variables/2
+.. _max_sat_program/0::variables/2:
+
+``variables/2``
+^^^^^^^^^^^^^^^
+
+Returns the ordered ``Term-Number`` variable table that the serialization predicates assign by first occurrence across hard and soft clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variables(Statements,Variables)``
+| **Mode and number of proofs:**
+|    ``variables(+list,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(max_sat_statement,Statement)``
+
+
+------------
+
+.. index:: top_weight/2
+.. _max_sat_program/0::top_weight/2:
+
+``top_weight/2``
+^^^^^^^^^^^^^^^^
+
+Returns the top weight used by the ``old`` format: one plus the sum of the weights of the soft clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``top_weight(Statements,Top)``
+| **Mode and number of proofs:**
+|    ``top_weight(+list,-positive_integer)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

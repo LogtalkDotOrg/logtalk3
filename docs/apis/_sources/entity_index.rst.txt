@@ -798,6 +798,11 @@ Objects
       magic <magic_0>
       magic_expansion(Mode) <magic_expansion_1>
       massey_ranker <massey_ranker_0>
+      max_sat <max_sat_0>
+      max_sat_expansion <max_sat_expansion_0>
+      max_sat_output <max_sat_output_0>
+      max_sat_process <max_sat_process_0>
+      max_sat_program <max_sat_program_0>
       maxheap <maxheap_0>
       maybe <maybe_0>
       mcp_server <mcp_server_0>
@@ -1743,6 +1748,11 @@ Objects
    * :doc:`magic <magic_0>`
    * :doc:`magic_expansion(Mode) <magic_expansion_1>`
    * :doc:`massey_ranker <massey_ranker_0>`
+   * :doc:`max_sat <max_sat_0>`
+   * :doc:`max_sat_expansion <max_sat_expansion_0>`
+   * :doc:`max_sat_output <max_sat_output_0>`
+   * :doc:`max_sat_process <max_sat_process_0>`
+   * :doc:`max_sat_program <max_sat_program_0>`
    * :doc:`maxheap <maxheap_0>`
    * :doc:`maybe <maybe_0>`
    * :doc:`mcp_server <mcp_server_0>`
@@ -2319,6 +2329,8 @@ Protocols
       loopp <loopp_0>
       lru_cache_protocol <lru_cache_protocol_0>
       max_flow_protocol <max_flow_protocol_0>
+      max_sat_problem_protocol <max_sat_problem_protocol_0>
+      max_sat_protocol <max_sat_protocol_0>
       mcp_cache_protocol <mcp_cache_protocol_0>
       mcp_completion_protocol <mcp_completion_protocol_0>
       mcp_multiround_protocol <mcp_multiround_protocol_0>
@@ -2559,6 +2571,8 @@ Protocols
    * :doc:`loopp <loopp_0>`
    * :doc:`lru_cache_protocol <lru_cache_protocol_0>`
    * :doc:`max_flow_protocol <max_flow_protocol_0>`
+   * :doc:`max_sat_problem_protocol <max_sat_problem_protocol_0>`
+   * :doc:`max_sat_protocol <max_sat_protocol_0>`
    * :doc:`mcp_cache_protocol <mcp_cache_protocol_0>`
    * :doc:`mcp_completion_protocol <mcp_completion_protocol_0>`
    * :doc:`mcp_multiround_protocol <mcp_multiround_protocol_0>`
