@@ -72,6 +72,9 @@ contribution.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The Shumway Prolog embedding scripts to also support creating
+WebAssembly bundles.
+
 * FIXED: Build script for the RPM installer to set `LC_ALL=C`.
 
 * FIXED: Building of the latest Shumway Prolog git version in the portable

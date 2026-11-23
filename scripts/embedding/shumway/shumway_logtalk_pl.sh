@@ -7,7 +7,7 @@
 ##   Logtalk application; creates also application and logtalk self-contained
 ##   executables
 ##
-##   Last updated on November 18, 2026
+##   Last updated on November 23, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -29,7 +29,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.2"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
@@ -158,6 +158,7 @@ temporary=""
 name="logtalk"
 paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
+bundle="false"
 compile="false"
 goal="true"
 
@@ -168,13 +169,14 @@ usage_help() {
 	echo "given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-g goal]"
+	echo "  $(basename "$0") [-b] [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
+	echo "  -b create a WebAssembly bundle"
 	echo "  -c compile library alias paths in paths and settings files"
-	echo "  -d directory for generated Prolog files (absolute path; default is current directory)"
+	echo "  -d directory for generated Prolog files and artifacts (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated top-level (default is logtalk)"
 	echo "  -p library paths file (absolute path; default is $paths)"
@@ -186,9 +188,10 @@ usage_help() {
 	echo
 }
 
-while getopts "cd:t:n:p:s:l:g:vh" option
+while getopts "bcd:t:n:p:s:l:g:vh" option
 do
 	case $option in
+		b) bundle="true";;
 		c) compile="true";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
@@ -342,16 +345,23 @@ if [ "$loader" != "" ] ; then
 		echo
 		exit 1
 	fi
-	echo ":- include(logtalk)." > "$directory"/"$name.pl"
-	echo ":- include(application)." >> "$directory"/"$name.pl"
-	shumway-compile --release "$directory"/"$name.pl"
+	shumway-compile --release --output "$directory"/logtalk.shmo "$directory"/logtalk.pl
+	shumway-compile --release --output "$directory"/application.shmo "$directory"/application.pl
 	cd "$directory"
-	shumway-link --strip --allow-undefined --library -o "$name.shum" "$name.pl"
-	shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
+	if [ "$bundle" != "false" ] ; then
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.wasm" logtalk.shmo application.shmo
+	else
+		shumway-link --strip --allow-undefined --library --output "$name.shum" logtalk.shmo application.shmo
+		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
+	fi
 else
 	cd "$directory"
-	shumway-link --strip --allow-undefined --library -o logtalk.shum logtalk.pl
-	shumway --save-toplevel logtalk --self-contained logtalk.shum
+	if [ "$bundle" != "false" ] ; then
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.wasm logtalk.pl
+	else
+		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
+		shumway --save-toplevel logtalk --self-contained logtalk.shum
+	fi
 fi
 
 function cleanup {

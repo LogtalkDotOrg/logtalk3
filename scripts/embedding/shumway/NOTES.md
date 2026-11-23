@@ -19,7 +19,8 @@ ________________________________________________________________________
 
 
 This directory contains example scripts for creating Shumway Prolog
-executables from Logtalk core files and Logtalk source files.
+executables and WebAssembly bundles from Logtalk core files and Logtalk
+source files.
 
 The following scripts are provided:
 

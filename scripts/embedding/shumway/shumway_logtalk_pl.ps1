@@ -6,7 +6,7 @@
 ##   Logtalk application; creates also application and logtalk self-contained
 ##   executables
 ##
-##   Last updated on November 18, 2026
+##   Last updated on November 23, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,6 +32,7 @@
 [CmdletBinding()]
 param(
 	[Parameter()]
+	[Switch]$b,
 	[Switch]$c,
 	[Switch]$x,
 	[String]$d = $pwd,
@@ -48,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.2"
+	Write-Output "$myName 0.3"
 }
 
 function Test-LogtalkVersionIsOlder {
@@ -129,13 +130,14 @@ function Write-Usage-Help() {
 	Write-Output "given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
+	Write-Output "  $myName [-b] [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
+	Write-Output "  -b create a WebAssembly bundle"
 	Write-Output "  -c compile library alias paths in paths and settings files"
-	Write-Output "  -d directory for generated QLF files (absolute path; default is current directory)"
+	Write-Output "  -d directory for generated Prolog files and artifacts (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is $n)"
 	Write-Output "  -p library paths file (absolute path; default is $p)"
@@ -330,17 +332,24 @@ if ($l -ne "") {
 		Get-Content |
 		Add-Content "$d/application.pl"
 
-	Set-Content -Path "$d/$name.pl" -Value ":- include(logtalk)."
-	Add-Content -Path "$d/$name.pl" -Value ":- include(application)."
-	shumway-compile --release "$d/$name.pl"
+	shumway-compile --release --output "$d"/logtalk.shmo "$d"/logtalk.pl
+	shumway-compile --release --output "$d"/application.shmo "$d"/application.pl
 	Set-Location "$d"
-	shumway-link --strip --allow-undefined --library -o "$name.shum" "$name.pl"
-	shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
+	if ($b -eq $true) {
+		shumway-link --consult --library --wasm --no-compress --output "$name.wasm" logtalk.shmo application.shmo
+	} else {
+		shumway-link --strip --allow-undefined --library --output "$name.shum" logtalk.shmo application.shmo
+		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
+	}
 	Pop-Location
 } else {
 	Set-Location "$d"
-	shumway-link --strip --allow-undefined --library -o logtalk.shum logtalk.pl
-	shumway --save-toplevel logtalk --self-contained logtalk.shum
+	if ($b -eq $true) {
+		shumway-link --consult --library --wasm --no-compress --output logtalk.wasm logtalk.pl
+	} else {
+		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
+		shumway --save-toplevel logtalk --self-contained logtalk.shum
+	}
 	Pop-Location
 }
 
