@@ -26,7 +26,7 @@
 	:- info([
 		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2026-11-22,
+		date is 2026-11-23,
 		comment is 'Predicates for generating graph files using Mermaid. Requires Mermaid 12 or later.'
 	]).
 
@@ -62,11 +62,9 @@
 	file_header(Stream, _Identifier, Options) :-
 		retractall(edge_index_(_)),
 		asserta(edge_index_(0)),
-		% Mermaid creates the tooltip element with an inline max-width of 200px, which
-		% truncates long paths; the stylesheet overrides it so that the tooltip box
-		% fits the tooltip text
-		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { max-width: none !important; white-space: pre-wrap; }\n.nodeLabel a[title="Zoom"] { float: left; }\nbody:has(.nodeLabel b[title]:hover, .nodeLabel a[title]:hover) div.mermaidTooltip { visibility: hidden; }\n</style>\n</head>\n<body>\n'),
-		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs\';\nwindow.noop = function() {};\n// keep tooltips, which Mermaid anchors at the node center, inside the window\ndocument.addEventListener(\'mouseover\', function() { var t = document.querySelector(\'.mermaidTooltip\'); if (t) { var m = window.scrollX + document.documentElement.clientWidth - t.offsetWidth - 4, l = parseFloat(t.style.left); if (l > m) { t.style.left = Math.max(window.scrollX, m) + \'px\'; } } });\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true, htmlLabels: true, flowchart: { useMaxWidth: false } });\n</script>\n'),
+		% override Mermaid's inline tooltip width and wrap long text and paths
+		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { width: max-content; max-width: min(30em, calc(100vw - 16px)) !important; box-sizing: border-box; white-space: pre-wrap; overflow-wrap: anywhere; }\n.nodeLabel a[title="Zoom"] { float: left; }\nbody:has(.nodeLabel b[title]:hover, .nodeLabel a[title]:hover) div.mermaidTooltip { visibility: hidden; }\n</style>\n</head>\n<body>\n'),
+		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs\';\nwindow.noop = function() {};\n// keep tooltips, which Mermaid anchors at the node center, inside the window\ndocument.addEventListener(\'mouseover\', function() { var t = document.querySelector(\'.mermaidTooltip\'); if (t) { var m = window.scrollX + document.documentElement.clientWidth - t.offsetWidth - 4, l = parseFloat(t.style.left); if (l > m) { t.style.left = Math.max(window.scrollX, m) + \'px\'; } } });\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true, htmlLabels: true, dompurifyConfig: { ALLOW_UNKNOWN_PROTOCOLS: true }, flowchart: { useMaxWidth: false } });\n</script>\n'),
 		write(Stream, '<pre class="mermaid">\n'),
 		write(Stream, 'graph '),
 		^^option(layout(Layout), Options),
@@ -141,12 +139,27 @@
 		write(Stream, Label),
 		write(Stream, '</p></body>\n</html>\n').
 
-	graph_header(Stream, Identifier, Label, Kind, _Options) :-
+	graph_header(Stream, Identifier, Label, Kind, Options) :-
 		graph_style_margin_color(Kind, _Style, _Margin, Color),
 		write(Stream, 'subgraph '),
 		write_safe_identifier(Stream, Identifier),
 		write(Stream, ' ["'),
-		write_html_escaped(Stream, Label, false),
+		(	member(url(URL), Options), URL \== '' ->
+			write(Stream, '<a href=\''),
+			write_html_escaped(Stream, URL, false),
+			write(Stream, '\' title=\''),
+			write_html_escaped(Stream, URL, false),
+			write(Stream, '\'>'),
+			write_html_escaped(Stream, Label, false),
+			write(Stream, '</a>')
+		;	member(tooltip(Tooltip), Options) ->
+			write(Stream, '<span title=\''),
+			write_html_escaped(Stream, Tooltip, false),
+			write(Stream, '\'>'),
+			write_html_escaped(Stream, Label, false),
+			write(Stream, '</span>')
+		;	write_html_escaped(Stream, Label, false)
+		),
 		write(Stream, '"]\nstyle '),
 		write_safe_identifier(Stream, Identifier),
 		write(Stream, ' fill:'),
@@ -199,9 +212,9 @@
 			write(Stream, '\'')
 		;	true
 		),
-		write(Stream, '>'),
+		write(Stream, '><u>'),
 		write_html_escaped(Stream, Label, false),
-		write(Stream, '</b>'),
+		write(Stream, '</u></b>'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
 			write(Stream, '<br/><i>'),

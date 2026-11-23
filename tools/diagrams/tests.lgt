@@ -125,6 +125,27 @@
 		\+ sub_atom(Output, _, _, _, '"comment": "'),
 		sub_atom(Output, _, _, _, '"tooltip": "object"').
 
+	test(mermaid_graph_link_tooltip, true) :-
+		mermaid_graph_output('Library "A" & B', [url('https://example.com/o\'reilly?a=1&b=2'), tooltip('Other')], Output),
+		sub_atom(Output, _, _, _, 'subgraph graph ["<a href=\'https://example.com/o#39;reilly?a=1#amp;b=2\' title=\'https://example.com/o#39;reilly?a=1#amp;b=2\'>Library #quot;A#quot; #amp; B</a>"]\n').
+
+	test(mermaid_graph_editor_link, true) :-
+		mermaid_graph_output('File', [url('vscode://file/path/file.lgt:58:0')], Output),
+		sub_atom(Output, _, _, _, 'dompurifyConfig: { ALLOW_UNKNOWN_PROTOCOLS: true }'),
+		sub_atom(Output, _, _, _, '<a href=\'vscode://file/path/file.lgt:58:0\' title=\'vscode://file/path/file.lgt:58:0\'>File</a>').
+
+	test(mermaid_graph_unlinked_tooltip, true) :-
+		mermaid_graph_output('Library', [url(''), tooltip('Path\'s "name" & more')], Output),
+		sub_atom(Output, _, _, _, 'subgraph graph ["<span title=\'Path#39;s #quot;name#quot; #amp; more\'>Library</span>"]\n'),
+		mermaid_graph_output('Library', [tooltip('Path')], Output2),
+		sub_atom(Output2, _, _, _, '<span title=\'Path\'>Library</span>').
+
+	test(mermaid_graph_without_tooltip, true) :-
+		mermaid_graph_output('Library', [], Output),
+		sub_atom(Output, _, _, _, 'subgraph graph ["Library"]\n'),
+		mermaid_graph_output('Library', [url('')], Output),
+		sub_atom(Output, _, _, _, 'subgraph graph ["Library"]\n').
+
 	test(mermaid_node_comment_tooltips, true) :-
 		mermaid_node_output(
 			[comment('O\'Reilly "A" <x>\nnext'), tooltip(object), url('https://example.com')],
@@ -696,6 +717,20 @@
 		cytoscapejs_graph_language::file_header(Stream, test, [title(''), description('')]),
 		cytoscapejs_graph_language::node(Stream, entity, entity, object, [predicate/1], prototype, Options),
 		cytoscapejs_graph_language::file_footer(Stream, test, []),
+		close(Stream),
+		open(File, read, Input),
+		read_node_output_chars(Input, Chars),
+		close(Input),
+		os::delete_file(File),
+		atom_chars(Output, Chars).
+
+	mermaid_graph_output(Label, Options, Output) :-
+		File = 'mermaid_graph_tooltip_test.tmp',
+		\+ os::file_exists(File),
+		open(File, write, Stream),
+		mermaid_graph_language::file_header(Stream, graph, [layout(top_to_bottom)]),
+		mermaid_graph_language::graph_header(Stream, graph, Label, library, Options),
+		mermaid_graph_language::graph_footer(Stream, graph, Label, library, Options),
 		close(Stream),
 		open(File, read, Input),
 		read_node_output_chars(Input, Chars),
