@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 470.07,-140 470.07,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol dimension_reduction_dataset_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_dimension_reduction_dataset_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="dimension_reduction_dataset_protocol">
 <path fill="snow" stroke="dimgray" d="M110.04,-46C110.04,-46 356.04,-46 356.04,-46 362.04,-46 368.04,-52 368.04,-58 368.04,-58 368.04,-116 368.04,-116 368.04,-122 362.04,-128 356.04,-128 356.04,-128 110.04,-128 110.04,-128 104.04,-128 98.04,-122 98.04,-116 98.04,-116 98.04,-58 98.04,-58 98.04,-52 104.04,-46 110.04,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="110.04" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">dimension_reduction_dataset_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Enumerates by backtracking the attributes and their possible values. For discrete attributes, ``Values`` is a list of possible values. For continuous (numeric) attributes, ``Values`` is the atom ``continuous``.">
 <polygon fill="springgreen" stroke="black" points="253.85,-92 108.23,-92 108.23,-56 253.85,-56 253.85,-92"/>
 <text xml:space="preserve" text-anchor="start" x="116.23" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="121.63" y="-75.71" font-family="monospace" font-size="11.00">attribute_values/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Enumerates by backtracking the examples in the dataset. Each example has an ``Id`` and a list of ``Attribute&#45;Value`` pairs.">
 <polygon fill="springgreen" stroke="black" points="358.14,-92 271.93,-92 271.93,-56 358.14,-56 358.14,-92"/>
 <text xml:space="preserve" text-anchor="start" x="279.93" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/dimension_reduction_protocols/dimension_reduction_dataset_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="285.33" y="-75.71" font-family="monospace" font-size="11.00">example/2</text>
 </a>
 </g>

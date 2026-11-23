@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 380.06,-140 380.06,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol interpolator_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_interpolator_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="interpolator_protocol">
 <path fill="snow" stroke="dimgray" d="M66.03,-46C66.03,-46 310.03,-46 310.03,-46 316.03,-46 322.03,-52 322.03,-58 322.03,-58 322.03,-116 322.03,-116 322.03,-122 316.03,-128 310.03,-128 310.03,-128 66.03,-128 66.03,-128 60.03,-128 54.03,-122 54.03,-116 54.03,-116 54.03,-58 54.03,-58 54.03,-52 60.03,-46 66.03,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="66.03" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">interpolator_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Fits an interpolant to a list of ``X&#45;Y`` points using default options.">
 <polygon fill="springgreen" stroke="black" points="123.93,-92 64.13,-92 64.13,-56 123.93,-56 123.93,-92"/>
 <text xml:space="preserve" text-anchor="start" x="72.13" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="77.53" y="-75.71" font-family="monospace" font-size="11.00">fit/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Fits an interpolant to a list of ``X&#45;Y`` points using the given options.">
 <polygon fill="springgreen" stroke="black" points="201.93,-92 142.13,-92 142.13,-56 201.93,-56 201.93,-92"/>
 <text xml:space="preserve" text-anchor="start" x="150.13" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="155.53" y="-75.71" font-family="monospace" font-size="11.00">fit/3</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Evaluates a fitted interpolant inside its data domain.">
 <polygon fill="springgreen" stroke="black" points="312.44,-92 219.62,-92 219.62,-56 312.44,-56 312.44,-92"/>
 <text xml:space="preserve" text-anchor="start" x="227.62" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/numerical_analysis/interpolator_protocol.lgt#L58">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/numerical_analysis/interpolator_protocol.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="233.02" y="-75.71" font-family="monospace" font-size="11.00">evaluate/3</text>
 </a>
 </g>

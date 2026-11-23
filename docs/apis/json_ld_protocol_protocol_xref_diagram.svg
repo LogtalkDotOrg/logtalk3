@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 622,-140 622,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol json_ld_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 15:15</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
 <g id="clust1" class="cluster">
 <title>cluster_json_ld_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="json_ld_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 598,-46 598,-46 604,-46 610,-52 610,-58 610,-58 610,-116 610,-116 610,-122 604,-128 598,-128 598,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">json_ld_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Parses a JSON&#45;LD document from the given source (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) into a term.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Generates the content using the representation specified in the first argument (``file(Path)``, ``stream(Stream)``, ``codes(List)``, ``chars(List)``, or ``atom(Atom)``) for the term in the second argument.">
 <polygon fill="springgreen" stroke="black" points="202.41,-92 109.59,-92 109.59,-56 202.41,-56 202.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L42">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L42">
 <text xml:space="preserve" text-anchor="start" x="122.99" y="-75.71" font-family="monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Expands a parsed JSON&#45;LD document. Expansion removes the context and represents all properties and types as full IRIs. The result is a list of node objects in expanded document form.">
 <polygon fill="springgreen" stroke="black" points="299.81,-92 220.19,-92 220.19,-56 299.81,-56 299.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="228.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L53">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="233.6" y="-75.71" font-family="monospace" font-size="11.00">expand/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Compacts an expanded JSON&#45;LD document using the given context. Compaction applies the context to shorten IRIs to terms or compact IRIs.">
 <polygon fill="springgreen" stroke="black" points="404.11,-92 317.89,-92 317.89,-56 404.11,-56 404.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="325.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L63">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L63">
 <text xml:space="preserve" text-anchor="start" x="331.3" y="-75.71" font-family="monospace" font-size="11.00">compact/3</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Flattens an expanded JSON&#45;LD document. Flattening collects all node objects into a flat ``@graph`` array, with nested nodes replaced by references. Blank node identifiers are generated for nodes without ``@id``.">
 <polygon fill="springgreen" stroke="black" points="508.11,-92 421.89,-92 421.89,-56 508.11,-56 508.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="429.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L74">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="435.3" y="-75.71" font-family="monospace" font-size="11.00">flatten/2</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Frames a JSON&#45;LD document using the given frame. The result is an expanded framed document unless the frame provides a context, in which case the result is compacted with that context.">
 <polygon fill="springgreen" stroke="black" points="599.5,-92 526.5,-92 526.5,-56 599.5,-56 599.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="534.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d7d41b3a194d1d880f31611a9620896920aaecd2/library/json_ld/json_ld_protocol.lgt#L84">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/json_ld/json_ld_protocol.lgt#L84">
 <text xml:space="preserve" text-anchor="start" x="539.9" y="-75.71" font-family="monospace" font-size="11.00">frame/3</text>
 </a>
 </g>
