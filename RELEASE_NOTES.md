@@ -41,11 +41,10 @@ Tools
 -----
 
 * ADDED: Support to the `diagrams` tool for displaying entity and predicate
-comments as node tooltips when exporting diagrams in D2, Cytoscape, or
-Graphviz formats.
+comments as node tooltips when exporting diagrams in D2, Cytoscape, Graphviz,
+or Mermaid formats.
 
-* IMPROVED: The `diagrams` tool experimental support for generating Mermaid
-diagrams.
+* IMPROVED: The `diagrams` tool support for generating D2 and Mermaid diagrams.
 
 * FIXED: The `debug_messages` tool tests for Trealla Prolog running on Windows.
 

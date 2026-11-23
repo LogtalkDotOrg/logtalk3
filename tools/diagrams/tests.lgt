@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2026-11-22,
+		date is 2026-11-23,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -61,6 +61,16 @@
 		os::path_concat(ScratchDirectory, 'dot_dias', OutputDirectory),
 		os::delete_directory_and_contents(OutputDirectory).
 
+	test(d2_graph_link_tooltip, true) :-
+		d2_graph_output('Library "name"\\path', [url('https://example.com'), tooltip('Other')], Output),
+		sub_atom(Output, _, _, _, 'link: "https://example.com"\n'),
+		sub_atom(Output, _, _, _, 'tooltip: "Library \\"name\\"\\\\path"\n').
+
+	test(d2_graph_unlinked_tooltip, true) :-
+		d2_graph_output('Library', [url(''), tooltip('Path')], Output),
+		\+ sub_atom(Output, _, _, _, 'link:'),
+		sub_atom(Output, _, _, _, 'tooltip: Path\n').
+
 	test(d2_node_comment_tooltip, true) :-
 		d2_node_output(
 			[comment('He said "hi": ${value}\\path\nnext'), tooltip(object), url('https://example.com'), zoom_url('entity.svg')],
@@ -83,7 +93,14 @@
 	test(d2_node_unlinked, true) :-
 		d2_node_output([comment('Comment'), tooltip(object), url('')], Output),
 		sub_atom(Output, _, _, _, 'tooltip: "Comment"\n'),
-		sub_atom(Output, _, _, _, '## entity\n').
+		sub_atom(Output, _, _, _, '## entity\n'),
+		sub_atom(Output, _, _, _, '"entity_".text: {\ntooltip: "object"\n}\n').
+
+	test(d2_node_tooltip_without_comment_or_url, true) :-
+		d2_node_output([tooltip('Object path'), url('')], Output),
+		sub_atom(Output, _, _, _, 'style.stroke-dash: 0\nlabel: ""\n'),
+		sub_atom(Output, _, _, _, '## entity\n'),
+		sub_atom(Output, _, _, _, '"entity_".text: {\ntooltip: "Object path"\n}\n').
 
 	test(d2_node_empty_comment_tooltip, true) :-
 		d2_node_output([comment('')], Output),
@@ -646,6 +663,19 @@
 		caller_diagram(_Format_)::predicate(list::member/2).
 
 	% auxiliary predicates
+
+	d2_graph_output(Label, Options, Output) :-
+		File = 'd2_graph_tooltip_test.tmp',
+		\+ os::file_exists(File),
+		open(File, write, Stream),
+		d2_graph_language::graph_header(Stream, graph, Label, library, Options),
+		d2_graph_language::graph_footer(Stream, graph, Label, library, Options),
+		close(Stream),
+		open(File, read, Input),
+		read_node_output_chars(Input, Chars),
+		close(Input),
+		os::delete_file(File),
+		atom_chars(Output, Chars).
 
 	d2_node_output(Options, Output) :-
 		File = 'd2_node_tooltip_test.tmp',

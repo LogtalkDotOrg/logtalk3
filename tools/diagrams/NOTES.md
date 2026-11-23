@@ -260,7 +260,8 @@ on node and edge attributes. The JSON backend includes optional metadata
 such as title, description, generation timestamp, and Logtalk/Prolog version
 information. A default HTML viewer, `cytoscapejs_viewer.html`, is provided
 for convenience. This viewer currently requires starting a local web server
-in the generated diagrams directory and manually entering the server address.
+(using e.g. the `logtalk_http_server` script) in the generated diagrams
+directory and manually entering the server address.
 
 PlantUML output is also supported. The PlantUML backend generates `.puml`
 files using custom stereotypes with spotted characters to distinguish Logtalk

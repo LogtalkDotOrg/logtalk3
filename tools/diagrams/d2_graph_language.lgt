@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2026-11-22,
+		date is 2026-11-23,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -135,7 +135,11 @@
 		write_key_value(Stream, 'style.fill', Color),
 		(	member(url(URL), Options) ->
 			(	URL \== '' ->
-				write_key_value_quoted(Stream, link, URL)
+				write_key_value_quoted(Stream, link, URL),
+				write(Stream, 'tooltip: "'),
+				write_term_to_chars(Label, LabelChars, []),
+				write_quoted_chars(LabelChars, Stream),
+				write(Stream, '"\n')
 			;	member(tooltip(Tooltip), Options) ->
 				write_key_value(Stream, tooltip, Tooltip)
 			;	write_key_value(Stream, tooltip, Label)
@@ -186,6 +190,7 @@
 		write(Stream, '## '),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
+			LabelTooltip = '',
 			write(Stream, '['),
 			write_node_line(Label, Stream, [quoted(Quoted)]),
 			write(Stream, ']('),
@@ -193,7 +198,11 @@
 			write(Stream, ' "'),
 			write_markdown_title(URL, Stream),
 			write(Stream, '")')
-		;	write_node_line(Label, Stream, [quoted(Quoted)])
+		;	member(tooltip(Tooltip), Options) ->
+			LabelTooltip = Tooltip,
+			write_node_line(Label, Stream, [quoted(Quoted)])
+		;	LabelTooltip = '',
+			write_node_line(Label, Stream, [quoted(Quoted)])
 		),
 		write(Stream, '\n'),
 		(	^^option(node_type_captions(true), Options),
@@ -224,7 +233,17 @@
 		;	true
 		),
 		write(Stream, '|\n'),
-		write(Stream, '}\n').
+		write(Stream, '}\n'),
+		(	LabelTooltip \== '' ->
+			write(Stream, '"'),
+			write(Stream, Identifier),
+			write(Stream, '_".text: {\n'),
+			write(Stream, 'tooltip: "'),
+			write_term_to_chars(LabelTooltip, TooltipChars, []),
+			write_quoted_chars(TooltipChars, Stream),
+			write(Stream, '"\n}\n')
+		;	true
+		).
 
 	% entities belonging to the file or library being documented
 	node_shape_dash_color_quoted(prototype,                   rectangle, 0, cornsilk,             false).
