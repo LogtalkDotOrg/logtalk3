@@ -153,7 +153,7 @@ Hook predicate that importing dimension reducer implementations must define in o
 ``dataset_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the dataset attribute declarations as `Attribute-Values` pairs.
+Collects the dataset attribute declarations as ``Attribute-Values`` pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -248,7 +248,7 @@ Checks that a single example contains numeric values for all declared attributes
 ``attribute_value/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Looks up an attribute value in a list of `Attribute-Value` pairs.
+Looks up an attribute value in a list of ``Attribute-Value`` pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -533,7 +533,7 @@ Collects encoder attribute names preserving encoder order.
 ``project_components/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Projects encoded features onto the learned components and returns `component_N-Score` pairs.
+Projects encoded features onto the learned components and returns ``ComponentName-Score`` pairs.
 
 | **Compilation flags:**
 |    ``static``

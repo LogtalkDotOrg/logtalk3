@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(basic_types(loader)),
 	logtalk_load(base32(loader)),
 	logtalk_load(hmac(loader)),
 	logtalk_load([otp_protocol, otp], [optimize(on)])

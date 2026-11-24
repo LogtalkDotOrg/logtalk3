@@ -57,7 +57,7 @@ Protected predicates
 ``dataset_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the dataset attribute declarations as `Attribute-Values` pairs.
+Collects the dataset attribute declarations as ``Attribute-Values`` pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -342,7 +342,7 @@ Checks that an attribute-value list contains each declared attribute exactly onc
 ``attribute_value/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Looks up an attribute value in a list of `Attribute-Value` pairs.
+Looks up an attribute value in a list of ``Attribute-Value`` pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -399,7 +399,7 @@ Collects the known numeric values for a given attribute across the training exam
 ``examples_to_rows/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Encodes training examples into `Id-Features` rows using the object-local or imported encoder implementation.
+Encodes training examples into ``Id-Features`` rows using the object-local or imported encoder implementation.
 
 | **Compilation flags:**
 |    ``static``
@@ -532,7 +532,7 @@ Checks that the requested cluster count does not exceed the number of examples.
 ``take_first_k/3``
 ^^^^^^^^^^^^^^^^^^
 
-Collects the first `K` vectors from `Id-Vector` rows.
+Collects the first ``K`` vectors from ``Id-Vector`` rows.
 
 | **Compilation flags:**
 |    ``static``
@@ -551,7 +551,7 @@ Collects the first `K` vectors from `Id-Vector` rows.
 ``remove_candidate/3``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Removes the first matching `Id-Vector` candidate from a candidate list.
+Removes the first matching ``Id-Vector`` candidate from a candidate list.
 
 | **Compilation flags:**
 |    ``static``

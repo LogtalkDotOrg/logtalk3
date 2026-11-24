@@ -21,6 +21,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
+	logtalk_load(basic_types(loader)),
 	logtalk_load(base32(loader)),
 	logtalk_load(hmac(loader)),
 	logtalk_load([otp_protocol, otp], [debug(on), source_data(on)]),

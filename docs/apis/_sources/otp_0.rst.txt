@@ -14,8 +14,8 @@ HOTP and TOTP generation and verification predicates.
 |    ``logtalk_load(otp(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-09-25
+| **Version:** 1:2:0
+| **Date:** 2026-11-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,6 +27,7 @@ HOTP and TOTP generation and verification predicates.
 |    :ref:`base32 <base32/0>`
 |    :ref:`hmac <hmac/0>`
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)

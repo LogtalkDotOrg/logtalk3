@@ -111,7 +111,7 @@ Hook predicate that importing anomaly detector implementations must define in or
 ``dataset_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the dataset attribute declarations as `Attribute-Values` pairs.
+Collects the dataset attribute declarations as ``Attribute-Values`` pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -187,7 +187,7 @@ Checks that a ``baseline_class_values/1`` option value is a non-empty list of di
 ``extract_scores/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Transforms `Score-Id-Class` tuples into the public `Id-Class-Score` representation.
+Transforms `Score-Id-Class` tuples into the public ``Id-Class-Score`` representation.
 
 | **Compilation flags:**
 |    ``static``

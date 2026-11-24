@@ -145,7 +145,7 @@ Checks that a learned clusterer term is structurally valid for the receiving imp
 ``valid_clusterer/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
-True when a learned clusterer term is structurally valid for the receiving implementation. Succeeds iff `check_clusterer/1` succeeds without throwing an exception.
+True when a learned clusterer term is structurally valid for the receiving implementation. Succeeds iff ``check_clusterer/1`` succeeds without throwing an exception.
 
 | **Compilation flags:**
 |    ``static``

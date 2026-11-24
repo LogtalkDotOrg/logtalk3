@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-11-09,
+		date is 2026-11-24,
 		comment is 'Process-backed MiniZinc CLI solving, source generation, and collected result inspection.'
 	]).
 
@@ -47,10 +47,14 @@
 	]).
 
 	solve(Source, Result) :-
-		solve(Source, Result, []).
+		context(Context),
+		solve(Source, Result, Context, []).
 
 	solve(Source, Result, UserOptions) :-
 		context(Context),
+		solve(Source, Result, Context, UserOptions).
+
+	solve(Source, Result, Context, UserOptions) :-
 		check(ground, Source, Context),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),

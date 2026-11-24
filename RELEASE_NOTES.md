@@ -37,6 +37,9 @@ Library
 * ADDED: New `max_sat` library providing weighted partial MaxSAT solving by
 interfacing with external solver command-line tools.
 
+* IMPROVED: The error-checking of the `asp`, `minizinc`, `omt`,  `otp`,
+`problog`, `sat`, `smt`, and `souffle` libraries.
+
 * FIXED: The `csv`, `format`, `hook_objects`, `http_directory_listing`,
 `listing`, and `reader` library tests for Trealla Prolog running on Windows.
 

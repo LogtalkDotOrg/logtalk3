@@ -23,9 +23,9 @@
 	implements(otp_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-25,
+		date is 2026-11-24,
 		comment is 'HOTP and TOTP generation and verification predicates.',
 		see_also is [base32, hmac, sha1, sha256, sha512_256]
 	]).
@@ -42,122 +42,88 @@
 		append/3, length/2
 	]).
 
+	:- uses(type, [
+		check/3
+	]).
+
 	hotp(Hash, Secret, Counter, Digits, OTP) :-
-		check_hash(Hash),
-		normalize_secret(Secret, SecretBytes),
-		check_non_negative_integer(Counter),
-		check_positive_integer(Digits),
+		context(Context),
+		check_hash(Hash, Context),
+		normalize_secret(Secret, SecretBytes, Context),
+		check(non_negative_integer, Counter, Context),
+		check(positive_integer, Digits, Context),
 		hotp_checked(Hash, SecretBytes, Counter, Digits, OTP).
 
 	totp(Hash, Secret, UnixTime, Digits, OTP) :-
-		check_hash(Hash),
-		normalize_secret(Secret, SecretBytes),
-		check_non_negative_integer(UnixTime),
-		check_positive_integer(Digits),
+		context(Context),
+		check_hash(Hash, Context),
+		normalize_secret(Secret, SecretBytes, Context),
+		check(non_negative_integer, UnixTime, Context),
+		check(positive_integer, Digits, Context),
 		TimeStep is UnixTime // 30,
 		hotp_checked(Hash, SecretBytes, TimeStep, Digits, OTP).
 
 	hotp_verify(Hash, Secret, Counter, Window, Digits, OTP, MatchedCounter) :-
-		check_hash(Hash),
-		normalize_secret(Secret, SecretBytes),
-		check_non_negative_integer(Counter),
-		check_non_negative_integer(Window),
-		check_positive_integer(Digits),
-		check_otp_atom(OTP, Digits),
+		context(Context),
+		check_hash(Hash, Context),
+		normalize_secret(Secret, SecretBytes, Context),
+		check(non_negative_integer, Counter, Context),
+		check(non_negative_integer, Window, Context),
+		check(positive_integer, Digits, Context),
+		check_otp_atom(OTP, Digits, Context),
 		hotp_verify_checked(Hash, SecretBytes, Counter, Window, Digits, OTP, MatchedCounter).
 
 	totp_verify(Hash, Secret, UnixTime, Window, Digits, OTP, MatchedTimeStep) :-
-		check_hash(Hash),
-		normalize_secret(Secret, SecretBytes),
-		check_non_negative_integer(UnixTime),
-		check_non_negative_integer(Window),
-		check_positive_integer(Digits),
-		check_otp_atom(OTP, Digits),
+		context(Context),
+		check_hash(Hash, Context),
+		normalize_secret(Secret, SecretBytes, Context),
+		check(non_negative_integer, UnixTime, Context),
+		check(non_negative_integer, Window, Context),
+		check(positive_integer, Digits, Context),
+		check_otp_atom(OTP, Digits, Context),
 		CurrentTimeStep is UnixTime // 30,
 		totp_verify_checked(Hash, SecretBytes, CurrentTimeStep, Window, Digits, OTP, MatchedTimeStep).
 
-	check_hash(Hash) :-
+	check_hash(Hash, Context) :-
 		(	var(Hash) ->
-			instantiation_error
+			throw(error(instantiation_error, Context))
+		;	\+ callable(Hash) ->
+			throw(error(type_error(callable, Hash), Context))
 		;	current_object(Hash),
 			catch(Hash::digest_size(DigestSize), _, fail),
 			catch(Hash::block_size(_BlockSize), _, fail),
 			catch(Hash::digest([], _DigestBytes), _, fail) ->
 			(	DigestSize >= 20 ->
 				true
-			;	domain_error(otp_hash, Hash)
+			;	throw(error(domain_error(otp_hash, Hash), Context))
 			)
-		;	domain_error(otp_hash, Hash)
+		;	throw(error(existence_error(otp_hash, Hash), Context))
 		).
 
-	normalize_secret(Secret, SecretBytes) :-
+	normalize_secret(Secret, SecretBytes, Context) :-
 		(	var(Secret) ->
-			instantiation_error
+			throw(error(instantiation_error, Context))
 		;	Secret = base32(atom(Atom)) ->
 			parse(atom(Atom), SecretBytes)
 		;	Secret = base32(chars(Chars)) ->
 			parse(chars(Chars), SecretBytes)
 		;	Secret = base32(codes(Codes)) ->
 			parse(codes(Codes), SecretBytes)
-		;	check_byte_list(Secret),
+		;	check(list(byte), Secret, Context),
 			SecretBytes = Secret
 		).
 
-	check_byte_list(Bytes) :-
-		(	var(Bytes) ->
-			instantiation_error
-		;	Bytes == [] ->
-			true
-		;	Bytes = [Byte| Tail] ->
-			check_byte(Byte),
-			check_byte_list(Tail)
-		;	type_error(list, Bytes)
-		).
-
-	check_byte(Byte) :-
-		(	var(Byte) ->
-			instantiation_error
-		;	integer(Byte) ->
-			(	0 =< Byte, Byte =< 255 ->
-				true
-			;	domain_error(byte, Byte)
-			)
-		;	type_error(integer, Byte)
-		).
-
-	check_non_negative_integer(Integer) :-
-		(	var(Integer) ->
-			instantiation_error
-		;	integer(Integer) ->
-			(	Integer >= 0 ->
-				true
-			;	domain_error(non_negative_integer, Integer)
-			)
-		;	type_error(integer, Integer)
-		).
-
-	check_positive_integer(Integer) :-
-		(	var(Integer) ->
-			instantiation_error
-		;	integer(Integer) ->
-			(	Integer > 0 ->
-				true
-			;	domain_error(positive_integer, Integer)
-			)
-		;	type_error(integer, Integer)
-		).
-
-	check_otp_atom(OTP, Digits) :-
+	check_otp_atom(OTP, Digits, Context) :-
 		(	var(OTP) ->
-			instantiation_error
+			throw(error(instantiation_error, Context))
 		;	atom(OTP) ->
 			atom_codes(OTP, Codes),
 			(	length(Codes, Digits),
 				all_digit_codes(Codes) ->
 				true
-			;	domain_error(otp_value, OTP)
+			;	throw(error(domain_error(otp_value, OTP), Context))
 			)
-		;	type_error(atom, OTP)
+		;	throw(error(type_error(atom, OTP), Context))
 		).
 
 	all_digit_codes([]).

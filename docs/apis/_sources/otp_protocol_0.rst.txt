@@ -14,8 +14,8 @@ Protocol for HOTP and TOTP generation and verification as specified in RFC 4226 
 |    ``logtalk_load(otp(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-08
+| **Version:** 1:1:0
+| **Date:** 2026-11-24
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,37 @@ Computes an HOTP value for the given hash object, secret, moving counter, and nu
 | **Template:**
 |    ``hotp(Hash,Secret,Counter,Digits,OTP)``
 | **Mode and number of proofs:**
-|    ``hotp(+object_identifier,+term,+integer,+integer,--atom)`` - ``one``
+|    ``hotp(+object_identifier,+term,+integer,+integer,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Hash`` is a variable:
+|        ``instantiation_error``
+|    ``Hash`` is neither a variable nor a callable term:
+|        ``type_error(callable,Hash)``
+|    ``Hash`` is a callable term but not an existing object:
+|        ``existence_error(object,Hash)``
+|    ``Hash`` is an object but not a supported OTP hash object:
+|        ``domain_error(otp_hash,Hash)``
+|    ``Secret``, ``Counter``, or ``Digits`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Secret`` is neither a partial list nor a list:
+|        ``type_error(list,Secret)``
+|    An element ``Byte`` of the `Secret`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Secret`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Secret`` is not a valid Base32 source:
+|        ``domain_error(base32_source,Secret)``
+|    ``Counter`` is neither a variable nor an integer:
+|        ``type_error(integer,Integer)``
+|    ``Counter`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Integer)``
+|    ``Digits`` is neither a variable nor an integer:
+|        ``type_error(integer,Digits)``
+|    ``Digits`` is an integer but not a positive integer:
+|        ``domain_error(positive_integer,Digits)``
+|    A searched counter exceeds the 64-bit HOTP moving-factor range:
+|        ``domain_error(otp_moving_factor,Counter)``
 
 
 ------------
@@ -71,7 +101,37 @@ Computes a TOTP value using the standard 30-second time step and Unix epoch ``T0
 | **Template:**
 |    ``totp(Hash,Secret,UnixTime,Digits,OTP)``
 | **Mode and number of proofs:**
-|    ``totp(+object_identifier,+term,+integer,+integer,--atom)`` - ``one``
+|    ``totp(+object_identifier,+term,+integer,+integer,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Hash`` is a variable:
+|        ``instantiation_error``
+|    ``Hash`` is neither a variable nor a callable term:
+|        ``type_error(callable,Hash)``
+|    ``Hash`` is a callable term but not an existing object:
+|        ``existence_error(object,Hash)``
+|    ``Hash`` is an object but not a supported OTP hash object:
+|        ``domain_error(otp_hash,Hash)``
+|    ``Secret``, ``Counter``, ``UnixTime``, or ``Digits`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Secret`` is neither a partial list nor a list:
+|        ``type_error(list,Secret)``
+|    An element ``Byte`` of the `Secret`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Secret`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Secret`` is not a valid Base32 source:
+|        ``domain_error(base32_source,Secret)``
+|    ``UnixTime`` is neither a variable nor an integer:
+|        ``type_error(integer,Integer)``
+|    ``UnixTime`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Integer)``
+|    ``Digits`` is neither a variable nor an integer:
+|        ``type_error(integer,Digits)``
+|    ``Digits`` is an integer but not a positive integer:
+|        ``domain_error(positive_integer,Digits)``
+|    A searched time step exceeds the 64-bit HOTP moving-factor range:
+|        ``domain_error(otp_moving_factor,TimeStep)``
 
 
 ------------
@@ -93,10 +153,16 @@ Verifies an HOTP value by searching from the given counter through the bounded f
 |    ``hotp_verify(+object_identifier,+term,+integer,+integer,+integer,+atom,--integer)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
-|    ``Hash``, ``Secret``, ``Counter``, ``Window``, ``Digits``, or ``OTP`` is a variable or a partial list:
+|    ``Hash`` is a variable:
 |        ``instantiation_error``
-|    ``Hash`` is not a supported OTP hash object:
+|    ``Hash`` is neither a variable nor a callable term:
+|        ``type_error(callable,Hash)``
+|    ``Hash`` is a callable term but not an existing object:
+|        ``existence_error(object,Hash)``
+|    ``Hash`` is an object but not a supported OTP hash object:
 |        ``domain_error(otp_hash,Hash)``
+|    ``Secret``, ``Counter``, ``Window``, ``Digits``, or ``OTP`` is a variable or a partial list:
+|        ``instantiation_error``
 |    ``Secret`` is neither a partial list nor a list:
 |        ``type_error(list,Secret)``
 |    An element ``Byte`` of the `Secret`` list is neither a variable nor an integer:
@@ -140,10 +206,16 @@ Verifies a TOTP value by searching within the bounded symmetric time-step window
 |    ``totp_verify(+object_identifier,+term,+integer,+integer,+integer,+atom,--integer)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
-|    ``Hash``, ``Secret``, ``UnixTime``, ``Window``, ``Digits``, or ``OTP`` is a variable or a partial list:
+|    ``Hash`` is a variable:
 |        ``instantiation_error``
-|    ``Hash`` is not a supported OTP hash object:
+|    ``Hash`` is neither a variable nor a callable term:
+|        ``type_error(callable,Hash)``
+|    ``Hash`` is a callable term but not an existing object:
+|        ``existence_error(object,Hash)``
+|    ``Hash`` is an object but not a supported OTP hash object:
 |        ``domain_error(otp_hash,Hash)``
+|    ``Secret``, ``Counter``, ``Window``, ``Digits``, or ``OTP`` is a variable or a partial list:
+|        ``instantiation_error``
 |    ``Secret`` is neither a partial list nor a list:
 |        ``type_error(list,Secret)``
 |    An element ``Byte`` of the `Secret`` list is neither a variable nor an integer:

@@ -483,8 +483,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-08</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-11-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -543,7 +543,68 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">hotp(+object_identifier,+term,+integer,+integer,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">hotp(+object_identifier,+term,+integer,+integer,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a callable term but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is an object but not a supported OTP hash object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(otp_hash,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, or <code class="docutils literal notranslate"><span class="pre">Digits</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Secret)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <cite>Secret`</cite> list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">Secret</span></code> list is an integer but not a valid byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code> is not a valid Base32 source:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(base32_source,Secret)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counter</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Integer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counter</span></code> is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Integer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Digits</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Digits)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Digits</span></code> is an integer but not a positive integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Digits)</span></code></div>
+</div>
+<div class="line">A searched counter exceeds the 64-bit HOTP moving-factor range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(otp_moving_factor,Counter)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -564,7 +625,68 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">totp(+object_identifier,+term,+integer,+integer,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">totp(+object_identifier,+term,+integer,+integer,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a callable term but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is an object but not a supported OTP hash object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(otp_hash,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, <code class="docutils literal notranslate"><span class="pre">UnixTime</span></code>, or <code class="docutils literal notranslate"><span class="pre">Digits</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Secret)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <cite>Secret`</cite> list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">Secret</span></code> list is an integer but not a valid byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code> is not a valid Base32 source:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(base32_source,Secret)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">UnixTime</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Integer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">UnixTime</span></code> is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Integer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Digits</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Digits)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Digits</span></code> is an integer but not a positive integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Digits)</span></code></div>
+</div>
+<div class="line">A searched time step exceeds the 64-bit HOTP moving-factor range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(otp_moving_factor,TimeStep)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -591,13 +713,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code>, <code class="docutils literal notranslate"><span class="pre">Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, <code class="docutils literal notranslate"><span class="pre">Window</span></code>, <code class="docutils literal notranslate"><span class="pre">Digits</span></code>, or <code class="docutils literal notranslate"><span class="pre">OTP</span></code> is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is not a supported OTP hash object:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a callable term but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is an object but not a supported OTP hash object:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(otp_hash,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, <code class="docutils literal notranslate"><span class="pre">Window</span></code>, <code class="docutils literal notranslate"><span class="pre">Digits</span></code>, or <code class="docutils literal notranslate"><span class="pre">OTP</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
@@ -669,13 +803,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code>, <code class="docutils literal notranslate"><span class="pre">Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">UnixTime</span></code>, <code class="docutils literal notranslate"><span class="pre">Window</span></code>, <code class="docutils literal notranslate"><span class="pre">Digits</span></code>, or <code class="docutils literal notranslate"><span class="pre">OTP</span></code> is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is not a supported OTP hash object:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a callable term but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is an object but not a supported OTP hash object:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(otp_hash,Hash)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code>, <code class="docutils literal notranslate"><span class="pre">Counter</span></code>, <code class="docutils literal notranslate"><span class="pre">Window</span></code>, <code class="docutils literal notranslate"><span class="pre">Digits</span></code>, or <code class="docutils literal notranslate"><span class="pre">OTP</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Secret</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">

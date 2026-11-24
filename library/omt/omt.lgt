@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-11-14,
+		date is 2026-11-24,
 		comment is 'Process-backed single-objective optimization with Z3 and OptiMathSAT.'
 	]).
 
@@ -46,18 +46,22 @@
 	]).
 
 	solve(Source, Results) :-
-		solve(Source, Results, []).
-
-	solve(Source, Results, Options) :-
-		validate_source(Source),
 		context(Context),
-		^^check_options(Options),
-		^^merge_options(Options, Merged),
-		^^option(solver(Solver), Merged),
-		^^option(time_limit(Seconds), Merged),
+		solve(Source, Results, Context, []).
+
+	solve(Source, Results, UserOptions) :-
+		context(Context),
+		solve(Source, Results, Context, UserOptions).
+
+	solve(Source, Results, Context, UserOptions) :-
+		validate_source(Source),
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		^^option(solver(Solver), Options),
+		^^option(time_limit(Seconds), Options),
 		solver_arguments(Solver, Seconds, Arguments),
 		default_executable(Solver, Default),
-		^^option(executable(Command), Merged, executable(Default)),
+		^^option(executable(Command), Options, executable(Default)),
 		(	file_exists(Command) ->
 			absolute_file_name(Command, Executable)
 		;	resolve_command_path(Command, Executable) ->

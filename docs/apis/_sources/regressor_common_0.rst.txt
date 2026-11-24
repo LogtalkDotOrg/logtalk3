@@ -114,7 +114,7 @@ Hook predicate that importing regressor implementations must define in order to 
 ``dataset_attributes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the dataset attribute declarations as `Attribute-Values` pairs.
+Collects the dataset attribute declarations as ``Attribute-Values`` pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -133,7 +133,7 @@ Collects the dataset attribute declarations as `Attribute-Values` pairs.
 ``dataset_examples/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Collects the dataset examples as `example(Id, TargetValue, AttributeValues)` terms.
+Collects the dataset examples as ``example(Id, TargetValue, AttributeValues)`` terms.
 
 | **Compilation flags:**
 |    ``static``
