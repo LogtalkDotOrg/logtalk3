@@ -3,7 +3,7 @@
 % 
 %  CSS styles for converting SVG diagram files
 %
-%  Last updated on November 21, 2026
+%  Last updated on November 24, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -25,4 +25,17 @@
 
 a[*|href]:hover {
 	text-decoration: underline;
+}
+
+g.graph g.edge:hover path,
+g.graph g.edge:hover polygon,
+g.graph g.edge:hover polyline,
+g.graph g.edge:hover ellipse {
+	stroke: #060000;
+	stroke-width: 2px;
+}
+
+svg.d2-svg g:hover > path.connection {
+	stroke: #060000;
+	stroke-width: 4px !important;
 }

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3221,-140 3221,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol atms_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:00</text>
 <g id="clust1" class="cluster">
 <title>cluster_atms_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="atms_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3197,-46 3197,-46 3203,-46 3209,-52 3209,-58 3209,-58 3209,-116 3209,-116 3209,-122 3203,-128 3197,-128 3197,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">atms_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Creates a new empty ATMS using the default ordered&#45;list environment representation.">
 <polygon fill="springgreen" stroke="black" points="77.9,-92 18.1,-92 18.1,-56 77.9,-56 77.9,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.1" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="31.5" y="-75.71" font-family="monospace" font-size="11.00">new/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Creates a new empty ATMS using the specified environment representation object. Fails if the object does not conform to the environment protocol.">
 <polygon fill="springgreen" stroke="black" points="155.9,-92 96.1,-92 96.1,-56 155.9,-56 155.9,-92"/>
 <text xml:space="preserve" text-anchor="start" x="104.1" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L43">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="109.5" y="-75.71" font-family="monospace" font-size="11.00">new/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Returns a new empty ATMS using the same environment representation as the given state.">
 <polygon fill="springgreen" stroke="black" points="246.5,-92 173.5,-92 173.5,-56 246.5,-56 246.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="181.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L50">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L50">
 <text xml:space="preserve" text-anchor="start" x="186.9" y="-75.71" font-family="monospace" font-size="11.00">clear/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Returns the environment representation object used by the given state.">
 <polygon fill="springgreen" stroke="black" points="397.21,-92 264.79,-92 264.79,-56 397.21,-56 397.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="272.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L57">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="278.19" y="-75.71" font-family="monospace" font-size="11.00">representation/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Creates an ordinary node for the given datum and returns the updated state.">
 <polygon fill="springgreen" stroke="black" points="528.31,-92 415.69,-92 415.69,-56 528.31,-56 528.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="423.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L64">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="429.09" y="-75.71" font-family="monospace" font-size="11.00">create_node/4</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Creates an assumption node for the given datum and returns the updated state.">
 <polygon fill="springgreen" stroke="black" points="698.11,-92 545.89,-92 545.89,-56 698.11,-56 698.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="553.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L71">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L71">
 <text xml:space="preserve" text-anchor="start" x="559.29" y="-75.71" font-family="monospace" font-size="11.00">create_assumption/4</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Creates a contradiction node for the given datum and returns the updated state.">
 <polygon fill="springgreen" stroke="black" points="888.01,-92 715.99,-92 715.99,-56 888.01,-56 888.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="723.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L78">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="729.39" y="-75.71" font-family="monospace" font-size="11.00">create_contradiction/4</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Adds a Horn justification from the antecedent nodes to the consequent node, incrementally propagating label changes. Fails if any referenced node is unknown.">
 <polygon fill="springgreen" stroke="black" points="992.11,-92 905.89,-92 905.89,-56 992.11,-56 992.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="913.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L85">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="919.3" y="-75.71" font-family="monospace" font-size="11.00">justify/5</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Removes one occurrence of the specified Horn justification, rebuilding labels and nogoods when needed. Returns the input state unchanged if the justification is absent.">
 <polygon fill="springgreen" stroke="black" points="1188.31,-92 1009.69,-92 1009.69,-56 1188.31,-56 1188.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1017.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L92">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="1023.09" y="-75.71" font-family="monospace" font-size="11.00">retract_justification/5</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Removes all occurrences matching the requested justification terms, rebuilding derived state at most once. Returns the input state unchanged if none match.">
 <polygon fill="springgreen" stroke="black" points="1391.61,-92 1206.39,-92 1206.39,-56 1391.61,-56 1391.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1214.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L104">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L104">
 <text xml:space="preserve" text-anchor="start" x="1219.79" y="-75.71" font-family="monospace" font-size="11.00">retract_justifications/3</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Removes an ordinary, assumption, or contradiction node and all justifications mentioning it, rebuilding derived state when needed. Returns the input state unchanged if the node is absent.">
 <polygon fill="springgreen" stroke="black" points="1528.61,-92 1409.39,-92 1409.39,-56 1528.61,-56 1528.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1417.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L116">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="1422.79" y="-75.71" font-family="monospace" font-size="11.00">retract_node/3</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="a_node12"><a xlink:title="Removes the requested nodes and every justification mentioning any of them, rebuilding derived state at most once. Returns the input state unchanged if no nodes are removed.">
 <polygon fill="springgreen" stroke="black" points="1672.91,-92 1547.09,-92 1547.09,-56 1672.91,-56 1672.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1555.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L128">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L128">
 <text xml:space="preserve" text-anchor="start" x="1560.49" y="-75.71" font-family="monospace" font-size="11.00">retract_nodes/3</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <g id="a_node13"><a xlink:title="Removes requested nodes, their incident justifications, and all exact matches for requested justification terms in one batch, rebuilding derived state at most once.">
 <polygon fill="springgreen" stroke="black" points="1816.91,-92 1691.09,-92 1691.09,-56 1816.91,-56 1816.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1699.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L140">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="1704.49" y="-75.71" font-family="monospace" font-size="11.00">retract_batch/4</text>
 </a>
 </g>
@@ -251,7 +251,7 @@
 <g id="a_node14"><a xlink:title="Enumerates or tests the nodes in the given state.">
 <polygon fill="springgreen" stroke="black" points="1901.2,-92 1834.8,-92 1834.8,-56 1901.2,-56 1901.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1842.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L154">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L154" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L154">
 <text xml:space="preserve" text-anchor="start" x="1848.2" y="-75.71" font-family="monospace" font-size="11.00">node/2</text>
 </a>
 </g>
@@ -268,7 +268,7 @@
 <g id="a_node15"><a xlink:title="Enumerates or tests the assumption nodes in the given state.">
 <polygon fill="springgreen" stroke="black" points="2025.01,-92 1918.99,-92 1918.99,-56 2025.01,-56 2025.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1926.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L161">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L161">
 <text xml:space="preserve" text-anchor="start" x="1932.39" y="-75.71" font-family="monospace" font-size="11.00">assumption/2</text>
 </a>
 </g>
@@ -285,7 +285,7 @@
 <g id="a_node16"><a xlink:title="Enumerates or tests the contradiction nodes in the given state.">
 <polygon fill="springgreen" stroke="black" points="2168.91,-92 2043.09,-92 2043.09,-56 2168.91,-56 2168.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2051.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L168">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="2056.49" y="-75.71" font-family="monospace" font-size="11.00">contradiction/2</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <g id="a_node17"><a xlink:title="Returns the node&#45;datum pairs in node identifier order.">
 <polygon fill="springgreen" stroke="black" points="2259.5,-92 2186.5,-92 2186.5,-56 2259.5,-56 2259.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2194.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L175">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L175" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L175">
 <text xml:space="preserve" text-anchor="start" x="2199.9" y="-75.71" font-family="monospace" font-size="11.00">nodes/2</text>
 </a>
 </g>
@@ -319,7 +319,7 @@
 <g id="a_node18"><a xlink:title="Returns the assumption nodes in node identifier order.">
 <polygon fill="springgreen" stroke="black" points="2390.31,-92 2277.69,-92 2277.69,-56 2390.31,-56 2390.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2285.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L182">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="2291.09" y="-75.71" font-family="monospace" font-size="11.00">assumptions/2</text>
 </a>
 </g>
@@ -336,7 +336,7 @@
 <g id="a_node19"><a xlink:title="Returns all justifications in insertion order.">
 <polygon fill="springgreen" stroke="black" points="2541.21,-92 2408.79,-92 2408.79,-56 2541.21,-56 2541.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2416.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L189">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L189">
 <text xml:space="preserve" text-anchor="start" x="2422.19" y="-75.71" font-family="monospace" font-size="11.00">justifications/2</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <g id="a_node20"><a xlink:title="Returns the minimal consistent environments supporting the given node. Fails if the node is unknown.">
 <polygon fill="springgreen" stroke="black" points="2632.5,-92 2559.5,-92 2559.5,-56 2632.5,-56 2632.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2567.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L196">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L196">
 <text xml:space="preserve" text-anchor="start" x="2572.9" y="-75.71" font-family="monospace" font-size="11.00">label/3</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <g id="a_node21"><a xlink:title="True iff the given environment is a member of the node label.">
 <polygon fill="springgreen" stroke="black" points="2743.41,-92 2650.59,-92 2650.59,-56 2743.41,-56 2743.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2658.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L203">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="2663.99" y="-75.71" font-family="monospace" font-size="11.00">in_label/3</text>
 </a>
 </g>
@@ -387,7 +387,7 @@
 <g id="a_node22"><a xlink:title="True iff the given environment contains no recorded nogood.">
 <polygon fill="springgreen" stroke="black" points="2867.01,-92 2760.99,-92 2760.99,-56 2867.01,-56 2867.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2768.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L210">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="2774.39" y="-75.71" font-family="monospace" font-size="11.00">consistent/2</text>
 </a>
 </g>
@@ -404,7 +404,7 @@
 <g id="a_node23"><a xlink:title="Enumerates or tests the minimal nogood environments in the given state.">
 <polygon fill="springgreen" stroke="black" points="2964.81,-92 2885.19,-92 2885.19,-56 2964.81,-56 2964.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2893.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L217">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L217">
 <text xml:space="preserve" text-anchor="start" x="2898.6" y="-75.71" font-family="monospace" font-size="11.00">nogood/2</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <g id="a_node24"><a xlink:title="Returns the maximal consistent environments over all assumptions.">
 <polygon fill="springgreen" stroke="black" points="3121.51,-92 2982.49,-92 2982.49,-56 3121.51,-56 3121.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2990.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L224">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L224">
 <text xml:space="preserve" text-anchor="start" x="2995.89" y="-75.71" font-family="monospace" font-size="11.00">interpretations/2</text>
 </a>
 </g>
@@ -438,7 +438,7 @@
 <g id="a_node25"><a xlink:title="Returns the direct justifications for the given node in insertion order.">
 <polygon fill="springgreen" stroke="black" points="3198.9,-92 3139.1,-92 3139.1,-56 3198.9,-56 3198.9,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3147.1" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L231" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/atms/atms_protocol.lgt#L231">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L231" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/atms/atms_protocol.lgt#L231">
 <text xml:space="preserve" text-anchor="start" x="3152.5" y="-75.71" font-family="monospace" font-size="11.00">why/3</text>
 </a>
 </g>

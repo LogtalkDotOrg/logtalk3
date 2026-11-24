@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1247 1639.07,-1247 1639.07,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object max_sat_program</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:01</text>
 <g id="clust1" class="cluster">
 <title>cluster_max_sat_program_object</title>
 <g id="a_clust1"><a xlink:title="max_sat_program">
 <path fill="snow" stroke="dimgray" d="M46.07,-46C46.07,-46 1615.07,-46 1615.07,-46 1621.07,-46 1627.07,-52 1627.07,-58 1627.07,-58 1627.07,-1223 1627.07,-1223 1627.07,-1229 1621.07,-1235 1615.07,-1235 1615.07,-1235 46.07,-1235 46.07,-1235 40.07,-1235 34.07,-1229 34.07,-1223 34.07,-1223 34.07,-58 34.07,-58 34.07,-52 40.07,-46 46.07,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="46.07" y="-1219.46" font-family="monospace" font-size="10.00" fill="dimgray">max_sat_program</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Serializes ground canonical statements to WCNF character codes using the classic ``p wcnf`` format, assigning sequential variable numbers by first occurrence.">
 <polygon fill="springgreen" stroke="black" points="1052.77,-1199 953.36,-1199 953.36,-1163 1052.77,-1163 1052.77,-1199"/>
 <text xml:space="preserve" text-anchor="start" x="961.36" y="-1183.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="966.76" y="-1182.71" font-family="monospace" font-size="11.00">serialize/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Serializes statements using the given WCNF format: ``old`` (``p wcnf`` header with a top weight, hard clauses carrying the top weight) or ``new`` (the format of the MaxSAT Evaluations from 2022, without header, with ``h`` for hard clauses).">
 <polygon fill="springgreen" stroke="black" points="1052.77,-1082 953.36,-1082 953.36,-1046 1052.77,-1046 1052.77,-1082"/>
 <text xml:space="preserve" text-anchor="start" x="961.36" y="-1066.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L43">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="966.76" y="-1065.71" font-family="monospace" font-size="11.00">serialize/3</text>
 </a>
 </g>
@@ -61,12 +61,12 @@
 <!-- serialize/2&#45;&gt;serialize/3 -->
 <g id="edge1" class="edge">
 <title>serialize/2&#45;&gt;serialize/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L97" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M1003.07,-1162.53C1003.07,-1144.28 1003.07,-1115.33 1003.07,-1093.7"/>
 <polygon fill="black" stroke="black" points="1006.57,-1093.77 1003.07,-1083.77 999.57,-1093.77 1006.57,-1093.77"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L97">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="1003.07" y="-1120.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -77,7 +77,7 @@
 <g id="a_node5"><a xlink:title="Returns the top weight used by the ``old`` format: one plus the sum of the weights of the soft clauses.">
 <polygon fill="springgreen" stroke="black" points="1387.08,-965 1281.06,-965 1281.06,-929 1387.08,-929 1387.08,-965"/>
 <text xml:space="preserve" text-anchor="start" x="1289.06" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L82">
+<g id="a_node5_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="1294.46" y="-948.71" font-family="monospace" font-size="11.00">top_weight/2</text>
 </a>
 </g>
@@ -91,12 +91,12 @@
 <!-- serialize/3&#45;&gt;top_weight/2 -->
 <g id="edge6" class="edge">
 <title>serialize/3&#45;&gt;top_weight/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1053.01,-1059.24C1105.44,-1053.78 1189.23,-1040.7 1255.07,-1010 1274.7,-1000.85 1293.88,-985.98 1308.42,-973.1"/>
 <polygon fill="black" stroke="black" points="1310.7,-975.75 1315.72,-966.42 1305.98,-970.59 1310.7,-975.75"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1269.48" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,7 +106,7 @@
 <title>valid_format/1</title>
 <polygon fill="cornsilk" stroke="black" points="1262.68,-965 1143.46,-965 1143.46,-929 1262.68,-929 1262.68,-965"/>
 <text xml:space="preserve" text-anchor="start" x="1151.46" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L159">
+<g id="a_node7_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L159">
 <text xml:space="preserve" text-anchor="start" x="1156.86" y="-948.71" font-family="monospace" font-size="11.00">valid_format/1</text>
 </a>
 </g>
@@ -118,12 +118,12 @@
 <!-- serialize/3&#45;&gt;valid_format/1 -->
 <g id="edge2" class="edge">
 <title>serialize/3&#45;&gt;valid_format/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1033.44,-1045.53C1068.05,-1025.63 1124.75,-993.04 1162.96,-971.06"/>
 <polygon fill="black" stroke="black" points="1164.5,-974.22 1171.42,-966.2 1161.01,-968.15 1164.5,-974.22"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1109.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,7 +133,7 @@
 <title>valid_statements/1</title>
 <polygon fill="cornsilk" stroke="black" points="1125.88,-965 980.26,-965 980.26,-929 1125.88,-929 1125.88,-965"/>
 <text xml:space="preserve" text-anchor="start" x="988.26" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L172">
+<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L172">
 <text xml:space="preserve" text-anchor="start" x="993.66" y="-948.71" font-family="monospace" font-size="11.00">valid_statements/1</text>
 </a>
 </g>
@@ -145,12 +145,12 @@
 <!-- serialize/3&#45;&gt;valid_statements/1 -->
 <g id="edge3" class="edge">
 <title>serialize/3&#45;&gt;valid_statements/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1013.05,-1045.65C1018.72,-1035.45 1025.72,-1022.2 1031.07,-1010 1035.82,-999.17 1040.33,-986.96 1044.01,-976.25"/>
 <polygon fill="black" stroke="black" points="1047.32,-977.39 1047.18,-966.8 1040.68,-975.17 1047.32,-977.39"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1034.54" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,7 +160,7 @@
 <title>collect_variables/2</title>
 <polygon fill="cornsilk" stroke="black" points="516.18,-965 363.96,-965 363.96,-929 516.18,-929 516.18,-965"/>
 <text xml:space="preserve" text-anchor="start" x="371.96" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230">
+<g id="a_node15_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="377.36" y="-948.71" font-family="monospace" font-size="11.00">collect_variables/2</text>
 </a>
 </g>
@@ -172,12 +172,12 @@
 <!-- serialize/3&#45;&gt;collect_variables/2 -->
 <g id="edge4" class="edge">
 <title>serialize/3&#45;&gt;collect_variables/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M953.18,-1054.04C902.27,-1044.52 821.15,-1028.35 752.06,-1010 739.43,-1006.65 736.75,-1004.17 724.07,-1001 640.36,-980.07 615.35,-981.64 527.8,-965.48"/>
 <polygon fill="black" stroke="black" points="528.47,-962.04 518,-963.64 527.18,-968.92 528.47,-962.04"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="752.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -187,7 +187,7 @@
 <title>count_clauses/3</title>
 <polygon fill="cornsilk" stroke="black" points="961.98,-965 836.16,-965 836.16,-929 961.98,-929 961.98,-965"/>
 <text xml:space="preserve" text-anchor="start" x="844.16" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L285" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L285">
+<g id="a_node22_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L285" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L285">
 <text xml:space="preserve" text-anchor="start" x="849.56" y="-948.71" font-family="monospace" font-size="11.00">count_clauses/3</text>
 </a>
 </g>
@@ -199,12 +199,12 @@
 <!-- serialize/3&#45;&gt;count_clauses/3 -->
 <g id="edge5" class="edge">
 <title>serialize/3&#45;&gt;count_clauses/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M987.09,-1045.9C977.47,-1035.55 965,-1022.08 954.06,-1010 943.39,-998.22 931.69,-985.06 921.84,-973.91"/>
 <polygon fill="black" stroke="black" points="924.62,-971.78 915.38,-966.59 919.37,-976.41 924.62,-971.78"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="954.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -214,7 +214,7 @@
 <title>serialize_statements/6</title>
 <polygon fill="cornsilk" stroke="black" points="1577.08,-965 1405.06,-965 1405.06,-929 1577.08,-929 1577.08,-965"/>
 <text xml:space="preserve" text-anchor="start" x="1413.06" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L293">
+<g id="a_node23_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L293">
 <text xml:space="preserve" text-anchor="start" x="1418.46" y="-948.71" font-family="monospace" font-size="11.00">serialize_statements/6</text>
 </a>
 </g>
@@ -226,12 +226,12 @@
 <!-- serialize/3&#45;&gt;serialize_statements/6 -->
 <g id="edge8" class="edge">
 <title>serialize/3&#45;&gt;serialize_statements/6</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1053.17,-1056.21C1112.57,-1047.66 1214.33,-1031.46 1300.07,-1010 1345.32,-998.68 1395.44,-982.25 1432.98,-969.15"/>
 <polygon fill="black" stroke="black" points="1434.01,-972.5 1442.29,-965.88 1431.69,-965.9 1434.01,-972.5"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1331.8" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -241,7 +241,7 @@
 <title>header//3</title>
 <polygon fill="cornsilk" stroke="black" points="1617.17,-893 1530.96,-893 1530.96,-857 1617.17,-857 1617.17,-893"/>
 <text xml:space="preserve" text-anchor="start" x="1538.96" y="-877.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314">
+<g id="a_node26_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314">
 <text xml:space="preserve" text-anchor="start" x="1544.36" y="-876.71" font-family="monospace" font-size="11.00">header//3</text>
 </a>
 </g>
@@ -253,12 +253,12 @@
 <!-- serialize/3&#45;&gt;header//3 -->
 <g id="edge7" class="edge">
 <title>serialize/3&#45;&gt;header//3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1053.16,-1063.46C1174.53,-1063.78 1480.76,-1059.5 1568.07,-1010 1601.88,-990.83 1610.14,-966.8 1601.07,-929 1598.96,-920.2 1595.13,-911.22 1591,-903.21"/>
 <polygon fill="black" stroke="black" points="1594.18,-901.71 1586.27,-894.66 1588.05,-905.1 1594.18,-901.71"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1581.02" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -280,12 +280,12 @@
 <!-- serialize/3&#45;&gt;type::check/3 -->
 <g id="edge60" class="edge">
 <title>serialize/3&#45;&gt;type::check/3</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M952.95,-1059.35C864.26,-1052.5 674.02,-1036 515.06,-1010 496.65,-1006.99 492.45,-1004.16 474.07,-1001 350.11,-979.72 314.2,-988.87 187.96,-965.41"/>
 <polygon fill="black" stroke="black" points="188.65,-961.98 178.17,-963.56 187.35,-968.86 188.65,-961.98"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="515.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -307,12 +307,12 @@
 <!-- serialize/3&#45;&gt;list::length/2 -->
 <g id="edge61" class="edge">
 <title>serialize/3&#45;&gt;list::length/2</title>
-<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M952.96,-1048.64C921.9,-1039.08 881.5,-1025.48 847.06,-1010 822.15,-998.8 795.47,-983.69 774.75,-971.19"/>
 <polygon fill="black" stroke="black" points="776.74,-968.3 766.38,-966.08 773.09,-974.27 776.74,-968.3"/>
 </a>
 </g>
-<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge61&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="847.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -334,12 +334,12 @@
 <!-- serialize/3&#45;&gt;list::append/3 -->
 <g id="edge62" class="edge">
 <title>serialize/3&#45;&gt;list::append/3</title>
-<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
+<g id="a_edge62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M984.46,-1045.66C969.16,-1032.1 946.43,-1013.52 924.07,-1001 883.94,-978.54 861.95,-994.96 827.07,-965 813.18,-953.08 818.51,-943.29 807.07,-929 731.92,-835.12 687.95,-836.12 605.06,-749 590.9,-734.12 592.66,-725.12 576.07,-713 540.28,-686.85 508.12,-713.56 483.07,-677 443.21,-618.83 568.92,-579.23 525.07,-524 503.28,-496.56 289.17,-456.99 174.98,-437.6"/>
 <polygon fill="black" stroke="black" points="175.85,-434.2 165.41,-435.98 174.69,-441.1 175.85,-434.2"/>
 </a>
 </g>
-<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L100">
+<g id="a_edge62&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="605.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -350,7 +350,7 @@
 <g id="a_node3"><a xlink:title="Serializes statements with origins and returns ``line(Start, End, Origin)`` source&#45;map entries; with the ``old`` format the generated header occupies line 1.">
 <polygon fill="springgreen" stroke="black" points="745.77,-1082 646.36,-1082 646.36,-1046 745.77,-1046 745.77,-1082"/>
 <text xml:space="preserve" text-anchor="start" x="654.36" y="-1066.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L56">
+<g id="a_node3_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L56">
 <text xml:space="preserve" text-anchor="start" x="659.76" y="-1065.71" font-family="monospace" font-size="11.00">serialize/5</text>
 </a>
 </g>
@@ -364,12 +364,12 @@
 <!-- serialize/5&#45;&gt;top_weight/2 -->
 <g id="edge14" class="edge">
 <title>serialize/5&#45;&gt;top_weight/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.19,-1060.14C828.98,-1054.72 999.16,-1040.63 1140.07,-1010 1187.28,-999.74 1239.37,-982.76 1277.67,-969.17"/>
 <polygon fill="black" stroke="black" points="1278.44,-972.61 1286.67,-965.94 1276.08,-966.02 1278.44,-972.61"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1172.44" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -377,12 +377,12 @@
 <!-- serialize/5&#45;&gt;valid_format/1 -->
 <g id="edge9" class="edge">
 <title>serialize/5&#45;&gt;valid_format/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.2,-1057.66C803.9,-1050.6 900.99,-1035.93 981.07,-1010 989.96,-1007.12 991.28,-1004.19 1000.06,-1001 1012.75,-996.38 1078.85,-979.33 1132.23,-965.8"/>
 <polygon fill="black" stroke="black" points="1132.76,-969.28 1141.59,-963.43 1131.04,-962.49 1132.76,-969.28"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1000.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -390,12 +390,12 @@
 <!-- serialize/5&#45;&gt;valid_statements/1 -->
 <g id="edge10" class="edge">
 <title>serialize/5&#45;&gt;valid_statements/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.12,-1048.74C781.89,-1038.39 831.1,-1023.83 874.07,-1010 914.35,-997.03 959.37,-981.43 994.18,-969.13"/>
 <polygon fill="black" stroke="black" points="994.96,-972.57 1003.21,-965.93 992.62,-965.97 994.96,-972.57"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="898.55" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -405,7 +405,7 @@
 <title>valid_origins/2</title>
 <polygon fill="cornsilk" stroke="black" points="659.98,-965 534.16,-965 534.16,-929 659.98,-929 659.98,-965"/>
 <text xml:space="preserve" text-anchor="start" x="542.16" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L217">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L217">
 <text xml:space="preserve" text-anchor="start" x="547.56" y="-948.71" font-family="monospace" font-size="11.00">valid_origins/2</text>
 </a>
 </g>
@@ -417,12 +417,12 @@
 <!-- serialize/5&#45;&gt;valid_origins/2 -->
 <g id="edge11" class="edge">
 <title>serialize/5&#45;&gt;valid_origins/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M645.91,-1048.45C627.19,-1040.32 607.88,-1028.06 597.06,-1010 591.17,-1000.17 590.19,-987.79 591.04,-976.68"/>
 <polygon fill="black" stroke="black" points="594.5,-977.18 592.34,-966.81 587.56,-976.26 594.5,-977.18"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="597.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -430,12 +430,12 @@
 <!-- serialize/5&#45;&gt;collect_variables/2 -->
 <g id="edge12" class="edge">
 <title>serialize/5&#45;&gt;collect_variables/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M649.48,-1045.59C623.77,-1035.69 591.4,-1022.76 563.06,-1010 535.9,-997.77 506.05,-982.76 482.56,-970.58"/>
 <polygon fill="black" stroke="black" points="484.41,-967.59 473.92,-966.07 481.17,-973.8 484.41,-967.59"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="563.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -443,12 +443,12 @@
 <!-- serialize/5&#45;&gt;count_clauses/3 -->
 <g id="edge13" class="edge">
 <title>serialize/5&#45;&gt;count_clauses/3</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M723.19,-1045.62C743.34,-1032.89 771.64,-1015.39 797.06,-1001 815.5,-990.57 836.19,-979.67 854.09,-970.49"/>
 <polygon fill="black" stroke="black" points="855.6,-973.65 862.92,-965.99 852.43,-967.41 855.6,-973.65"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="797.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -458,7 +458,7 @@
 <title>serialize_located/9</title>
 <polygon fill="cornsilk" stroke="black" points="346.18,-965 193.96,-965 193.96,-929 346.18,-929 346.18,-965"/>
 <text xml:space="preserve" text-anchor="start" x="201.96" y="-949.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L298">
+<g id="a_node24_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="207.36" y="-948.71" font-family="monospace" font-size="11.00">serialize_located/9</text>
 </a>
 </g>
@@ -470,12 +470,12 @@
 <!-- serialize/5&#45;&gt;serialize_located/9 -->
 <g id="edge16" class="edge">
 <title>serialize/5&#45;&gt;serialize_located/9</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M646.33,-1054.88C595.64,-1046.04 515.01,-1030.38 447.06,-1010 436.55,-1006.85 434.37,-1004.79 424.07,-1001 394.43,-990.11 361.34,-978.63 333.46,-969.15"/>
 <polygon fill="black" stroke="black" points="334.68,-965.87 324.08,-965.98 332.43,-972.5 334.68,-965.87"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="447.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -483,12 +483,12 @@
 <!-- serialize/5&#45;&gt;header//3 -->
 <g id="edge15" class="edge">
 <title>serialize/5&#45;&gt;header//3</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M746.05,-1059.38C890.58,-1048.85 1302.53,-1018.48 1363.07,-1010 1413.13,-1002.99 1554.05,-1004.12 1586.07,-965 1599.85,-948.16 1595.03,-923.22 1587.8,-904.02"/>
 <polygon fill="black" stroke="black" points="1591.07,-902.75 1583.97,-894.88 1584.61,-905.46 1591.07,-902.75"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1465.69" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -496,12 +496,12 @@
 <!-- serialize/5&#45;&gt;type::check/3 -->
 <g id="edge63" class="edge">
 <title>serialize/5&#45;&gt;type::check/3</title>
-<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M646.04,-1056.41C580.84,-1047.51 463.41,-1030.38 364.06,-1010 287.16,-994.23 266.29,-986.09 187.72,-965.69"/>
 <polygon fill="black" stroke="black" points="188.8,-962.35 178.25,-963.24 187.05,-969.13 188.8,-962.35"/>
 </a>
 </g>
-<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge63&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="364.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -509,12 +509,12 @@
 <!-- serialize/5&#45;&gt;list::length/2 -->
 <g id="edge64" class="edge">
 <title>serialize/5&#45;&gt;list::length/2</title>
-<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M693.48,-1045.65C692.25,-1032.92 692.01,-1015.43 697.06,-1001 700.44,-991.37 706.31,-982.12 712.58,-974.12"/>
 <polygon fill="black" stroke="black" points="715.23,-976.41 719.01,-966.51 709.88,-971.89 715.23,-976.41"/>
 </a>
 </g>
-<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge64&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="697.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -522,12 +522,12 @@
 <!-- serialize/5&#45;&gt;list::append/3 -->
 <g id="edge65" class="edge">
 <title>serialize/5&#45;&gt;list::append/3</title>
-<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
+<g id="a_edge65"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M645.96,-1059.25C501.38,-1047.89 91.4,-1011.79 55.07,-965 -67.49,-807.16 47.41,-539.57 89.8,-453.52"/>
 <polygon fill="black" stroke="black" points="92.91,-455.14 94.26,-444.63 86.65,-452.01 92.91,-455.14"/>
 </a>
 </g>
-<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L117">
+<g id="a_edge65&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="5.38" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -538,7 +538,7 @@
 <g id="a_node4"><a xlink:title="Returns the ordered ``Term&#45;Number`` variable table that the serialization predicates assign by first occurrence across hard and soft clauses.">
 <polygon fill="springgreen" stroke="black" points="445.77,-1082 346.36,-1082 346.36,-1046 445.77,-1046 445.77,-1082"/>
 <text xml:space="preserve" text-anchor="start" x="354.36" y="-1066.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L70">
+<g id="a_node4_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="359.76" y="-1065.71" font-family="monospace" font-size="11.00">variables/2</text>
 </a>
 </g>
@@ -552,12 +552,12 @@
 <!-- variables/2&#45;&gt;valid_statements/1 -->
 <g id="edge17" class="edge">
 <title>variables/2&#45;&gt;valid_statements/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M446.15,-1051.34C522.2,-1033.64 658.65,-1001.94 664.06,-1001 795.85,-978.1 833.48,-986.49 968.61,-965.31"/>
 <polygon fill="black" stroke="black" points="968.99,-968.79 978.31,-963.76 967.89,-961.88 968.99,-968.79"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="664.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -565,12 +565,12 @@
 <!-- variables/2&#45;&gt;collect_variables/2 -->
 <g id="edge18" class="edge">
 <title>variables/2&#45;&gt;collect_variables/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M393.38,-1045.61C392.1,-1032.87 391.84,-1015.37 397.06,-1001 400.65,-991.13 406.91,-981.74 413.56,-973.68"/>
 <polygon fill="black" stroke="black" points="416.08,-976.12 420.11,-966.33 410.85,-971.47 416.08,-976.12"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="397.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -578,12 +578,12 @@
 <!-- variables/2&#45;&gt;type::check/3 -->
 <g id="edge66" class="edge">
 <title>variables/2&#45;&gt;type::check/3</title>
-<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140" xlink:title="calls">
+<g id="a_edge66"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140" xlink:title="calls">
 <path fill="none" stroke="black" d="M346.04,-1045.59C318.42,-1035.69 283.6,-1022.75 253.06,-1010 223.52,-997.66 190.93,-982.49 165.4,-970.25"/>
 <polygon fill="black" stroke="black" points="167.17,-967.22 156.64,-966.03 164.13,-973.52 167.17,-967.22"/>
 </a>
 </g>
-<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L140">
+<g id="a_edge66&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="253.06" y="-1003.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -593,7 +593,7 @@
 <title>sum_weights/3</title>
 <polygon fill="cornsilk" stroke="black" points="1073.38,-749 960.76,-749 960.76,-713 1073.38,-713 1073.38,-749"/>
 <text xml:space="preserve" text-anchor="start" x="968.76" y="-733.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L151">
+<g id="a_node6_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="974.16" y="-732.71" font-family="monospace" font-size="11.00">sum_weights/3</text>
 </a>
 </g>
@@ -605,12 +605,12 @@
 <!-- top_weight/2&#45;&gt;sum_weights/3 -->
 <g id="edge19" class="edge">
 <title>top_weight/2&#45;&gt;sum_weights/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L147" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L147" xlink:title="calls">
 <path fill="none" stroke="black" d="M1308.4,-928.67C1251.89,-890.53 1116.7,-799.26 1052.32,-755.8"/>
 <polygon fill="black" stroke="black" points="1054.48,-753.03 1044.24,-750.34 1050.56,-758.84 1054.48,-753.03"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L147">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="1253.89" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -620,7 +620,7 @@
 <title>soft_parts/3</title>
 <polygon fill="cornsilk" stroke="black" points="940.08,-560 834.06,-560 834.06,-524 940.08,-524 940.08,-560"/>
 <text xml:space="preserve" text-anchor="start" x="842.06" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L168">
+<g id="a_node8_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="847.46" y="-543.71" font-family="monospace" font-size="11.00">soft_parts/3</text>
 </a>
 </g>
@@ -632,12 +632,12 @@
 <!-- sum_weights/3&#45;&gt;soft_parts/3 -->
 <g id="edge20" class="edge">
 <title>sum_weights/3&#45;&gt;soft_parts/3</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L152" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L152" xlink:title="calls">
 <path fill="none" stroke="black" d="M1055.35,-712.67C1069.56,-704.11 1084.15,-692.29 1092.07,-677 1099.43,-662.79 1100.6,-654.54 1092.07,-641 1061.43,-592.39 999.29,-567.37 951.42,-554.83"/>
 <polygon fill="black" stroke="black" points="952.53,-551.5 941.98,-552.49 950.84,-558.3 952.53,-551.5"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L152">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="1098.03" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -647,7 +647,7 @@
 <title>valid_statement/1</title>
 <polygon fill="cornsilk" stroke="black" points="961.58,-821 822.56,-821 822.56,-785 961.58,-785 961.58,-821"/>
 <text xml:space="preserve" text-anchor="start" x="830.56" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L180">
+<g id="a_node10_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="835.96" y="-804.71" font-family="monospace" font-size="11.00">valid_statement/1</text>
 </a>
 </g>
@@ -659,12 +659,12 @@
 <!-- valid_statements/1&#45;&gt;valid_statement/1 -->
 <g id="edge21" class="edge">
 <title>valid_statements/1&#45;&gt;valid_statement/1</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L173" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M1033.33,-928.59C1004.93,-903.54 952.41,-857.22 920.03,-828.66"/>
 <polygon fill="black" stroke="black" points="922.42,-826.1 912.6,-822.11 917.79,-831.35 922.42,-826.1"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L173">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L173">
 <text xml:space="preserve" text-anchor="start" x="991.72" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -672,12 +672,12 @@
 <!-- valid_statement/1&#45;&gt;soft_parts/3 -->
 <g id="edge23" class="edge">
 <title>valid_statement/1&#45;&gt;soft_parts/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L189" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L189" xlink:title="calls">
 <path fill="none" stroke="black" d="M878.5,-784.97C871.51,-775.09 863.7,-762.05 860.07,-749 842.81,-687.01 862.71,-611.39 876.37,-571.23"/>
 <polygon fill="black" stroke="black" points="879.65,-572.44 879.68,-561.85 873.05,-570.11 879.65,-572.44"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L189">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L189">
 <text xml:space="preserve" text-anchor="start" x="858.35" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -687,7 +687,7 @@
 <title>valid_clause/1</title>
 <polygon fill="cornsilk" stroke="black" points="1082.68,-677 963.46,-677 963.46,-641 1082.68,-641 1082.68,-677"/>
 <text xml:space="preserve" text-anchor="start" x="971.46" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L198">
+<g id="a_node11_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="976.86" y="-660.71" font-family="monospace" font-size="11.00">valid_clause/1</text>
 </a>
 </g>
@@ -699,12 +699,12 @@
 <!-- valid_statement/1&#45;&gt;valid_clause/1 -->
 <g id="edge24" class="edge">
 <title>valid_statement/1&#45;&gt;valid_clause/1</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L189" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L189" xlink:title="calls">
 <path fill="none" stroke="black" d="M896.94,-784.57C903.53,-761.91 915.56,-723.95 925.06,-713 935.93,-700.48 950.51,-690.4 965.1,-682.54"/>
 <polygon fill="black" stroke="black" points="966.46,-685.77 973.8,-678.12 963.3,-679.52 966.46,-685.77"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L189">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L189" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L189">
 <text xml:space="preserve" text-anchor="start" x="925.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -714,7 +714,7 @@
 <title>valid_disjunction/1</title>
 <polygon fill="cornsilk" stroke="black" points="1209.18,-560 1056.96,-560 1056.96,-524 1209.18,-524 1209.18,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1064.96" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L203">
+<g id="a_node12_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L203" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L203">
 <text xml:space="preserve" text-anchor="start" x="1070.36" y="-543.71" font-family="monospace" font-size="11.00">valid_disjunction/1</text>
 </a>
 </g>
@@ -726,12 +726,12 @@
 <!-- valid_statement/1&#45;&gt;valid_disjunction/1 -->
 <g id="edge25" class="edge">
 <title>valid_statement/1&#45;&gt;valid_disjunction/1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L195" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M961.91,-794.69C1000.32,-787.84 1047.12,-774.6 1082.07,-749 1112.9,-726.42 1117.63,-713.46 1129.07,-677 1140.06,-641.99 1139.03,-599.27 1136.61,-571.63"/>
 <polygon fill="black" stroke="black" points="1140.12,-571.52 1135.64,-561.92 1133.16,-572.22 1140.12,-571.52"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L195">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L195">
 <text xml:space="preserve" text-anchor="start" x="1136.33" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -741,7 +741,7 @@
 <title>raw_codes/2</title>
 <polygon fill="cornsilk" stroke="black" points="818.77,-677 719.36,-677 719.36,-641 818.77,-641 818.77,-677"/>
 <text xml:space="preserve" text-anchor="start" x="727.36" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node36_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L379">
+<g id="a_node36_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L379">
 <text xml:space="preserve" text-anchor="start" x="732.76" y="-660.71" font-family="monospace" font-size="11.00">raw_codes/2</text>
 </a>
 </g>
@@ -753,12 +753,12 @@
 <!-- valid_statement/1&#45;&gt;raw_codes/2 -->
 <g id="edge22" class="edge">
 <title>valid_statement/1&#45;&gt;raw_codes/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L182" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M864.91,-784.69C851.34,-775.2 835.26,-762.61 823.06,-749 806.43,-730.43 792.05,-706.04 782.32,-687.48"/>
 <polygon fill="black" stroke="black" points="785.49,-686 777.83,-678.67 779.25,-689.17 785.49,-686"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L182">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="823.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -780,12 +780,12 @@
 <!-- valid_statement/1&#45;&gt;list::member/2 -->
 <g id="edge67" class="edge">
 <title>valid_statement/1&#45;&gt;list::member/2</title>
-<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L182" xlink:title="calls">
+<g id="a_edge67"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M858.13,-784.5C839.09,-774.47 815.03,-761.44 794.07,-749 743.5,-718.99 728.77,-714 683.06,-677 665.48,-662.77 666.72,-652.22 647.07,-641 640.23,-637.1 445.41,-587.93 337.08,-560.76"/>
 <polygon fill="black" stroke="black" points="337.93,-557.37 327.38,-558.33 336.23,-564.16 337.93,-557.37"/>
 </a>
 </g>
-<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L182">
+<g id="a_edge67&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="683.06" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -793,12 +793,12 @@
 <!-- valid_clause/1&#45;&gt;valid_disjunction/1 -->
 <g id="edge26" class="edge">
 <title>valid_clause/1&#45;&gt;valid_disjunction/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L200" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L200" xlink:title="calls">
 <path fill="none" stroke="black" d="M1039.77,-640.53C1058.13,-621.34 1087.79,-590.33 1108.73,-568.44"/>
 <polygon fill="black" stroke="black" points="1111.14,-570.99 1115.52,-561.35 1106.08,-566.15 1111.14,-570.99"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L200">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="1081.37" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -808,7 +808,7 @@
 <title>valid_literal/1</title>
 <polygon fill="cornsilk" stroke="black" points="1166.98,-443 1041.16,-443 1041.16,-407 1166.98,-407 1166.98,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1049.16" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L210">
+<g id="a_node13_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L210">
 <text xml:space="preserve" text-anchor="start" x="1054.56" y="-426.71" font-family="monospace" font-size="11.00">valid_literal/1</text>
 </a>
 </g>
@@ -820,12 +820,12 @@
 <!-- valid_disjunction/1&#45;&gt;valid_literal/1 -->
 <g id="edge27" class="edge">
 <title>valid_disjunction/1&#45;&gt;valid_literal/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L207" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L207" xlink:title="calls">
 <path fill="none" stroke="black" d="M1128.66,-523.53C1124.04,-505.19 1116.69,-476.06 1111.23,-454.4"/>
 <polygon fill="black" stroke="black" points="1114.63,-453.56 1108.79,-444.72 1107.84,-455.27 1114.63,-453.56"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L207">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="1119.44" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -835,7 +835,7 @@
 <title>collect_variables/3</title>
 <polygon fill="cornsilk" stroke="black" points="589.18,-821 436.96,-821 436.96,-785 589.18,-785 589.18,-821"/>
 <text xml:space="preserve" text-anchor="start" x="444.96" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L234">
+<g id="a_node16_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L234" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L234">
 <text xml:space="preserve" text-anchor="start" x="450.36" y="-804.71" font-family="monospace" font-size="11.00">collect_variables/3</text>
 </a>
 </g>
@@ -847,12 +847,12 @@
 <!-- collect_variables/2&#45;&gt;collect_variables/3 -->
 <g id="edge28" class="edge">
 <title>collect_variables/2&#45;&gt;collect_variables/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M449.02,-928.59C461.51,-904.29 484.29,-859.97 499.05,-831.27"/>
 <polygon fill="black" stroke="black" points="502.12,-832.95 503.58,-822.46 495.89,-829.75 502.12,-832.95"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="485.25" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -862,7 +862,7 @@
 <title>number_variables/3</title>
 <polygon fill="cornsilk" stroke="black" points="418.88,-821 273.26,-821 273.26,-785 418.88,-785 418.88,-821"/>
 <text xml:space="preserve" text-anchor="start" x="281.26" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L280">
+<g id="a_node21_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L280" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L280">
 <text xml:space="preserve" text-anchor="start" x="286.66" y="-804.71" font-family="monospace" font-size="11.00">number_variables/3</text>
 </a>
 </g>
@@ -874,12 +874,12 @@
 <!-- collect_variables/2&#45;&gt;number_variables/3 -->
 <g id="edge29" class="edge">
 <title>collect_variables/2&#45;&gt;number_variables/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230" xlink:title="calls">
 <path fill="none" stroke="black" d="M428.54,-928.59C412.32,-904.08 382.6,-859.19 363.62,-830.52"/>
 <polygon fill="black" stroke="black" points="366.67,-828.78 358.23,-822.37 360.83,-832.64 366.67,-828.78"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L230">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L230">
 <text xml:space="preserve" text-anchor="start" x="404.25" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -889,7 +889,7 @@
 <title>statement_clause/2</title>
 <polygon fill="cornsilk" stroke="black" points="637.88,-677 492.26,-677 492.26,-641 637.88,-641 637.88,-677"/>
 <text xml:space="preserve" text-anchor="start" x="500.26" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L247">
+<g id="a_node17_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L247" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L247">
 <text xml:space="preserve" text-anchor="start" x="505.66" y="-660.71" font-family="monospace" font-size="11.00">statement_clause/2</text>
 </a>
 </g>
@@ -901,12 +901,12 @@
 <!-- collect_variables/3&#45;&gt;statement_clause/2 -->
 <g id="edge30" class="edge">
 <title>collect_variables/3&#45;&gt;statement_clause/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235" xlink:title="calls">
 <path fill="none" stroke="black" d="M519.44,-784.59C528.3,-760.4 544.43,-716.36 554.94,-687.65"/>
 <polygon fill="black" stroke="black" points="558.13,-689.13 558.28,-678.53 551.56,-686.72 558.13,-689.13"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235">
 <text xml:space="preserve" text-anchor="start" x="545.25" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -916,7 +916,7 @@
 <title>disjunction_literals/2</title>
 <polygon fill="cornsilk" stroke="black" points="516.08,-560 344.06,-560 344.06,-524 516.08,-524 516.08,-560"/>
 <text xml:space="preserve" text-anchor="start" x="352.06" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L258">
+<g id="a_node18_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="357.46" y="-543.71" font-family="monospace" font-size="11.00">disjunction_literals/2</text>
 </a>
 </g>
@@ -928,12 +928,12 @@
 <!-- collect_variables/3&#45;&gt;disjunction_literals/2 -->
 <g id="edge31" class="edge">
 <title>collect_variables/3&#45;&gt;disjunction_literals/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235" xlink:title="calls">
 <path fill="none" stroke="black" d="M499.63,-784.55C482.64,-761.4 454.03,-718.6 441.06,-677 430.11,-641.87 428.48,-599.18 428.84,-571.57"/>
 <polygon fill="black" stroke="black" points="432.33,-571.97 429.07,-561.89 425.33,-571.81 432.33,-571.97"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235">
 <text xml:space="preserve" text-anchor="start" x="441.06" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -943,7 +943,7 @@
 <title>literal_terms/3</title>
 <polygon fill="cornsilk" stroke="black" points="288.98,-677 163.16,-677 163.16,-641 288.98,-641 288.98,-677"/>
 <text xml:space="preserve" text-anchor="start" x="171.16" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L265">
+<g id="a_node19_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L265">
 <text xml:space="preserve" text-anchor="start" x="176.56" y="-660.71" font-family="monospace" font-size="11.00">literal_terms/3</text>
 </a>
 </g>
@@ -955,12 +955,12 @@
 <!-- collect_variables/3&#45;&gt;literal_terms/3 -->
 <g id="edge32" class="edge">
 <title>collect_variables/3&#45;&gt;literal_terms/3</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235" xlink:title="calls">
 <path fill="none" stroke="black" d="M472.63,-784.59C449.72,-774.53 420.6,-761.45 395.06,-749 351.17,-727.61 301.85,-701.38 267.87,-682.95"/>
 <polygon fill="black" stroke="black" points="269.63,-679.92 259.18,-678.22 266.29,-686.07 269.63,-679.92"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L235">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L235">
 <text xml:space="preserve" text-anchor="start" x="395.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -968,12 +968,12 @@
 <!-- statement_clause/2&#45;&gt;soft_parts/3 -->
 <g id="edge33" class="edge">
 <title>statement_clause/2&#45;&gt;soft_parts/3</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L253" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L253" xlink:title="calls">
 <path fill="none" stroke="black" d="M634.8,-640.6C669.79,-631.23 712.59,-618.77 750.07,-605 767.43,-598.62 807.53,-580.32 839.89,-565.24"/>
 <polygon fill="black" stroke="black" points="841.13,-568.52 848.71,-561.12 838.17,-562.18 841.13,-568.52"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L253">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L253" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L253">
 <text xml:space="preserve" text-anchor="start" x="770.09" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -981,12 +981,12 @@
 <!-- disjunction_literals/2&#45;&gt;list::append/3 -->
 <g id="edge68" class="edge">
 <title>disjunction_literals/2&#45;&gt;list::append/3</title>
-<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L258" xlink:title="calls">
+<g id="a_edge68"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L258" xlink:title="calls">
 <path fill="none" stroke="black" d="M380.56,-523.53C322.58,-503.08 226.59,-469.22 164.34,-447.26"/>
 <polygon fill="black" stroke="black" points="165.53,-443.97 154.94,-443.95 163.2,-450.57 165.53,-443.97"/>
 </a>
 </g>
-<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L258">
+<g id="a_edge68&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L258">
 <text xml:space="preserve" text-anchor="start" x="276.84" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -996,7 +996,7 @@
 <title>literal_term/2</title>
 <polygon fill="cornsilk" stroke="black" points="712.68,-209 593.46,-209 593.46,-173 712.68,-173 712.68,-209"/>
 <text xml:space="preserve" text-anchor="start" x="601.46" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L274">
+<g id="a_node20_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L274" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L274">
 <text xml:space="preserve" text-anchor="start" x="606.86" y="-192.71" font-family="monospace" font-size="11.00">literal_term/2</text>
 </a>
 </g>
@@ -1008,12 +1008,12 @@
 <!-- literal_terms/3&#45;&gt;literal_term/2 -->
 <g id="edge34" class="edge">
 <title>literal_terms/3&#45;&gt;literal_term/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266" xlink:title="calls">
 <path fill="none" stroke="black" d="M215.51,-640.68C200.9,-614.31 178.34,-563.07 197.07,-524 277.29,-356.62 488.7,-255.1 593.05,-213.67"/>
 <polygon fill="black" stroke="black" points="594.27,-216.95 602.31,-210.04 591.72,-210.43 594.27,-216.95"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266">
 <text xml:space="preserve" text-anchor="start" x="279.78" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1021,12 +1021,12 @@
 <!-- literal_terms/3&#45;&gt;list::append/3 -->
 <g id="edge70" class="edge">
 <title>literal_terms/3&#45;&gt;list::append/3</title>
-<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266" xlink:title="calls">
+<g id="a_edge70"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266" xlink:title="calls">
 <path fill="none" stroke="black" d="M210.71,-640.87C201.92,-630.74 190.92,-617.49 182.07,-605 168.58,-585.97 165.25,-580.98 155.06,-560 137.84,-524.54 122.41,-481.67 113.15,-454.13"/>
 <polygon fill="black" stroke="black" points="116.51,-453.16 110.04,-444.77 109.87,-455.36 116.51,-453.16"/>
 </a>
 </g>
-<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266">
+<g id="a_edge70&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266">
 <text xml:space="preserve" text-anchor="start" x="155.06" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1034,12 +1034,12 @@
 <!-- literal_terms/3&#45;&gt;list::member/2 -->
 <g id="edge69" class="edge">
 <title>literal_terms/3&#45;&gt;list::member/2</title>
-<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266" xlink:title="calls">
+<g id="a_edge69"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266" xlink:title="calls">
 <path fill="none" stroke="black" d="M232.14,-640.53C238.55,-622.11 248.75,-592.79 256.29,-571.1"/>
 <polygon fill="black" stroke="black" points="259.59,-572.28 259.57,-561.68 252.98,-569.98 259.59,-572.28"/>
 </a>
 </g>
-<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L266">
+<g id="a_edge69&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L266">
 <text xml:space="preserve" text-anchor="start" x="247.27" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1047,12 +1047,12 @@
 <!-- count_clauses/3&#45;&gt;statement_clause/2 -->
 <g id="edge35" class="edge">
 <title>count_clauses/3&#45;&gt;statement_clause/2</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L286" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L286" xlink:title="calls">
 <path fill="none" stroke="black" d="M877.06,-928.64C835.21,-895.29 741.83,-819.35 669.07,-749 653.46,-733.91 652.17,-727.56 636.07,-713 624.81,-702.83 611.69,-692.62 599.81,-683.93"/>
 <polygon fill="black" stroke="black" points="602,-681.19 591.84,-678.19 597.91,-686.87 602,-681.19"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L286">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L286">
 <text xml:space="preserve" text-anchor="start" x="747.57" y="-800.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1062,7 +1062,7 @@
 <title>statement//4</title>
 <polygon fill="cornsilk" stroke="black" points="1402.08,-821 1296.06,-821 1296.06,-785 1402.08,-785 1402.08,-821"/>
 <text xml:space="preserve" text-anchor="start" x="1304.06" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317">
+<g id="a_node27_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317">
 <text xml:space="preserve" text-anchor="start" x="1309.46" y="-804.71" font-family="monospace" font-size="11.00">statement//4</text>
 </a>
 </g>
@@ -1074,12 +1074,12 @@
 <!-- serialize_statements/6&#45;&gt;statement//4 -->
 <g id="edge36" class="edge">
 <title>serialize_statements/6&#45;&gt;statement//4</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L294" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L294" xlink:title="calls">
 <path fill="none" stroke="black" d="M1473.66,-928.59C1448.72,-903.65 1402.69,-857.62 1374.1,-829.03"/>
 <polygon fill="black" stroke="black" points="1376.8,-826.78 1367.25,-822.18 1371.85,-831.73 1376.8,-826.78"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L294">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L294">
 <text xml:space="preserve" text-anchor="start" x="1436.96" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1089,7 +1089,7 @@
 <title>count_lines/3</title>
 <polygon fill="cornsilk" stroke="black" points="255.38,-821 142.76,-821 142.76,-785 255.38,-785 255.38,-821"/>
 <text xml:space="preserve" text-anchor="start" x="150.76" y="-805.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L306">
+<g id="a_node25_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L306" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L306">
 <text xml:space="preserve" text-anchor="start" x="156.16" y="-804.71" font-family="monospace" font-size="11.00">count_lines/3</text>
 </a>
 </g>
@@ -1101,12 +1101,12 @@
 <!-- serialize_located/9&#45;&gt;count_lines/3 -->
 <g id="edge38" class="edge">
 <title>serialize_located/9&#45;&gt;count_lines/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299" xlink:title="calls">
 <path fill="none" stroke="black" d="M261.36,-928.59C249.21,-904.29 227.06,-859.97 212.7,-831.27"/>
 <polygon fill="black" stroke="black" points="215.9,-829.84 208.3,-822.46 209.64,-832.97 215.9,-829.84"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299">
 <text xml:space="preserve" text-anchor="start" x="243.02" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1114,12 +1114,12 @@
 <!-- serialize_located/9&#45;&gt;statement//4 -->
 <g id="edge37" class="edge">
 <title>serialize_located/9&#45;&gt;statement//4</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299" xlink:title="calls">
 <path fill="none" stroke="black" d="M280.02,-928.51C293.19,-907.28 318.59,-872.4 351.06,-857 361.65,-851.98 1064.93,-817.7 1284.39,-807.11"/>
 <polygon fill="black" stroke="black" points="1284.37,-810.61 1294.19,-806.64 1284.03,-803.62 1284.37,-810.61"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299">
 <text xml:space="preserve" text-anchor="start" x="351.06" y="-872.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1127,12 +1127,12 @@
 <!-- serialize_located/9&#45;&gt;list::append/3 -->
 <g id="edge71" class="edge">
 <title>serialize_located/9&#45;&gt;list::append/3</title>
-<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299" xlink:title="calls">
+<g id="a_edge71"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299" xlink:title="calls">
 <path fill="none" stroke="black" d="M222.05,-928.65C173.03,-907.48 104.07,-866.58 104.07,-804 104.07,-804 104.07,-804 104.07,-541 104.07,-511.55 104.07,-477.86 104.07,-454.6"/>
 <polygon fill="black" stroke="black" points="107.57,-454.66 104.07,-444.66 100.57,-454.66 107.57,-454.66"/>
 </a>
 </g>
-<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L299">
+<g id="a_edge71&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L299">
 <text xml:space="preserve" text-anchor="start" x="104.07" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1142,7 +1142,7 @@
 <title>integer_text//1</title>
 <polygon fill="cornsilk" stroke="black" points="1594.98,-209 1469.16,-209 1469.16,-173 1594.98,-173 1594.98,-209"/>
 <text xml:space="preserve" text-anchor="start" x="1477.16" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node33_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L365">
+<g id="a_node33_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L365">
 <text xml:space="preserve" text-anchor="start" x="1482.56" y="-192.71" font-family="monospace" font-size="11.00">integer_text//1</text>
 </a>
 </g>
@@ -1154,12 +1154,12 @@
 <!-- header//3&#45;&gt;integer_text//1 -->
 <g id="edge40" class="edge">
 <title>header//3&#45;&gt;integer_text//1</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314" xlink:title="calls">
 <path fill="none" stroke="black" d="M1577.73,-856.71C1582.6,-832.69 1590.99,-787.78 1594.07,-749 1595.34,-733.05 1594.21,-729 1594.07,-713 1593.18,-611.43 1590.07,-586.07 1590.07,-484.5 1590.07,-484.5 1590.07,-484.5 1590.07,-307 1590.07,-273.89 1570.66,-240.6 1554.3,-218.42"/>
 <polygon fill="black" stroke="black" points="1557.1,-216.33 1548.23,-210.54 1551.56,-220.6 1557.1,-216.33"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314">
 <text xml:space="preserve" text-anchor="start" x="1590.76" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1169,7 +1169,7 @@
 <title>text//1</title>
 <polygon fill="cornsilk" stroke="black" points="1429.57,-560 1356.56,-560 1356.56,-524 1429.57,-524 1429.57,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1364.56" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node34_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L369">
+<g id="a_node34_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="1369.96" y="-543.71" font-family="monospace" font-size="11.00">text//1</text>
 </a>
 </g>
@@ -1181,12 +1181,12 @@
 <!-- header//3&#45;&gt;text//1 -->
 <g id="edge39" class="edge">
 <title>header//3&#45;&gt;text//1</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314" xlink:title="calls">
 <path fill="none" stroke="black" d="M1574.24,-856.67C1573.87,-815.78 1568.22,-711.41 1523.07,-641 1502.32,-608.65 1466.94,-583.02 1438.33,-566.09"/>
 <polygon fill="black" stroke="black" points="1440.25,-563.16 1429.83,-561.23 1436.77,-569.24 1440.25,-563.16"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L314">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L314">
 <text xml:space="preserve" text-anchor="start" x="1563.11" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1194,12 +1194,12 @@
 <!-- statement//4&#45;&gt;soft_parts/3 -->
 <g id="edge46" class="edge">
 <title>statement//4&#45;&gt;soft_parts/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L328" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L328" xlink:title="calls">
 <path fill="none" stroke="black" d="M1299.22,-784.66C1244.38,-765.86 1153.48,-735.54 1074.07,-713 1009.36,-694.63 975.8,-723.36 927.06,-677 898.03,-649.38 889.81,-601.65 887.63,-571.24"/>
 <polygon fill="black" stroke="black" points="891.15,-571.45 887.13,-561.65 884.16,-571.82 891.15,-571.45"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L328">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L328">
 <text xml:space="preserve" text-anchor="start" x="927.06" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1209,7 +1209,7 @@
 <title>hard_prefix//2</title>
 <polygon fill="cornsilk" stroke="black" points="1513.68,-677 1394.46,-677 1394.46,-641 1513.68,-641 1513.68,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1402.46" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L335">
+<g id="a_node28_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L335">
 <text xml:space="preserve" text-anchor="start" x="1407.86" y="-660.71" font-family="monospace" font-size="11.00">hard_prefix//2</text>
 </a>
 </g>
@@ -1221,12 +1221,12 @@
 <!-- statement//4&#45;&gt;hard_prefix//2 -->
 <g id="edge44" class="edge">
 <title>statement//4&#45;&gt;hard_prefix//2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L325" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M1361.94,-784.59C1380.15,-759.97 1413.55,-714.8 1434.74,-686.14"/>
 <polygon fill="black" stroke="black" points="1437.38,-688.45 1440.52,-678.33 1431.76,-684.29 1437.38,-688.45"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L325">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="1414.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1236,7 +1236,7 @@
 <title>clause//2</title>
 <polygon fill="cornsilk" stroke="black" points="1313.17,-677 1226.96,-677 1226.96,-641 1313.17,-641 1313.17,-677"/>
 <text xml:space="preserve" text-anchor="start" x="1234.96" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L340">
+<g id="a_node29_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L340">
 <text xml:space="preserve" text-anchor="start" x="1240.36" y="-660.71" font-family="monospace" font-size="11.00">clause//2</text>
 </a>
 </g>
@@ -1248,12 +1248,12 @@
 <!-- statement//4&#45;&gt;clause//2 -->
 <g id="edge45" class="edge">
 <title>statement//4&#45;&gt;clause//2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L325" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L325" xlink:title="calls">
 <path fill="none" stroke="black" d="M1338.44,-784.96C1332.09,-774.64 1323.94,-761.16 1317.06,-749 1305.53,-728.59 1293.18,-705.13 1284.03,-687.42"/>
 <polygon fill="black" stroke="black" points="1287.16,-685.86 1279.48,-678.57 1280.94,-689.06 1287.16,-685.86"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L325">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L325">
 <text xml:space="preserve" text-anchor="start" x="1317.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1261,12 +1261,12 @@
 <!-- statement//4&#45;&gt;integer_text//1 -->
 <g id="edge47" class="edge">
 <title>statement//4&#45;&gt;integer_text//1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L328" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L328" xlink:title="calls">
 <path fill="none" stroke="black" d="M1402.3,-794.25C1452.16,-785.78 1521.44,-770.49 1538.07,-749 1570.51,-707.07 1542.97,-328.24 1534.4,-220.48"/>
 <polygon fill="black" stroke="black" points="1537.91,-220.46 1533.62,-210.77 1530.94,-221.02 1537.91,-220.46"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L328">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L328" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L328">
 <text xml:space="preserve" text-anchor="start" x="1550.76" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1274,12 +1274,12 @@
 <!-- statement//4&#45;&gt;text//1 -->
 <g id="edge42" class="edge">
 <title>statement//4&#45;&gt;text//1</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="calls">
 <path fill="none" stroke="black" d="M1348.43,-784.88C1347.67,-755.23 1347.64,-692.59 1358.06,-641 1363,-616.57 1372.78,-590.02 1380.75,-570.72"/>
 <polygon fill="black" stroke="black" points="1383.91,-572.24 1384.59,-561.66 1377.46,-569.5 1383.91,-572.24"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317">
 <text xml:space="preserve" text-anchor="start" x="1358.06" y="-656.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1289,7 +1289,7 @@
 <title>codes//1</title>
 <polygon fill="cornsilk" stroke="black" points="1489.87,-92 1410.26,-92 1410.26,-56 1489.87,-56 1489.87,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1418.26" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node35_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L372" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L372">
+<g id="a_node35_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L372" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L372">
 <text xml:space="preserve" text-anchor="start" x="1423.66" y="-75.71" font-family="monospace" font-size="11.00">codes//1</text>
 </a>
 </g>
@@ -1301,12 +1301,12 @@
 <!-- statement//4&#45;&gt;codes//1 -->
 <g id="edge43" class="edge">
 <title>statement//4&#45;&gt;codes//1</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="calls">
 <path fill="none" stroke="black" d="M1396.09,-784.56C1439.13,-765.61 1499.57,-730.66 1523.07,-677 1579.75,-547.54 1450.07,-508.83 1450.07,-367.5 1450.07,-367.5 1450.07,-367.5 1450.07,-190 1450.07,-160.55 1450.07,-126.86 1450.07,-103.6"/>
 <polygon fill="black" stroke="black" points="1453.57,-103.66 1450.07,-93.66 1446.57,-103.66 1453.57,-103.66"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317">
 <text xml:space="preserve" text-anchor="start" x="1463.1" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1314,12 +1314,12 @@
 <!-- statement//4&#45;&gt;raw_codes/2 -->
 <g id="edge41" class="edge">
 <title>statement//4&#45;&gt;raw_codes/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="calls">
 <path fill="none" stroke="black" d="M1295.57,-801.68C1187.12,-800.14 945.83,-791.84 877.06,-749 860.95,-738.96 867.57,-726.35 854.07,-713 842.53,-701.58 828.1,-691.45 814.43,-683.17"/>
 <polygon fill="black" stroke="black" points="816.37,-680.25 805.97,-678.25 812.85,-686.3 816.37,-680.25"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L317">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L317">
 <text xml:space="preserve" text-anchor="start" x="877.06" y="-728.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1327,12 +1327,12 @@
 <!-- hard_prefix//2&#45;&gt;integer_text//1 -->
 <g id="edge48" class="edge">
 <title>hard_prefix//2&#45;&gt;integer_text//1</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L335" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L335" xlink:title="calls">
 <path fill="none" stroke="black" d="M1469.57,-640.7C1487.05,-619.34 1513.07,-581.15 1513.07,-543 1513.07,-543 1513.07,-543 1513.07,-307 1513.07,-277.19 1519.36,-243.6 1524.7,-220.46"/>
 <polygon fill="black" stroke="black" points="1528.08,-221.4 1527.02,-210.86 1521.27,-219.76 1528.08,-221.4"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L335">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L335" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L335">
 <text xml:space="preserve" text-anchor="start" x="1513.07" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1340,12 +1340,12 @@
 <!-- hard_prefix//2&#45;&gt;text//1 -->
 <g id="edge49" class="edge">
 <title>hard_prefix//2&#45;&gt;text//1</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L337" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L337" xlink:title="calls">
 <path fill="none" stroke="black" d="M1444.8,-640.53C1434.89,-621.85 1419.04,-591.97 1407.5,-570.2"/>
 <polygon fill="black" stroke="black" points="1410.71,-568.78 1402.93,-561.59 1404.52,-572.06 1410.71,-568.78"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L337">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L337" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L337">
 <text xml:space="preserve" text-anchor="start" x="1425.4" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1353,12 +1353,12 @@
 <!-- clause//2&#45;&gt;disjunction_literals/2 -->
 <g id="edge51" class="edge">
 <title>clause//2&#45;&gt;disjunction_literals/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L343" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L343" xlink:title="calls">
 <path fill="none" stroke="black" d="M1226.69,-644.26C1222.12,-643.05 1217.51,-641.93 1213.07,-641 969.38,-589.78 677.01,-561.89 527.93,-550.02"/>
 <polygon fill="black" stroke="black" points="528.33,-546.54 518.09,-549.25 527.78,-553.52 528.33,-546.54"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L343">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="999.84" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1368,7 +1368,7 @@
 <title>literals//2</title>
 <polygon fill="cornsilk" stroke="black" points="1326.77,-560 1227.36,-560 1227.36,-524 1326.77,-524 1326.77,-560"/>
 <text xml:space="preserve" text-anchor="start" x="1235.36" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L347">
+<g id="a_node30_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="1240.76" y="-543.71" font-family="monospace" font-size="11.00">literals//2</text>
 </a>
 </g>
@@ -1380,12 +1380,12 @@
 <!-- clause//2&#45;&gt;literals//2 -->
 <g id="edge52" class="edge">
 <title>clause//2&#45;&gt;literals//2</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L343" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L343" xlink:title="calls">
 <path fill="none" stroke="black" d="M1267.91,-640.6C1266.69,-628.16 1265.66,-611.02 1267.06,-596 1267.83,-587.86 1269.23,-579.1 1270.75,-571.1"/>
 <polygon fill="black" stroke="black" points="1274.13,-572.05 1272.7,-561.55 1267.27,-570.65 1274.13,-572.05"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L343">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L343">
 <text xml:space="preserve" text-anchor="start" x="1267.06" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1393,12 +1393,12 @@
 <!-- clause//2&#45;&gt;text//1 -->
 <g id="edge50" class="edge">
 <title>clause//2&#45;&gt;text//1</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L340" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L340" xlink:title="calls">
 <path fill="none" stroke="black" d="M1281.13,-640.52C1289.92,-627.41 1303.04,-609.48 1317.06,-596 1328.25,-585.25 1341.79,-575.08 1354.32,-566.58"/>
 <polygon fill="black" stroke="black" points="1355.98,-569.68 1362.4,-561.25 1352.12,-563.84 1355.98,-569.68"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L340">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L340">
 <text xml:space="preserve" text-anchor="start" x="1317.06" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1408,7 +1408,7 @@
 <title>literal_tail//2</title>
 <polygon fill="cornsilk" stroke="black" points="1373.98,-443 1248.16,-443 1248.16,-407 1373.98,-407 1373.98,-443"/>
 <text xml:space="preserve" text-anchor="start" x="1256.16" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L352">
+<g id="a_node31_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L352">
 <text xml:space="preserve" text-anchor="start" x="1261.56" y="-426.71" font-family="monospace" font-size="11.00">literal_tail//2</text>
 </a>
 </g>
@@ -1420,12 +1420,12 @@
 <!-- literals//2&#45;&gt;literal_tail//2 -->
 <g id="edge54" class="edge">
 <title>literals//2&#45;&gt;literal_tail//2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L349" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M1282.23,-523.53C1287.68,-505.11 1296.35,-475.79 1302.76,-454.1"/>
 <polygon fill="black" stroke="black" points="1306.06,-455.29 1305.54,-444.71 1299.35,-453.3 1306.06,-455.29"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L349">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="1295.09" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1435,7 +1435,7 @@
 <title>literal//2</title>
 <polygon fill="cornsilk" stroke="black" points="1312.47,-326 1219.66,-326 1219.66,-290 1312.47,-290 1312.47,-326"/>
 <text xml:space="preserve" text-anchor="start" x="1227.66" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node32_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357">
+<g id="a_node32_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357">
 <text xml:space="preserve" text-anchor="start" x="1233.06" y="-309.71" font-family="monospace" font-size="11.00">literal//2</text>
 </a>
 </g>
@@ -1447,12 +1447,12 @@
 <!-- literals//2&#45;&gt;literal//2 -->
 <g id="edge53" class="edge">
 <title>literals//2&#45;&gt;literal//2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L349" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M1260.78,-523.53C1244.82,-505.12 1221.55,-474.47 1212.06,-443 1200.52,-404.72 1224.3,-362.15 1243.88,-335.48"/>
 <polygon fill="black" stroke="black" points="1246.61,-337.68 1249.91,-327.61 1241.05,-333.42 1246.61,-337.68"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L349">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="1212.06" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1460,12 +1460,12 @@
 <!-- literal_tail//2&#45;&gt;literal//2 -->
 <g id="edge55" class="edge">
 <title>literal_tail//2&#45;&gt;literal//2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L354" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M1304.23,-406.53C1296.99,-388.02 1285.44,-358.52 1276.95,-336.8"/>
 <polygon fill="black" stroke="black" points="1280.27,-335.7 1273.37,-327.66 1273.76,-338.25 1280.27,-335.7"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L354">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="1289.92" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1473,12 +1473,12 @@
 <!-- literal//2&#45;&gt;literal_term/2 -->
 <g id="edge57" class="edge">
 <title>literal//2&#45;&gt;literal_term/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L361" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L361" xlink:title="calls">
 <path fill="none" stroke="black" d="M1219.24,-298.21C1112.47,-278.18 850.49,-229.04 723.87,-205.28"/>
 <polygon fill="black" stroke="black" points="724.74,-201.88 714.27,-203.48 723.45,-208.76 724.74,-201.88"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L361">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L361">
 <text xml:space="preserve" text-anchor="start" x="977.95" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1486,12 +1486,12 @@
 <!-- literal//2&#45;&gt;integer_text//1 -->
 <g id="edge56" class="edge">
 <title>literal//2&#45;&gt;integer_text//1</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357" xlink:title="calls">
 <path fill="none" stroke="black" d="M1306.47,-289.53C1353.28,-269.3 1430.47,-235.92 1481.3,-213.95"/>
 <polygon fill="black" stroke="black" points="1482.55,-217.22 1490.34,-210.04 1479.77,-210.8 1482.55,-217.22"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357">
 <text xml:space="preserve" text-anchor="start" x="1407.04" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1513,12 +1513,12 @@
 <!-- literal//2&#45;&gt;list::memberchk/2 -->
 <g id="edge72" class="edge">
 <title>literal//2&#45;&gt;list::memberchk/2</title>
-<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357" xlink:title="calls">
+<g id="a_edge72"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357" xlink:title="calls">
 <path fill="none" stroke="black" d="M1266.07,-289.53C1266.07,-271.28 1266.07,-242.33 1266.07,-220.7"/>
 <polygon fill="black" stroke="black" points="1269.57,-220.77 1266.07,-210.77 1262.57,-220.77 1269.57,-220.77"/>
 </a>
 </g>
-<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L357">
+<g id="a_edge72&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L357">
 <text xml:space="preserve" text-anchor="start" x="1266.07" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1526,12 +1526,12 @@
 <!-- integer_text//1&#45;&gt;codes//1 -->
 <g id="edge58" class="edge">
 <title>integer_text//1&#45;&gt;codes//1</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L365" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L365" xlink:title="calls">
 <path fill="none" stroke="black" d="M1519.61,-172.53C1506.17,-153.68 1484.6,-123.43 1469.04,-101.61"/>
 <polygon fill="black" stroke="black" points="1471.9,-99.6 1463.25,-93.49 1466.21,-103.66 1471.9,-99.6"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L365">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L365" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L365">
 <text xml:space="preserve" text-anchor="start" x="1493.53" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1539,12 +1539,12 @@
 <!-- text//1&#45;&gt;codes//1 -->
 <g id="edge59" class="edge">
 <title>text//1&#45;&gt;codes//1</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L369" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L369" xlink:title="calls">
 <path fill="none" stroke="black" d="M1393.07,-523.85C1393.07,-501.38 1393.07,-460.74 1393.07,-426 1393.07,-426 1393.07,-426 1393.07,-190 1393.07,-157 1412.14,-123.7 1428.22,-101.49"/>
 <polygon fill="black" stroke="black" points="1430.95,-103.69 1434.18,-93.6 1425.36,-99.47 1430.95,-103.69"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L369">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L369" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L369">
 <text xml:space="preserve" text-anchor="start" x="1393.07" y="-305.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1566,12 +1566,12 @@
 <!-- raw_codes/2&#45;&gt;type::valid/2 -->
 <g id="edge73" class="edge">
 <title>raw_codes/2&#45;&gt;type::valid/2</title>
-<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L379" xlink:title="calls">
+<g id="a_edge73"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L379" xlink:title="calls">
 <path fill="none" stroke="black" d="M748.34,-640.58C738.72,-631.15 728.29,-618.66 723.06,-605 719.09,-594.63 718.16,-582.54 718.47,-571.82"/>
 <polygon fill="black" stroke="black" points="721.95,-572.16 719.13,-561.95 714.97,-571.69 721.95,-572.16"/>
 </a>
 </g>
-<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/max_sat/max_sat_program.lgt#L379">
+<g id="a_edge73&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L379" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/max_sat/max_sat_program.lgt#L379">
 <text xml:space="preserve" text-anchor="start" x="723.06" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>

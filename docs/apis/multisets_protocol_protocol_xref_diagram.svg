@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 3603,-140 3603,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol multisets_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:01</text>
 <g id="clust1" class="cluster">
 <title>cluster_multisets_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="multisets_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 3579,-46 3579,-46 3585,-46 3591,-52 3591,-58 3591,-58 3591,-116 3591,-116 3591,-122 3585,-128 3579,-128 3579,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">multisets_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Generates all K&#45;multisets (unordered K&#45;element selections with replacement) of a list using default order.">
 <polygon fill="springgreen" stroke="black" points="117.71,-92 18.29,-92 18.29,-56 117.71,-56 117.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.69" y="-75.71" font-family="monospace" font-size="11.00">multisets/3</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="True iff the third argument is a K&#45;multiset with replacement of a list using default order.">
 <polygon fill="springgreen" stroke="black" points="228.41,-92 135.59,-92 135.59,-56 228.41,-56 228.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="143.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="148.99" y="-75.71" font-family="monospace" font-size="11.00">multiset/3</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Generates all K&#45;multisets with the given order: ``default`` or ``lexicographic``.">
 <polygon fill="springgreen" stroke="black" points="345.71,-92 246.29,-92 246.29,-56 345.71,-56 345.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="254.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L45">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="259.69" y="-75.71" font-family="monospace" font-size="11.00">multisets/4</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="True iff the fourth argument is a K&#45;multiset with replacement with the given order: ``default`` or ``lexicographic``.">
 <polygon fill="springgreen" stroke="black" points="456.41,-92 363.59,-92 363.59,-56 456.41,-56 456.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="371.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L52">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="376.99" y="-75.71" font-family="monospace" font-size="11.00">multiset/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Generates all distinct K&#45;multisets (deduplicating repeated values in the input list) using default order.">
 <polygon fill="springgreen" stroke="black" points="633.41,-92 474.59,-92 474.59,-56 633.41,-56 633.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="482.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L59">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="487.99" y="-75.71" font-family="monospace" font-size="11.00">distinct_multisets/3</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="True iff the third argument is a distinct K&#45;multiset with replacement of a list using default order.">
 <polygon fill="springgreen" stroke="black" points="804.11,-92 651.89,-92 651.89,-56 804.11,-56 804.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="659.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L66">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="665.29" y="-75.71" font-family="monospace" font-size="11.00">distinct_multiset/3</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Generates all distinct K&#45;multisets with the given order: ``default`` or ``lexicographic``.">
 <polygon fill="springgreen" stroke="black" points="981.41,-92 822.59,-92 822.59,-56 981.41,-56 981.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="830.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L73">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="835.99" y="-75.71" font-family="monospace" font-size="11.00">distinct_multisets/4</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="True iff the fourth argument is a distinct K&#45;multiset with replacement with the given order: ``default`` or ``lexicographic``.">
 <polygon fill="springgreen" stroke="black" points="1152.11,-92 999.89,-92 999.89,-56 1152.11,-56 1152.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1007.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L80">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1013.29" y="-75.71" font-family="monospace" font-size="11.00">distinct_multiset/4</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Returns the K&#45;multiset at a given zero&#45;based index using default order.">
 <polygon fill="springgreen" stroke="black" points="1289.61,-92 1170.39,-92 1170.39,-56 1289.61,-56 1289.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1178.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L87">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="1183.79" y="-75.71" font-family="monospace" font-size="11.00">nth_multiset/4</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Returns the K&#45;multiset at a given zero&#45;based index in the given order: ``default`` or ``lexicographic``.">
 <polygon fill="springgreen" stroke="black" points="1426.61,-92 1307.39,-92 1307.39,-56 1426.61,-56 1426.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1315.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L94">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L94">
 <text xml:space="preserve" text-anchor="start" x="1320.79" y="-75.71" font-family="monospace" font-size="11.00">nth_multiset/5</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Returns the zero&#45;based index of a K&#45;multiset using default order.">
 <polygon fill="springgreen" stroke="black" points="1577.21,-92 1444.79,-92 1444.79,-56 1577.21,-56 1577.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1452.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L101">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1458.19" y="-75.71" font-family="monospace" font-size="11.00">multiset_index/4</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="a_node12"><a xlink:title="Returns the zero&#45;based index of a K&#45;multiset in the given order: ``default`` or ``lexicographic``.">
 <polygon fill="springgreen" stroke="black" points="1727.21,-92 1594.79,-92 1594.79,-56 1727.21,-56 1727.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1602.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L108">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="1608.19" y="-75.71" font-family="monospace" font-size="11.00">multiset_index/5</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <g id="a_node13"><a xlink:title="Counts the number of K&#45;multisets with replacement of a list.">
 <polygon fill="springgreen" stroke="black" points="1884.51,-92 1745.49,-92 1745.49,-56 1884.51,-56 1884.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1753.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L115">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="1758.89" y="-75.71" font-family="monospace" font-size="11.00">count_multisets/3</text>
 </a>
 </g>
@@ -251,7 +251,7 @@
 <g id="a_node14"><a xlink:title="Counts the number of distinct K&#45;multisets with replacement of a list (deduplicating repeated values in the input list).">
 <polygon fill="springgreen" stroke="black" points="2101.21,-92 1902.79,-92 1902.79,-56 2101.21,-56 2101.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1910.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L122">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="1916.19" y="-75.71" font-family="monospace" font-size="11.00">count_distinct_multisets/3</text>
 </a>
 </g>
@@ -268,7 +268,7 @@
 <g id="a_node15"><a xlink:title="Returns the distinct K&#45;multiset at a given zero&#45;based index in default generation order.">
 <polygon fill="springgreen" stroke="black" points="2298.31,-92 2119.69,-92 2119.69,-56 2298.31,-56 2298.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2127.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L129">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="2133.09" y="-75.71" font-family="monospace" font-size="11.00">nth_distinct_multiset/4</text>
 </a>
 </g>
@@ -285,7 +285,7 @@
 <g id="a_node16"><a xlink:title="Returns the zero&#45;based index of a distinct K&#45;multiset in default generation order.">
 <polygon fill="springgreen" stroke="black" points="2507.91,-92 2316.09,-92 2316.09,-56 2507.91,-56 2507.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2324.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L136">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L136">
 <text xml:space="preserve" text-anchor="start" x="2329.49" y="-75.71" font-family="monospace" font-size="11.00">distinct_multiset_index/4</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <g id="a_node17"><a xlink:title="Returns a random K&#45;multiset with replacement of a list.">
 <polygon fill="springgreen" stroke="black" points="2664.51,-92 2525.49,-92 2525.49,-56 2664.51,-56 2664.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2533.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L143">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="2538.89" y="-75.71" font-family="monospace" font-size="11.00">random_multiset/3</text>
 </a>
 </g>
@@ -319,7 +319,7 @@
 <g id="a_node18"><a xlink:title="Returns SampleCount random K&#45;multisets with replacement of a list, sampled with replacement.">
 <polygon fill="springgreen" stroke="black" points="2827.81,-92 2682.19,-92 2682.19,-56 2827.81,-56 2827.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2690.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L150">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="2695.59" y="-75.71" font-family="monospace" font-size="11.00">sample_multisets/4</text>
 </a>
 </g>
@@ -336,7 +336,7 @@
 <g id="a_node19"><a xlink:title="Returns a random distinct K&#45;multiset with replacement of a list (deduplicating repeated values in the input list).">
 <polygon fill="springgreen" stroke="black" points="3044.21,-92 2845.79,-92 2845.79,-56 3044.21,-56 3044.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2853.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L157">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="2859.19" y="-75.71" font-family="monospace" font-size="11.00">random_distinct_multiset/3</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <g id="a_node20"><a xlink:title="Returns SampleCount random distinct K&#45;multisets with replacement of a list, sampled with replacement after deduplicating repeated values in the input list.">
 <polygon fill="springgreen" stroke="black" points="3267.52,-92 3062.48,-92 3062.48,-56 3267.52,-56 3267.52,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3070.48" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L164">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L164">
 <text xml:space="preserve" text-anchor="start" x="3075.89" y="-75.71" font-family="monospace" font-size="11.00">sample_distinct_multisets/4</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <g id="a_node21"><a xlink:title="Returns the next distinct multiset value in lexicographic order induced by the first argument.">
 <polygon fill="springgreen" stroke="black" points="3410.91,-92 3285.09,-92 3285.09,-56 3410.91,-56 3410.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3293.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L171">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="3298.49" y="-75.71" font-family="monospace" font-size="11.00">next_multiset/3</text>
 </a>
 </g>
@@ -387,7 +387,7 @@
 <g id="a_node22"><a xlink:title="Returns the previous distinct multiset value in lexicographic order induced by the first argument.">
 <polygon fill="springgreen" stroke="black" points="3581.11,-92 3428.89,-92 3428.89,-56 3581.11,-56 3581.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3436.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/multisets/multisets_protocol.lgt#L178">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L178" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/multisets/multisets_protocol.lgt#L178">
 <text xml:space="preserve" text-anchor="start" x="3442.29" y="-75.71" font-family="monospace" font-size="11.00">previous_multiset/3</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 446,-140 446,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol wkt_wkb_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:19</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:01</text>
 <g id="clust1" class="cluster">
 <title>cluster_wkt_wkb_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="wkt_wkb_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 422,-46 422,-46 428,-46 434,-52 434,-58 434,-58 434,-116 434,-116 434,-122 428,-128 422,-128 422,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">wkt_wkb_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Parses a geometry from the given source. Supported sources are ``wkt(file(Path))``, ``wkt(stream(Stream))``, ``wkt(atom(Atom))``, ``wkt(chars(List))``, ``wkt(codes(List))``, ``wkb(file(Path))``, ``wkb(stream(Stream))``, ``wkb(bytes(List))``, ``wkb(hex(atom(Atom)))``, ``wkb(hex(chars(List)))``, and ``wkb(hex(codes(List)))``.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">parse/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Generates WKT or WKB content using the representation specified in the first argument from a native geometry term. Supported sinks are ``wkt(file(Path))``, ``wkt(stream(Stream))``, ``wkt(atom(Atom))``, ``wkt(chars(List))``, ``wkt(codes(List))``, ``wkb(file(Path))``, ``wkb(stream(Stream))``, ``wkb(bytes(List))``, ``wkb(hex(atom(Atom)))``, ``wkb(hex(chars(List)))``, ``wkb(hex(codes(List)))``, and the same WKB sink wrappers wrapped as ``wkb(Sink, Order)`` where ``Order`` is ``little`` or ``big``.">
 <polygon fill="springgreen" stroke="black" points="202.41,-92 109.59,-92 109.59,-56 202.41,-56 202.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="122.99" y="-75.71" font-family="monospace" font-size="11.00">generate/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="True iff the argument is a valid native WKT/WKB geometry term.">
 <polygon fill="springgreen" stroke="black" points="313.41,-92 220.59,-92 220.59,-56 313.41,-56 313.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="228.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L57">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L57">
 <text xml:space="preserve" text-anchor="start" x="233.99" y="-75.71" font-family="monospace" font-size="11.00">validate/1</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Validates a native geometry term returning a list of reason terms whose final argument is the failing path.">
 <polygon fill="springgreen" stroke="black" points="424.41,-92 331.59,-92 331.59,-56 424.41,-56 424.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="339.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/wkt_wkb/wkt_wkb_protocol.lgt#L64">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/wkt_wkb/wkt_wkb_protocol.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="344.99" y="-75.71" font-family="monospace" font-size="11.00">validate/2</text>
 </a>
 </g>

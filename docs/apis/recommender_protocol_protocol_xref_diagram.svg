@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1681,-140 1681,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol recommender_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:01</text>
 <g id="clust1" class="cluster">
 <title>cluster_recommender_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="recommender_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1657,-46 1657,-46 1663,-46 1669,-52 1669,-58 1669,-58 1669,-116 1669,-116 1669,-122 1663,-128 1657,-128 1657,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">recommender_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Learns a recommender model from the given rating dataset object using the specified options.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">learn/3</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Learns a recommender model from the given rating dataset object using default options.">
 <polygon fill="springgreen" stroke="black" points="182.5,-92 109.5,-92 109.5,-56 182.5,-56 182.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L76">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="122.9" y="-75.71" font-family="monospace" font-size="11.00">learn/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Scores the relevance of ``Item`` to ``User`` using the learned recommender. Higher scores indicate greater relevance. Scores may be predicted ratings or other relevance measures; their ranges and handling of unknown identifiers depend on the implementation.">
 <polygon fill="springgreen" stroke="black" points="273.5,-92 200.5,-92 200.5,-56 273.5,-56 273.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="208.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L115">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L115" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L115">
 <text xml:space="preserve" text-anchor="start" x="213.9" y="-75.71" font-family="monospace" font-size="11.00">score/4</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Recommends up to ``N`` items to ``User`` using the learned recommender model, as a list of ``Item&#45;Score`` pairs sorted by decreasing score. Whether items already rated by ``User`` are excluded, and how ties and an unknown ``User`` are handled, depends on the implementation.">
 <polygon fill="springgreen" stroke="black" points="390.71,-92 291.29,-92 291.29,-56 390.71,-56 390.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="299.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L129">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="304.69" y="-75.71" font-family="monospace" font-size="11.00">recommend/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Checks model data and diagnostics for the receiving implementation without instantiating the recommender. Throws an exception when the term is not a valid recommender representation.">
 <polygon fill="springgreen" stroke="black" points="561.11,-92 408.89,-92 408.89,-56 561.11,-56 561.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="416.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L145">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L145">
 <text xml:space="preserve" text-anchor="start" x="422.29" y="-75.71" font-family="monospace" font-size="11.00">check_recommender/1</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="True when a learned recommender term is structurally valid for the receiving implementation. Succeeds iff ``check_recommender/1`` succeeds without throwing an exception.">
 <polygon fill="springgreen" stroke="black" points="731.11,-92 578.89,-92 578.89,-56 731.11,-56 731.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="586.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L156">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L156">
 <text xml:space="preserve" text-anchor="start" x="592.29" y="-75.71" font-family="monospace" font-size="11.00">valid_recommender/1</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Returns diagnostics metadata for a learned recommender.">
 <polygon fill="springgreen" stroke="black" points="861.31,-92 748.69,-92 748.69,-56 861.31,-56 861.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="756.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L163">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="762.09" y="-75.71" font-family="monospace" font-size="11.00">diagnostics/2</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Enumerates individual diagnostics metadata terms for a learned recommender.">
 <polygon fill="springgreen" stroke="black" points="985.01,-92 878.99,-92 878.99,-56 985.01,-56 985.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="886.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L170">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="892.39" y="-75.71" font-family="monospace" font-size="11.00">diagnostic/2</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Returns the effective training options recorded in a learned recommender diagnostics metadata.">
 <polygon fill="springgreen" stroke="black" points="1168.71,-92 1003.29,-92 1003.29,-56 1168.71,-56 1168.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1011.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L177">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L177">
 <text xml:space="preserve" text-anchor="start" x="1016.69" y="-75.71" font-family="monospace" font-size="11.00">recommender_options/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Converts a recommender into a list of predicate clauses. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized recommender term, a noun such as ``recommender`` or ``model`` is usually clearer than a verb such as ``recommend``.">
 <polygon fill="springgreen" stroke="black" points="1339.11,-92 1186.89,-92 1186.89,-56 1339.11,-56 1339.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1194.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L184">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1200.29" y="-75.71" font-family="monospace" font-size="11.00">export_to_clauses/4</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Exports a recommender to a file. ``Functor`` is the functor for the generated predicate clauses. When exporting a serialized recommender term, a noun such as ``recommender`` or ``model`` is usually clearer than a verb such as ``recommend``.">
 <polygon fill="springgreen" stroke="black" points="1489.21,-92 1356.79,-92 1356.79,-56 1489.21,-56 1489.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1364.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L191">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L191" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L191">
 <text xml:space="preserve" text-anchor="start" x="1370.19" y="-75.71" font-family="monospace" font-size="11.00">export_to_file/4</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="a_node12"><a xlink:title="Prints a recommender to the current output stream in a human&#45;readable format.">
 <polygon fill="springgreen" stroke="black" points="1659.11,-92 1506.89,-92 1506.89,-56 1659.11,-56 1659.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1514.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/recommender_protocols/recommender_protocol.lgt#L198">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/recommender_protocols/recommender_protocol.lgt#L198">
 <text xml:space="preserve" text-anchor="start" x="1520.29" y="-75.71" font-family="monospace" font-size="11.00">print_recommender/1</text>
 </a>
 </g>

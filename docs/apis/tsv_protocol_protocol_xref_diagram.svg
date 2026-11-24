@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1488,-140 1488,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol tsv_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;23, 22:18</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:01</text>
 <g id="clust1" class="cluster">
 <title>cluster_tsv_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="tsv_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1464,-46 1464,-46 1470,-46 1476,-52 1476,-58 1476,-58 1476,-116 1476,-116 1476,-122 1470,-128 1464,-128 1464,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L23">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L23" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L23">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">tsv_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Reads a TSV file saving the data as clauses for the specified object predicate. Fails if the file cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="117.71,-92 18.29,-92 18.29,-56 117.71,-56 117.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L35">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L35">
 <text xml:space="preserve" text-anchor="start" x="31.69" y="-75.71" font-family="monospace" font-size="11.00">read_file/3</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Reads a TSV stream saving the data as clauses for the specified object predicate. Fails if the stream cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="248.31,-92 135.69,-92 135.69,-56 248.31,-56 248.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="143.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L54">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="149.09" y="-75.71" font-family="monospace" font-size="11.00">read_stream/3</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Reads a TSV file returning the data as a list of rows, each row a list of fields. Fails if the file cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="365.71,-92 266.29,-92 266.29,-56 365.71,-56 365.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="274.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L74">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="279.69" y="-75.71" font-family="monospace" font-size="11.00">read_file/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Reads a TSV stream returning the data as a list of rows, each row a list of fields. Fails if the stream cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="496.31,-92 383.69,-92 383.69,-56 496.31,-56 496.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="391.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L87">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="397.09" y="-75.71" font-family="monospace" font-size="11.00">read_stream/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Reads a TSV file saving the data as clauses for the specified object predicate. The file is read line by line. Fails if the file cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="666.11,-92 513.89,-92 513.89,-56 666.11,-56 666.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="521.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L101">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="527.29" y="-75.71" font-family="monospace" font-size="11.00">read_file_by_line/3</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Reads a TSV stream saving the data as clauses for the specified object predicate. The stream is read line by line. Fails if the stream cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="849.71,-92 684.29,-92 684.29,-56 849.71,-56 849.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="692.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L120">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L120">
 <text xml:space="preserve" text-anchor="start" x="697.69" y="-75.71" font-family="monospace" font-size="11.00">read_stream_by_line/3</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Reads a TSV file returning the data as a list of rows, each row a list of fields. The file is read line by line. Fails if the file cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="1020.11,-92 867.89,-92 867.89,-56 1020.11,-56 1020.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="875.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L140">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="881.29" y="-75.71" font-family="monospace" font-size="11.00">read_file_by_line/2</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Reads a TSV stream returning the data as a list of rows, each row a list of fields. The stream is read line by line. Fails if the stream cannot be parsed.">
 <polygon fill="springgreen" stroke="black" points="1203.71,-92 1038.29,-92 1038.29,-56 1203.71,-56 1203.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1046.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L153">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L153">
 <text xml:space="preserve" text-anchor="start" x="1051.69" y="-75.71" font-family="monospace" font-size="11.00">read_stream_by_line/2</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Writes a TSV file with the data represented by the solutions to the specified object predicate.">
 <polygon fill="springgreen" stroke="black" points="1328.01,-92 1221.99,-92 1221.99,-56 1328.01,-56 1328.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1229.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L167">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L167">
 <text xml:space="preserve" text-anchor="start" x="1235.39" y="-75.71" font-family="monospace" font-size="11.00">write_file/3</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Writes a TSV stream with the data represented by the solutions to the specified object predicate.">
 <polygon fill="springgreen" stroke="black" points="1465.61,-92 1346.39,-92 1346.39,-56 1465.61,-56 1465.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1354.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d360e014371176f8ebac0ff2ee79ccf3f8458122/library/tsv/tsv_protocol.lgt#L185">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/tsv/tsv_protocol.lgt#L185">
 <text xml:space="preserve" text-anchor="start" x="1359.79" y="-75.71" font-family="monospace" font-size="11.00">write_stream/3</text>
 </a>
 </g>
