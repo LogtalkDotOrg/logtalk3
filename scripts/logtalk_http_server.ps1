@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Local HTTP server script
-##   Last updated on August 7, 2026
+##   Last updated on November 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ param(
 
 Function Write-Script-Version {
 	$myName = Split-Path -Path $MyInvocation.ScriptName -Leaf
-	Write-Output "$myName 1.0"
+	Write-Output "$myName 1.1"
 }
 
 Function Write-Usage-Help {
@@ -53,7 +53,7 @@ Function Write-Usage-Help {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are eclipse, sicstus, swi, trealla, and xvm)"
+	Write-Output "     (valid values are eclipse, sicstus, shumway, swi, trealla, and xvm)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -n server port (default is 8080)"
@@ -133,6 +133,10 @@ switch ($p) {
 		$logtalk = "sicstuslgt"
 		$goalOptions = @("--noinfo", "--goal")
 		$dot = "."
+	}
+	"shumway" {
+		$logtalk = "shumwaylgt"
+		$goalOptions = @("-q", "-g")
 	}
 	"swi" {
 		$logtalk = "swilgt"

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Local HTTP server script
-##   Last updated on August 7, 2026
+##   Last updated on November 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 1.0"
+	echo "$(basename "$0") 1.1"
 	exit 0
 }
 
@@ -40,7 +40,7 @@ usage_help() {
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are eclipse, sicstus, swi, trealla, and xvm)"
+	echo "     (valid values are eclipse, sicstus, shumway, swi, trealla, and xvm)"
 	echo
 	echo "Optional arguments:"
 	echo "  -n server port (default is 8080)"
@@ -109,6 +109,7 @@ case "$backend" in
 	eclipse)  logtalk="eclipselgt$extension";  goal_options=(-e);;
 	xvm)      logtalk="xvmlgt$extension";      goal_options=(-q -g); dot=".";;
 	sicstus)  logtalk="sicstuslgt$extension";  goal_options=(--noinfo --goal); dot=".";;
+	shumway)  logtalk="shumwaylgt$extension";  goal_options=(-q -g);;
 	swi)      logtalk="swilgt$extension";      goal_options=(-q -g);;
 	trealla)  logtalk="tplgt$extension";       goal_options=(-q -g);;
 	*)

@@ -55,6 +55,9 @@ exporting diagrams in D2 and Graphviz formats.
 
 * IMPROVED: The `diagrams` tool support for generating D2 and Mermaid diagrams.
 
+* UPDATED: The `logtalk_http_server.sh` and `logtalk_http_server.ps1` scripts
+to also support Shumway Prolog.
+
 * FIXED: The `debug_messages` tool tests for Trealla Prolog running on Windows.
 
 * FIXED: The `issue_creator` tool tests when running on Windows.
