@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-23,
+		date is 2026-11-24,
 		comment is 'Process-backed RC2, Open-WBO, and Z3 CLI weighted partial MaxSAT solving, WCNF source generation, and collected result inspection.'
 	]).
 
@@ -124,7 +124,7 @@
 	valid_option(embed_variables(Boolean)) :-
 		once((Boolean == true; Boolean == false)).
 
-	default_option(solver(open_wbo)).
+	default_option(solver(z3)).
 	default_option(time_limit(0)).
 	default_option(anytime(false)).
 	default_option(wcnf_format(old)).

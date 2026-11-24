@@ -872,7 +872,8 @@ the diagrams.
 
 When generating diagrams in SVG format, a copy of the ``diagrams.css``
 file must exist in any directory used for publishing diagrams using it.
-The ``lgt2svg`` scripts also take care of copying this file.
+The ``lgt2svg`` scripts also take care of copying this file and adding a
+reference to it when converting d2 diagrams to SVG.
 
 The Graphviz command-line utilities, e.g., ``dot``, are notorious for
 random crashes (segmentation faults usually), often requiring retrying

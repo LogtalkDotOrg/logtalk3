@@ -1150,7 +1150,8 @@ doesn’t load (and apply) the <code class="docutils literal notranslate"><span 
 the diagrams.</p>
 <p>When generating diagrams in SVG format, a copy of the <code class="docutils literal notranslate"><span class="pre">diagrams.css</span></code>
 file must exist in any directory used for publishing diagrams using it.
-The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts also take care of copying this file.</p>
+The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts also take care of copying this file and adding a
+reference to it when converting d2 diagrams to SVG.</p>
 <p>The Graphviz command-line utilities, e.g., <code class="docutils literal notranslate"><span class="pre">dot</span></code>, are notorious for
 random crashes (segmentation faults usually), often requiring retrying
 conversions from <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to other formats. A possible workaround

@@ -30,11 +30,12 @@ into a collected result that maps solver variable numbers back to terms.
 
 The supported solvers, selected using the `solver(Name)` option, are:
 
-- `open_wbo`: [Open-WBO](https://github.com/sat-group/open-wbo), the
-  default solver (default executable: `open-wbo`)
-- `rc2`: [RC2](https://pysathq.github.io/) from PySAT (default executable:
-  `rc2.py`)
-- `z3`: [Z3](https://github.com/Z3Prover/z3) (default executable: `z3`)
+- `open_wbo`: [Open-WBO](https://github.com/sat-group/open-wbo)
+  (default executable: `open-wbo`)
+- `rc2`: [RC2](https://pysathq.github.io/) from PySAT
+  (default executable: `rc2.py`)
+- `z3`: [Z3](https://github.com/Z3Prover/z3), the default solver
+  (default executable: `z3`)
 
 Other solvers that follow the MaxSAT Evaluation conventions (an `o` line
 with the cost, an `s` status line, and a `v` line with the model as
