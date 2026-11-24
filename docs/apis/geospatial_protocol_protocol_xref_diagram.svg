@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 10434,-140 10434,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol geospatial_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:00</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 11:38</text>
 <g id="clust1" class="cluster">
 <title>cluster_geospatial_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="geospatial_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 10410,-46 10410,-46 10416,-46 10422,-52 10422,-58 10422,-58 10422,-116 10422,-116 10422,-122 10416,-128 10410,-128 10410,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">geospatial_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="True if the argument is a valid geographic coordinate represented as ``geographic(Latitude,Longitude)`` with latitude in the ``[&#45;90.0,90.0]`` range and longitude in the ``[&#45;180.0,180.0]`` range.">
 <polygon fill="springgreen" stroke="black" points="163.81,-92 18.19,-92 18.19,-56 163.81,-56 163.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.59" y="-75.71" font-family="monospace" font-size="11.00">valid_coordinate/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Normalizes a coordinate by wrapping longitude to the ``[&#45;180.0,180.0]`` range and reflecting latitude over the poles when necessary.">
 <polygon fill="springgreen" stroke="black" points="354.01,-92 181.99,-92 181.99,-56 354.01,-56 354.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="189.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="195.39" y="-75.71" font-family="monospace" font-size="11.00">normalize_coordinate/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Projects a coordinate to local equirectangular planar coordinates in kilometers using a reference latitude in degrees.">
 <polygon fill="springgreen" stroke="black" points="583.82,-92 372.18,-92 372.18,-56 583.82,-56 583.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="380.18" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="385.58" y="-75.71" font-family="monospace" font-size="11.00">equirectangular_projection/4</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Converts local equirectangular planar coordinates in kilometers to a geographic coordinate using a reference latitude in degrees.">
 <polygon fill="springgreen" stroke="black" points="793.91,-92 602.09,-92 602.09,-56 793.91,-56 793.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="610.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="615.49" y="-75.71" font-family="monospace" font-size="11.00">equirectangular_inverse/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Computes the great&#45;circle distance in kilometers between two coordinates using the Haversine formula.">
 <polygon fill="springgreen" stroke="black" points="970.41,-92 811.59,-92 811.59,-56 970.41,-56 970.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="819.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="824.99" y="-75.71" font-family="monospace" font-size="11.00">haversine_distance/3</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Computes the geodesic distance in kilometers between two coordinates using the Vincenty inverse formula over the WGS84 ellipsoid. Fails if the iterative method does not converge.">
 <polygon fill="springgreen" stroke="black" points="1141.11,-92 988.89,-92 988.89,-56 1141.11,-56 1141.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="996.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="1002.29" y="-75.71" font-family="monospace" font-size="11.00">vincenty_distance/3</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Computes the rhumb&#45;line (loxodrome) distance in kilometers between two coordinates on a spherical Earth model.">
 <polygon fill="springgreen" stroke="black" points="1291.21,-92 1158.79,-92 1158.79,-56 1291.21,-56 1291.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1166.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="1172.19" y="-75.71" font-family="monospace" font-size="11.00">rhumb_distance/3</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Computes the rhumb&#45;line initial bearing in degrees in the ``[0.0,360.0[`` range from the first coordinate to the second coordinate.">
 <polygon fill="springgreen" stroke="black" points="1434.91,-92 1309.09,-92 1309.09,-56 1434.91,-56 1434.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1317.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="1322.49" y="-75.71" font-family="monospace" font-size="11.00">rhumb_bearing/3</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Computes the destination coordinate from a start coordinate, a rhumb&#45;line bearing in degrees, and a distance in kilometers on a spherical Earth model.">
 <polygon fill="springgreen" stroke="black" points="1644.91,-92 1453.09,-92 1453.09,-56 1644.91,-56 1644.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1461.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="1466.49" y="-75.71" font-family="monospace" font-size="11.00">rhumb_destination_point/4</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Computes an intermediate coordinate along the rhumb&#45;line path between two coordinates using a fraction in the ``[0.0,1.0]`` range.">
 <polygon fill="springgreen" stroke="black" points="1815.11,-92 1662.89,-92 1662.89,-56 1815.11,-56 1815.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1670.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1676.29" y="-75.71" font-family="monospace" font-size="11.00">interpolate_rhumb/4</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Computes the midpoint along the rhumb&#45;line path between two coordinates.">
 <polygon fill="springgreen" stroke="black" points="1965.21,-92 1832.79,-92 1832.79,-56 1965.21,-56 1965.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1840.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L102">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1846.19" y="-75.71" font-family="monospace" font-size="11.00">rhumb_midpoint/3</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="a_node12"><a xlink:title="Computes the distance in kilometers between two coordinates using a selected metric. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``.">
 <polygon fill="springgreen" stroke="black" points="2076.41,-92 1983.59,-92 1983.59,-56 2076.41,-56 2076.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1991.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L109">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1996.99" y="-75.71" font-family="monospace" font-size="11.00">distance/4</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <g id="a_node13"><a xlink:title="Computes the distance between two coordinates using a selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.">
 <polygon fill="springgreen" stroke="black" points="2187.41,-92 2094.59,-92 2094.59,-56 2187.41,-56 2187.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2102.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L116">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="2107.99" y="-75.71" font-family="monospace" font-size="11.00">distance/5</text>
 </a>
 </g>
@@ -251,7 +251,7 @@
 <g id="a_node14"><a xlink:title="Computes the initial bearing in degrees in the ``[0.0,360.0[`` range from the first coordinate to the second coordinate.">
 <polygon fill="springgreen" stroke="black" points="2344.51,-92 2205.49,-92 2205.49,-56 2344.51,-56 2344.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2213.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L123">
+<g id="a_node14_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="2218.89" y="-75.71" font-family="monospace" font-size="11.00">initial_bearing/3</text>
 </a>
 </g>
@@ -268,7 +268,7 @@
 <g id="a_node15"><a xlink:title="Computes the final bearing in degrees in the ``[0.0,360.0[`` range when arriving at the second coordinate from the first coordinate.">
 <polygon fill="springgreen" stroke="black" points="2487.91,-92 2362.09,-92 2362.09,-56 2487.91,-56 2487.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2370.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L130">
+<g id="a_node15_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L130" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L130">
 <text xml:space="preserve" text-anchor="start" x="2375.49" y="-75.71" font-family="monospace" font-size="11.00">final_bearing/3</text>
 </a>
 </g>
@@ -285,7 +285,7 @@
 <g id="a_node16"><a xlink:title="Computes the geographic midpoint between two coordinates using a spherical Earth model.">
 <polygon fill="springgreen" stroke="black" points="2598.41,-92 2505.59,-92 2505.59,-56 2598.41,-56 2598.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2513.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L137">
+<g id="a_node16_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L137">
 <text xml:space="preserve" text-anchor="start" x="2518.99" y="-75.71" font-family="monospace" font-size="11.00">midpoint/3</text>
 </a>
 </g>
@@ -302,7 +302,7 @@
 <g id="a_node17"><a xlink:title="Computes the destination coordinate from a start coordinate, an initial bearing in degrees, and a distance in kilometers using a spherical Earth model.">
 <polygon fill="springgreen" stroke="black" points="2769.11,-92 2616.89,-92 2616.89,-56 2769.11,-56 2769.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2624.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L144">
+<g id="a_node17_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="2630.29" y="-75.71" font-family="monospace" font-size="11.00">destination_point/4</text>
 </a>
 </g>
@@ -319,7 +319,7 @@
 <g id="a_node18"><a xlink:title="Computes an intermediate coordinate along the great&#45;circle path between two coordinates using a fraction in the ``[0.0,1.0]`` range.">
 <polygon fill="springgreen" stroke="black" points="2985.21,-92 2786.79,-92 2786.79,-56 2985.21,-56 2985.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="2794.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L151">
+<g id="a_node18_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="2800.19" y="-75.71" font-family="monospace" font-size="11.00">interpolate_great_circle/4</text>
 </a>
 </g>
@@ -336,7 +336,7 @@
 <g id="a_node19"><a xlink:title="Computes the signed cross&#45;track distance in kilometers from a coordinate to the great&#45;circle path defined by a start and end coordinate.">
 <polygon fill="springgreen" stroke="black" points="3175.01,-92 3002.99,-92 3002.99,-56 3175.01,-56 3175.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3010.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L158">
+<g id="a_node19_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="3016.39" y="-75.71" font-family="monospace" font-size="11.00">cross_track_distance/4</text>
 </a>
 </g>
@@ -353,7 +353,7 @@
 <g id="a_node20"><a xlink:title="Computes the along&#45;track distance in kilometers from the start coordinate to the closest point to a coordinate on the great&#45;circle path defined by a start and end coordinate.">
 <polygon fill="springgreen" stroke="black" points="3365.01,-92 3192.99,-92 3192.99,-56 3365.01,-56 3365.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3200.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L165">
+<g id="a_node20_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L165">
 <text xml:space="preserve" text-anchor="start" x="3206.39" y="-75.71" font-family="monospace" font-size="11.00">along_track_distance/4</text>
 </a>
 </g>
@@ -370,7 +370,7 @@
 <g id="a_node21"><a xlink:title="True when the distance between two coordinates is less than or equal to the given radius in kilometers using the selected metric.">
 <polygon fill="springgreen" stroke="black" points="3522.51,-92 3383.49,-92 3383.49,-56 3522.51,-56 3522.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3391.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L172">
+<g id="a_node21_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L172">
 <text xml:space="preserve" text-anchor="start" x="3396.89" y="-75.71" font-family="monospace" font-size="11.00">within_distance/4</text>
 </a>
 </g>
@@ -387,7 +387,7 @@
 <g id="a_node22"><a xlink:title="Finds the nearest coordinate to the origin coordinate in a list using the selected metric, returning the nearest coordinate and distance in kilometers.">
 <polygon fill="springgreen" stroke="black" points="3699.41,-92 3540.59,-92 3540.59,-56 3699.41,-56 3699.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3548.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L179">
+<g id="a_node22_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L179">
 <text xml:space="preserve" text-anchor="start" x="3553.99" y="-75.71" font-family="monospace" font-size="11.00">nearest_coordinate/5</text>
 </a>
 </g>
@@ -404,7 +404,7 @@
 <g id="a_node23"><a xlink:title="Computes the arithmetic mean center of a list of one or more coordinates.">
 <polygon fill="springgreen" stroke="black" points="3830.31,-92 3717.69,-92 3717.69,-56 3830.31,-56 3830.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3725.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L186">
+<g id="a_node23_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L186" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L186">
 <text xml:space="preserve" text-anchor="start" x="3731.09" y="-75.71" font-family="monospace" font-size="11.00">mean_center/2</text>
 </a>
 </g>
@@ -421,7 +421,7 @@
 <g id="a_node24"><a xlink:title="Computes an approximate minimum enclosing circle for a list of one or more coordinates, returning the circle center coordinate and radius in kilometers.">
 <polygon fill="springgreen" stroke="black" points="4047.21,-92 3848.79,-92 3848.79,-56 4047.21,-56 4047.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="3856.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L193">
+<g id="a_node24_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L193">
 <text xml:space="preserve" text-anchor="start" x="3862.19" y="-75.71" font-family="monospace" font-size="11.00">minimum_enclosing_circle/3</text>
 </a>
 </g>
@@ -438,7 +438,7 @@
 <g id="a_node25"><a xlink:title="Computes the axis&#45;aligned latitude/longitude bounding box for a list of one or more coordinates.">
 <polygon fill="springgreen" stroke="black" points="4263.21,-92 4064.79,-92 4064.79,-56 4263.21,-56 4263.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4072.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L200">
+<g id="a_node25_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L200">
 <text xml:space="preserve" text-anchor="start" x="4078.19" y="-75.71" font-family="monospace" font-size="11.00">coordinates_bounding_box/2</text>
 </a>
 </g>
@@ -455,7 +455,7 @@
 <g id="a_node26"><a xlink:title="True when a coordinate is inside (or on the boundary of) a polygon represented as a list of coordinates. Uses a planar ray&#45;casting algorithm over latitude/longitude coordinates.">
 <polygon fill="springgreen" stroke="black" points="4426.81,-92 4281.19,-92 4281.19,-56 4426.81,-56 4426.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4289.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L207">
+<g id="a_node26_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="4294.59" y="-75.71" font-family="monospace" font-size="11.00">point_in_polygon/2</text>
 </a>
 </g>
@@ -472,7 +472,7 @@
 <g id="a_node27"><a xlink:title="Computes an approximate polygon area in square kilometers by projecting coordinates to a local equirectangular plane and applying the shoelace formula.">
 <polygon fill="springgreen" stroke="black" points="4563.61,-92 4444.39,-92 4444.39,-56 4563.61,-56 4563.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4452.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L214">
+<g id="a_node27_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L214">
 <text xml:space="preserve" text-anchor="start" x="4457.79" y="-75.71" font-family="monospace" font-size="11.00">polygon_area/2</text>
 </a>
 </g>
@@ -489,7 +489,7 @@
 <g id="a_node28"><a xlink:title="Computes an approximate polygon centroid by using a local equirectangular projection and planar centroid formula.">
 <polygon fill="springgreen" stroke="black" points="4726.81,-92 4581.19,-92 4581.19,-56 4726.81,-56 4726.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4589.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L221">
+<g id="a_node28_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L221">
 <text xml:space="preserve" text-anchor="start" x="4594.59" y="-75.71" font-family="monospace" font-size="11.00">polygon_centroid/2</text>
 </a>
 </g>
@@ -506,7 +506,7 @@
 <g id="a_node29"><a xlink:title="Computes the axis&#45;aligned latitude/longitude bounding box for a polygon represented as a list of coordinates.">
 <polygon fill="springgreen" stroke="black" points="4917.01,-92 4744.99,-92 4744.99,-56 4917.01,-56 4917.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4752.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L228">
+<g id="a_node29_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L228">
 <text xml:space="preserve" text-anchor="start" x="4758.39" y="-75.71" font-family="monospace" font-size="11.00">polygon_bounding_box/2</text>
 </a>
 </g>
@@ -523,7 +523,7 @@
 <g id="a_node30"><a xlink:title="Returns a closed polygon ring by ensuring the first coordinate is repeated at the end of the list.">
 <polygon fill="springgreen" stroke="black" points="5060.91,-92 4935.09,-92 4935.09,-56 5060.91,-56 5060.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="4943.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L235">
+<g id="a_node30_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L235">
 <text xml:space="preserve" text-anchor="start" x="4948.49" y="-75.71" font-family="monospace" font-size="11.00">close_polygon/2</text>
 </a>
 </g>
@@ -540,7 +540,7 @@
 <g id="a_node31"><a xlink:title="Computes polygon ring orientation as ``clockwise`` or ``counterclockwise`` using a local projected signed area approximation.">
 <polygon fill="springgreen" stroke="black" points="5244.71,-92 5079.29,-92 5079.29,-56 5244.71,-56 5244.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5087.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node31_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L242">
+<g id="a_node31_31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L242">
 <text xml:space="preserve" text-anchor="start" x="5092.69" y="-75.71" font-family="monospace" font-size="11.00">polygon_orientation/2</text>
 </a>
 </g>
@@ -557,7 +557,7 @@
 <g id="a_node32"><a xlink:title="True when a polygon ring orientation is clockwise.">
 <polygon fill="springgreen" stroke="black" points="5435.01,-92 5262.99,-92 5262.99,-56 5435.01,-56 5435.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5270.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node32_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L249">
+<g id="a_node32_32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L249">
 <text xml:space="preserve" text-anchor="start" x="5276.39" y="-75.71" font-family="monospace" font-size="11.00">is_clockwise_polygon/1</text>
 </a>
 </g>
@@ -574,7 +574,7 @@
 <g id="a_node33"><a xlink:title="Normalizes a polygon ring orientation to ``clockwise`` or ``counterclockwise``.">
 <polygon fill="springgreen" stroke="black" points="5684.72,-92 5453.28,-92 5453.28,-56 5684.72,-56 5684.72,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5461.28" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node33_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L256">
+<g id="a_node33_33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L256" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L256">
 <text xml:space="preserve" text-anchor="start" x="5466.68" y="-75.71" font-family="monospace" font-size="11.00">normalize_polygon_orientation/3</text>
 </a>
 </g>
@@ -591,7 +591,7 @@
 <g id="a_node34"><a xlink:title="Returns a polygon ring with clockwise orientation.">
 <polygon fill="springgreen" stroke="black" points="5855.11,-92 5702.89,-92 5702.89,-56 5855.11,-56 5855.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5710.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node34_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L263">
+<g id="a_node34_34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L263" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L263">
 <text xml:space="preserve" text-anchor="start" x="5716.29" y="-75.71" font-family="monospace" font-size="11.00">clockwise_polygon/2</text>
 </a>
 </g>
@@ -608,7 +608,7 @@
 <g id="a_node35"><a xlink:title="Returns a polygon ring with counterclockwise orientation.">
 <polygon fill="springgreen" stroke="black" points="6071.21,-92 5872.79,-92 5872.79,-56 6071.21,-56 6071.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="5880.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node35_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L270">
+<g id="a_node35_35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L270" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L270">
 <text xml:space="preserve" text-anchor="start" x="5886.19" y="-75.71" font-family="monospace" font-size="11.00">counterclockwise_polygon/2</text>
 </a>
 </g>
@@ -625,7 +625,7 @@
 <g id="a_node36"><a xlink:title="True when a polygon has at least three valid coordinates after normalizing optional closure.">
 <polygon fill="springgreen" stroke="black" points="6234.81,-92 6089.19,-92 6089.19,-56 6234.81,-56 6234.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6097.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node36_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L277">
+<g id="a_node36_36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L277">
 <text xml:space="preserve" text-anchor="start" x="6102.59" y="-75.71" font-family="monospace" font-size="11.00">is_valid_polygon/1</text>
 </a>
 </g>
@@ -642,7 +642,7 @@
 <g id="a_node37"><a xlink:title="True when a coordinate or bounding box is inside or on the boundary of a bounding box term ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``. Antimeridian&#45;crossing bounding boxes are supported.">
 <polygon fill="springgreen" stroke="black" points="6378.91,-92 6253.09,-92 6253.09,-56 6378.91,-56 6378.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6261.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node37_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L284">
+<g id="a_node37_37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L284" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L284">
 <text xml:space="preserve" text-anchor="start" x="6266.49" y="-75.71" font-family="monospace" font-size="11.00">bbox_contains/2</text>
 </a>
 </g>
@@ -659,7 +659,7 @@
 <g id="a_node38"><a xlink:title="True when two bounding boxes intersect or touch. Antimeridian&#45;crossing bounding boxes are supported.">
 <polygon fill="springgreen" stroke="black" points="6535.51,-92 6396.49,-92 6396.49,-56 6535.51,-56 6535.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6404.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node38_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L291">
+<g id="a_node38_38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L291" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L291">
 <text xml:space="preserve" text-anchor="start" x="6409.89" y="-75.71" font-family="monospace" font-size="11.00">bbox_intersects/2</text>
 </a>
 </g>
@@ -676,7 +676,7 @@
 <g id="a_node39"><a xlink:title="True when two bounding boxes have a strict positive&#45;area overlap. Touching only at an edge or corner fails. Antimeridian&#45;crossing bounding boxes are supported.">
 <polygon fill="springgreen" stroke="black" points="6678.91,-92 6553.09,-92 6553.09,-56 6678.91,-56 6678.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6561.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node39_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L298">
+<g id="a_node39_39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L298" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L298">
 <text xml:space="preserve" text-anchor="start" x="6566.49" y="-75.71" font-family="monospace" font-size="11.00">bbox_overlaps/2</text>
 </a>
 </g>
@@ -693,7 +693,7 @@
 <g id="a_node40"><a xlink:title="Computes the minimal bounding box containing two bounding boxes.">
 <polygon fill="springgreen" stroke="black" points="6803.01,-92 6696.99,-92 6696.99,-56 6803.01,-56 6803.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6704.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node40_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L305">
+<g id="a_node40_40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L305" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L305">
 <text xml:space="preserve" text-anchor="start" x="6710.39" y="-75.71" font-family="monospace" font-size="11.00">bbox_union/3</text>
 </a>
 </g>
@@ -710,7 +710,7 @@
 <g id="a_node41"><a xlink:title="Expands a bounding box by a distance in kilometers on all sides using a local spherical approximation.">
 <polygon fill="springgreen" stroke="black" points="6933.31,-92 6820.69,-92 6820.69,-56 6933.31,-56 6933.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6828.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node41_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L312">
+<g id="a_node41_41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L312">
 <text xml:space="preserve" text-anchor="start" x="6834.09" y="-75.71" font-family="monospace" font-size="11.00">bbox_expand/3</text>
 </a>
 </g>
@@ -727,7 +727,7 @@
 <g id="a_node42"><a xlink:title="True when a bounding box intersects a polygon or either contains the other. Antimeridian&#45;crossing bounding boxes are supported.">
 <polygon fill="springgreen" stroke="black" points="7142.91,-92 6951.09,-92 6951.09,-56 7142.91,-56 7142.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="6959.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node42_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L319">
+<g id="a_node42_42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L319" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L319">
 <text xml:space="preserve" text-anchor="start" x="6964.49" y="-75.71" font-family="monospace" font-size="11.00">bbox_intersects_polygon/2</text>
 </a>
 </g>
@@ -744,7 +744,7 @@
 <g id="a_node43"><a xlink:title="True when a bounding box fully contains a polygon, including polygon vertices on the boundary. Antimeridian&#45;crossing bounding boxes are supported.">
 <polygon fill="springgreen" stroke="black" points="7339.31,-92 7160.69,-92 7160.69,-56 7339.31,-56 7339.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7168.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node43_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L326">
+<g id="a_node43_43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L326" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L326">
 <text xml:space="preserve" text-anchor="start" x="7174.09" y="-75.71" font-family="monospace" font-size="11.00">bbox_contains_polygon/2</text>
 </a>
 </g>
@@ -761,7 +761,7 @@
 <g id="a_node44"><a xlink:title="Computes a bounding box from a list of one or more coordinates.">
 <polygon fill="springgreen" stroke="black" points="7536.31,-92 7357.69,-92 7357.69,-56 7536.31,-56 7536.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7365.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node44_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L333">
+<g id="a_node44_44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="7371.09" y="-75.71" font-family="monospace" font-size="11.00">bbox_from_coordinates/2</text>
 </a>
 </g>
@@ -778,7 +778,7 @@
 <g id="a_node45"><a xlink:title="True when a bounding box intersects or touches a polyline with two or more coordinates. Antimeridian&#45;crossing bounding boxes are supported.">
 <polygon fill="springgreen" stroke="black" points="7753.21,-92 7554.79,-92 7554.79,-56 7753.21,-56 7753.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7562.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node45_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L340">
+<g id="a_node45_45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L340" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L340">
 <text xml:space="preserve" text-anchor="start" x="7568.19" y="-75.71" font-family="monospace" font-size="11.00">bbox_intersects_polyline/2</text>
 </a>
 </g>
@@ -795,7 +795,7 @@
 <g id="a_node46"><a xlink:title="Computes the minimum distance in kilometers from a coordinate to a polyline with two or more coordinates.">
 <polygon fill="springgreen" stroke="black" points="7982.82,-92 7771.18,-92 7771.18,-56 7982.82,-56 7982.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="7779.18" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node46_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L347">
+<g id="a_node46_46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="7784.58" y="-75.71" font-family="monospace" font-size="11.00">point_to_polyline_distance/3</text>
 </a>
 </g>
@@ -812,7 +812,7 @@
 <g id="a_node47"><a xlink:title="Computes the nearest coordinate on a segment to a coordinate using a local equirectangular approximation.">
 <polygon fill="springgreen" stroke="black" points="8199.21,-92 8000.79,-92 8000.79,-56 8199.21,-56 8199.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8008.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node47_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L354">
+<g id="a_node47_47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L354">
 <text xml:space="preserve" text-anchor="start" x="8014.19" y="-75.71" font-family="monospace" font-size="11.00">nearest_point_on_segment/4</text>
 </a>
 </g>
@@ -829,7 +829,7 @@
 <g id="a_node48"><a xlink:title="Computes the nearest coordinate on a polyline to a coordinate and the corresponding distance in kilometers.">
 <polygon fill="springgreen" stroke="black" points="8422.52,-92 8217.48,-92 8217.48,-56 8422.52,-56 8422.52,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8225.48" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node48_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L361">
+<g id="a_node48_48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L361">
 <text xml:space="preserve" text-anchor="start" x="8230.89" y="-75.71" font-family="monospace" font-size="11.00">nearest_point_on_polyline/4</text>
 </a>
 </g>
@@ -846,7 +846,7 @@
 <g id="a_node49"><a xlink:title="Computes the polyline length in kilometers for a list of two or more coordinates using the default ``haversine`` metric.">
 <polygon fill="springgreen" stroke="black" points="8579.51,-92 8440.49,-92 8440.49,-56 8579.51,-56 8579.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8448.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node49_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L368">
+<g id="a_node49_49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L368" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L368">
 <text xml:space="preserve" text-anchor="start" x="8453.89" y="-75.71" font-family="monospace" font-size="11.00">polyline_length/2</text>
 </a>
 </g>
@@ -863,7 +863,7 @@
 <g id="a_node50"><a xlink:title="Computes the polyline length in kilometers for a list of two or more coordinates using the selected metric.">
 <polygon fill="springgreen" stroke="black" points="8736.51,-92 8597.49,-92 8597.49,-56 8736.51,-56 8736.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8605.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node50_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L375">
+<g id="a_node50_50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L375">
 <text xml:space="preserve" text-anchor="start" x="8610.89" y="-75.71" font-family="monospace" font-size="11.00">polyline_length/3</text>
 </a>
 </g>
@@ -880,7 +880,7 @@
 <g id="a_node51"><a xlink:title="Simplifies a polyline using the Douglas&#45;Peucker algorithm with a tolerance in kilometers.">
 <polygon fill="springgreen" stroke="black" points="8907.11,-92 8754.89,-92 8754.89,-56 8907.11,-56 8907.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8762.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node51_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L382">
+<g id="a_node51_51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L382">
 <text xml:space="preserve" text-anchor="start" x="8768.29" y="-75.71" font-family="monospace" font-size="11.00">polyline_simplify/3</text>
 </a>
 </g>
@@ -897,7 +897,7 @@
 <g id="a_node52"><a xlink:title="Splits a polyline at a distance in kilometers from its first coordinate, returning left and right polylines that share the split coordinate.">
 <polygon fill="springgreen" stroke="black" points="9136.82,-92 8925.18,-92 8925.18,-56 9136.82,-56 9136.82,-92"/>
 <text xml:space="preserve" text-anchor="start" x="8933.18" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node52_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L389">
+<g id="a_node52_52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L389">
 <text xml:space="preserve" text-anchor="start" x="8938.58" y="-75.71" font-family="monospace" font-size="11.00">polyline_split_at_distance/4</text>
 </a>
 </g>
@@ -914,7 +914,7 @@
 <g id="a_node53"><a xlink:title="Resamples a polyline using a fixed step in kilometers, preserving first and last coordinates.">
 <polygon fill="springgreen" stroke="black" points="9307.11,-92 9154.89,-92 9154.89,-56 9307.11,-56 9307.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9162.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node53_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L396">
+<g id="a_node53_53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L396" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L396">
 <text xml:space="preserve" text-anchor="start" x="9168.29" y="-75.71" font-family="monospace" font-size="11.00">polyline_resample/3</text>
 </a>
 </g>
@@ -931,7 +931,7 @@
 <g id="a_node54"><a xlink:title="Computes the polygon perimeter in kilometers using the default ``haversine`` metric.">
 <polygon fill="springgreen" stroke="black" points="9477.11,-92 9324.89,-92 9324.89,-56 9477.11,-56 9477.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9332.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node54_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L403">
+<g id="a_node54_54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L403">
 <text xml:space="preserve" text-anchor="start" x="9338.29" y="-75.71" font-family="monospace" font-size="11.00">polygon_perimeter/2</text>
 </a>
 </g>
@@ -948,7 +948,7 @@
 <g id="a_node55"><a xlink:title="Computes the polygon perimeter in kilometers using the selected metric.">
 <polygon fill="springgreen" stroke="black" points="9647.11,-92 9494.89,-92 9494.89,-56 9647.11,-56 9647.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9502.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node55_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L410" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L410">
+<g id="a_node55_55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L410" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L410">
 <text xml:space="preserve" text-anchor="start" x="9508.29" y="-75.71" font-family="monospace" font-size="11.00">polygon_perimeter/3</text>
 </a>
 </g>
@@ -965,7 +965,7 @@
 <g id="a_node56"><a xlink:title="True when two polygons intersect or one polygon is contained in the other.">
 <polygon fill="springgreen" stroke="black" points="9824.41,-92 9665.59,-92 9665.59,-56 9824.41,-56 9824.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9673.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node56_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L417">
+<g id="a_node56_56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L417" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L417">
 <text xml:space="preserve" text-anchor="start" x="9678.99" y="-75.71" font-family="monospace" font-size="11.00">polygons_intersect/2</text>
 </a>
 </g>
@@ -982,7 +982,7 @@
 <g id="a_node57"><a xlink:title="Computes a spherical bounding box around a center coordinate for a given radius in kilometers. The returned bounding box term is ``bbox(geographic(MinLatitude,MinLongitude),geographic(MaxLatitude,MaxLongitude))``.">
 <polygon fill="springgreen" stroke="black" points="9961.61,-92 9842.39,-92 9842.39,-56 9961.61,-56 9961.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9850.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node57_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L424" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L424">
+<g id="a_node57_57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L424" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L424">
 <text xml:space="preserve" text-anchor="start" x="9855.79" y="-75.71" font-family="monospace" font-size="11.00">bounding_box/3</text>
 </a>
 </g>
@@ -999,7 +999,7 @@
 <g id="a_node58"><a xlink:title="Computes the route distance in kilometers for a list of two or more coordinates using the default ``haversine`` metric.">
 <polygon fill="springgreen" stroke="black" points="10112.21,-92 9979.79,-92 9979.79,-56 10112.21,-56 10112.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="9987.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node58_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L431" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L431">
+<g id="a_node58_58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L431" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L431">
 <text xml:space="preserve" text-anchor="start" x="9993.19" y="-75.71" font-family="monospace" font-size="11.00">route_distance/2</text>
 </a>
 </g>
@@ -1016,7 +1016,7 @@
 <g id="a_node59"><a xlink:title="Computes the route distance in kilometers for a list of two or more coordinates using the selected metric. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``.">
 <polygon fill="springgreen" stroke="black" points="10262.21,-92 10129.79,-92 10129.79,-56 10262.21,-56 10262.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10137.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node59_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L438" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L438">
+<g id="a_node59_59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L438" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L438">
 <text xml:space="preserve" text-anchor="start" x="10143.19" y="-75.71" font-family="monospace" font-size="11.00">route_distance/3</text>
 </a>
 </g>
@@ -1033,7 +1033,7 @@
 <g id="a_node60"><a xlink:title="Computes the route distance for a list of two or more coordinates using the selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.">
 <polygon fill="springgreen" stroke="black" points="10412.21,-92 10279.79,-92 10279.79,-56 10412.21,-56 10412.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="10287.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node60_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L445" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/geospatial/geospatial_protocol.lgt#L445">
+<g id="a_node60_60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L445" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/geospatial/geospatial_protocol.lgt#L445">
 <text xml:space="preserve" text-anchor="start" x="10293.19" y="-75.71" font-family="monospace" font-size="11.00">route_distance/4</text>
 </a>
 </g>

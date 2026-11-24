@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1287,-140 1287,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol queuep</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 10:01</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;24, 11:38</text>
 <g id="clust1" class="cluster">
 <title>cluster_queuep_protocol</title>
 <g id="a_clust1"><a xlink:title="queuep">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1263,-46 1263,-46 1269,-46 1275,-52 1275,-58 1275,-58 1275,-116 1275,-116 1275,-122 1269,-128 1263,-128 1263,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">queuep</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="True if the queue is empty.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">empty/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Unifies ``Head`` with the first element of the queue.">
 <polygon fill="springgreen" stroke="black" points="176.2,-92 109.8,-92 109.8,-56 176.2,-56 176.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="123.2" y="-75.71" font-family="monospace" font-size="11.00">head/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Adds the new element at the end of the queue.">
 <polygon fill="springgreen" stroke="black" points="260.2,-92 193.8,-92 193.8,-56 260.2,-56 260.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="201.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="207.2" y="-75.71" font-family="monospace" font-size="11.00">join/3</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Adds the new elements at the end of the queue. The elements are added in the same order that they appear in the list.">
 <polygon fill="springgreen" stroke="black" points="371.41,-92 278.59,-92 278.59,-56 371.41,-56 371.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="286.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="291.99" y="-75.71" font-family="monospace" font-size="11.00">join_all/3</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Adds the new element at the front of the queue.">
 <polygon fill="springgreen" stroke="black" points="456.2,-92 389.8,-92 389.8,-56 456.2,-56 456.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="397.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="403.2" y="-75.71" font-family="monospace" font-size="11.00">jump/3</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Adds the new elements at the front of the queue. The last element in the list will be at the front of the queue.">
 <polygon fill="springgreen" stroke="black" points="567.41,-92 474.59,-92 474.59,-56 567.41,-56 567.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="482.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="487.99" y="-75.71" font-family="monospace" font-size="11.00">jump_all/3</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Adds the new elements as a block at the front of the queue. The first element in the list will be at the front of the queue.">
 <polygon fill="springgreen" stroke="black" points="718.21,-92 585.79,-92 585.79,-56 718.21,-56 718.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="593.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="599.19" y="-75.71" font-family="monospace" font-size="11.00">jump_all_block/3</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Appends two queues. The new queue will have the elements of the first queue followed by the elements of the second queue.">
 <polygon fill="springgreen" stroke="black" points="815.81,-92 736.19,-92 736.19,-56 815.81,-56 815.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="744.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L81">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="749.6" y="-75.71" font-family="monospace" font-size="11.00">append/3</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Queue length.">
 <polygon fill="springgreen" stroke="black" points="913.81,-92 834.19,-92 834.19,-56 913.81,-56 913.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="842.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L88">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="847.6" y="-75.71" font-family="monospace" font-size="11.00">length/2</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="a_node10"><a xlink:title="Removes the first element of the queue for service.">
 <polygon fill="springgreen" stroke="black" points="1004.5,-92 931.5,-92 931.5,-56 1004.5,-56 1004.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="939.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L95">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="944.9" y="-75.71" font-family="monospace" font-size="11.00">serve/3</text>
 </a>
 </g>
@@ -200,7 +200,7 @@
 <g id="a_node11"><a xlink:title="Converts a queue to a list.">
 <polygon fill="springgreen" stroke="black" points="1109.11,-92 1022.89,-92 1022.89,-56 1109.11,-56 1109.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1030.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L102">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1036.3" y="-75.71" font-family="monospace" font-size="11.00">as_list/2</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="a_node12"><a xlink:title="Applies a closure to all elements of a queue.">
 <polygon fill="springgreen" stroke="black" points="1186.9,-92 1127.1,-92 1127.1,-56 1186.9,-56 1186.9,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1135.1" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L109">
+<g id="a_node12_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L109">
 <text xml:space="preserve" text-anchor="start" x="1140.5" y="-75.71" font-family="monospace" font-size="11.00">map/2</text>
 </a>
 </g>
@@ -234,7 +234,7 @@
 <g id="a_node13"><a xlink:title="Applies a closure to all elements of a queue constructing a new queue.">
 <polygon fill="springgreen" stroke="black" points="1264.9,-92 1205.1,-92 1205.1,-56 1264.9,-56 1264.9,-92"/>
 <text xml:space="preserve" text-anchor="start" x="1213.1" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/246481fdb69dee7f1e0de53ae01471caf86548d0/library/queues/queuep.lgt#L117">
+<g id="a_node13_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ab242da375d71ffaaefc115a6222ef6847fe7f4a/library/queues/queuep.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1218.5" y="-75.71" font-family="monospace" font-size="11.00">map/3</text>
 </a>
 </g>
