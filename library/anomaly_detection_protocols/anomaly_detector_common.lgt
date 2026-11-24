@@ -54,7 +54,7 @@
 	:- protected(dataset_attributes/2).
 	:- mode(dataset_attributes(+object_identifier, -list(pair)), one).
 	:- info(dataset_attributes/2, [
-		comment is 'Collects the dataset attribute declarations as `Attribute-Values` pairs.',
+		comment is 'Collects the dataset attribute declarations as ``Attribute-Values`` pairs.',
 		argnames is ['Dataset', 'Attributes']
 	]).
 
@@ -82,7 +82,7 @@
 	:- protected(extract_scores/2).
 	:- mode(extract_scores(+list, -list), one).
 	:- info(extract_scores/2, [
-		comment is 'Transforms `Score-Id-Class` tuples into the public `Id-Class-Score` representation.',
+		comment is 'Transforms `Score-Id-Class` tuples into the public ``Id-Class-Score`` representation.',
 		argnames is ['Pairs', 'Scores']
 	]).
 

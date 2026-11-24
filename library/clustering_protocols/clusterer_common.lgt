@@ -33,7 +33,7 @@
 	:- protected(dataset_attributes/2).
 	:- mode(dataset_attributes(+object_identifier, -list(pair)), one).
 	:- info(dataset_attributes/2, [
-		comment is 'Collects the dataset attribute declarations as `Attribute-Values` pairs.',
+		comment is 'Collects the dataset attribute declarations as ``Attribute-Values`` pairs.',
 		argnames is ['Dataset', 'Attributes']
 	]).
 
@@ -138,7 +138,7 @@
 	:- protected(attribute_value/3).
 	:- mode(attribute_value(+atom, +list(pair), -term), one).
 	:- info(attribute_value/3, [
-		comment is 'Looks up an attribute value in a list of `Attribute-Value` pairs.',
+		comment is 'Looks up an attribute value in a list of ``Attribute-Value`` pairs.',
 		argnames is ['Attribute', 'AttributeValues', 'Value']
 	]).
 
@@ -159,7 +159,7 @@
 	:- protected(examples_to_rows/3).
 	:- mode(examples_to_rows(+list, +list(compound), -list(pair)), one).
 	:- info(examples_to_rows/3, [
-		comment is 'Encodes training examples into `Id-Features` rows using the object-local or imported encoder implementation.',
+		comment is 'Encodes training examples into ``Id-Features`` rows using the object-local or imported encoder implementation.',
 		argnames is ['Examples', 'Encoders', 'Rows']
 	]).
 
@@ -208,14 +208,14 @@
 	:- protected(take_first_k/3).
 	:- mode(take_first_k(+integer, +list, -list), one).
 	:- info(take_first_k/3, [
-		comment is 'Collects the first `K` vectors from `Id-Vector` rows.',
+		comment is 'Collects the first ``K`` vectors from ``Id-Vector`` rows.',
 		argnames is ['K', 'Rows', 'Vectors']
 	]).
 
 	:- protected(remove_candidate/3).
 	:- mode(remove_candidate(+pair, +list(pair), -list(pair)), one).
 	:- info(remove_candidate/3, [
-		comment is 'Removes the first matching `Id-Vector` candidate from a candidate list.',
+		comment is 'Removes the first matching ``Id-Vector`` candidate from a candidate list.',
 		argnames is ['Candidate', 'Candidates', 'RemainingCandidates']
 	]).
 

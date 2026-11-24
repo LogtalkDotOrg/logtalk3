@@ -54,14 +54,14 @@
 	:- protected(dataset_attributes/2).
 	:- mode(dataset_attributes(+object_identifier, -list(pair)), one).
 	:- info(dataset_attributes/2, [
-		comment is 'Collects the dataset attribute declarations as `Attribute-Values` pairs.',
+		comment is 'Collects the dataset attribute declarations as ``Attribute-Values`` pairs.',
 		argnames is ['Dataset', 'Attributes']
 	]).
 
 	:- protected(dataset_examples/2).
 	:- mode(dataset_examples(+object_identifier, -list(compound)), one).
 	:- info(dataset_examples/2, [
-		comment is 'Collects the dataset examples as `example(Id, TargetValue, AttributeValues)` terms.',
+		comment is 'Collects the dataset examples as ``example(Id, TargetValue, AttributeValues)`` terms.',
 		argnames is ['Dataset', 'Examples']
 	]).
 

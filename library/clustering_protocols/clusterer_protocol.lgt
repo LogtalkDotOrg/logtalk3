@@ -71,7 +71,7 @@
 	:- public(valid_clusterer/1).
 	:- mode(valid_clusterer(@compound), zero_or_one).
 	:- info(valid_clusterer/1, [
-		comment is 'True when a learned clusterer term is structurally valid for the receiving implementation. Succeeds iff `check_clusterer/1` succeeds without throwing an exception.',
+		comment is 'True when a learned clusterer term is structurally valid for the receiving implementation. Succeeds iff ``check_clusterer/1`` succeeds without throwing an exception.',
 		argnames is ['Clusterer']
 	]).
 

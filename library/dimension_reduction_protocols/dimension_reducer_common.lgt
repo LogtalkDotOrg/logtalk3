@@ -68,7 +68,7 @@
 	:- protected(dataset_attributes/2).
 	:- mode(dataset_attributes(+object_identifier, -list(pair)), one).
 	:- info(dataset_attributes/2, [
-		comment is 'Collects the dataset attribute declarations as `Attribute-Values` pairs.',
+		comment is 'Collects the dataset attribute declarations as ``Attribute-Values`` pairs.',
 		argnames is ['Dataset', 'Attributes']
 	]).
 
@@ -103,7 +103,7 @@
 	:- protected(attribute_value/3).
 	:- mode(attribute_value(+atom, +list(pair), -term), one).
 	:- info(attribute_value/3, [
-		comment is 'Looks up an attribute value in a list of `Attribute-Value` pairs.',
+		comment is 'Looks up an attribute value in a list of ``Attribute-Value`` pairs.',
 		argnames is ['Attribute', 'AttributeValues', 'Value']
 	]).
 
@@ -211,7 +211,7 @@
 	:- protected(project_components/4).
 	:- mode(project_components(+list(list(number)), +list(number), +integer, -list(pair)), one).
 	:- info(project_components/4, [
-		comment is 'Projects encoded features onto the learned components and returns `component_N-Score` pairs.',
+		comment is 'Projects encoded features onto the learned components and returns ``ComponentName-Score`` pairs.',
 		argnames is ['Components', 'Features', 'Index', 'ReducedInstance']
 	]).
 
