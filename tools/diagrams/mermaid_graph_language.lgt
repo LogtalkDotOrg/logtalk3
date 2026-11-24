@@ -62,8 +62,8 @@
 	file_header(Stream, _Identifier, Options) :-
 		retractall(edge_index_(_)),
 		asserta(edge_index_(0)),
-		% override Mermaid's inline tooltip width and wrap long text and paths
-		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { width: max-content; max-width: min(30em, calc(100vw - 16px)) !important; box-sizing: border-box; white-space: pre-wrap; overflow-wrap: anywhere; }\n.nodeLabel a[title="Zoom"] { float: left; }\nbody:has(.nodeLabel b[title]:hover, .nodeLabel a[title]:hover) div.mermaidTooltip { visibility: hidden; }\n</style>\n</head>\n<body>\n'),
+		% override Mermaid's inline tooltip width and font size and wrap long text and paths
+		write(Stream, '<html>\n<head>\n<style>\ndiv.mermaidTooltip { width: max-content; max-width: min(22.5rem, calc(100vw - 16px)) !important; box-sizing: border-box; font-size: 1rem !important; white-space: pre-wrap; overflow-wrap: anywhere; }\nbody:has(.node.hover) div.mermaidTooltip { opacity: 1 !important; }\n.nodeLabel a[title="Zoom"] { float: left; }\nbody:has(.nodeLabel b[title]:hover, .nodeLabel a[title]:hover) div.mermaidTooltip { visibility: hidden; }\n</style>\n</head>\n<body>\n'),
 		write(Stream, '<script type="module">\nimport mermaid from \'https://cdn.jsdelivr.net/npm/mermaid@12/dist/mermaid.esm.min.mjs\';\nwindow.noop = function() {};\n// keep tooltips, which Mermaid anchors at the node center, inside the window\ndocument.addEventListener(\'mouseover\', function() { var t = document.querySelector(\'.mermaidTooltip\'); if (t) { var m = window.scrollX + document.documentElement.clientWidth - t.offsetWidth - 4, l = parseFloat(t.style.left); if (l > m) { t.style.left = Math.max(window.scrollX, m) + \'px\'; } } });\nmermaid.initialize({ securityLevel: \'loose\', startOnLoad: true, htmlLabels: true, dompurifyConfig: { ALLOW_UNKNOWN_PROTOCOLS: true }, flowchart: { useMaxWidth: false } });\n</script>\n'),
 		write(Stream, '<pre class="mermaid">\n'),
 		write(Stream, 'graph '),
