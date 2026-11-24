@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   DOT and d2 diagram files to SVG files conversion script
-##   Last updated on March 13, 2026
+##   Last updated on November 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -93,7 +93,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.15"
+	echo "$(basename "$0") 0.16"
 	exit 0
 }
 
@@ -199,7 +199,33 @@ if [ $d2_count -ne 0 ] ; then
 		echo -n "  converting $(basename "$file")... "
 		d2 --layout "$layout" "${args[@]}" "$file" "${file%.*}.$format"  2>/dev/null | cat
 		if [ "${PIPESTATUS[0]}" == 0 ] ; then
-			echo "done"
+			if [ "$format" = "svg" ] ; then
+				output="${file%.*}.$format"
+				temporary=$(mktemp "${output}.XXXXXX") || {
+					d2_failed_flag=1
+					echo "failed to create temporary file" >&2
+					continue
+				}
+				if awk '
+					NR == 1 {
+						if (match($0, /^<\?xml[^?]*\?>/)) {
+							print substr($0, 1, RLENGTH)
+							$0 = substr($0, RLENGTH + 1)
+						}
+						print "<?xml-stylesheet href=\"diagrams.css\" type=\"text/css\"?>"
+					}
+					{ print }
+				' "$output" > "$temporary" && cat "$temporary" > "$output"; then
+					rm -f "$temporary"
+					echo "done"
+				else
+					rm -f "$temporary"
+					d2_failed_flag=1
+					echo "failed to add stylesheet reference" >&2
+				fi
+			else
+				echo "done"
+			fi
 		else
 			d2_failed_flag=1
 			echo "failed"

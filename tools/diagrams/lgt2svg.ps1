@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   DOT and d2 diagram files to SVG files conversion script
-##   Last updated on March 13, 2026
+##   Last updated on November 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -39,7 +39,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.15"
+	Write-Output "$myName 0.16"
 }
 
 function Get-Logtalkhome {
@@ -203,7 +203,25 @@ if ($d2_count -gt 0) {
 			& d2 --layout $l $_.Name "$($_.BaseName).$f"
 		}
 		if ($?) {
-			Write-Output " done"
+			if ($f -eq "svg") {
+				try {
+					$output = "$($_.BaseName).$f"
+					$svg = [System.IO.File]::ReadAllText((Join-Path $PWD $output))
+					$stylesheet = '<?xml-stylesheet href="diagrams.css" type="text/css"?>'
+					if ($svg -match '^<\?xml[^?]*\?>') {
+						$svg = $Matches[0] + "`n" + $stylesheet + "`n" + $svg.Substring($Matches[0].Length)
+					} else {
+						$svg = $stylesheet + "`n" + $svg
+					}
+					[System.IO.File]::WriteAllText((Join-Path $PWD $output), $svg, [System.Text.UTF8Encoding]::new($false))
+					Write-Output " done"
+				} catch {
+					$d2_failed_flag = $true
+					Write-Error "Failed to add stylesheet reference to $output`: $_"
+				}
+			} else {
+				Write-Output " done"
+			}
 		} else {
 			$d2_failed_flag = $true
 			Write-Output " failed"
