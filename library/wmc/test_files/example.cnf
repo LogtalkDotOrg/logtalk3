@@ -1,0 +1,15 @@
+c SPDX-FileCopyrightText: 2026 Paulo Moura <pmoura@logtalk.org>
+c SPDX-License-Identifier: Apache-2.0
+c weighted model counting example with embedded variable markers
+c v 1 x1
+c v 2 x2
+c v 3 x3
+p cnf 3 2
+c p weight 1 0.3 0
+c p weight -1 0.7 0
+c p weight 2 0.5 0
+c p weight -2 0.5 0
+c p weight 3 0.2 0
+c p weight -3 0.8 0
+1 2 0
+-1 3 0

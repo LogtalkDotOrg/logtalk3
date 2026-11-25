@@ -1,0 +1,153 @@
+.. index:: single: wmc_program
+.. _wmc_program/0:
+
+.. rst-class:: right
+
+**object**
+
+``wmc_program``
+===============
+
+Canonical weighted model counting statement validation, DIMACS CNF source generation with weights using the Model Counting Competition format, and variable table computation.
+
+| **Availability:** 
+|    ``logtalk_load(wmc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: serialize/2
+.. _wmc_program/0::serialize/2:
+
+``serialize/2``
+^^^^^^^^^^^^^^^
+
+Serializes ground canonical statements to CNF character codes (``p cnf`` header, ``c p weight`` lines when the problem is weighted, and clauses), assigning sequential variable numbers by first occurrence across clauses and weights. In a weighted problem, both literals of every variable get an explicit weight (1 when unspecified).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Codes)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,-list(code))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(wmc_statement,Statement)``
+|    The weight of a literal is given more than once:
+|        ``domain_error(wmc_duplicate_weight,Literal)``
+
+
+------------
+
+.. index:: serialize/4
+.. _wmc_program/0::serialize/4:
+
+``serialize/4``
+^^^^^^^^^^^^^^^
+
+Serializes statements with origins and returns ``line(Start, End, Origin)`` source-map entries for the statements that generate lines (weight and probability statements do not).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serialize(Statements,Origins,Codes,SourceMap)``
+| **Mode and number of proofs:**
+|    ``serialize(+list,+list,-list(code),-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Statements`` is a partial list or a list with an element ``Statement`` which is a variable:
+|        ``instantiation_error``
+|    ``Statements`` is neither a partial list nor a list:
+|        ``type_error(list,Statements)``
+|    An element ``Statement`` of the list ``Statements`` is not a valid statement:
+|        ``domain_error(wmc_statement,Statement)``
+|    The weight of a literal is given more than once:
+|        ``domain_error(wmc_duplicate_weight,Literal)``
+|    ``Origins`` has an element that is neither ``unknown`` nor a valid ``source(File, Start, End)`` term, or its length differs from ``Statements``:
+|        ``domain_error(wmc_origins,Origins)``
+
+
+------------
+
+.. index:: variables/2
+.. _wmc_program/0::variables/2:
+
+``variables/2``
+^^^^^^^^^^^^^^^
+
+Returns the ordered ``Term-Number`` variable table that the serialization predicates assign by first occurrence across clauses and weights.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variables(Statements,Variables)``
+| **Mode and number of proofs:**
+|    ``variables(+list,-list(pair))`` - ``one_or_error``
+
+
+------------
+
+.. index:: weighted/1
+.. _wmc_program/0::weighted/1:
+
+``weighted/1``
+^^^^^^^^^^^^^^
+
+True when the statements include a ``weight/2`` or ``probability/2`` statement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``weighted(Statements)``
+| **Mode and number of proofs:**
+|    ``weighted(+list)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

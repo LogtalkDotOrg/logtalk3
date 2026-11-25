@@ -71,8 +71,8 @@ Library groups
 - System and external integration: ``crontab``, ``git``, ``java``,
   ``os``, and ``sockets``.
 - Logic and symbolic computing: ``asp``, ``atms``, ``datalog``,
-  ``max_sat``, ``minizinc``, ``omt``, ``problog``, ``sat``, ``smt``, and
-  ``souffle``.
+  ``max_sat``, ``minizinc``, ``omt``, ``problog``, ``sat``, ``smt``,
+  ``souffle``, and ``wmc``.
 - Security and integrity: ``block_ciphers``, ``cmac``, ``crypto``,
   ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.

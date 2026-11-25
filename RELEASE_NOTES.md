@@ -37,6 +37,10 @@ Library
 * ADDED: New `max_sat` library providing weighted partial MaxSAT solving by
 interfacing with external solver command-line tools.
 
+* ADDED: New `wmc` library providing weighted model counting (WMC) and plain
+model counting (#SAT) using either external model counter command-line tools
+or a portable reference counter written in Logtalk.
+
 * IMPROVED: The error-checking of the `asp`, `minizinc`, `omt`,  `otp`,
 `problog`, `sat`, `smt`, and `souffle` libraries.
 

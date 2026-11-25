@@ -1,0 +1,68 @@
+.. index:: single: wmc
+.. _wmc/0:
+
+.. rst-class:: right
+
+**object**
+
+``wmc``
+=======
+
+Weighted model counting using external Ganak and SharpSAT-TD CLI counters or a reference counter written in Logtalk, CNF source generation, and collected result inspection.
+
+| **Availability:** 
+|    ``logtalk_load(wmc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`wmc_protocol <wmc_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`type <type/0>`
+|    :ref:`wmc_output <wmc_output/0>`
+|    :ref:`wmc_process <wmc_process/0>`
+|    :ref:`wmc_program <wmc_program/0>`
+|    :ref:`wmc_reference <wmc_reference/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`wmc_protocol/0::print_program/1`  :ref:`wmc_protocol/0::print_result/1`  :ref:`wmc_protocol/0::program/1`  :ref:`wmc_protocol/0::program/2`  :ref:`wmc_protocol/0::program/3`  :ref:`wmc_protocol/0::result_property/2`  :ref:`wmc_protocol/0::solve/2`  :ref:`wmc_protocol/0::solve/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`wmc_protocol/0::value/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

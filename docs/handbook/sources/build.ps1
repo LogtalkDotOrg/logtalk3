@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on November 23, 2026
+##   Last updated on November 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -404,6 +404,7 @@ Foreach-Object {
 (Get-Content ../../../library/uuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/uuid.rst
 (Get-Content ../../../library/validations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/validations.rst
 (Get-Content ../../../library/wkt_wkb/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/wkt_wkb.rst
+(Get-Content ../../../library/wmc/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/wmc.rst
 (Get-Content ../../../library/yaml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/yaml.rst
 (Get-Content ../../../library/z_score_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/z_score_anomaly_detector.rst
 (Get-Content ../../../library/zippers/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/zippers.rst

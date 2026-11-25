@@ -353,6 +353,7 @@ directory in the ``NOTES.md`` file.
    uuid
    validations
    wkt_wkb
+   wmc
    yaml
    zippers
    z_score_anomaly_detector

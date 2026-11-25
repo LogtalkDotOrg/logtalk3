@@ -282,6 +282,7 @@
 		smt(loader),
 		omt(loader),
 		souffle(loader),
+		wmc(loader),
 		uri_template(loader),
 		url(loader),
 		sqids(loader),

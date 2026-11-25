@@ -91,7 +91,7 @@ vertex cover of a triangle:
 
    :- end_object.
 
-Assuming the object saved in a ``vertex_cover`` file:
+Assuming the object saved in a ``vertex_cover.lgt`` file:
 
 ::
 

@@ -1,0 +1,133 @@
+.. index:: single: wmc_output
+.. _wmc_output/0:
+
+.. rst-class:: right
+
+**object**
+
+``wmc_output``
+==============
+
+Whole-document Ganak and SharpSAT-TD plain-text model counting output decoding using the Model Counting Competition output format.
+
+| **Availability:** 
+|    ``logtalk_load(wmc(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/8
+.. _wmc_output/0::decode/8:
+
+``decode/8``
+^^^^^^^^^^^^
+
+Decodes captured stdout and process metadata into a collected ``wmc_result(Status, Value, Properties)`` term. ``Status`` is one of ``counted``, ``unsatisfiable`` (the count is zero), and ``unknown`` (no count, e.g., after a time limit or an interrupted process). ``Value`` is a number (an integer for unweighted counts, otherwise a float) or ``none``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Solver,Codes,RawStatus,NormalizedStatus,Diagnostics,SourceMap,Variables,Result)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,+list(code),++ground,++ground,+list(code),+list(compound),+term,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Solver`` is a variable:
+|        ``instantiation_error``
+|    ``Solver`` is neither a variable nor an atom:
+|        ``type_error(atom,Solver)``
+|    ``Codes`` is a partial list or a list with an element ``Element`` which is a variable:
+|        ``instantiation_error``
+|    ``Codes`` is neither a partial list nor a list of character codes:
+|        ``type_error(codes,Codes)``
+|    An element ``Element`` of the ``Codes`` list is neither a variable nor an integer:
+|        ``type_error(integer,Element)``
+|    An element ``Element`` of the ``Codes`` list is an integer but not a valid character code:
+|        ``domain_error(character_code,Element)``
+|    ``Codes`` has no status line, no ``c s exact`` result line, or an invalid value:
+|        ``domain_error(wmc_output,Field-Value)``
+|    ``RawStatus`` is not a ground term:
+|        ``instantiation_error``
+|    ``NormalizedStatus`` is not a ground term:
+|        ``instantiation_error``
+|    ``NormalizedStatus`` is a ground term bit not a valid status:
+|        ``domain_error(wmc_process_status,NormalizedStatus)``
+|    ``Diagnostics`` is a partial list or a list with an element ``Element`` which is a variable:
+|        ``instantiation_error``
+|    ``Diagnostics`` is neither a partial list nor a list of character codes:
+|        ``type_error(codes,Diagnostics)``
+|    An element ``Element`` of the ``Diagnostics`` list is neither a variable nor an integer:
+|        ``type_error(integer,Element)``
+|    An element ``Element`` of the ``Diagnostics`` list is an integer but not a valid character code:
+|        ``domain_error(character_code,Element)``
+|    ``SourceMap`` is a partial list or a list with an element ``Element`` which is a variable:
+|        ``instantiation_error``
+|    ``SourceMap`` is neither a partial list nor a list of ground compound terms:
+|        ``type_error(list(ground(compound)),SourceMap)``
+|    An element ``Element`` of the ``SourceMap`` list is neither a variable nor a compound:
+|        ``type_error(compound,Element)``
+|    ``Variables`` is a not a ground term:
+|        ``instantiation_error``
+|    ``Variables`` is ground but neither ``none`` nor a list of ground pairs:
+|        ``type_error(list(pair(ground,ground)),Variables)``
+
+
+------------
+
+.. index:: parse_number/2
+.. _wmc_output/0::parse_number/2:
+
+``parse_number/2``
+^^^^^^^^^^^^^^^^^^
+
+Parses a decimal number (optionally signed, with optional fraction and exponent, e.g., ``0.41``, ``4``, ``4.1e-01``, ``1e-5``) from character codes. Fails if the codes are not a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_number(Codes,Number)``
+| **Mode and number of proofs:**
+|    ``parse_number(+list(code),-number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

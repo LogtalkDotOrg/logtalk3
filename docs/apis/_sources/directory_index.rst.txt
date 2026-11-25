@@ -6420,6 +6420,34 @@ To load an entity, always load the library that includes it using the goal ``log
    * :doc:`wkt_wkb <wkt_wkb_0>`
    * :doc:`wkt_wkb_protocol <wkt_wkb_protocol_0>`
 
+``library/wmc/``
+----------------
+
+.. only:: not latex
+
+   .. toctree::
+      :maxdepth: 1
+
+      wmc <wmc_0>
+      wmc_expansion <wmc_expansion_0>
+      wmc_output <wmc_output_0>
+      wmc_problem_protocol <wmc_problem_protocol_0>
+      wmc_process <wmc_process_0>
+      wmc_program <wmc_program_0>
+      wmc_protocol <wmc_protocol_0>
+      wmc_reference <wmc_reference_0>
+
+.. only:: latex
+
+   * :doc:`wmc <wmc_0>`
+   * :doc:`wmc_expansion <wmc_expansion_0>`
+   * :doc:`wmc_output <wmc_output_0>`
+   * :doc:`wmc_problem_protocol <wmc_problem_protocol_0>`
+   * :doc:`wmc_process <wmc_process_0>`
+   * :doc:`wmc_program <wmc_program_0>`
+   * :doc:`wmc_protocol <wmc_protocol_0>`
+   * :doc:`wmc_reference <wmc_reference_0>`
+
 ``library/yaml/``
 -----------------
 

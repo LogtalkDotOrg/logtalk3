@@ -787,7 +787,10 @@
 	random_literals(Count, Variables, Seed0, Seed, [Literal| Literals]) :-
 		random_int(1, Variables, Seed0, Seed1, Index),
 		random_int(0, 1, Seed1, Seed2, Sign),
-		(	Sign =:= 0 -> Literal = +x(Index) ; Literal = -x(Index) ),
+		(	Sign =:= 0 ->
+			Literal = +x(Index)
+		;	Literal = -x(Index)
+		),
 		Count1 is Count - 1,
 		random_literals(Count1, Variables, Seed2, Seed, Literals).
 
@@ -850,7 +853,9 @@
 	assignment(0, []) :-
 		!.
 	assignment(Variables, [Value| Values]) :-
-		(	Value = true ; Value = false ),
+		(	Value = true
+		;	Value = false
+		),
 		Variables1 is Variables - 1,
 		assignment(Variables1, Values).
 
