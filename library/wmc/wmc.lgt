@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Weighted model counting using external Ganak and SharpSAT-TD CLI counters or a reference counter written in Logtalk, CNF source generation, and collected result inspection.'
 	]).
 
@@ -149,10 +149,21 @@
 	% a source is weighted if it has "c p weight" lines
 	weighted_source(Codes) :-
 		split_lines(Codes, Lines),
-		atom_codes('c p weight ', Prefix),
 		member(Line, Lines),
-		append(Prefix, _, Line),
+		phrase(weight_prefix, Line, _),
 		!.
+
+	weight_prefix -->
+		blanks, [0'c], blank, blanks, [0'p], blank, blanks,
+		[0'w, 0'e, 0'i, 0'g, 0'h, 0't], blank.
+
+	blanks -->
+		blank, !, blanks.
+	blanks -->
+		[].
+
+	blank -->
+		[Code], {member(Code, [9, 13, 32])}.
 
 	solve_source(object(Object), Codes, SourceMap, Variables) :-
 		!,
@@ -339,9 +350,9 @@
 		status_label(Status, Label),
 		write('s '), write(Label), nl,
 		(	integer(Value) ->
-			write('c s exact int '), write(Value), nl
+			write('c s exact arb int '), write(Value), nl
 		;	number(Value) ->
-			write('c s exact float '), write(Value), nl
+			write('c s exact double float '), write(Value), nl
 		;	true
 		).
 

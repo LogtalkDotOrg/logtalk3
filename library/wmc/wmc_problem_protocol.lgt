@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Protocol for ordered, ground weighted model counting statement providers.'
 	]).
 

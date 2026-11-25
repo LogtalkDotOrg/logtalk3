@@ -73,6 +73,15 @@
 		wmc_program::serialize([probability(p, 0.25)], Codes),
 		atom_codes(Atom, Codes).
 
+	test(wmc_program_probability_signed_term, deterministic) :-
+		wmc::solve(terms([probability(-a, 0.25), +(-a)]), Result),
+		Result = wmc_result(counted, Value, Properties),
+		assertion(close(Value, 0.25)),
+		assertion(memberchk(variables([-a-1]), Properties)),
+		wmc::solve(terms([probability(-a, 0.25)]), FreeResult),
+		wmc::value(FreeResult, FreeValue),
+		assertion(close(FreeValue, 1.0)).
+
 	test(wmc_program_probability_integer_bounds, deterministic(Atom == 'p cnf 2 0\nc p weight 1 1 0\nc p weight -1 0 0\nc p weight 2 0 0\nc p weight -2 1 0\n')) :-
 		wmc_program::serialize([probability(p, 1), probability(q, 0)], Codes),
 		atom_codes(Atom, Codes).
@@ -184,6 +193,53 @@
 	test(wmc_reference_no_header, deterministic(Count == 3)) :-
 		count_atom('1 2 0\n', Count).
 
+	test(wmc_reference_clauses_across_lines, deterministic(Count == 3)) :-
+		count_atom('p cnf 3 2\n1\nc comment\n2 0 -3 0\n', Count).
+
+	test(wmc_reference_clause_count_mismatch, error(domain_error(wmc_source, header(1, 2)))) :-
+		count_atom('p cnf 1 2\n1 0\n', _).
+
+	test(wmc_reference_variable_outside_header, error(domain_error(wmc_source, header(1, 1)))) :-
+		count_atom('p cnf 1 1\n2 0\n', _).
+
+	test(wmc_reference_weight_outside_header, error(domain_error(wmc_source, header(1, 0)))) :-
+		count_atom('p cnf 1 0\nc p weight 2 0.5 0\n', _).
+
+	test(wmc_reference_malformed_weight, error(domain_error(wmc_source, 'c p weight 1 bad 0'))) :-
+		count_atom('p cnf 1 1\nc p weight 1 bad 0\n1 0\n', _).
+
+	test(wmc_reference_negative_weight, error(domain_error(wmc_source, 'c p weight 1 -2 0'))) :-
+		count_atom('p cnf 1 1\nc p weight 1 -2 0\n1 0\n', _).
+
+	test(wmc_reference_negative_underflow_weight, error(domain_error(wmc_source, 'c p weight 1 -1e-400 0'))) :-
+		count_atom('p cnf 1 1\nc p weight 1 -1e-400 0\n1 0\n', _).
+
+	test(wmc_reference_negative_zero_weight, deterministic) :-
+		count_atom('p cnf 1 1\nc p weight 1 -0e-400 0\n1 0\n', Count),
+		assertion(Count =:= 0).
+
+	test(wmc_reference_duplicate_weight, error(domain_error(wmc_source, 'c p weight 1 0.9 0'))) :-
+		count_atom('p cnf 1 1\nc p weight 1 0.1 0\nc p weight 1 0.9 0\n1 0\n', _).
+
+	test(wmc_reference_bounded_integer_promotion, deterministic, [condition(current_prolog_flag(bounded, true))]) :-
+		current_prolog_flag(max_integer, Maximum),
+		Half is Maximum // 2,
+		wmc::solve(terms([weight(+a, Half), weight(-a, 0)]), ExactResult),
+		wmc::value(ExactResult, Exact),
+		assertion(integer(Exact)),
+		assertion(Exact =:= Half),
+		count_atom('p cnf 61 0\n', Approximate),
+		assertion(float(Approximate)),
+		assertion(close(Approximate, 2.305843009213694e18)),
+		wmc::solve(terms([weight(+a, Maximum), weight(-a, Maximum)]), Result),
+		wmc::value(Result, Sum),
+		assertion(float(Sum)),
+		Expected is Maximum * 1.0 * 2,
+		assertion(close(Sum, Expected)).
+
+	test(wmc_reference_float_overflow, error(evaluation_error(float_overflow))) :-
+		wmc::solve(terms([weight(+a, 1.0e308), weight(-a, 1.0e308)]), _).
+
 	test(wmc_reference_weights, deterministic) :-
 		count_atom('p cnf 3 2\nc p weight 1 0.3 0\nc p weight -1 0.7 0\nc p weight 2 0.5 0\nc p weight -2 0.5 0\nc p weight 3 0.2 0\nc p weight -3 0.8 0\n1 2 0\n-1 3 0\n', Count),
 		assertion(close(Count, 0.41)).
@@ -279,6 +335,72 @@
 		atom_codes('s SATISFIABLE\nc s exact arb int 123456789012345678901234567890\n', Codes),
 		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, wmc_result(_, Value, _)),
 		assertion(Value == Expected).
+
+	test(wmc_output_large_fraction, deterministic) :-
+		repeat_code(400, 0'9, Numerator),
+		repeat_code(400, 0'0, Zeros),
+		atom_codes('s SATISFIABLE\nc s exact arb frac ', Prefix),
+		append(Prefix, Numerator, Start),
+		append(Start, [0'/, 0'1| Zeros], Body),
+		append(Body, [10], Codes),
+		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, wmc_result(counted, Value, Properties)),
+		assertion(close(Value, 1.0)),
+		(	current_prolog_flag(bounded, false) ->
+			assertion(memberchk(exact_fraction(_), Properties))
+		;	true
+		).
+
+	test(wmc_output_fraction_float_overflow, deterministic) :-
+		repeat_code(400, 0'0, Zeros),
+		atom_codes('s SATISFIABLE\nc s exact arb frac 1', Prefix),
+		append(Prefix, Zeros, Start),
+		append(Start, [0'/, 0'1, 10], Codes),
+		catch(wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, _), error(Error, _), true),
+		assertion(conversion_range_error(Error)).
+
+	test(wmc_output_parse_number_float_overflow, deterministic) :-
+		atom_codes('1.0e400', Codes),
+		catch(number_codes(_, Codes), _, ConversionFailed = true),
+		catch(wmc_output::parse_number(Codes, _), error(Error, Context), true),
+		(	ConversionFailed == true ->
+			assertion(Error == domain_error(number, Codes)),
+			assertion(Context = logtalk(_, _))
+		;	assertion(Error == evaluation_error(float_overflow))
+		).
+
+	test(wmc_output_big_integer_float_overflow, deterministic, [condition(current_prolog_flag(bounded, true))]) :-
+		repeat_code(400, 0'0, Zeros),
+		atom_codes('s SATISFIABLE\nc s exact arb int 1', Prefix),
+		append(Prefix, Zeros, Start),
+		append(Start, [10], Codes),
+		catch(wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, _), error(Error, _), true),
+		assertion(conversion_range_error(Error)).
+
+	test(wmc_output_parse_number_large_float, deterministic) :-
+		atom_codes('1.0e308', Codes),
+		wmc_output::parse_number(Codes, Value),
+		assertion(close(Value, 1.0e308)).
+
+	test(wmc_output_zero_count_status, deterministic) :-
+		atom_codes('s SATISFIABLE\nc s exact arb frac 0\n', Codes),
+		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, wmc_result(unsatisfiable, Value, _)),
+		assertion(Value =:= 0).
+
+	test(wmc_output_inconsistent_unsatisfiable, error(domain_error(wmc_output, 'Result'-inconsistent_count))) :-
+		atom_codes('s UNSATISFIABLE\nc s exact arb int 7\n', Codes),
+		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, _).
+
+	test(wmc_output_negative_count, error(domain_error(wmc_output, value-'-7'))) :-
+		atom_codes('s SATISFIABLE\nc s exact arb int -7\n', Codes),
+		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, _).
+
+	test(wmc_output_negative_underflow, error(domain_error(wmc_output, value-'-1e-400'))) :-
+		atom_codes('s SATISFIABLE\nc s exact arb float -1e-400\n', Codes),
+		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, _).
+
+	test(wmc_output_inconsistent_underflow, error(domain_error(wmc_output, 'Result'-inconsistent_count))) :-
+		atom_codes('s UNSATISFIABLE\nc s exact arb float 1e-400\n', Codes),
+		wmc_output::decode(ganak, Codes, exit(0), exit(0), [], [], none, _).
 
 	test(wmc_output_unknown_status, deterministic) :-
 		atom_codes('s UNKNOWN\n', Codes),
@@ -381,13 +503,22 @@
 		findall(Property, wmc::result_property(Result, Property), Properties).
 
 	test(wmc_print_result_integer, deterministic) :-
-		assert_printed_result(wmc_result(counted, 5, []), 's SATISFIABLE\nc s exact int 5\n').
+		assert_printed_result(wmc_result(counted, 5, []), 's SATISFIABLE\nc s exact arb int 5\n').
 
 	test(wmc_print_result_float, deterministic) :-
-		assert_printed_result(wmc_result(counted, 0.5, []), 's SATISFIABLE\nc s exact float 0.5\n').
+		assert_printed_result(wmc_result(counted, 0.5, []), 's SATISFIABLE\nc s exact double float 0.5\n').
 
 	test(wmc_print_result_unsatisfiable, deterministic) :-
-		assert_printed_result(wmc_result(unsatisfiable, 0, []), 's UNSATISFIABLE\nc s exact int 0\n').
+		assert_printed_result(wmc_result(unsatisfiable, 0, []), 's UNSATISFIABLE\nc s exact arb int 0\n').
+
+	test(wmc_print_result_round_trip, deterministic) :-
+		printed_result_codes(wmc_result(counted, 5, []), IntegerCodes),
+		wmc_output::decode(ganak, IntegerCodes, exit(0), exit(0), [], [], none, wmc_result(counted, 5, _)),
+		printed_result_codes(wmc_result(counted, 0.5, []), FloatCodes),
+		wmc_output::decode(ganak, FloatCodes, exit(0), exit(0), [], [], none, wmc_result(counted, Float, _)),
+		assertion(close(Float, 0.5)),
+		printed_result_codes(wmc_result(unknown, none, []), UnknownCodes),
+		wmc_output::decode(ganak, UnknownCodes, exit(0), exit(0), [], [], none, wmc_result(unknown, none, _)).
 
 	test(wmc_print_result_unknown, deterministic) :-
 		assert_printed_result(wmc_result(unknown, none, []), 's UNKNOWN\n').
@@ -501,6 +632,54 @@
 	test(wmc_solve_time_limit_missing_timeout_command, error(existence_error(command, timeout)), [condition(\+ os::resolve_command_path(timeout, _))]) :-
 		wmc::solve(terms([p]), _, [solver(ganak), executable(sh), time_limit(1)]).
 
+	test(wmc_process_existing_arguments, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
+		os::resolve_command_path(sh, Shell),
+		wmc_process::run(Shell, ['-c', 'printf existing'], codes([]), Output, [], _, exit(0)),
+		atom_codes(existing, Output).
+
+	test(wmc_process_unbound_argument, error(instantiation_error)) :-
+		wmc_process::run(sh, [_], codes([]), _, _, _, _).
+
+	test(wmc_solve_weighted_source_tabs, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
+		fake_counter(Counter),
+		atom_codes('p cnf 1 1\nc p weight\t1 0.25 0\n1 0\n', Codes),
+		wmc::solve(codes(Codes), Result, [solver(ganak), executable(Counter)]),
+		wmc::value(Result, Value),
+		assertion(close(Value, 0.25)).
+
+	test(wmc_sharpsat_cleanup_completed, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
+		fake_counter(Counter),
+		wmc::solve(terms([p]), Result, [solver(sharpsat_td), executable(Counter), decomposition_time(1)]),
+		assertion(Result = wmc_result(counted, 1, _)),
+		assert_workspace_removed(Result).
+
+	test(wmc_sharpsat_cleanup_file, deterministic, [condition(\+ os::operating_system_type(windows))]) :-
+		fake_counter(Counter),
+		^^file_path('test_files/example.cnf', Path),
+		wmc::solve(file(Path), Result, [solver(sharpsat_td), executable(Counter), decomposition_time(1)]),
+		assertion(Result = wmc_result(counted, 1, _)),
+		assert_workspace_removed(Result),
+		assertion(os::file_exists(Path)).
+
+	test(wmc_sharpsat_cleanup_timeout, deterministic, [condition((\+ os::operating_system_type(windows), os::resolve_command_path(timeout, _)))]) :-
+		fake_counter(Counter),
+		wmc::solve(terms([p]), Result, [solver(sharpsat_td), executable(Counter), decomposition_time(2), time_limit(1)]),
+		assertion(Result = wmc_result(unknown, none, _)),
+		assert_workspace_removed(Result).
+
+	test(wmc_sharpsat_cleanup_forced_timeout, deterministic, [condition((\+ os::operating_system_type(windows), os::resolve_command_path(timeout, _)))]) :-
+		fake_counter(Counter),
+		catch(
+			(	wmc::solve(terms([p]), Result, [solver(sharpsat_td), executable(Counter), decomposition_time(3), time_limit(1)]),
+				Result = wmc_result(unknown, none, Properties),
+				assertion(memberchk(termination(resource_limit), Properties)),
+				memberchk(diagnostics(Diagnostics), Properties)
+			),
+			error(wmc_solver_error(domain_error(wmc_output, 'Result'-missing), ProcessStatus, Diagnostics, _), _),
+			memberchk(ProcessStatus, [killed(9), unknown(9)])
+		),
+		assert_diagnostics_workspace_removed(Diagnostics).
+
 	% external Ganak and SharpSAT-TD CLI solving tests and reference counter tests
 
 	test(wmc_solve_invalid_cnf_ganak, error(wmc_solver_error(_, _, _, _)), [condition(os::resolve_command_path(ganak, _))]) :-
@@ -579,7 +758,7 @@
 	test(wmc_solve_print_result_reference, deterministic) :-
 		solver_options(reference, Options),
 		wmc::solve(object(wmc_independent_sets), Result, Options),
-		assert_printed_result(Result, 's SATISFIABLE\nc s exact int 5\n').
+		assert_printed_result(Result, 's SATISFIABLE\nc s exact arb int 5\n').
 
 	test(random_generator_seed_sequence, deterministic) :-
 		next_seed(0, 12345),
@@ -673,7 +852,7 @@
 	test(wmc_solve_print_result_ganak, deterministic, [condition(os::resolve_command_path(ganak, _))]) :-
 		solver_options(ganak, Options),
 		wmc::solve(object(wmc_independent_sets), Result, Options),
-		assert_printed_result(Result, 's SATISFIABLE\nc s exact int 5\n').
+		assert_printed_result(Result, 's SATISFIABLE\nc s exact arb int 5\n').
 
 	test(wmc_solve_random_unweighted_instances_ganak, deterministic, [condition((os::resolve_command_path(ganak, _), \+ current_logtalk_flag(prolog_dialect, gnu)))]) :-
 		solver_options(ganak, Options),
@@ -763,7 +942,7 @@
 	test(wmc_solve_print_result_sharpsat_td, deterministic, [condition(os::resolve_command_path('sharpSAT', _))]) :-
 		solver_options(sharpsat_td, Options),
 		wmc::solve(object(wmc_independent_sets), Result, Options),
-		assert_printed_result(Result, 's SATISFIABLE\nc s exact int 5\n').
+		assert_printed_result(Result, 's SATISFIABLE\nc s exact arb int 5\n').
 
 	test(wmc_solve_random_unweighted_instances_sharpsat_td, deterministic, [condition((os::resolve_command_path('sharpSAT', _), \+ current_logtalk_flag(prolog_dialect, gnu)))]) :-
 		solver_options(sharpsat_td, Options),
@@ -780,12 +959,17 @@
 		assertion(Status == counted),
 		assertion(Value == 5).
 
-
 	% auxiliary predicates
 
 	count_atom(Atom, Count) :-
 		atom_codes(Atom, Codes),
 		wmc_reference::count(Codes, Count).
+
+	conversion_range_error(Error) :-
+		nonvar(Error),
+		(	Error = domain_error(number, _)
+		;	Error = evaluation_error(float_overflow)
+		).
 
 	close(Value, Expected) :-
 		abs(Value - Expected) =< 1.0e-9 * max(1, abs(Expected)).
@@ -810,6 +994,35 @@
 		subtract(Chars, ['\r'], Normalized),
 		atom_chars(Output, Normalized),
 		assertion(Output == Expected).
+
+	printed_result_codes(Result, Codes) :-
+		^^set_text_output(''),
+		wmc::print_result(Result),
+		^^text_output_contents(Chars),
+		subtract(Chars, ['\r'], Normalized),
+		atom_chars(Output, Normalized),
+		atom_codes(Output, Codes).
+
+	repeat_code(0, _, []) :-
+		!.
+	repeat_code(Count, Code, [Code| Codes]) :-
+		Next is Count - 1,
+		repeat_code(Next, Code, Codes).
+
+	fake_counter(Counter) :-
+		^^file_path('test_files/fake_counter.sh', Counter).
+
+	% The fake counter writes its workspace path to stderr, captured as diagnostics.
+	assert_workspace_removed(Result) :-
+		Result = wmc_result(_, _, Properties),
+		memberchk(diagnostics(Diagnostics), Properties),
+		assert_diagnostics_workspace_removed(Diagnostics).
+
+	% The fake counter emits the path as a single newline-terminated line.
+	assert_diagnostics_workspace_removed(Diagnostics) :-
+		once(append(PathCodes, [10], Diagnostics)),
+		atom_codes(Path, PathCodes),
+		assertion(\+ os::directory_exists(Path)).
 
 	% deterministic pseudo-random instance generation (linear congruential generator)
 

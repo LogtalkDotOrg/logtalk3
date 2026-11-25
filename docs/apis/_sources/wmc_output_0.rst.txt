@@ -15,7 +15,7 @@ Whole-document Ganak and SharpSAT-TD plain-text model counting output decoding u
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-24
+| **Date:** 2026-11-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -44,7 +44,7 @@ Public predicates
 ``decode/8``
 ^^^^^^^^^^^^
 
-Decodes captured stdout and process metadata into a collected ``wmc_result(Status, Value, Properties)`` term. ``Status`` is one of ``counted``, ``unsatisfiable`` (the count is zero), and ``unknown`` (no count, e.g., after a time limit or an interrupted process). ``Value`` is a number (an integer for unweighted counts, otherwise a float) or ``none``.
+Decodes captured stdout and process metadata into a collected ``wmc_result(Status, Value, Properties)`` term. ``Status`` is one of ``counted``, ``unsatisfiable`` (the count is zero), and ``unknown`` (no count, e.g., after a time limit or an interrupted process). ``Value`` is a number (an integer for integer counts that fit the backend, otherwise a float) or ``none``.
 
 | **Compilation flags:**
 |    ``static``
@@ -103,7 +103,7 @@ Decodes captured stdout and process metadata into a collected ``wmc_result(Statu
 ``parse_number/2``
 ^^^^^^^^^^^^^^^^^^
 
-Parses a decimal number (optionally signed, with optional fraction and exponent, e.g., ``0.41``, ``4``, ``4.1e-01``, ``1e-5``) from character codes. Fails if the codes are not a number.
+Parses a decimal number (optionally signed, with optional fraction and exponent, e.g., ``0.41``, ``4``, ``4.1e-01``, ``1e-5``) from character codes. Fails if the codes are not a number. Throws a domain error if the backend cannot convert the validated number.
 
 | **Compilation flags:**
 |    ``static``
@@ -112,6 +112,25 @@ Parses a decimal number (optionally signed, with optional fraction and exponent,
 |    ``parse_number(Codes,Number)``
 | **Mode and number of proofs:**
 |    ``parse_number(+list(code),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: check_finite/1
+.. _wmc_output/0::check_finite/1:
+
+``check_finite/1``
+^^^^^^^^^^^^^^^^^^
+
+Throws a float overflow evaluation error if a numeric result is not finite.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_finite(Number)``
+| **Mode and number of proofs:**
+|    ``check_finite(+number)`` - ``one_or_error``
 
 
 ------------

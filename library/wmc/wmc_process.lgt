@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Isolated operating-system shell transport for the Ganak and SharpSAT-TD CLIs.'
 	]).
 
@@ -78,8 +78,9 @@
 	]).
 
 	:- uses(os, [
-		absolute_file_name/2, delete_directory/1, delete_file/1, directory_exists/1, file_exists/1,
-		operating_system_type/1, resolve_command_path/2, temporary_directory/1, working_directory/1
+		absolute_file_name/2, delete_directory/1, delete_directory_and_contents/1, delete_file/1,
+		directory_exists/1, file_exists/1, operating_system_type/1, resolve_command_path/2,
+		temporary_directory/1, working_directory/1
 	]).
 
 	:- uses(process, [
@@ -100,12 +101,12 @@
 
 	run(Executable, Arguments, Source, Codes, Diagnostics, RawStatus, NormalizedStatus) :-
 		context(Context),
-		check(ground, Executable-Arguments-Source, Context),
 		check(atom, Executable, Context),
 		check(list(atom), Arguments, Context),
+		check(ground, Source, Context),
+		check_source(Source),
 		quote(posix, Executable, _),
 		forall(member(Argument, Arguments), quote(posix, Argument, _)),
-		check_source(Source),
 		platform(Platform),
 		create_workspace(Platform, Directory),
 		catch(
@@ -332,8 +333,16 @@
 
 	% Remove only known owned files; a user-supplied native source is never deleted.
 	remove_workspace(Directory) :-
+		remove_decomposition(Directory),
 		remove_capture_files(['problem.cnf', 'stdout.txt', 'stderr.txt'], Directory),
 		delete_directory(Directory).
+
+	remove_decomposition(Directory) :-
+		atom_concat(Directory, '/decomposition', Path),
+		(	directory_exists(Path) ->
+			delete_directory_and_contents(Path)
+		;	true
+		).
 
 	remove_capture_files([], _).
 	remove_capture_files([Name| Names], Directory) :-

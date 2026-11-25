@@ -491,7 +491,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-11-24</div>
+<div class="line"><strong>Date:</strong> 2026-11-25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -737,7 +737,7 @@
 </section>
 <section id="value-2">
 <span id="wmc-protocol-0-value-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">value/2</span></code></a><a class="headerlink" href="#value-2" title="Link to this heading"></a></h3>
-<p>Returns the weighted model count of a collected result: an integer for unweighted problems, otherwise a float. Fails when the result has no value.</p>
+<p>Returns the weighted model count of a collected result: an integer for counts computed as integers that fit the backend, otherwise a float. Fails when the result has no value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -779,7 +779,7 @@
 </section>
 <section id="print-result-1">
 <span id="wmc-protocol-0-print-result-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">print_result/1</span></code></a><a class="headerlink" href="#print-result-1" title="Link to this heading"></a></h3>
-<p>Prints the status and value of a collected result using Model Counting Competition style <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">s</span> <span class="pre">exact</span></code> labels, without invoking a solver.</p>
+<p>Prints the status and value of a collected result using Model Counting Competition <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">s</span> <span class="pre">exact</span> <span class="pre">PRECISION</span> <span class="pre">KIND</span> <span class="pre">VALUE</span></code> lines, without invoking a solver.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

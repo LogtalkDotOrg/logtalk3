@@ -15,7 +15,7 @@ Protocol for weighted model counting using external Ganak and SharpSAT-TD CLI co
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-24
+| **Date:** 2026-11-25
 
 | **Compilation flags:**
 |    ``static``
@@ -192,7 +192,7 @@ Prints CNF character codes to the current output without adding a newline or inv
 ``value/2``
 ^^^^^^^^^^^
 
-Returns the weighted model count of a collected result: an integer for unweighted problems, otherwise a float. Fails when the result has no value.
+Returns the weighted model count of a collected result: an integer for counts computed as integers that fit the backend, otherwise a float. Fails when the result has no value.
 
 | **Compilation flags:**
 |    ``static``
@@ -230,7 +230,7 @@ Enumerates, by backtracking, ``status(Status)`` and the stored result properties
 ``print_result/1``
 ^^^^^^^^^^^^^^^^^^
 
-Prints the status and value of a collected result using Model Counting Competition style ``s`` and ``c s exact`` labels, without invoking a solver.
+Prints the status and value of a collected result using Model Counting Competition ``s`` and ``c s exact PRECISION KIND VALUE`` lines, without invoking a solver.
 
 | **Compilation flags:**
 |    ``static``

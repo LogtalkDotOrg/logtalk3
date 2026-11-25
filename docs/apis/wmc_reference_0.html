@@ -491,7 +491,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-11-24</div>
+<div class="line"><strong>Date:</strong> 2026-11-25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -536,7 +536,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="count-2">
 <span id="wmc-reference-0-count-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">count/2</span></code></a><a class="headerlink" href="#count-2" title="Link to this heading"></a></h3>
-<p>Computes the weighted model count of CNF source (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header, <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">p</span> <span class="pre">weight</span></code> lines, and clauses), which is an integer when all weights are integers. Weights default to 1.</p>
+<p>Computes the weighted model count of CNF source (optional <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">cnf</span></code> header, <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">p</span> <span class="pre">weight</span></code> lines, and clauses). Integer counts are exact when they fit the backend; larger counts are approximated as floats. Weights default to 1.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

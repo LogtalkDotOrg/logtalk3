@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Canonical weighted model counting statement validation, DIMACS CNF source generation with weights using the Model Counting Competition format, and variable table computation.'
 	]).
 
@@ -210,7 +210,7 @@
 		!.
 	statement_literals(weight(Literal, _), [Literal]) :-
 		!.
-	statement_literals(probability(Term, _), [Term]) :-
+	statement_literals(probability(Term, _), [+Term]) :-
 		!.
 	statement_literals(Disjunction, Literals) :-
 		disjunction_literals(Disjunction, Literals).

@@ -24,14 +24,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Reference weighted model counter written in Logtalk (no external solver required): DPLL with unit propagation, connected component decomposition, and free variable handling over DIMACS CNF source with Model Counting Competition weights. Intended for small problems and as an oracle for testing; use an external counter for larger problems.'
 	]).
 
 	:- public(count/2).
 	:- mode(count(+list(code), -number), one_or_error).
 	:- info(count/2, [
-		comment is 'Computes the weighted model count of CNF source (``p cnf`` header, ``c p weight`` lines, and clauses), which is an integer when all weights are integers. Weights default to 1.',
+		comment is 'Computes the weighted model count of CNF source (optional ``p cnf`` header, ``c p weight`` lines, and clauses). Integer counts are exact when they fit the backend; larger counts are approximated as floats. Weights default to 1.',
 		argnames is ['Codes', 'Count'],
 		exceptions is [
 			'``Codes`` is a partial list or a list with an element ``Element`` which is a variable' - instantiation_error,
@@ -45,7 +45,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, member/2, memberchk/2, reverse/2
+		append/3, length/2, member/2, memberchk/2, reverse/2
 	]).
 
 	:- uses(type, [
@@ -56,56 +56,100 @@
 		context(Context),
 		check(codes, Codes, Context),
 		split_lines(Codes, Lines),
-		parse_lines(Lines, 0, Declared, [], Weights0, [], Clauses),
-		max_variable(Clauses, Weights0, Declared, Variables),
+		parse_lines(Lines, none, Header, [], Weights0, [], [], [], ReversedClauses),
+		reverse(ReversedClauses, Clauses),
+		max_variable(Clauses, Weights0, 0, MaxVariable),
+		validate_header(Header, Clauses, MaxVariable, Variables),
 		weights_dictionary(Variables, Weights0, Weights),
 		variable_list(Variables, VariableList),
 		count(Clauses, VariableList, Weights, Count).
 
 	% parsing
 
-	parse_lines([], Variables, Variables, Weights, Weights, Clauses, Clauses).
-	parse_lines([Line| Lines], Variables0, Variables, Weights0, Weights, Clauses0, Clauses) :-
-		(	blank_line(Line) ->
-			parse_lines(Lines, Variables0, Variables, Weights0, Weights, Clauses0, Clauses)
-		;	header_line(Line, VariableCount) ->
-			parse_lines(Lines, VariableCount, Variables, Weights0, Weights, Clauses0, Clauses)
-		;	weight_line(Line, Literal, Weight) ->
-			parse_lines(Lines, Variables0, Variables, [Literal-Weight| Weights0], Weights, Clauses0, Clauses)
-		;	Line = [0'c| _] ->
-			parse_lines(Lines, Variables0, Variables, Weights0, Weights, Clauses0, Clauses)
-		;	clause_line(Line, Clause) ->
-			append(Clauses0, [Clause], Clauses1),
-			parse_lines(Lines, Variables0, Variables, Weights0, Weights, Clauses1, Clauses)
-		;	atom_codes(Atom, Line),
-			domain_error(wmc_source, Atom)
+	parse_lines([], Header, Header, Weights, Weights, Pending, PendingLine, Clauses, Clauses) :-
+		(	Pending == [] ->
+			true
+		;	source_error(PendingLine)
+		).
+	parse_lines([Line| Lines], Header0, Header, Weights0, Weights, Pending0, PendingLine0, Clauses0, Clauses) :-
+		words(Line, Words),
+		(	Words == [] ->
+			Header1 = Header0, Weights1 = Weights0, Pending1 = Pending0,
+			PendingLine1 = PendingLine0, Clauses1 = Clauses0
+		;	Words = [[0'c], [0'p], [0'w, 0'e, 0'i, 0'g, 0'h, 0't]| _] ->
+			(	weight_words(Words, Literal, Weight),
+				\+ member(Literal-_, Weights0) ->
+				Weights1 = [Literal-Weight| Weights0]
+			;	source_error(Line)
+			),
+			Header1 = Header0, Pending1 = Pending0, PendingLine1 = PendingLine0, Clauses1 = Clauses0
+		;	Words = [[0'c]| _] ->
+			Header1 = Header0, Weights1 = Weights0, Pending1 = Pending0,
+			PendingLine1 = PendingLine0, Clauses1 = Clauses0
+		;	Words = [[0'p]| _] ->
+			(	Header0 == none, Pending0 == [], Clauses0 == [],
+				header_words(Words, Header1) ->
+				true
+			;	source_error(Line)
+			),
+			Weights1 = Weights0, Pending1 = Pending0, PendingLine1 = PendingLine0, Clauses1 = Clauses0
+		;	clause_words(Words, Pending0, Pending1, Clauses0, Clauses1) ->
+			Header1 = Header0, Weights1 = Weights0, PendingLine1 = Line
+		;	source_error(Line)
+		),
+		parse_lines(Lines, Header1, Header, Weights1, Weights, Pending1, PendingLine1, Clauses1, Clauses).
+
+	header_words([[0'p], [0'c, 0'n, 0'f], Variables, Clauses], header(VariableCount, ClauseCount)) :-
+		integer_codes(Variables, VariableCount),
+		VariableCount >= 0,
+		integer_codes(Clauses, ClauseCount),
+		ClauseCount >= 0.
+
+	weight_words([[0'c], [0'p], [0'w, 0'e, 0'i, 0'g, 0'h, 0't], LiteralWord, WeightText, [0'0]], Literal, Weight) :-
+		integer_codes(LiteralWord, Literal),
+		Literal =\= 0,
+		wmc_output::parse_number(WeightText, Weight),
+		Weight >= 0,
+		nonnegative_weight_text(WeightText).
+
+	nonnegative_weight_text([0'-| Codes]) :-
+		!,
+		zero_mantissa(Codes).
+	nonnegative_weight_text(_).
+
+	zero_mantissa([]).
+	zero_mantissa([Code| _]) :-
+		( Code =:= 0'e ; Code =:= 0'E ),
+		!.
+	zero_mantissa([Code| Codes]) :-
+		( Code =:= 0'0 ; Code =:= 0'. ),
+		!,
+		zero_mantissa(Codes).
+
+	clause_words([], Pending, Pending, Clauses, Clauses).
+	clause_words([Word| Words], Pending0, Pending, Clauses0, Clauses) :-
+		integer_codes(Word, Literal),
+		(	Literal =:= 0 ->
+			reverse(Pending0, Clause),
+			Pending1 = [],
+			Clauses1 = [Clause| Clauses0]
+		;	Pending1 = [Literal| Pending0],
+			Clauses1 = Clauses0
+		),
+		clause_words(Words, Pending1, Pending, Clauses1, Clauses).
+
+	validate_header(none, _, MaxVariable, MaxVariable).
+	validate_header(header(Variables, Expected), Clauses, MaxVariable, Variables) :-
+		length(Clauses, Actual),
+		(	Actual =:= Expected,
+			MaxVariable =< Variables ->
+			true
+		;	domain_error(wmc_source, header(Variables, Expected))
 		).
 
-	blank_line(Line) :-
-		words(Line, []).
-
-	header_line(Line, VariableCount) :-
-		words(Line, [[0'p], Format, Variables, _]),
-		atom_codes(cnf, Format),
-		integer_codes(Variables, VariableCount).
-
-	weight_line(Line, Literal, Weight) :-
-		words(Line, [[0'c], [0'p], WeightWord, LiteralWord, WeightText, [0'0]]),
-		atom_codes(weight, WeightWord),
-		integer_codes(LiteralWord, Literal),
-		wmc_output::parse_number(WeightText, Weight).
-
-	clause_line(Line, Clause) :-
-		words(Line, Words),
-		words_literals(Words, Clause).
-
-	words_literals([Word], []) :-
-		Word == [0'0],
-		!.
-	words_literals([Word| Words], [Literal| Literals]) :-
-		integer_codes(Word, Literal),
-		Literal =\= 0,
-		words_literals(Words, Literals).
+	source_error(Line) :-
+		atom_codes(Atom, Line),
+		domain_error(wmc_source, Atom).
 
 	% only plain (optionally negative) integers
 	integer_codes([0'-| Digits], Integer) :-
@@ -196,8 +240,14 @@
 		(	Variable > VariableCount ->
 			Pairs = []
 		;	Negated is -Variable,
-			(	memberchk(Variable-Positive, Weights) -> true ; Positive = 1 ),
-			(	memberchk(Negated-Negative, Weights) -> true ; Negative = 1 ),
+			(	member(Variable-Positive, Weights) ->
+				true
+			;	Positive = 1
+			),
+			(	member(Negated-Negative, Weights) ->
+				true
+			;	Negative = 1
+			),
 			Pairs = [Variable-weights(Positive, Negative)| Pairs1],
 			Next is Variable + 1,
 			weight_pairs(Next, VariableCount, Weights, Pairs1)
@@ -224,13 +274,13 @@
 		;	unit_clause(Clauses, Literal) ->
 			assign(Literal, Clauses, Variables, Weights, Factor, Clauses1, Variables1),
 			count(Clauses1, Variables1, Weights, Count1),
-			Count is Factor * Count1
+			count_product(Factor, Count1, Count)
 		;	clauses_variables(Clauses, Used),
 			free_variables(Variables, Used, Free, Constrained),
 			free_product(Free, Weights, 1, FreeCount),
 			components(Clauses, Components),
 			components_count(Components, Constrained, Weights, 1, ComponentsCount),
-			Count is FreeCount * ComponentsCount
+			count_product(FreeCount, ComponentsCount, Count)
 		).
 
 	unit_clause([[Literal]| _], Literal) :-
@@ -302,7 +352,8 @@
 	free_product([], _, Product, Product).
 	free_product([Variable| Variables], Weights, Product0, Product) :-
 		dict_lookup(Variable, weights(Positive, Negative), Weights),
-		Product1 is (Positive + Negative) * Product0,
+		count_sum(Positive, Negative, Sum),
+		count_product(Sum, Product0, Product1),
 		free_product(Variables, Weights, Product1, Product).
 
 	% connected components of the clauses (clauses sharing variables)
@@ -343,7 +394,7 @@
 	components_count([Component| Components], Constrained, Weights, Count0, Count) :-
 		clauses_variables(Component, ComponentVariables),
 		branch(Component, ComponentVariables, Weights, BranchCount),
-		Count1 is Count0 * BranchCount,
+		count_product(Count0, BranchCount, Count1),
 		components_count(Components, Constrained, Weights, Count1, Count).
 
 	% branch on the most frequent variable of a component
@@ -354,7 +405,7 @@
 		branch_value(Variable, Positive, Clauses, Variables, Weights, PositiveCount),
 		Negated is -Variable,
 		branch_value(Negated, Negative, Clauses, Variables, Weights, NegativeCount),
-		Count is PositiveCount + NegativeCount.
+		count_sum(PositiveCount, NegativeCount, Count).
 
 	branch_value(Literal, Weight, Clauses, Variables, Weights, Value) :-
 		Variable is abs(Literal),
@@ -362,7 +413,27 @@
 		Negated is -Literal,
 		simplify(Clauses, Literal, Negated, Clauses1),
 		count(Clauses1, Variables1, Weights, Count),
-		Value is Weight * Count.
+		count_product(Weight, Count, Value).
+
+	count_sum(A, B, Sum) :-
+		(	integer(A), integer(B),
+			current_prolog_flag(bounded, true),
+			current_prolog_flag(max_integer, Maximum),
+			A > Maximum - B ->
+			Sum is A * 1.0 + B
+		;	Sum is A + B
+		),
+		wmc_output::check_finite(Sum).
+
+	count_product(A, B, Product) :-
+		(	integer(A), integer(B), A > 0,
+			current_prolog_flag(bounded, true),
+			current_prolog_flag(max_integer, Maximum),
+			B > Maximum // A ->
+			Product is A * 1.0 * B
+		;	Product is A * B
+		),
+		wmc_output::check_finite(Product).
 
 	most_frequent([Variable| Variables], Clauses, Best) :-
 		occurrences(Clauses, Variable, 0, Count),

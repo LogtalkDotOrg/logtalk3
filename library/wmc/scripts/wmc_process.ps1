@@ -28,6 +28,16 @@ if ($PSVersionTable.PSVersion -lt [version]'7.3') {
 }
 
 switch ($args[0]) {
+    'cleanup' {
+        try {
+            Remove-Item -LiteralPath $args[1] -Recurse -Force -ErrorAction Stop
+            exit 0
+        }
+        catch {
+            [Console]::Out.WriteLine('model counter cleanup failed')
+            exit 125
+        }
+    }
     'allocate' {
         $ErrorActionPreference = 'Continue'
         [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)

@@ -28,17 +28,21 @@
 # working directory and requires a temporary directory for the tree
 # decomposition files. Usage:
 #
-#   wmc_sharpsat_td.sh /path/to/sharpSAT [solver arguments] input.cnf
+#   wmc_sharpsat_td.sh /path/to/sharpSAT [solver arguments] /path/to/workspace/problem.cnf
+#
+# The input file and workspace are created and cleaned up by the process launcher.
 
 solver=$1
 shift
 
+for input do :; done
+case "$input" in
+    */problem.cnf) temporary=${input%/*}/decomposition ;;
+    *) printf '%s\n' 'Invalid model counter input path' >&2; exit 125 ;;
+esac
+
 directory=$(dirname "$solver") || exit 125
-temporary=$(mktemp -d "${TMPDIR:-/tmp}/logtalk-wmc-td.XXXXXXXXXX") || exit 125
+mkdir "$temporary" || exit 125
 
 cd "$directory" || exit 125
-"$solver" -tmpdir "$temporary" "$@"
-status=$?
-
-rm -rf "$temporary"
-exit $status
+exec "$solver" -tmpdir "$temporary" "$@"

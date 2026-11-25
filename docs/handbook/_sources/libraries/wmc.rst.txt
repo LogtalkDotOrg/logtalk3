@@ -145,7 +145,7 @@ counting the independent sets of a path with three vertices :
    | ?- wmc::solve(terms([(-in(a) ; -in(b)), (-in(b) ; -in(c))]), Result),
         wmc::print_result(Result).
    s SATISFIABLE
-   c s exact int 5
+   c s exact arb int 5
 
 Sources
 -------
@@ -162,7 +162,10 @@ sources:
 For ``codes/1`` and ``file/1`` sources, variable terms are recovered
 from ``c v Number Term`` marker comments, which are embedded by default
 in the output of ``program/1-3`` (use ``embed_variables(false)`` to omit
-them).
+them). The reference counter accepts headerless CNF and clauses spanning
+or sharing lines. When a header is present, it checks the variable
+bounds and clause count. Malformed, negative, or duplicate literal
+weights are rejected.
 
 Options
 -------
@@ -198,28 +201,31 @@ of:
 - ``unknown``: no count (e.g., the time limit was reached); ``Value`` is
   ``none``
 
-``Value`` is an integer for unweighted counts and a float for weighted
-counts. Properties include ``number_type/1``, ``representation/1``
-(e.g., ``arb-frac``), ``value_text/1`` (the count as printed by the
-counter), ``exact_fraction/1`` (when the counter reports a fraction),
-``log10_estimate/1``, ``solver/1``, ``termination/1`` (``completed``,
-``resource_limit``, or ``interrupted``), ``variables/1``,
-``variable_count/1``, ``diagnostics/1``, ``source_map/1``,
-``raw_status/1``, ``process_status/1``, and ``raw_output/1``.
+``Value`` is an integer for counts computed as integers that fit the
+backend; otherwise it is a float. Properties include ``number_type/1``,
+``representation/1`` (e.g., ``arb-frac``), ``value_text/1`` (the count
+as printed by the counter), ``exact_fraction/1`` (when the counter
+reports a fraction), ``log10_estimate/1``, ``solver/1``,
+``termination/1`` (``completed``, ``resource_limit``, or
+``interrupted``), ``variables/1``, ``variable_count/1``,
+``diagnostics/1``, ``source_map/1``, ``raw_status/1``,
+``process_status/1``, and ``raw_output/1``.
 
-Notes and limitations
----------------------
+Limitations
+-----------
 
-- Weighted counts are floats, thus limited to double precision and
-  subject to its range. For exact rational counts, use
-  ``result_property/2`` to get the ``exact_fraction/1`` property
-  reported by Ganak (when it fits in the integers of the backend) or the
-  ``value_text/1`` property.
+- Floating-point counts are limited to double precision and subject to
+  its range. For exact rational counts, use ``result_property/2`` to get
+  the ``exact_fraction/1`` property reported by Ganak (when it fits in
+  the integers of the backend) or the ``value_text/1`` property.
 - Backends with bounded integers (e.g., GNU Prolog) approximate integer
   counts that exceed their integer range using floats.
-- The ``reference`` counter reports an ``unsatisfiable`` status whenever
-  the count is zero, including problems that are satisfiable but have
-  zero weight.
+- When a backend rejects conversion of a valid numeric text, a
+  ``domain_error(number, Codes)`` is raised. A non-finite result
+  returned by a backend raises an ``evaluation_error(float_overflow)``.
+- A zero count is reported as ``unsatisfiable``, including problems that
+  are satisfiable but have zero weight.
 - The ``reference`` counter ignores the ``time_limit/1`` option.
-- The process launcher scripts are adapted from the ``sat`` library
-  ones.
+- When a timeout wrapper is itself forcibly killed, the resulting
+  process status may be reported as a solver error instead of a time
+  limit.

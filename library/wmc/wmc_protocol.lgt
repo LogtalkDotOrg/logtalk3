@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Protocol for weighted model counting using external Ganak and SharpSAT-TD CLI counters or a reference counter written in Logtalk, CNF source generation, and result inspection.'
 	]).
 
@@ -92,7 +92,7 @@
 	:- public(value/2).
 	:- mode(value(+compound, -number), zero_or_one).
 	:- info(value/2, [
-		comment is 'Returns the weighted model count of a collected result: an integer for unweighted problems, otherwise a float. Fails when the result has no value.',
+		comment is 'Returns the weighted model count of a collected result: an integer for counts computed as integers that fit the backend, otherwise a float. Fails when the result has no value.',
 		argnames is ['Result', 'Value']
 	]).
 
@@ -106,7 +106,7 @@
 	:- public(print_result/1).
 	:- mode(print_result(+compound), one_or_error).
 	:- info(print_result/1, [
-		comment is 'Prints the status and value of a collected result using Model Counting Competition style ``s`` and ``c s exact`` labels, without invoking a solver.',
+		comment is 'Prints the status and value of a collected result using Model Counting Competition ``s`` and ``c s exact PRECISION KIND VALUE`` lines, without invoking a solver.',
 		argnames is ['Result']
 	]).
 

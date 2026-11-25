@@ -24,14 +24,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-24,
+		date is 2026-11-25,
 		comment is 'Whole-document Ganak and SharpSAT-TD plain-text model counting output decoding using the Model Counting Competition output format.'
 	]).
 
 	:- public(decode/8).
 	:- mode(decode(+atom, +list(code), ++ground, ++ground, +list(code), +list(compound), +term, -compound), one_or_error).
 	:- info(decode/8, [
-		comment is 'Decodes captured stdout and process metadata into a collected ``wmc_result(Status, Value, Properties)`` term. ``Status`` is one of ``counted``, ``unsatisfiable`` (the count is zero), and ``unknown`` (no count, e.g., after a time limit or an interrupted process). ``Value`` is a number (an integer for unweighted counts, otherwise a float) or ``none``.',
+		comment is 'Decodes captured stdout and process metadata into a collected ``wmc_result(Status, Value, Properties)`` term. ``Status`` is one of ``counted``, ``unsatisfiable`` (the count is zero), and ``unknown`` (no count, e.g., after a time limit or an interrupted process). ``Value`` is a number (an integer for integer counts that fit the backend, otherwise a float) or ``none``.',
 		argnames is ['Solver', 'Codes', 'RawStatus', 'NormalizedStatus', 'Diagnostics', 'SourceMap', 'Variables', 'Result'],
 		exceptions is [
 			'``Solver`` is a variable' - instantiation_error,
@@ -59,12 +59,19 @@
 	:- public(parse_number/2).
 	:- mode(parse_number(+list(code), -number), zero_or_one).
 	:- info(parse_number/2, [
-		comment is 'Parses a decimal number (optionally signed, with optional fraction and exponent, e.g., ``0.41``, ``4``, ``4.1e-01``, ``1e-5``) from character codes. Fails if the codes are not a number.',
+		comment is 'Parses a decimal number (optionally signed, with optional fraction and exponent, e.g., ``0.41``, ``4``, ``4.1e-01``, ``1e-5``) from character codes. Fails if the codes are not a number. Throws a domain error if the backend cannot convert the validated number.',
 		argnames is ['Codes', 'Number']
 	]).
 
+	:- public(check_finite/1).
+	:- mode(check_finite(+number), one_or_error).
+	:- info(check_finite/1, [
+		comment is 'Throws a float overflow evaluation error if a numeric result is not finite.',
+		argnames is ['Number']
+	]).
+
 	:- uses(type, [
-		check/3, valid/2
+		check/3
 	]).
 
 	:- uses(list, [
@@ -140,11 +147,35 @@
 			Status = unknown, Value = none, Extra = []
 		;	exact_line(Lines, Precision, Kind, Text) ->
 			parse_value(Kind, Text, Value, ValueExtra),
-			Status = Status0,
+			(	( Value < 0 ; negative_nonzero(Kind, Text) ) ->
+				domain_error(wmc_output, value-Text)
+			;	Status0 == unsatisfiable, nonzero_text(Kind, Text) ->
+				domain_error(wmc_output, 'Result'-inconsistent_count)
+			;	Value =:= 0 ->
+				Status = unsatisfiable
+			;	Status = counted
+			),
 			log10_estimate(Lines, LogExtra),
 			append([representation(Precision-Kind), value_text(Text)| ValueExtra], LogExtra, Extra)
 		;	domain_error(wmc_output, 'Result'-no_count)
 		).
+
+	negative_nonzero(Kind, Text) :-
+		atom_codes(Text, [0'-| _]),
+		nonzero_text(Kind, Text).
+
+	nonzero_text(Kind, Text) :-
+		atom_codes(Text, Codes),
+		(	Kind == frac,
+			append(Numerator, [0'/| _], Codes) ->
+			Digits = Numerator
+		;	Kind == float ->
+			split_exponent(Codes, Digits, _)
+		;	Digits = Codes
+		),
+		member(Digit, Digits),
+		0'1 =< Digit, Digit =< 0'9,
+		!.
 
 	status_label('SATISFIABLE', counted).
 	status_label('UNSATISFIABLE', unsatisfiable).
@@ -190,18 +221,12 @@
 		!,
 		atom_codes(Text, Codes),
 		(	append(NumeratorCodes, [0'/| DenominatorCodes], Codes) ->
-			(	parse_integer(NumeratorCodes, Numerator),
-				parse_integer(DenominatorCodes, Denominator),
-				Denominator > 0 ->
-				% fractions are always reported as floats; the exact fraction is kept as a property
-				Value is Numerator * 1.0 / Denominator,
-				Extra = [exact_fraction(Numerator/Denominator)]
-			;	digits_float(NumeratorCodes, NumeratorFloat),
-				digits_float(DenominatorCodes, DenominatorFloat),
-				DenominatorFloat > 0 ->
-				% terms too large for backends with bounded integers
-				Value is NumeratorFloat / DenominatorFloat,
-				Extra = []
+			(	fraction_float(NumeratorCodes, DenominatorCodes, Value) ->
+				(	parse_integer(NumeratorCodes, Numerator),
+					parse_integer(DenominatorCodes, Denominator) ->
+					Extra = [exact_fraction(Numerator/Denominator)]
+				;	Extra = []
+				)
 			;	domain_error(wmc_output, value-Text)
 			)
 		;	parse_integer(Codes, Numerator) ->
@@ -214,17 +239,81 @@
 	parse_value(Kind, _, _, _) :-
 		domain_error(wmc_output, kind-Kind).
 
+	fraction_float(Numerator0, Denominator0, Value) :-
+		Numerator0 \== [],
+		Denominator0 \== [],
+		all_digits(Numerator0),
+		all_digits(Denominator0),
+		significant_digits(Numerator0, Numerator),
+		significant_digits(Denominator0, Denominator),
+		Denominator \== [],
+		(	Numerator == [] ->
+			Value = 0.0
+		;	decimal_mantissa(Numerator, NumeratorMantissa, NumeratorExponent),
+			decimal_mantissa(Denominator, DenominatorMantissa, DenominatorExponent),
+			Ratio0 is NumeratorMantissa / DenominatorMantissa,
+			Exponent0 is NumeratorExponent - DenominatorExponent,
+			(	Ratio0 < 1.0 ->
+				Ratio is Ratio0 * 10.0,
+				Exponent is Exponent0 - 1
+			;	Ratio = Ratio0,
+				Exponent = Exponent0
+			),
+			number_codes(Ratio, RatioCodes),
+			number_codes(Exponent, ExponentCodes),
+			append(RatioCodes, [0'e| ExponentCodes], FloatCodes),
+			float_codes(FloatCodes, Value)
+		).
+
+	significant_digits([0'0| Digits], Significant) :-
+		!,
+		significant_digits(Digits, Significant).
+	significant_digits(Digits, Digits).
+
+	decimal_mantissa([Digit| Digits], Mantissa, Exponent) :-
+		length(Digits, Exponent),
+		first_digits(16, Digits, Fraction0),
+		(	Fraction0 == [] ->
+			Fraction = [0'0]
+		;	Fraction = Fraction0
+		),
+		number_codes(Mantissa, [Digit, 0'.| Fraction]).
+
+	first_digits(0, _, []) :-
+		!.
+	first_digits(_, [], []) :-
+		!.
+	first_digits(Count, [Digit| Digits], [Digit| Prefix]) :-
+		Next is Count - 1,
+		first_digits(Next, Digits, Prefix).
+
 	digits_float(Digits, Value) :-
 		Digits \== [],
 		all_digits(Digits),
 		append(Digits, [0'., 0'0], FloatCodes),
-		number_codes(Value, FloatCodes).
+		float_codes(FloatCodes, Value).
 
 	parse_big_integer(Digits, Value) :-
 		Digits \== [],
 		all_digits(Digits),
 		append(Digits, [0'., 0'0], FloatCodes),
-		number_codes(Value, FloatCodes).
+		float_codes(FloatCodes, Value).
+
+	float_codes(Codes, Value) :-
+		catch(
+			number_codes(Value, Codes),
+			_,
+			domain_error(number, Codes)
+		),
+		check_finite(Value).
+
+	check_finite(Value) :-
+		(	integer(Value) ->
+			true
+		;	catch((Zero is Value - Value, Zero =:= 0), _, fail) ->
+			true
+		;	evaluation_error(float_overflow)
+		).
 
 	parse_integer([0'-| Digits], Value) :-
 		!,
@@ -270,8 +359,9 @@
 			append(IntegerPart, [0'.| Fraction], Decimal),
 			append(Decimal, ExponentCodes, NumberCodes)
 		),
-		number_codes(Magnitude, NumberCodes),
-		Number is Sign * Magnitude.
+		float_codes(NumberCodes, Magnitude),
+		Number is Sign * Magnitude,
+		check_finite(Number).
 
 	split_exponent(Codes, Mantissa, Exponent) :-
 		(	append(Mantissa0, [E| Rest], Codes),

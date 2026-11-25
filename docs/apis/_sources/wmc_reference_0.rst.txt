@@ -15,7 +15,7 @@ Reference weighted model counter written in Logtalk (no external solver required
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-11-24
+| **Date:** 2026-11-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -46,7 +46,7 @@ Public predicates
 ``count/2``
 ^^^^^^^^^^^
 
-Computes the weighted model count of CNF source (``p cnf`` header, ``c p weight`` lines, and clauses), which is an integer when all weights are integers. Weights default to 1.
+Computes the weighted model count of CNF source (optional ``p cnf`` header, ``c p weight`` lines, and clauses). Integer counts are exact when they fit the backend; larger counts are approximated as floats. Weights default to 1.
 
 | **Compilation flags:**
 |    ``static``

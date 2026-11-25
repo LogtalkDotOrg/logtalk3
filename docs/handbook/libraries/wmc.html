@@ -403,7 +403,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#notes-and-limitations">Notes and limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="yaml.html"><code class="docutils literal notranslate"><span class="pre">yaml</span></code></a></li>
@@ -572,7 +572,7 @@ counting the independent sets of a path with three vertices :</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> wmc<span class="o">::</span>solve(terms([(<span class="o">-</span>in(a) <span class="o">;</span> <span class="o">-</span>in(b)), (<span class="o">-</span>in(b) <span class="o">;</span> <span class="o">-</span>in(c))]), <span class="nv">Result</span>),
      wmc<span class="o">::</span>print_result(<span class="nv">Result</span>).
 s <span class="nv">SATISFIABLE</span>
-c s exact int <span class="m">5</span>
+c s exact arb int <span class="m">5</span>
 </pre></div>
 </div>
 </section>
@@ -590,7 +590,10 @@ solver as a file named <code class="docutils literal notranslate"><span class="p
 <p>For <code class="docutils literal notranslate"><span class="pre">codes/1</span></code> and <code class="docutils literal notranslate"><span class="pre">file/1</span></code> sources, variable terms are recovered
 from <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">v</span> <span class="pre">Number</span> <span class="pre">Term</span></code> marker comments, which are embedded by default
 in the output of <code class="docutils literal notranslate"><span class="pre">program/1-3</span></code> (use <code class="docutils literal notranslate"><span class="pre">embed_variables(false)</span></code> to omit
-them).</p>
+them). The reference counter accepts headerless CNF and clauses spanning
+or sharing lines. When a header is present, it checks the variable
+bounds and clause count. Malformed, negative, or duplicate literal
+weights are rejected.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
@@ -625,31 +628,34 @@ of:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">unknown</span></code>: no count (e.g., the time limit was reached); <code class="docutils literal notranslate"><span class="pre">Value</span></code> is
 <code class="docutils literal notranslate"><span class="pre">none</span></code></p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">Value</span></code> is an integer for unweighted counts and a float for weighted
-counts. Properties include <code class="docutils literal notranslate"><span class="pre">number_type/1</span></code>, <code class="docutils literal notranslate"><span class="pre">representation/1</span></code>
-(e.g., <code class="docutils literal notranslate"><span class="pre">arb-frac</span></code>), <code class="docutils literal notranslate"><span class="pre">value_text/1</span></code> (the count as printed by the
-counter), <code class="docutils literal notranslate"><span class="pre">exact_fraction/1</span></code> (when the counter reports a fraction),
-<code class="docutils literal notranslate"><span class="pre">log10_estimate/1</span></code>, <code class="docutils literal notranslate"><span class="pre">solver/1</span></code>, <code class="docutils literal notranslate"><span class="pre">termination/1</span></code> (<code class="docutils literal notranslate"><span class="pre">completed</span></code>,
-<code class="docutils literal notranslate"><span class="pre">resource_limit</span></code>, or <code class="docutils literal notranslate"><span class="pre">interrupted</span></code>), <code class="docutils literal notranslate"><span class="pre">variables/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">variable_count/1</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnostics/1</span></code>, <code class="docutils literal notranslate"><span class="pre">source_map/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">raw_status/1</span></code>, <code class="docutils literal notranslate"><span class="pre">process_status/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">raw_output/1</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Value</span></code> is an integer for counts computed as integers that fit the
+backend; otherwise it is a float. Properties include <code class="docutils literal notranslate"><span class="pre">number_type/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">representation/1</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">arb-frac</span></code>), <code class="docutils literal notranslate"><span class="pre">value_text/1</span></code> (the count
+as printed by the counter), <code class="docutils literal notranslate"><span class="pre">exact_fraction/1</span></code> (when the counter
+reports a fraction), <code class="docutils literal notranslate"><span class="pre">log10_estimate/1</span></code>, <code class="docutils literal notranslate"><span class="pre">solver/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">termination/1</span></code> (<code class="docutils literal notranslate"><span class="pre">completed</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_limit</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">interrupted</span></code>), <code class="docutils literal notranslate"><span class="pre">variables/1</span></code>, <code class="docutils literal notranslate"><span class="pre">variable_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">diagnostics/1</span></code>, <code class="docutils literal notranslate"><span class="pre">source_map/1</span></code>, <code class="docutils literal notranslate"><span class="pre">raw_status/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">process_status/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">raw_output/1</span></code>.</p>
 </section>
-<section id="notes-and-limitations">
-<h2>Notes and limitations<a class="headerlink" href="#notes-and-limitations" title="Link to this heading"></a></h2>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Weighted counts are floats, thus limited to double precision and
-subject to its range. For exact rational counts, use
-<code class="docutils literal notranslate"><span class="pre">result_property/2</span></code> to get the <code class="docutils literal notranslate"><span class="pre">exact_fraction/1</span></code> property
-reported by Ganak (when it fits in the integers of the backend) or the
-<code class="docutils literal notranslate"><span class="pre">value_text/1</span></code> property.</p></li>
+<li><p>Floating-point counts are limited to double precision and subject to
+its range. For exact rational counts, use <code class="docutils literal notranslate"><span class="pre">result_property/2</span></code> to get
+the <code class="docutils literal notranslate"><span class="pre">exact_fraction/1</span></code> property reported by Ganak (when it fits in
+the integers of the backend) or the <code class="docutils literal notranslate"><span class="pre">value_text/1</span></code> property.</p></li>
 <li><p>Backends with bounded integers (e.g., GNU Prolog) approximate integer
 counts that exceed their integer range using floats.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">reference</span></code> counter reports an <code class="docutils literal notranslate"><span class="pre">unsatisfiable</span></code> status whenever
-the count is zero, including problems that are satisfiable but have
-zero weight.</p></li>
+<li><p>When a backend rejects conversion of a valid numeric text, a
+<code class="docutils literal notranslate"><span class="pre">domain_error(number,</span> <span class="pre">Codes)</span></code> is raised. A non-finite result
+returned by a backend raises an <code class="docutils literal notranslate"><span class="pre">evaluation_error(float_overflow)</span></code>.</p></li>
+<li><p>A zero count is reported as <code class="docutils literal notranslate"><span class="pre">unsatisfiable</span></code>, including problems that
+are satisfiable but have zero weight.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">reference</span></code> counter ignores the <code class="docutils literal notranslate"><span class="pre">time_limit/1</span></code> option.</p></li>
-<li><p>The process launcher scripts are adapted from the <code class="docutils literal notranslate"><span class="pre">sat</span></code> library
-ones.</p></li>
+<li><p>When a timeout wrapper is itself forcibly killed, the resulting
+process status may be reported as a solver error instead of a time
+limit.</p></li>
 </ul>
 </section>
 </section>
