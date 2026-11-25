@@ -59,9 +59,9 @@ Serve an absolute directory path using SICStus Prolog:
 \fBlogtalk_http_server -p sicstus /srv/www\fR
 
 .SH IMPLEMENTATION NOTES
-The ECLiPSe and SICStus Prolog backends serve requests serially without requiring thread support. Backends with thread support use the open-ended server loop provided by the \fIhttp_server\fR library. Responses close their HTTP connections so that subsequent browser requests can be accepted portably by all supported backends.
+The ECLiPSe, SICStus Prolog, and Shumway Prolog backends serve requests serially without requiring thread support. Backends with thread support use the open-ended server loop provided by the \fIhttp_server\fR library. Responses close their HTTP connections so that subsequent browser requests can be accepted portably by all supported backends.
 .TP
-The SICStus Prolog integration script is invoked with \fI--noinfo\fR. The SWI-Prolog, Trealla Prolog, and XVM integration scripts are invoked with \fI-q\fR. ECLiPSe does not provide an equivalent quiet option.
+The SICStus Prolog integration script is invoked with \fI--noinfo\fR. The Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM integration scripts are invoked with \fI-q\fR. ECLiPSe does not provide an equivalent quiet option.
 .TP
 The server binds only to the IPv4 loopback address and is not directly reachable from other hosts.
 
