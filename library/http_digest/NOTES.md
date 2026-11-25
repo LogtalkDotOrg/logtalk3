@@ -25,8 +25,8 @@ This library provides HTTP Digest authentication helpers on top of the
 normalized HTTP stack.
 
 This library can be used with backend Prolog systems that support unbound
-integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation

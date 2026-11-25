@@ -16,7 +16,7 @@ supplied by an application backend object implementing
 
 Requires a backend supporting sockets and unbound integer arithmetic due
 to the library dependencies. Supported backends include ECLiPSe, SICStus
-Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 Loading
 -------

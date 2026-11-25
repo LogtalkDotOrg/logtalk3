@@ -11,7 +11,7 @@ support and reuses the ``crypto``, ``options``, ``os``, ``json``,
 
 This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
-Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 API documentation
 -----------------

@@ -12,7 +12,7 @@ selected ``http_transport_protocol``-compatible layer, such as
 
 This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
-Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 By default, ``transport(default)`` selects ``http_socket_transport`` for
 ``http://`` and ``ws://`` URLs, and ``http_process_transport`` for

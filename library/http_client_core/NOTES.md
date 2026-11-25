@@ -25,8 +25,8 @@ The `http_client_core` library provides low-level stream primitives that
 are transport-neutral and used by `http_socket_transport` the library.
 
 This library can be used with backend Prolog systems that support unbound
-integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation

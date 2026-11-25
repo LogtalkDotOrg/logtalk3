@@ -27,8 +27,8 @@ the `http_process_transport` transport for HTTPS support and reuses the `crypto`
 `options`, `os`, `json`, `url`, and `rest` libraries.
 
 This library can be used with backend Prolog systems that support unbound
-integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation

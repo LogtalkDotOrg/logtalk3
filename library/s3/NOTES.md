@@ -30,8 +30,8 @@ responses and wraps it behind the `s3_xml` adapter so the public API exposes
 stable S3-specific terms instead of generic XML parse trees.
 
 This library can be used with backend Prolog systems that support unbound
-integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation

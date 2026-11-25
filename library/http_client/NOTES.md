@@ -29,8 +29,8 @@ options and delegates transport to the selected
 `http_process_transport`.
 
 This library can be used with backend Prolog systems that support unbound
-integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 By default, `transport(default)` selects `http_socket_transport` for `http://`
 and `ws://` URLs, and `http_process_transport` for `https://` and `wss://`

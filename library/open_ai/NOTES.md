@@ -32,7 +32,7 @@ application backend object implementing `open_ai_backend_protocol`.
 
 Requires a backend supporting sockets and unbound integer arithmetic due to
 the library dependencies. Supported backends include ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM.
+Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 
 Loading

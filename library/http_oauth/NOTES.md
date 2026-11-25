@@ -108,8 +108,8 @@ Missing credentials produce a 401 response, malformed authorization data a
 400 response, invalid tokens a 401 response, and insufficient scopes a 403
 response. Optional `realm/1`, `resource_metadata/1`, `headers/1`, `body/1`,
 and `properties/1` options customize generated error responses. Supply a
-`scope_checker/1` object implementing `http_oauth_scope_checker_protocol` for
-policies other than exact all-scopes matching.
+`scope_checker/1` object implementing `http_oauth_scope_checker_protocol`
+for policies other than exact all-scopes matching.
 
 ### Separating authentication from authorization
 

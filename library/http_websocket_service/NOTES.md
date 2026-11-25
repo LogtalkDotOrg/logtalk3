@@ -37,10 +37,10 @@ parametric `http_websocket_service(_HTTPSocket_, _Role_, _TextRepresentation_)`,
 `http_transport_protocol` implementations such as `http_process_transport`.
 
 This library can be used with backend Prolog systems that support unbound
-integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
-SWI-Prolog, Trealla Prolog, and XVM. On backends that don't support threads,
-only a subset of the library is usable; see the "Backends without thread support"
-section below for the details.
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog, Shumway
+Prolog, SWI-Prolog, Trealla Prolog, and XVM. On backends that don't support
+threads, only a subset of the library is usable; see the "Backends without
+thread support" section below for the details.
 
 
 API documentation
