@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 650,-140 650,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol min_cost_flow_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 19:07</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:03</text>
 <g id="clust1" class="cluster">
 <title>cluster_min_cost_flow_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="min_cost_flow_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 626,-46 626,-46 632,-46 638,-52 638,-58 638,-58 638,-116 638,-116 638,-122 632,-128 626,-128 626,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">min_cost_flow_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Computes a minimum cost flow satisfying the given supplies and demands, including arc lower bounds. ``Supplies`` is a list of ``Vertex&#45;Amount`` pairs where a positive amount is a supply and a negative amount is a demand; vertices not listed are transshipment vertices. Duplicate vertices are added. Fails if there is no feasible flow. Negative arc costs (including negative cost cycles) are supported. ``Flow`` is a list of ``flow(ArcId, From, To, Amount)`` terms with a positive amount, one per arc carrying flow, in the order of the network arcs. ``ArcId`` is the one&#45;based position of the arc in the input list used to construct the network.">
 <polygon fill="springgreen" stroke="black" points="143.91,-92 18.09,-92 18.09,-56 143.91,-56 143.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.49" y="-75.71" font-family="monospace" font-size="11.00">min_cost_flow/4</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="As ``min_cost_flow/4``, also returning the final vertex potentials as ``Vertex&#45;Potential`` pairs in vertex order. The potentials certify non&#45;negative reduced costs on the residual arcs.">
 <polygon fill="springgreen" stroke="black" points="287.91,-92 162.09,-92 162.09,-56 287.91,-56 287.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="170.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L46">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="175.49" y="-75.71" font-family="monospace" font-size="11.00">min_cost_flow/5</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Computes a minimum cost flow among the maximum flows from ``Source`` to ``Sink``. Always succeeds for valid terminals. Currently requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="458.11,-92 305.89,-92 305.89,-56 458.11,-56 458.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="313.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L60">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="319.29" y="-75.71" font-family="monospace" font-size="11.00">min_cost_max_flow/6</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="As ``min_cost_max_flow/6``, also returning final vertex potentials as ``Vertex&#45;Potential`` pairs in vertex order.">
 <polygon fill="springgreen" stroke="black" points="628.11,-92 475.89,-92 475.89,-56 628.11,-56 628.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="483.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/717dd6ce038cfe42b66a5310ca2b1c8d74077078/library/flow_networks/min_cost_flow_protocol.lgt#L73">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/min_cost_flow_protocol.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="489.29" y="-75.71" font-family="monospace" font-size="11.00">min_cost_max_flow/7</text>
 </a>
 </g>
