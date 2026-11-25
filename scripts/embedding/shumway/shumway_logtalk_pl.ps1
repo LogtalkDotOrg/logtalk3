@@ -6,7 +6,7 @@
 ##   Logtalk application; creates also application and logtalk self-contained
 ##   executables
 ##
-##   Last updated on November 23, 2026
+##   Last updated on November 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ param(
 	[Switch]$x,
 	[String]$d = $pwd,
 	[String]$t,
-	[String]$n = "logtalk",
+	[String]$n = "embedded",
 	[String]$p = "$env:LOGTALKHOME\paths\paths.pl",
 	[String]$s = "$env:LOGTALKHOME\scripts\embedding\settings-embedding-sample.lgt",
 	[String]$l,
@@ -49,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.3"
+	Write-Output "$myName 0.4"
 }
 
 function Test-LogtalkVersionIsOlder {
@@ -332,20 +332,20 @@ if ($l -ne "") {
 		Get-Content |
 		Add-Content "$d/application.pl"
 
-	shumway-compile --release --output "$d"/logtalk.shmo "$d"/logtalk.pl
-	shumway-compile --release --output "$d"/application.shmo "$d"/application.pl
+	Get-Content "$d"/logtalk.shmo, "$d"/application.shmo | Set-Content "$d"/"$name.pl"
+	shumway-compile --release --output "$d"/"$name.shmo" "$d"/"$name.pl"
 	Set-Location "$d"
 	if ($b -eq $true) {
-		shumway-link --consult --library --wasm --no-compress --output "$name.wasm" logtalk.shmo application.shmo
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.shum" "$name.shmo"
 	} else {
-		shumway-link --strip --allow-undefined --library --output "$name.shum" logtalk.shmo application.shmo
+		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
 		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
 	}
 	Pop-Location
 } else {
 	Set-Location "$d"
 	if ($b -eq $true) {
-		shumway-link --consult --library --wasm --no-compress --output logtalk.wasm logtalk.pl
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.shum logtalk.pl
 	} else {
 		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum

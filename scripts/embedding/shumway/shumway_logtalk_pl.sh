@@ -7,7 +7,7 @@
 ##   Logtalk application; creates also application and logtalk self-contained
 ##   executables
 ##
-##   Last updated on November 23, 2026
+##   Last updated on November 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -29,7 +29,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.4"
 	exit 0
 }
 
@@ -155,7 +155,7 @@ fi
 # default values
 directory="$(pwd -P)"
 temporary=""
-name="logtalk"
+name="embedded"
 paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 bundle="false"
@@ -169,7 +169,7 @@ usage_help() {
 	echo "given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-b] [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-g goal]"
+	echo "  $(basename "$0") [-b] [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -345,19 +345,19 @@ if [ "$loader" != "" ] ; then
 		echo
 		exit 1
 	fi
-	shumway-compile --release --output "$directory"/logtalk.shmo "$directory"/logtalk.pl
-	shumway-compile --release --output "$directory"/application.shmo "$directory"/application.pl
+	cat "$directory"/logtalk.pl "$directory"/application.pl > "$directory"/"$name.pl"
+	shumway-compile --release --output "$directory"/"$name.shmo" "$directory"/"$name.pl"
 	cd "$directory"
 	if [ "$bundle" != "false" ] ; then
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.wasm" logtalk.shmo application.shmo
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.shum" "$name.shmo"
 	else
-		shumway-link --strip --allow-undefined --library --output "$name.shum" logtalk.shmo application.shmo
+		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
 		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
 	fi
 else
 	cd "$directory"
 	if [ "$bundle" != "false" ] ; then
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.wasm logtalk.pl
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.shum logtalk.pl
 	else
 		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum
