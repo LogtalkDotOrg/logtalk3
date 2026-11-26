@@ -5,9 +5,9 @@
 ##   This script creates a Shumway Prolog logtalk.pl file with the Logtalk
 ##   compiler and runtime and optionally an application.pl file with a
 ##   Logtalk application; creates also application and logtalk self-contained
-##   executables
+##   executables and WebAssembly bundles
 ##
-##   Last updated on November 25, 2026
+##   Last updated on November 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -350,8 +350,10 @@ if [ "$loader" != "" ] ; then
 	cd "$directory"
 	if [ "$bundle" != "false" ] ; then
 		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.shum" "$name.shmo"
+		rm "$name.shmo"
 	else
 		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
+		rm "$name.shmo"
 		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
 	fi
 else
