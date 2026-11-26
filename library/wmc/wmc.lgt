@@ -51,10 +51,14 @@
 	]).
 
 	solve(Source, Result) :-
-		solve(Source, Result, []).
+		context(Context),
+		solve(Source, Result, Context, []).
 
 	solve(Source, Result, UserOptions) :-
 		context(Context),
+		solve(Source, Result, Context, UserOptions).
+
+	solve(Source, Result, Context, UserOptions) :-
 		check(ground, Source, Context),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
