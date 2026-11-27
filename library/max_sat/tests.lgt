@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-11-23,
+		date is 2026-11-27,
 		comment is 'Unit tests for the "max_sat" library.'
 	]).
 
@@ -776,7 +776,10 @@
 	% deterministic pseudo-random instance generation (linear congruential generator)
 
 	next_seed(Seed0, Seed) :-
-		Seed is (Seed0 * 1103515245 + 12345) mod 2147483648.
+		% Split the seed into 16-bit parts to avoid overflow before reduction modulo 2^31.
+		Low is Seed0 mod 65536,
+		High is ((Seed0 // 65536) * 1103515245) mod 32768,
+		Seed is (Low * 1103515245 + High * 65536 + 12345) mod 2147483648.
 
 	random_int(Low, High, Seed0, Seed, Value) :-
 		next_seed(Seed0, Seed),
