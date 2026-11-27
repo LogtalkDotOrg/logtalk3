@@ -2,12 +2,10 @@
 
 #############################################################################
 ##
-##   This script creates a Shumway Prolog logtalk.pl file with the Logtalk
-##   compiler and runtime and optionally an application.pl file with a
-##   Logtalk application; creates also application and logtalk self-contained
-##   executables and WebAssembly bundles
+##   This script creates Shumway Prolog executables and WebAssembly bundles
+##   containing the Logtalk compiler/runtime and optionally an application
 ##
-##   Last updated on November 26, 2026
+##   Last updated on November 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -160,25 +158,26 @@ paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 bundle="false"
 compile="false"
+keep="false"
 goal="true"
 
 usage_help() {
 	echo
-	echo "This script creates a Shumway Prolog logtalk.pl file with the Logtalk compiler"
-	echo "and runtime and an optional application.pl file from an application source code"
-	echo "given its loader file."
+	echo "This script creates Shumway Prolog executables and WebAssembly bundles"
+	echo "containing the Logtalk compiler/runtime and optionally an application."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-b] [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
+	echo "  $(basename "$0") [-b] [-c] [-k] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -b create a WebAssembly bundle"
+	echo "  -b create a WebAssembly bundle instead of an executable"
 	echo "  -c compile library alias paths in paths and settings files"
+	echo "  -k keep the generated Prolog files after creating a executable or a WebAssembly bundle"
 	echo "  -d directory for generated Prolog files and artifacts (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
-	echo "  -n name of the generated top-level (default is logtalk)"
+	echo "  -n name of the generated executable or WebAssembly bundle (default is $name)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
@@ -188,11 +187,12 @@ usage_help() {
 	echo
 }
 
-while getopts "bcd:t:n:p:s:l:g:vh" option
+while getopts "bckd:t:n:p:s:l:g:vh" option
 do
 	case $option in
 		b) bundle="true";;
 		c) compile="true";;
+		k) keep="true";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
@@ -345,24 +345,30 @@ if [ "$loader" != "" ] ; then
 		echo
 		exit 1
 	fi
-	cat "$directory"/logtalk.pl "$directory"/application.pl > "$directory"/"$name.pl"
-	shumway-compile --release --output "$directory"/"$name.shmo" "$directory"/"$name.pl"
-	cd "$directory"
-	if [ "$bundle" != "false" ] ; then
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.shum" "$name.shmo"
+	cd "$directory" || exit 1
+	cat logtalk.pl application.pl > "$name.pl"
+	shumway-compile --release --output "$name.shmo" "$name.pl"
+	if [ "$bundle" == "true" ] ; then
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --goal "$goal" --output "$name.shum" "$name.shmo"
 		rm "$name.shmo"
 	else
 		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
 		rm "$name.shmo"
-		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
+		shumway --save-toplevel "$name" --self-contained --goal "$goal" --toplevel halt "$name.shum"
+	fi
+	if [ "$keep" == "false" ] ; then
+		rm logtalk.pl application.pl "$name.pl"
 	fi
 else
-	cd "$directory"
-	if [ "$bundle" != "false" ] ; then
+	cd "$directory" || exit 1
+	if [ "$bundle" == "true" ] ; then
 		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.shum logtalk.pl
 	else
 		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum
+	fi
+	if [ "$keep" == "false" ] ; then
+		rm logtalk.pl
 	fi
 fi
 

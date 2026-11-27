@@ -1,12 +1,10 @@
 
 #############################################################################
 ##
-##   This script creates a Shumway Prolog logtalk.pl file with the Logtalk
-##   compiler and runtime and optionally an application.pl file with a
-##   Logtalk application; creates also application and logtalk self-contained
-##   executables and WebAssembly bundles
+##   This script creates Shumway Prolog executables and WebAssembly bundles
+##   containing the Logtalk compiler/runtime and optionally an application
 ##
-##   Last updated on November 26, 2026
+##   Last updated on November 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -34,12 +32,12 @@ param(
 	[Parameter()]
 	[Switch]$b,
 	[Switch]$c,
-	[Switch]$x,
+	[Switch]$k,
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "embedded",
-	[String]$p = "$env:LOGTALKHOME\paths\paths.pl",
-	[String]$s = "$env:LOGTALKHOME\scripts\embedding\settings-embedding-sample.lgt",
+	[String]$p,
+	[String]$s,
 	[String]$l,
 	[String]$g = "true",
 	[Switch]$v,
@@ -95,9 +93,11 @@ function Get-Logtalkhome {
 
 		$DEFAULTPATHS = [string[]](
 			"C:\Program Files (x86)\Logtalk",
-			"C:\Program Files\Logtalk",
-			"%LOCALAPPDATA%\Logtalk"
+			"C:\Program Files\Logtalk"
 		)
+		if ($env:LOCALAPPDATA) {
+			$DEFAULTPATHS += Join-Path $env:LOCALAPPDATA "Logtalk"
+		}
 
 		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) {
@@ -116,7 +116,7 @@ function Get-Logtalkuser {
 	if ($null -eq $env:LOGTALKUSER) {
 		Write-Output "After the script completion, you must set the environment variable"
 		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
-		$env:LOGTALKUSER = "%USERPROFILE%\Documents\Logtalk"
+		$env:LOGTALKUSER = Join-Path $env:USERPROFILE "Documents\Logtalk"
 	}
 	# At the end LOGTALKUSER was set already or now is set
 }
@@ -125,21 +125,21 @@ function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
 
-	Write-Output "This script creates a Shumway Prolog logtalk.pl file with the Logtalk compiler"
-	Write-Output "and runtime and an optional application.pl file from an application source code"
-	Write-Output "given its loader file."
+	Write-Output "This script creates Shumway Prolog executables and WebAssembly bundles"
+	Write-Output "containing the Logtalk compiler/runtime and optionally an application."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output "  $myName [-b] [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
+	Write-Output "  $myName [-b] [-c] [-k] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output "  -b create a WebAssembly bundle"
+	Write-Output "  -b create a WebAssembly bundle instead of an executable"
 	Write-Output "  -c compile library alias paths in paths and settings files"
+	Write-Output "  -k keep the generated Prolog files after creating a executable or a WebAssembly bundle"
 	Write-Output "  -d directory for generated Prolog files and artifacts (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
-	Write-Output "  -n name of the generated saved state (default is $n)"
+	Write-Output "  -n name of the generated executable or WebAssembly bundle (default is $n)"
 	Write-Output "  -p library paths file (absolute path; default is $p)"
 	Write-Output "  -s settings file (absolute path or 'none'; default is $s)"
 	Write-Output "  -l loader file for the application (absolute path)"
@@ -180,7 +180,7 @@ function Confirm-Parameters() {
 	}
 
 	if ($t -eq "") {
-		$t = "$pwd\tmp"
+		$script:t = Join-Path ([System.IO.Path]::GetTempPath()) ("logtalk-" + [System.Guid]::NewGuid().ToString("N"))
 	}
 
 	if (-not (Test-Path $d)) {
@@ -207,8 +207,6 @@ function Confirm-Parameters() {
 
 ###################### here it starts ############################
 
-Confirm-Parameters
-
 Get-Logtalkhome
 
 # Check for existence
@@ -219,6 +217,14 @@ if (Test-Path $env:LOGTALKHOME) {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
 	Exit 1
+}
+
+if ($p -eq "") {
+	$p = Join-Path $env:LOGTALKHOME "paths\paths.pl"
+}
+
+if ($s -eq "") {
+	$s = Join-Path $env:LOGTALKHOME "scripts\embedding\settings-embedding-sample.lgt"
 }
 
 Get-Logtalkuser
@@ -244,6 +250,8 @@ if (Test-Path $env:LOGTALKUSER) {
 	Write-Output "by running the logtalk_user_setup shell script:"
 	logtalk_user_setup
 }
+
+Confirm-Parameters
 
 Push-Location
 Set-Location $t
@@ -327,21 +335,31 @@ if ($l -ne "") {
 
 	shumwaylgt -g $GoalParam
 	Set-Content -Path "$d/application.pl" -Value $DiscontiguousDirectives
-	Get-Item *.pl |
+	$ApplicationFiles = @(Get-ChildItem -File -Filter *.pl)
+	if ($ApplicationFiles.Count -eq 0) {
+		Write-Output ""
+		Write-Output "No application files found!"
+		Write-Output ""
+		Exit 1
+	}
+	$ApplicationFiles |
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
 		Add-Content "$d/application.pl"
 
-	Get-Content "$d"/logtalk.shmo, "$d"/application.shmo | Set-Content "$d"/"$name.pl"
-	shumway-compile --release --output "$d"/"$name.shmo" "$d"/"$name.pl"
 	Set-Location "$d"
+	Get-Content logtalk.pl, application.pl | Set-Content "$n.pl"
+	shumway-compile --release --output "$n.shmo" "$n.pl"
 	if ($b -eq $true) {
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --output "$name.shum" "$name.shmo"
-		Remove-Item "$name.shmo"
+		shumway-link --consult --allow-undefined --library --wasm --no-compress --goal "$g" --output "$n.shum" "$n.shmo"
+		Remove-Item "$n.shmo"
 	} else {
-		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
-		Remove-Item "$name.shmo"
-		shumway --save-toplevel "$name" --self-contained --goal "$goal" -t halt "$name.shum"
+		shumway-link --strip --allow-undefined --library --output "$n.shum" "$n.shmo"
+		Remove-Item "$n.shmo"
+		shumway --save-toplevel "$n" --self-contained --goal "$g" --toplevel halt "$n.shum"
+	}
+	if ($k -eq $false) {
+		Remove-Item logtalk.pl, application.pl, "$n.pl"
 	}
 	Pop-Location
 } else {
@@ -351,6 +369,9 @@ if ($l -ne "") {
 	} else {
 		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum
+	}
+	if ($k -eq $false) {
+		Remove-Item logtalk.pl
 	}
 	Pop-Location
 }

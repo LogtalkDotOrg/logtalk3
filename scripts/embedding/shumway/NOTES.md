@@ -19,8 +19,8 @@ ________________________________________________________________________
 
 
 This directory contains example scripts for creating Shumway Prolog
-executables and WebAssembly bundles from Logtalk core files and Logtalk
-source files.
+executables and WebAssembly bundles containing the Logtalk compiler/runtime
+and optionally an application with an optional startup goal."
 
 The following scripts are provided:
 
@@ -29,11 +29,12 @@ The following scripts are provided:
 - `shumway_logtalk_pl.ps1`  
 	PowerShell script for Windows systems
 
-Both scripts create a `logtalk.pl` file with the Logtalk compiler and
-runtime and an optional `application.pl` file for an application plus
-an optional application startup goal. Self-contained executables are
-also created for the application and for a new top-level that includes
-Logtalk.
+Both scripts create an intermediate `logtalk.pl` file with the Logtalk
+compiler/runtime and optionally an intermediate `application.pl` file
+for an application. By default, these intermediate files are deleted
+(use the `-k` option to keep them). When creating an executable or
+WebAssembly bundle for a Logtalk application, it's also possible to
+specify a startup goal.
 
 Usage
 -----
