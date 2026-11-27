@@ -351,7 +351,7 @@ if ($l -ne "") {
 	Get-Content logtalk.pl, application.pl | Set-Content "$n.pl"
 	shumway-compile --release --output "$n.shmo" "$n.pl"
 	if ($b -eq $true) {
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --goal "$g" --output "$n.shum" "$n.shmo"
+		shumway-link --consult --allow-undefined --library --wasm --goal "$g" --output "$n.shum" "$n.shmo"
 		Remove-Item "$n.shmo"
 	} else {
 		shumway-link --strip --allow-undefined --library --output "$n.shum" "$n.shmo"
@@ -365,7 +365,7 @@ if ($l -ne "") {
 } else {
 	Set-Location "$d"
 	if ($b -eq $true) {
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.shum logtalk.pl
+		shumway-link --consult --allow-undefined --library --wasm --output logtalk.shum logtalk.pl
 	} else {
 		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum

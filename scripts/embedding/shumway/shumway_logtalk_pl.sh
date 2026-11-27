@@ -349,7 +349,7 @@ if [ "$loader" != "" ] ; then
 	cat logtalk.pl application.pl > "$name.pl"
 	shumway-compile --release --output "$name.shmo" "$name.pl"
 	if [ "$bundle" == "true" ] ; then
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --goal "$goal" --output "$name.shum" "$name.shmo"
+		shumway-link --consult --allow-undefined --library --wasm --goal "$goal" --output "$name.shum" "$name.shmo"
 		rm "$name.shmo"
 	else
 		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
@@ -362,7 +362,7 @@ if [ "$loader" != "" ] ; then
 else
 	cd "$directory" || exit 1
 	if [ "$bundle" == "true" ] ; then
-		shumway-link --consult --allow-undefined --library --wasm --no-compress --output logtalk.shum logtalk.pl
+		shumway-link --consult --allow-undefined --library --was --output logtalk.shum logtalk.pl
 	else
 		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum
