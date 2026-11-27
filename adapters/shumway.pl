@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on November 7, 2026
+%  Last updated on November 27, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -375,14 +375,21 @@
 	).
 
 '$shumway_env_prefix'(Path, Substituted) :-
-	(	sub_atom(Path, 0, 1, _, '$'),
-		once(sub_atom(Path, Slash, 1, _, '/')),
-		Slash > 1,
-		Length is Slash - 1,
-		sub_atom(Path, 1, Length, _, Name),
-		catch(getenv(Name, Value), _, fail) ->
-		sub_atom(Path, Slash, _, 0, Tail),
-		atom_concat(Value, Tail, Substituted)
+	(	sub_atom(Path, 0, 1, _, '$') ->
+		(	once(sub_atom(Path, Slash, 1, _, '/')),
+			Slash > 1,
+			Length is Slash - 1,
+			sub_atom(Path, 1, Length, _, Name),
+			catch(getenv(Name, Value), _, fail) ->
+			sub_atom(Path, Slash, _, 0, Tail),
+			atom_concat(Value, Tail, Substituted)
+		;	\+ sub_atom(Path, _, 1, _, '/'),
+			sub_atom(Path, 1, Length, 0, Name),
+			Length > 0,
+			catch(getenv(Name, Value), _, fail) ->
+			Substituted = Value
+		;	Substituted = Path
+		)
 	;	Substituted = Path
 	).
 

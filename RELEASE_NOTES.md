@@ -31,6 +31,9 @@ Prolog adapter and integration files
 * UPDATED: The Trealla Prolog adapter to use when available the built-in
 predicate `prolog_to_os_filename/2` added in version 3.15.21.
 
+* FIXED: The Shumway Prolog adapter definition of the `'$lgt_expand_path'/2`
+internal predicate to also expand paths that are just an environment variable.
+
 Library
 -------
 
