@@ -58,6 +58,8 @@ and Mermaid formats.
 exporting diagrams in D2 and Graphviz formats.
 
 * IMPROVED: The `diagrams` tool support for generating D2 and Mermaid diagrams.
+Edge tooltips are now also show in D2 diagrams. D2 0.9.0 or a later version is
+now required.
 
 * UPDATED: The `logtalk_http_server.sh` and `logtalk_http_server.ps1` scripts
 to also support Shumway Prolog.

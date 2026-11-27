@@ -55,7 +55,7 @@ scripts.
 Requirements
 ------------
 
-Recent versions of d2 (0.6.9 or later) or Graphviz are required for generating
+Recent versions of d2 (0.9.0 or later) or Graphviz are required for generating
 diagrams in the final formats:
 
 - https://d2lang.com

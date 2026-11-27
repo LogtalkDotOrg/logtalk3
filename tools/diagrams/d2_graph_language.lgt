@@ -24,10 +24,10 @@
 	imports(options)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2026-11-23,
-		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
+		date is 2026-11-27,
+		comment is 'Predicates for generating graph files in the D2 language (version 0.9.0 or later).'
 	]).
 
 	:- uses(list, [
@@ -284,20 +284,23 @@
 		write_vertex(Source, Stream),
 		write(Stream, ' -> '),
 		write_vertex(Destination, Stream),
-		write(Stream, ': "'),
-		write_edge_lines(Labels, Stream),
-		write(Stream, '" {\n'),
+		(	^^option(url(URL), Options),
+			URL \== '' ->
+			write(Stream, ': {\nlabel: |md\n*['),
+			write_markdown_edge_lines(Labels, Stream),
+			write(Stream, ']('),
+			write_markdown_destination(URL, Stream),
+			write(Stream, ' "'),
+			write_markdown_title(URL, Stream),
+			write(Stream, '")*\n|\n')
+		;	write(Stream, ': "'),
+			write_edge_lines(Labels, Stream),
+			write(Stream, '" {\n')
+		),
 		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
 		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
 		(	member(color(Color), Options) ->
 			write_key_value(Stream, 'style.stroke', Color)
-		;	true
-		),
-		(	^^option(url(URL), Options),
-			URL \== '' ->
-			write_key_value_quoted(Stream, link, URL)
-		;	member(tooltip(Tooltip), Options) ->
-			write_key_value(Stream, tooltip, Tooltip)
 		;	true
 		),
 		write(Stream, '}\n').
@@ -460,6 +463,30 @@
 	escaped_char('!').
 	escaped_char('|').
 	escaped_char('~').
+
+	write_markdown_edge_lines([], _).
+	write_markdown_edge_lines([Line| Lines], Stream) :-
+		write_term_to_chars(Line, Chars, []),
+		write_markdown_edge_chars(Chars, Stream),
+		(	Lines == [] ->
+			true
+		;	write(Stream, '  \n'),
+			write_markdown_edge_lines(Lines, Stream)
+		).
+
+	write_markdown_edge_chars([], _).
+	write_markdown_edge_chars([Char| Chars], Stream) :-
+		(	Char == '&' ->
+			write(Stream, '&amp;')
+		;	Char == '\n' ->
+			write(Stream, '&#10;')
+		;	Char == '\r' ->
+			write(Stream, '&#13;')
+		;	Char == '\t' ->
+			write(Stream, '&#9;')
+		;	write_escaped_chars([Char], Stream)
+		),
+		write_markdown_edge_chars(Chars, Stream).
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-

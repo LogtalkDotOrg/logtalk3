@@ -8,14 +8,14 @@
 ``d2_graph_language``
 =====================
 
-Predicates for generating graph files in the DOT language (version 2.36.0 or later).
+Predicates for generating graph files in the D2 language (version 0.9.0 or later).
 
 | **Availability:** 
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:7:0
-| **Date:** 2026-11-23
+| **Version:** 1:8:0
+| **Date:** 2026-11-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
