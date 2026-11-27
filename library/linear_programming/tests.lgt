@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-11-27,
 		comment is 'Unit tests for the "linear_programming" library.'
 	]).
 
@@ -76,6 +76,17 @@
 		one_variable_problem(2, 5, [], [1*x], maximize, Problem),
 		simplex::solve(Problem, Result),
 		simplex::variable_value(Result, x, X).
+
+	test(linear_programming_multiple_finite_bounds, deterministic((Status == optimal, X =~= 11.0, Y =~= 0.0, Value =~= -22.0))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, 0, 11, Problem0, Problem1),
+		simplex::variable(y, continuous, 0, 6, Problem1, Problem2),
+		simplex::objective([-2*x,1*y], minimize, Problem2, Problem),
+		simplex::solve(Problem, Result),
+		simplex::status(Result, Status),
+		simplex::variable_value(Result, x, X),
+		simplex::variable_value(Result, y, Y),
+		simplex::objective_value(Result, Value).
 
 	test(linear_programming_upper_bound_only, deterministic(X =~= 3.0)) :-
 		one_variable_problem(-inf, 3, [], [1*x], maximize, Problem),
@@ -233,6 +244,24 @@
 		milp_branch_and_bound::solve(Problem, Result),
 		milp_branch_and_bound::variable_value(Result, x, X),
 		milp_branch_and_bound::variable_value(Result, y, Y),
+		milp_branch_and_bound::objective_value(Result, Value).
+
+	test(linear_programming_milp_binary_knapsack, deterministic((Status == optimal, A =:= 0, B =:= 1, C =:= 1, D =:= 1, E =:= 0, Value =~= 51.0))) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(a, binary, Problem0, Problem1),
+		milp_branch_and_bound::variable(b, binary, Problem1, Problem2),
+		milp_branch_and_bound::variable(c, binary, Problem2, Problem3),
+		milp_branch_and_bound::variable(d, binary, Problem3, Problem4),
+		milp_branch_and_bound::variable(e, binary, Problem4, Problem5),
+		milp_branch_and_bound::constraint([12*a,7*b,11*c,8*d,9*e], =<, 26, Problem5, Problem6),
+		milp_branch_and_bound::objective([24*a,13*b,23*c,15*d,16*e], maximize, Problem6, Problem),
+		milp_branch_and_bound::solve(Problem, Result),
+		milp_branch_and_bound::status(Result, Status),
+		milp_branch_and_bound::variable_value(Result, a, A),
+		milp_branch_and_bound::variable_value(Result, b, B),
+		milp_branch_and_bound::variable_value(Result, c, C),
+		milp_branch_and_bound::variable_value(Result, d, D),
+		milp_branch_and_bound::variable_value(Result, e, E),
 		milp_branch_and_bound::objective_value(Result, Value).
 
 	test(linear_programming_milp_integer_minimum, deterministic((X =:= 2, Value =~= 2.0))) :-

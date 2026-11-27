@@ -23,9 +23,9 @@
 	imports(linear_programming_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-09-24,
+		date is 2026-11-27,
 		comment is 'Portable dense two-phase simplex solver for small continuous linear programs.',
 		remarks is [
 			'Variable types' - 'This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.',
@@ -172,13 +172,13 @@
 		),
 		normalize_rows(Rows, NormalizedRows).
 
-	dense_bound_row(Coefficients, Coefficients) :-
-		Coefficients = [],
+	dense_bound_row([], []) :-
 		!.
-	dense_bound_row([_Coefficient*_Column| _Terms]=Terms, Coefficients) :-
-		maximum_column(Terms, 0, Length),
+	dense_bound_row([Coefficient*Column| Terms], Coefficients) :-
+		!,
+		maximum_column([Coefficient*Column| Terms], 0, Length),
 		new_vector(Length, 0.0, Zeroes),
-		add_sparse_terms(Terms, Zeroes, Coefficients).
+		add_sparse_terms([Coefficient*Column| Terms], Zeroes, Coefficients).
 	dense_bound_row(Coefficients, Coefficients).
 
 	maximum_column([], Maximum, Maximum).

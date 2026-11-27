@@ -50,6 +50,10 @@ or a portable reference counter written in Logtalk.
 * FIXED: The `csv`, `format`, `hook_objects`, `http_directory_listing`,
 `listing`, and `reader` library tests for Trealla Prolog running on Windows.
 
+* FIXED: Bug in the `linear_programming` library portable simplex solver where
+it would return wrong optimal results when there's more than one finite upper
+bound.
+
 Tools
 -----
 
