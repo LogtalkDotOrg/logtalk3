@@ -74,22 +74,34 @@ are:
 
 - ``max_iterations(PositiveInteger)`` - Maximum number of iterations
   shared by both simplex phases (default: ``10000``).
-
 - ``tolerance(PositiveNumber)`` - Numerical tolerance (default:
   ``1.0e-9``).
-
 - ``pivot_rule(Rule)`` - Pivot rule, either ``bland`` (the default),
   which selects the first eligible entering column, or ``dantzig``,
   which selects the eligible column with the most negative reduced cost,
   breaking ties by the lowest column index.
 
-  \| ?- simplex::( new_problem(P0), variable(x, continuous, P0, P1),
-  variable(y, continuous, P1, P2), constraint([1\ *x, 2*\ y], =<, 14,
-  P2, P3), constraint([3\ *x, -1*\ y], >=, 0, P3, P4), objective([3\ *x,
-  4*\ y], maximize, P4, P), solve(P, Result), status(Result, Status),
-  variable_value(Result, x, X), variable_value(Result, y, Y),
-  objective_value(Result, Value) ). Status = optimal, X = 14.0, Y = 0,
-  Value = 42.0.
+For example:
+
+::
+
+   | ?- simplex::(
+            new_problem(P0),
+            variable(x, continuous, P0, P1),
+            variable(y, continuous, P1, P2),
+            constraint([1*x, 2*y], =<, 14, P2, P3),
+            constraint([3*x, -1*y], >=, 0, P3, P4),
+            objective([3*x, 4*y], maximize, P4, P),
+            solve(P, Result),
+            status(Result, Status),
+            variable_value(Result, x, X),
+            variable_value(Result, y, Y),
+            objective_value(Result, Value)
+        ).
+   Status = optimal,
+   X = 14.0,
+   Y = 0,
+   Value = 42.0.
 
 External solvers
 ----------------
@@ -108,7 +120,7 @@ supported by all four backends.
 | Backend   | Solver                                        | Default          | Notes            |
 |           |                                               | executable       |                  |
 +===========+===============================================+==================+==================+
-| ``cbc``   | `COIN-OR                                      | ``cbc``          | -                |
+| ``cbc``   | `COIN-OR                                      | ``cbc``          |                  |
 |           | CBC <https://github.com/coin-or/Cbc>`__       |                  |                  |
 +-----------+-----------------------------------------------+------------------+------------------+
 | ``glpk``  | `GLPK <https://www.gnu.org/software/glpk/>`__ | ``glpsol``       | ``time_limit/1`` |
@@ -120,7 +132,7 @@ supported by all four backends.
 |           |                                               |                  | supported by the |
 |           |                                               |                  | CLI)             |
 +-----------+-----------------------------------------------+------------------+------------------+
-| ``scip``  | `SCIP <https://www.scipopt.org/>`__           | ``scip``         | -                |
+| ``scip``  | `SCIP <https://www.scipopt.org/>`__           | ``scip``         |                  |
 +-----------+-----------------------------------------------+------------------+------------------+
 
 The solver executables must be installed and available in the system
@@ -230,40 +242,42 @@ The supported options are:
 
 - ``max_nodes(PositiveInteger)`` - Maximum number of search nodes
   (default: ``10000``).
-
 - ``integrality_tolerance(PositiveNumber)`` - Integrality tolerance
   (default: ``1.0e-9``).
-
 - ``simplex_max_iterations(PositiveInteger)`` - Maximum simplex
   iterations per LP relaxation (default: ``10000``).
-
 - ``simplex_tolerance(PositiveNumber)`` - Simplex numerical tolerance
   (default: ``1.0e-9``).
-
 - ``simplex_pivot_rule(Rule)`` - Simplex pivot rule for all LP
   relaxations (default: ``bland``).
-
 - ``branching_rule(Rule)`` - Branching rule, either ``first_fractional``
   (the default), which selects the first fractional discrete variable in
   declaration order, or ``most_fractional``, which selects the variable
   whose value is farthest from its nearest integer, breaking ties by
   declaration order.
-
 - ``branch_order(Order)`` - Child traversal order, either
   ``lower_first`` (the default) or ``upper_first``.
 
-  \| ?- milp_branch_and_bound:: new_problem(P0), variable(x, binary, P0,
-  P1), variable(y, binary, P1, P2), constraint([2\ *x, 2*\ y], =<, 3,
-  P2, P3), objective([1\ *x, 1*\ y], maximize, P3, P), solve(P, Result
-  ).
+For example:
+
+::
+
+   | ?- milp_branch_and_bound::
+           new_problem(P0),
+           variable(x, binary, P0, P1),
+           variable(y, binary, P1, P2),
+           constraint([2*x, 2*y], =<, 3, P2, P3),
+           objective([1*x, 1*y], maximize, P3, P),
+           solve(P, Result
+        ).
 
 Limitations
 -----------
 
-Both portable backends use dense lists and are intended for small
-problems.
+The ``simplex`` and ``milp_branch_and_bound`` portable backends use
+dense lists and are intended for small problems.
 
-The portable backends do not currently implement presolve beyond bound
+The portable backends do not currently implement pre-solve beyond bound
 and standard-form normalization, sparse storage, cutting planes, warm
 starts, time limits, callbacks, or parallel search. They also do not
 expose dual values, reduced costs, or basis data.

@@ -511,7 +511,7 @@ upper bound.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend solves continuous linear programs using a
 portable dense two-phase tableau implementation. The supported options
 are:</p>
-<ul>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">max_iterations(PositiveInteger)</span></code> - Maximum number of iterations
 shared by both simplex phases (default: <code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tolerance(PositiveNumber)</span></code> - Numerical tolerance (default:
@@ -519,16 +519,28 @@ shared by both simplex phases (default: <code class="docutils literal notranslat
 <li><p><code class="docutils literal notranslate"><span class="pre">pivot_rule(Rule)</span></code> - Pivot rule, either <code class="docutils literal notranslate"><span class="pre">bland</span></code> (the default),
 which selects the first eligible entering column, or <code class="docutils literal notranslate"><span class="pre">dantzig</span></code>,
 which selects the eligible column with the most negative reduced cost,
-breaking ties by the lowest column index.</p>
-<p>| ?- simplex::( new_problem(P0), variable(x, continuous, P0, P1),
-variable(y, continuous, P1, P2), constraint([1<em>x, 2</em>y], =&lt;, 14,
-P2, P3), constraint([3<em>x, -1</em>y], &gt;=, 0, P3, P4), objective([3<em>x,
-4</em>y], maximize, P4, P), solve(P, Result), status(Result, Status),
-variable_value(Result, x, X), variable_value(Result, y, Y),
-objective_value(Result, Value) ). Status = optimal, X = 14.0, Y = 0,
-Value = 42.0.</p>
-</li>
+breaking ties by the lowest column index.</p></li>
 </ul>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simplex<span class="o">::</span>(
+         new_problem(<span class="nv">P0</span>),
+         variable(x, continuous, <span class="nv">P0</span>, <span class="nv">P1</span>),
+         variable(y, continuous, <span class="nv">P1</span>, <span class="nv">P2</span>),
+         constraint([<span class="m">1</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">14</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
+         constraint([<span class="m">3</span><span class="o">*</span>x, <span class="o">-</span><span class="m">1</span><span class="o">*</span>y], <span class="o">&gt;=</span>, <span class="m">0</span>, <span class="nv">P3</span>, <span class="nv">P4</span>),
+         objective([<span class="m">3</span><span class="o">*</span>x, <span class="m">4</span><span class="o">*</span>y], maximize, <span class="nv">P4</span>, <span class="nv">P</span>),
+         solve(<span class="nv">P</span>, <span class="nv">Result</span>),
+         status(<span class="nv">Result</span>, <span class="nv">Status</span>),
+         variable_value(<span class="nv">Result</span>, x, <span class="nv">X</span>),
+         variable_value(<span class="nv">Result</span>, y, <span class="nv">Y</span>),
+         objective_value(<span class="nv">Result</span>, <span class="nv">Value</span>)
+     ).
+<span class="nv">Status</span> <span class="o">=</span> optimal,
+<span class="nv">X</span> <span class="o">=</span> <span class="m">14.0</span>,
+<span class="nv">Y</span> <span class="o">=</span> <span class="m">0</span>,
+<span class="nv">Value</span> <span class="o">=</span> <span class="m">42.0</span>.
+</pre></div>
+</div>
 </section>
 <section id="external-solvers">
 <h2>External solvers<a class="headerlink" href="#external-solvers" title="Link to this heading"></a></h2>
@@ -555,10 +567,7 @@ executable</p></th>
 <td><p><a class="reference external" href="https://github.com/coin-or/Cbc">COIN-OR
 CBC</a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">cbc</span></code></p></td>
-<td><ul class="simple">
-<li></li>
-</ul>
-</td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">glpk</span></code></p></td>
 <td><p><a class="reference external" href="https://www.gnu.org/software/glpk/">GLPK</a></p></td>
@@ -578,10 +587,7 @@ CLI)</p></td>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scip</span></code></p></td>
 <td><p><a class="reference external" href="https://www.scipopt.org/">SCIP</a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">scip</span></code></p></td>
-<td><ul class="simple">
-<li></li>
-</ul>
-</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -681,7 +687,7 @@ numerical termination returns the best validated incumbent as a
 <code class="docutils literal notranslate"><span class="pre">stop_status/1</span></code> in the statistics. Without a validated incumbent, the
 limit or error status is returned directly.</p>
 <p>The supported options are:</p>
-<ul>
+<ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">max_nodes(PositiveInteger)</span></code> - Maximum number of search nodes
 (default: <code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">integrality_tolerance(PositiveNumber)</span></code> - Integrality tolerance
@@ -698,19 +704,25 @@ declaration order, or <code class="docutils literal notranslate"><span class="pr
 whose value is farthest from its nearest integer, breaking ties by
 declaration order.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">branch_order(Order)</span></code> - Child traversal order, either
-<code class="docutils literal notranslate"><span class="pre">lower_first</span></code> (the default) or <code class="docutils literal notranslate"><span class="pre">upper_first</span></code>.</p>
-<p>| ?- milp_branch_and_bound:: new_problem(P0), variable(x, binary, P0,
-P1), variable(y, binary, P1, P2), constraint([2<em>x, 2</em>y], =&lt;, 3,
-P2, P3), objective([1<em>x, 1</em>y], maximize, P3, P), solve(P, Result
-).</p>
-</li>
+<code class="docutils literal notranslate"><span class="pre">lower_first</span></code> (the default) or <code class="docutils literal notranslate"><span class="pre">upper_first</span></code>.</p></li>
 </ul>
+<p>For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> milp_branch_and_bound<span class="o">::</span>
+        new_problem(<span class="nv">P0</span>),
+        variable(x, binary, <span class="nv">P0</span>, <span class="nv">P1</span>),
+        variable(y, binary, <span class="nv">P1</span>, <span class="nv">P2</span>),
+        constraint([<span class="m">2</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">3</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
+        objective([<span class="m">1</span><span class="o">*</span>x, <span class="m">1</span><span class="o">*</span>y], maximize, <span class="nv">P3</span>, <span class="nv">P</span>),
+        solve(<span class="nv">P</span>, <span class="nv">Result</span>
+     ).
+</pre></div>
+</div>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Both portable backends use dense lists and are intended for small
-problems.</p>
-<p>The portable backends do not currently implement presolve beyond bound
+<p>The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> and <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> portable backends use
+dense lists and are intended for small problems.</p>
+<p>The portable backends do not currently implement pre-solve beyond bound
 and standard-form normalization, sparse storage, cutting planes, warm
 starts, time limits, callbacks, or parallel search. They also do not
 expose dual values, reduced costs, or basis data.</p>
