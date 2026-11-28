@@ -5,7 +5,7 @@
 ##   This script creates Shumway Prolog executables and WebAssembly bundles
 ##   containing the Logtalk compiler/runtime and optionally an application
 ##
-##   Last updated on November 27, 2026
+##   Last updated on November 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
 
@@ -349,10 +349,10 @@ if [ "$loader" != "" ] ; then
 	cat logtalk.pl application.pl > "$name.pl"
 	shumway-compile --release --output "$name.shmo" "$name.pl"
 	if [ "$bundle" == "true" ] ; then
-		shumway-link --consult --allow-undefined --library --wasm --goal "$goal" --output "$name.shum" "$name.shmo"
+		shumway-link --library --wasm --goal "$goal" --output "$name.shum" "$name.shmo"
 		rm "$name.shmo"
 	else
-		shumway-link --strip --allow-undefined --library --output "$name.shum" "$name.shmo"
+		shumway-link --strip --library --output "$name.shum" "$name.shmo"
 		rm "$name.shmo"
 		shumway --save-toplevel "$name" --self-contained --goal "$goal" --toplevel halt "$name.shum"
 	fi
@@ -362,9 +362,9 @@ if [ "$loader" != "" ] ; then
 else
 	cd "$directory" || exit 1
 	if [ "$bundle" == "true" ] ; then
-		shumway-link --consult --allow-undefined --library --was --output logtalk.shum logtalk.pl
+		shumway-link --library --wasm --output logtalk.shum logtalk.pl
 	else
-		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
+		shumway-link --strip --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum
 	fi
 	if [ "$keep" == "false" ] ; then

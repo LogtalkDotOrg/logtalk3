@@ -4,7 +4,7 @@
 ##   This script creates Shumway Prolog executables and WebAssembly bundles
 ##   containing the Logtalk compiler/runtime and optionally an application
 ##
-##   Last updated on November 27, 2026
+##   Last updated on November 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2026 Paulo Moura <pmoura@logtalk.org>
@@ -47,7 +47,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.4"
+	Write-Output "$myName 0.5"
 }
 
 function Test-LogtalkVersionIsOlder {
@@ -351,10 +351,10 @@ if ($l -ne "") {
 	Get-Content logtalk.pl, application.pl | Set-Content "$n.pl"
 	shumway-compile --release --output "$n.shmo" "$n.pl"
 	if ($b -eq $true) {
-		shumway-link --consult --allow-undefined --library --wasm --goal "$g" --output "$n.shum" "$n.shmo"
+		shumway-link --library --wasm --goal "$g" --output "$n.shum" "$n.shmo"
 		Remove-Item "$n.shmo"
 	} else {
-		shumway-link --strip --allow-undefined --library --output "$n.shum" "$n.shmo"
+		shumway-link --strip --library --output "$n.shum" "$n.shmo"
 		Remove-Item "$n.shmo"
 		shumway --save-toplevel "$n" --self-contained --goal "$g" --toplevel halt "$n.shum"
 	}
@@ -365,9 +365,9 @@ if ($l -ne "") {
 } else {
 	Set-Location "$d"
 	if ($b -eq $true) {
-		shumway-link --consult --allow-undefined --library --wasm --output logtalk.shum logtalk.pl
+		shumway-link --library --wasm --output logtalk.shum logtalk.pl
 	} else {
-		shumway-link --strip --allow-undefined --library --output logtalk.shum logtalk.pl
+		shumway-link --strip --library --output logtalk.shum logtalk.pl
 		shumway --save-toplevel logtalk --self-contained logtalk.shum
 	}
 	if ($k -eq $false) {
