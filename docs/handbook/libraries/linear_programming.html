@@ -262,6 +262,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#model-representation">Model representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#continuous-solving">Continuous solving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#external-solvers">External solvers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dense-matrix-conversion">Dense matrix conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#results-and-errors">Results and errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mixed-integer-solving">Mixed-integer solving</a></li>
@@ -464,6 +465,16 @@ declarations. The <code class="docutils literal notranslate"><span class="pre">s
 throws a <code class="docutils literal notranslate"><span class="pre">domain_error(simplex_variable_type,</span> <span class="pre">Variable-Type)</span></code> error
 for other variable types. Use <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> to solve models
 containing integer or binary variables.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">glpk</span></code>, <code class="docutils literal notranslate"><span class="pre">cbc</span></code>, <code class="docutils literal notranslate"><span class="pre">highs</span></code>, and <code class="docutils literal notranslate"><span class="pre">scip</span></code> backends solve continuous
+and mixed-integer models by running the corresponding external solver’s
+command-line tool (see the “External solvers” section). Unlike the
+<code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backend, they can solve models with unbounded
+integer variables, and their production LP/MIP algorithms can handle
+larger and harder problems than the portable reference solvers. Limits
+on problem size and model features are determined by the selected
+external solver. These backends use the <code class="docutils literal notranslate"><span class="pre">process</span></code> library and thus are
+currently only supported when using the ECLiPSe, GNU Prolog, SICStus
+Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM backends.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -519,6 +530,118 @@ Value = 42.0.</p>
 </li>
 </ul>
 </section>
+<section id="external-solvers">
+<h2>External solvers<a class="headerlink" href="#external-solvers" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">glpk</span></code>, <code class="docutils literal notranslate"><span class="pre">cbc</span></code>, <code class="docutils literal notranslate"><span class="pre">highs</span></code>, and <code class="docutils literal notranslate"><span class="pre">scip</span></code> backends implement the
+same protocol as the <code class="docutils literal notranslate"><span class="pre">simplex</span></code> and <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backends
+but delegate the solving to an external solver command-line tool. They
+follow the design of the similar libraries (e.g., <code class="docutils literal notranslate"><span class="pre">sat</span></code>): the model is
+written as a CPLEX LP format file, the solver is run in an isolated
+directory (with the problem, solution, and output files removed
+afterwards), and its output is decoded into the usual result term.
+Variables of any type can be used, and integer and binary variables are
+supported by all four backends.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Backend</p></th>
+<th class="head"><p>Solver</p></th>
+<th class="head"><p>Default
+executable</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cbc</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/coin-or/Cbc">COIN-OR
+CBC</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cbc</span></code></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">glpk</span></code></p></td>
+<td><p><a class="reference external" href="https://www.gnu.org/software/glpk/">GLPK</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">glpsol</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">time_limit/1</span></code>
+is rounded up to
+whole seconds</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">highs</span></code></p></td>
+<td><p><a class="reference external" href="https://highs.dev/">HiGHS</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">highs</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mip_gap/1</span></code> is
+rejected (not
+supported by the
+CLI)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scip</span></code></p></td>
+<td><p><a class="reference external" href="https://www.scipopt.org/">SCIP</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scip</span></code></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The solver executables must be installed and available in the system
+path (or their location given using the <code class="docutils literal notranslate"><span class="pre">executable/1</span></code> option). Tests
+of these backends are conditional on the solver executables being
+available.</p>
+<p>These backends accept the following options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">executable(Path)</span></code>: solver executable (default: the solver default
+executable resolved using the system path)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_limit(Seconds)</span></code>: time limit (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>, i.e., no limit)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mip_gap(Gap)</span></code>: relative MIP gap (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>, i.e., the
+solver default)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simplex<span class="o">::</span>new_problem(<span class="nv">P0</span>),
+     simplex<span class="o">::</span>variable(x, continuous, <span class="nv">P0</span>, <span class="nv">P1</span>),
+     simplex<span class="o">::</span>variable(y, continuous, <span class="nv">P1</span>, <span class="nv">P2</span>),
+     simplex<span class="o">::</span>constraint([<span class="m">1</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">14</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
+     simplex<span class="o">::</span>constraint([<span class="m">3</span><span class="o">*</span>x, <span class="o">-</span><span class="m">1</span><span class="o">*</span>y], <span class="o">&gt;=</span>, <span class="m">0</span>, <span class="nv">P3</span>, <span class="nv">P4</span>),
+     simplex<span class="o">::</span>constraint([<span class="m">1</span><span class="o">*</span>x, <span class="o">-</span><span class="m">1</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">2</span>, <span class="nv">P4</span>, <span class="nv">P5</span>),
+     simplex<span class="o">::</span>objective([<span class="m">3</span><span class="o">*</span>x, <span class="m">4</span><span class="o">*</span>y], maximize, <span class="nv">P5</span>, <span class="nv">P</span>),
+     highs<span class="o">::</span>solve(<span class="nv">P</span>, <span class="nv">Result</span>),
+     highs<span class="o">::</span>objective_value(<span class="nv">Result</span>, <span class="nv">Objective</span>).
+<span class="nv">Objective</span> <span class="o">=</span> <span class="m">34</span>
+</pre></div>
+</div>
+<p>The result statuses for these backends include, besides <code class="docutils literal notranslate"><span class="pre">optimal</span></code>,
+<code class="docutils literal notranslate"><span class="pre">infeasible</span></code>, and <code class="docutils literal notranslate"><span class="pre">unbounded</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feasible</span></code>: a solution that is not proven optimal (e.g., after
+reaching the time limit); the <code class="docutils literal notranslate"><span class="pre">objective_value/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">variable_value/3</span></code> predicates succeed for results with this status</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">infeasible_or_unbounded</span></code>: reported by solvers that cannot tell
+which is the case</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_limit</span></code>: the time limit was reached without finding a solution</p></li>
+</ul>
+<p>The result statistics are <code class="docutils literal notranslate"><span class="pre">solver/1</span></code>, <code class="docutils literal notranslate"><span class="pre">solver_status/1</span></code> (the status
+text reported by the solver), <code class="docutils literal notranslate"><span class="pre">process_status/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">raw_status/1</span></code>. A reported solution must be present and must be
+consistent with the model before a result with status <code class="docutils literal notranslate"><span class="pre">optimal</span></code> or
+<code class="docutils literal notranslate"><span class="pre">feasible</span></code> is constructed. Variables omitted from a valid solution
+section have the value zero, and values of integer and binary variables
+are rounded to the closest integer when within <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code> of it. Values
+are numbers as reported by the solver (not necessarily floats) and are
+subject to the solver feasibility and optimality tolerances.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>The LP format uses generated variable names (<code class="docutils literal notranslate"><span class="pre">x1</span></code>, <code class="docutils literal notranslate"><span class="pre">x2</span></code>, …),
+thus any ground terms can be used as variable names in the model.</p></li>
+<li><p>The solvers write their solution to a file in the isolated directory
+(when they cannot print it to the standard output) and are run with
+that directory as the working directory on POSIX systems, as some of
+them (e.g., HiGHS) write log files to the working directory.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">lp_format::generate/2</span></code> predicate can be used to generate the LP
+source of a model, e.g., to use it with a solver that is not
+supported.</p></li>
+</ul>
+</section>
 <section id="dense-matrix-conversion">
 <h2>Dense matrix conversion<a class="headerlink" href="#dense-matrix-conversion" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">problem_from_matrices/8</span></code> predicate converts a dense standard-form
@@ -538,12 +661,13 @@ one-based column indices.</p>
 </section>
 <section id="results-and-errors">
 <h2>Results and errors<a class="headerlink" href="#results-and-errors" title="Link to this heading"></a></h2>
-<p>Solver statuses are <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">infeasible</span></code>, <code class="docutils literal notranslate"><span class="pre">unbounded</span></code>,
-<code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">node_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">numerical_error</span></code>. Only an
-optimal result contains variable values and an objective value. The
-corresponding inspector predicates fail for other statuses. Malformed
-problems and unsupported backend capabilities throw errors instead of
-being reported as mathematical solver statuses.</p>
+<p>Solver statuses are <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">feasible</span></code>, <code class="docutils literal notranslate"><span class="pre">infeasible</span></code>,
+<code class="docutils literal notranslate"><span class="pre">unbounded</span></code>, <code class="docutils literal notranslate"><span class="pre">infeasible_or_unbounded</span></code>, <code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>,
+<code class="docutils literal notranslate"><span class="pre">node_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">time_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">numerical_error</span></code>. Only
+<code class="docutils literal notranslate"><span class="pre">optimal</span></code> and <code class="docutils literal notranslate"><span class="pre">feasible</span></code> results contain variable values and an
+objective value. The corresponding inspector predicates fail for other
+statuses. Malformed problems and unsupported backend capabilities throw
+errors instead of being reported as mathematical solver statuses.</p>
 </section>
 <section id="mixed-integer-solving">
 <h2>Mixed-integer solving<a class="headerlink" href="#mixed-integer-solving" title="Link to this heading"></a></h2>
@@ -551,7 +675,11 @@ being reported as mathematical solver statuses.</p>
 integer, and binary models. Integer and binary variables must have
 finite bounds and each integer domain must contain at least one integer.
 The solver proves optimality by exhausting or bounding the search tree;
-it does not use cutting planes or primal heuristics.</p>
+it does not use cutting planes or primal heuristics. A limit or
+numerical termination returns the best validated incumbent as a
+<code class="docutils literal notranslate"><span class="pre">feasible</span></code> result and records the original termination reason as
+<code class="docutils literal notranslate"><span class="pre">stop_status/1</span></code> in the statistics. Without a validated incumbent, the
+limit or error status is returned directly.</p>
 <p>The supported options are:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_nodes(PositiveInteger)</span></code> - Maximum number of search nodes
@@ -580,11 +708,14 @@ P2, P3), objective([1<em>x, 1</em>y], maximize, P3, P), solve(P, Result
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Both backends use dense lists and are intended for small problems.</p>
-<p>The library does not currently implement presolve beyond bound and
-standard-form normalization, sparse storage, cutting planes, dual
-values, reduced costs, basis export, warm starts, time limits,
-callbacks, or parallel search.</p>
+<p>Both portable backends use dense lists and are intended for small
+problems.</p>
+<p>The portable backends do not currently implement presolve beyond bound
+and standard-form normalization, sparse storage, cutting planes, warm
+starts, time limits, callbacks, or parallel search. They also do not
+expose dual values, reduced costs, or basis data.</p>
+<p>External solver capabilities and options remain limited to the features
+supported by the common CLI interface described above.</p>
 </section>
 </section>
 

@@ -12233,6 +12233,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    * :ref:`json_path_protocol <json_path_protocol/0::generate/2>`
    * :ref:`json_pointer_protocol <json_pointer_protocol/0::generate/2>`
    * :ref:`json_protocol <json_protocol/0::generate/2>`
+   * :ref:`lp_format <lp_format/0::generate/2>`
    * :ref:`message_pack(StringRepresentation) <message_pack/1::generate/2>`
    * :ref:`open_api <open_api/0::generate/2>`
    * :ref:`sarif <sarif/0::generate/2>`
@@ -12246,7 +12247,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``generate/2`` - :ref:`base32 <base32/0::generate/2>`, :ref:`base58 <base58/0::generate/2>`, :ref:`base64 <base64/0::generate/2>`, :ref:`base64url <base64url/0::generate/2>`, :ref:`base64url_no_padding <base64url_no_padding/0::generate/2>`, :ref:`base85 <base85/0::generate/2>`, :ref:`bson(StringRepresentation) <bson/1::generate/2>`, :ref:`cbor(StringRepresentation) <cbor/1::generate/2>`, :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/2>`, :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/2>`, :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`, :ref:`crontab(Representation) <crontab/1::generate/2>`, :ref:`geojson_protocol <geojson_protocol/0::generate/2>`, :ref:`gpx_protocol <gpx_protocol/0::generate/2>`, :ref:`html <html/0::generate/2>`, :ref:`http_websocket_frames <http_websocket_frames/0::generate/2>`, :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`, :ref:`json_graph_protocol <json_graph_protocol/0::generate/2>`, :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`, :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`, :ref:`json_path_protocol <json_path_protocol/0::generate/2>`, :ref:`json_pointer_protocol <json_pointer_protocol/0::generate/2>`, :ref:`json_protocol <json_protocol/0::generate/2>`, :ref:`message_pack(StringRepresentation) <message_pack/1::generate/2>`, :ref:`open_api <open_api/0::generate/2>`, :ref:`sarif <sarif/0::generate/2>`, :ref:`toml_protocol <toml_protocol/0::generate/2>`, :ref:`toon_protocol <toon_protocol/0::generate/2>`, :ref:`typeid_protocol <typeid_protocol/0::generate/2>`, :ref:`ulid_protocol <ulid_protocol/0::generate/2>`, :ref:`url(Representation) <url/1::generate/2>`, :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::generate/2>`, :ref:`yaml_protocol <yaml_protocol/0::generate/2>`
+   * ``generate/2`` - :ref:`base32 <base32/0::generate/2>`, :ref:`base58 <base58/0::generate/2>`, :ref:`base64 <base64/0::generate/2>`, :ref:`base64url <base64url/0::generate/2>`, :ref:`base64url_no_padding <base64url_no_padding/0::generate/2>`, :ref:`base85 <base85/0::generate/2>`, :ref:`bson(StringRepresentation) <bson/1::generate/2>`, :ref:`cbor(StringRepresentation) <cbor/1::generate/2>`, :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/2>`, :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/2>`, :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`, :ref:`crontab(Representation) <crontab/1::generate/2>`, :ref:`geojson_protocol <geojson_protocol/0::generate/2>`, :ref:`gpx_protocol <gpx_protocol/0::generate/2>`, :ref:`html <html/0::generate/2>`, :ref:`http_websocket_frames <http_websocket_frames/0::generate/2>`, :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`, :ref:`json_graph_protocol <json_graph_protocol/0::generate/2>`, :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`, :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`, :ref:`json_path_protocol <json_path_protocol/0::generate/2>`, :ref:`json_pointer_protocol <json_pointer_protocol/0::generate/2>`, :ref:`json_protocol <json_protocol/0::generate/2>`, :ref:`lp_format <lp_format/0::generate/2>`, :ref:`message_pack(StringRepresentation) <message_pack/1::generate/2>`, :ref:`open_api <open_api/0::generate/2>`, :ref:`sarif <sarif/0::generate/2>`, :ref:`toml_protocol <toml_protocol/0::generate/2>`, :ref:`toon_protocol <toon_protocol/0::generate/2>`, :ref:`typeid_protocol <typeid_protocol/0::generate/2>`, :ref:`ulid_protocol <ulid_protocol/0::generate/2>`, :ref:`url(Representation) <url/1::generate/2>`, :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::generate/2>`, :ref:`yaml_protocol <yaml_protocol/0::generate/2>`
 
 .. only:: not latex
 
@@ -26081,6 +26082,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    -----------
 
    * :ref:`asp_process <asp_process/0::quote/3>`
+   * :ref:`linear_programming_process <linear_programming_process/0::quote/3>`
    * :ref:`max_sat_process <max_sat_process/0::quote/3>`
    * :ref:`minizinc_process <minizinc_process/0::quote/3>`
    * :ref:`problog_process <problog_process/0::quote/3>`
@@ -26091,7 +26093,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 .. only:: latex
 
-   * ``quote/3`` - :ref:`asp_process <asp_process/0::quote/3>`, :ref:`max_sat_process <max_sat_process/0::quote/3>`, :ref:`minizinc_process <minizinc_process/0::quote/3>`, :ref:`problog_process <problog_process/0::quote/3>`, :ref:`sat_process <sat_process/0::quote/3>`, :ref:`smt_process <smt_process/0::quote/3>`, :ref:`souffle_process <souffle_process/0::quote/3>`, :ref:`wmc_process <wmc_process/0::quote/3>`
+   * ``quote/3`` - :ref:`asp_process <asp_process/0::quote/3>`, :ref:`linear_programming_process <linear_programming_process/0::quote/3>`, :ref:`max_sat_process <max_sat_process/0::quote/3>`, :ref:`minizinc_process <minizinc_process/0::quote/3>`, :ref:`problog_process <problog_process/0::quote/3>`, :ref:`sat_process <sat_process/0::quote/3>`, :ref:`smt_process <smt_process/0::quote/3>`, :ref:`souffle_process <souffle_process/0::quote/3>`, :ref:`wmc_process <wmc_process/0::quote/3>`
 
 .. only:: not latex
 
@@ -29088,11 +29090,12 @@ This index lists all entities *declaring* a given predicate. To load an entity p
    ``run/8``
    ---------
 
+   * :ref:`linear_programming_process <linear_programming_process/0::run/8>`
    * :ref:`minizinc_process <minizinc_process/0::run/8>`
 
 .. only:: latex
 
-   * ``run/8`` - :ref:`minizinc_process <minizinc_process/0::run/8>`
+   * ``run/8`` - :ref:`linear_programming_process <linear_programming_process/0::run/8>`, :ref:`minizinc_process <minizinc_process/0::run/8>`
 
 .. only:: not latex
 
@@ -35985,6 +35988,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 .. only:: latex
 
    * ``variable/6`` - :ref:`linear_programming_protocol <linear_programming_protocol/0::variable/6>`
+
+.. only:: not latex
+
+   ``variable_names/2``
+   --------------------
+
+   * :ref:`lp_format <lp_format/0::variable_names/2>`
+
+.. only:: latex
+
+   * ``variable_names/2`` - :ref:`lp_format <lp_format/0::variable_names/2>`
 
 .. only:: not latex
 

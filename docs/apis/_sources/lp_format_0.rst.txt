@@ -1,0 +1,96 @@
+.. index:: single: lp_format
+.. _lp_format/0:
+
+.. rst-class:: right
+
+**object**
+
+``lp_format``
+=============
+
+Generates CPLEX LP format source (understood by GLPK, CBC, HiGHS, SCIP, and most other solvers) from ``linear_program/3`` problems. Variables are written using the generated names ``x1``, ``x2``, ... in declaration order (all variables are listed in the objective, with a zero coefficient if necessary, to keep them and their order), constraints as ``c1``, ``c2``, ..., and the objective as ``obj``.
+
+| **Availability:** 
+|    ``logtalk_load(linear_programming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/2
+.. _lp_format/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates LP format character codes for a problem with variables and an objective.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Problem,Codes)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,-list(code))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Problem`` is not a ``linear_program/3`` term with an objective:
+|        ``type_error(linear_program,Problem)``
+
+
+------------
+
+.. index:: variable_names/2
+.. _lp_format/0::variable_names/2:
+
+``variable_names/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the ``Name-GeneratedName`` pairs of the variables of a problem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variable_names(Problem,Pairs)``
+| **Mode and number of proofs:**
+|    ``variable_names(+compound,-list(pair))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

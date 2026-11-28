@@ -273,6 +273,48 @@
 		milp_branch_and_bound::variable_value(Result, x, X),
 		milp_branch_and_bound::objective_value(Result, Value).
 
+	test(linear_programming_milp_near_integral_infeasible_rounding, deterministic((Status == optimal, X =:= 0, Value =~= 0.0))) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, integer, 0, 1, Problem0, Problem1),
+		milp_branch_and_bound::constraint([1*x], =<, 0.999999, Problem1, Problem2),
+		milp_branch_and_bound::objective([1*x], maximize, Problem2, Problem),
+		milp_branch_and_bound::solve(Problem, Result, [integrality_tolerance(1.0e-5)]),
+		milp_branch_and_bound::status(Result, Status),
+		milp_branch_and_bound::variable_value(Result, x, X),
+		milp_branch_and_bound::objective_value(Result, Value).
+
+	test(linear_programming_milp_default_tolerance_infeasible_rounding, deterministic((Status == optimal, X =:= 0, Value =~= 0.0))) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, integer, 0, 1, Problem0, Problem1),
+		milp_branch_and_bound::constraint([1*x], =<, 0.9999999995, Problem1, Problem2),
+		milp_branch_and_bound::objective([1*x], maximize, Problem2, Problem),
+		milp_branch_and_bound::solve(Problem, Result),
+		milp_branch_and_bound::status(Result, Status),
+		milp_branch_and_bound::variable_value(Result, x, X),
+		milp_branch_and_bound::objective_value(Result, Value).
+
+	test(linear_programming_milp_near_integral_mixed_infeasible_rounding, deterministic((Status == optimal, X =:= 0, Y =~= 1.0, Value =~= 1.0))) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, integer, 0, 1, Problem0, Problem1),
+		milp_branch_and_bound::variable(y, continuous, 0, inf, Problem1, Problem2),
+		milp_branch_and_bound::constraint([1*x,1*y], =<, 1.0, Problem2, Problem3),
+		milp_branch_and_bound::constraint([1*x], =<, 0.999999, Problem3, Problem4),
+		milp_branch_and_bound::objective([1*x,1*y], maximize, Problem4, Problem),
+		milp_branch_and_bound::solve(Problem, Result, [integrality_tolerance(1.0e-5),branching_rule(most_fractional),branch_order(upper_first)]),
+		milp_branch_and_bound::status(Result, Status),
+		milp_branch_and_bound::variable_value(Result, x, X),
+		milp_branch_and_bound::variable_value(Result, y, Y),
+		milp_branch_and_bound::objective_value(Result, Value).
+
+	test(linear_programming_milp_feasible_near_integral_rounding, deterministic((X =:= 1, Value =~= 1.0))) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, integer, 0, 1, Problem0, Problem1),
+		milp_branch_and_bound::constraint([1*x], =<, 1.0, Problem1, Problem2),
+		milp_branch_and_bound::objective([1*x], maximize, Problem2, Problem),
+		milp_branch_and_bound::solve(Problem, Result, [integrality_tolerance(1.0e-5)]),
+		milp_branch_and_bound::variable_value(Result, x, X),
+		milp_branch_and_bound::objective_value(Result, Value).
+
 	test(linear_programming_milp_integer_infeasible, deterministic(Status == infeasible)) :-
 		milp_branch_and_bound::new_problem(Problem0),
 		milp_branch_and_bound::variable(x, integer, 0, 1, Problem0, Problem1),
@@ -324,6 +366,15 @@
 		milp_branch_and_bound::objective([1*x,1*y], maximize, Problem3, Problem),
 		milp_branch_and_bound::solve(Problem, Result, [max_nodes(1)]),
 		milp_branch_and_bound::status(Result, Status).
+
+	test(linear_programming_milp_node_limit_preserves_incumbent, deterministic((Status == feasible, X =:= 0, Value =~= 0.0, Stop == node_limit))) :-
+		branch_order_problem(Problem),
+		milp_branch_and_bound::solve(Problem, Result, [max_nodes(2)]),
+		milp_branch_and_bound::status(Result, Status),
+		milp_branch_and_bound::variable_value(Result, x, X),
+		milp_branch_and_bound::objective_value(Result, Value),
+		milp_branch_and_bound::statistics(Result, Statistics),
+		memberchk(stop_status(Stop), Statistics).
 
 	test(linear_programming_milp_statistics, subsumes([nodes(_),lp_iterations(_),bound_pruned_nodes(_),infeasible_nodes(_),incumbent_updates(_)], Statistics)) :-
 		milp_branch_and_bound::new_problem(Problem0),

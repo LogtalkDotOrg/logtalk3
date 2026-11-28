@@ -3762,18 +3762,30 @@ To load an entity, always load the library that includes it using the goal ``log
    .. toctree::
       :maxdepth: 1
 
+      glpk <glpk_0>
+      highs <highs_0>
+      linear_programming_cli <linear_programming_cli_0>
       linear_programming_common <linear_programming_common_0>
+      linear_programming_process <linear_programming_process_0>
       linear_programming_protocol <linear_programming_protocol_0>
       linear_programming_types <linear_programming_types_0>
+      lp_format <lp_format_0>
       milp_branch_and_bound <milp_branch_and_bound_0>
+      scip <scip_0>
       simplex <simplex_0>
 
 .. only:: latex
 
+   * :doc:`glpk <glpk_0>`
+   * :doc:`highs <highs_0>`
+   * :doc:`linear_programming_cli <linear_programming_cli_0>`
    * :doc:`linear_programming_common <linear_programming_common_0>`
+   * :doc:`linear_programming_process <linear_programming_process_0>`
    * :doc:`linear_programming_protocol <linear_programming_protocol_0>`
    * :doc:`linear_programming_types <linear_programming_types_0>`
+   * :doc:`lp_format <lp_format_0>`
    * :doc:`milp_branch_and_bound <milp_branch_and_bound_0>`
+   * :doc:`scip <scip_0>`
    * :doc:`simplex <simplex_0>`
 
 ``library/linear_regression/``

@@ -44,15 +44,22 @@ interfacing with external solver command-line tools.
 model counting (#SAT) using either external model counter command-line tools
 or a portable reference counter written in Logtalk.
 
+* ADDED: Support to the `linear_programming` library to use the CBC, GLPK,
+HiGHS, and SCIP solvers via their CLI interface.
+
 * IMPROVED: The error-checking of the `asp`, `minizinc`, `omt`,  `otp`,
 `problog`, `sat`, `smt`, and `souffle` libraries.
 
 * FIXED: The `csv`, `format`, `hook_objects`, `http_directory_listing`,
 `listing`, and `reader` library tests for Trealla Prolog running on Windows.
 
-* FIXED: Bug in the `linear_programming` library portable simplex solver where
-it would return wrong optimal results when there's more than one finite upper
-bound.
+* FIXED: Bug in the `linear_programming` library portable `simplex` solver
+where it would return wrong optimal results when there's more than one finite
+upper bound.
+
+* FIXED: Bugs in the `linear_programming` library `milp_branch_and_bound`
+object that could accept infeasible snapped integer candidates and discard
+a validated incumbent when the search stopped early.
 
 Tools
 -----

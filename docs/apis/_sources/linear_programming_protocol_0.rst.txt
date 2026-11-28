@@ -14,8 +14,8 @@ Protocol for immutable linear-program construction, solving, and result inspecti
 |    ``logtalk_load(linear_programming(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-09-03
+| **Version:** 1:1:0
+| **Date:** 2026-11-27
 
 | **Compilation flags:**
 |    ``static``
@@ -241,7 +241,7 @@ Creates a problem from a dense objective vector, objective sense, equality rows 
 ``solve/2``
 ^^^^^^^^^^^
 
-Solves a linear-program problem using default options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.
+Solves a linear-program problem using default options and returns a result term. Solver statuses include ``optimal``, ``feasible`` (a solution that is not proven optimal, e.g., after reaching a time limit), ``infeasible``, ``unbounded``, ``infeasible_or_unbounded``, ``iteration_limit``, ``node_limit``, ``time_limit``, and ``numerical_error`` as applicable to the backend.
 
 | **Compilation flags:**
 |    ``static``
@@ -276,7 +276,7 @@ Solves a linear-program problem using default options and returns a result term.
 ``solve/3``
 ^^^^^^^^^^^
 
-Solves a linear-program problem using the specified options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.
+Solves a linear-program problem using the specified options and returns a result term. Solver statuses include ``optimal``, ``feasible`` (a solution that is not proven optimal, e.g., after reaching a time limit), ``infeasible``, ``unbounded``, ``infeasible_or_unbounded``, ``iteration_limit``, ``node_limit``, ``time_limit``, and ``numerical_error`` as applicable to the backend.
 
 | **Compilation flags:**
 |    ``static``
@@ -346,7 +346,7 @@ Returns the result status.
 ``objective_value/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Returns the optimal objective value. Fails when the result status is not ``optimal``.
+Returns the objective value of the solution. Fails when the result status is neither ``optimal`` nor ``feasible``.
 
 | **Compilation flags:**
 |    ``static``
@@ -371,7 +371,7 @@ Returns the optimal objective value. Fails when the result status is not ``optim
 ``variable_value/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Returns an optimal variable value. Fails when the result status is not ``optimal`` or the variable is absent.
+Returns a variable value of the solution. Fails when the result status is neither ``optimal`` nor ``feasible`` or the variable is absent.
 
 | **Compilation flags:**
 |    ``static``

@@ -93,6 +93,7 @@ Categories
       library_diagram(Format) <library_diagram_1>
       linda_client <linda_client_0>
       linda_server <linda_server_0>
+      linear_programming_cli <linear_programming_cli_0>
       linear_programming_common <linear_programming_common_0>
       linear_programming_types <linear_programming_types_0>
       listing <listing_0>
@@ -233,6 +234,7 @@ Categories
    * :doc:`library_diagram(Format) <library_diagram_1>`
    * :doc:`linda_client <linda_client_0>`
    * :doc:`linda_server <linda_server_0>`
+   * :doc:`linear_programming_cli <linear_programming_cli_0>`
    * :doc:`linear_programming_common <linear_programming_common_0>`
    * :doc:`linear_programming_types <linear_programming_types_0>`
    * :doc:`listing <listing_0>`
@@ -565,6 +567,7 @@ Objects
       gl_language_profile <gl_language_profile_0>
       glicko2_periodic_ranker <glicko2_periodic_ranker_0>
       glicko2_ranker <glicko2_ranker_0>
+      glpk <glpk_0>
       gomory_hu <gomory_hu_0>
       gomory_hu(Dictionary) <gomory_hu_1>
       gpx <gpx_0>
@@ -590,6 +593,7 @@ Objects
       heuristic_expansion(Mode) <heuristic_expansion_1>
       hi_language_profile <hi_language_profile_0>
       hierarchical_clustering <hierarchical_clustering_0>
+      highs <highs_0>
       hmac <hmac_0>
       hodge_rank <hodge_rank_0>
       hook_pipeline(Pipeline) <hook_pipeline_1>
@@ -779,6 +783,7 @@ Objects
       library_load_diagram(Format) <library_load_diagram_1>
       linda <linda_0>
       linear_algebra <linear_algebra_0>
+      linear_programming_process <linear_programming_process_0>
       linear_regression <linear_regression_0>
       linear_svm_classifier <linear_svm_classifier_0>
       lines_metric <lines_metric_0>
@@ -792,6 +797,7 @@ Objects
       logtalk <logtalk_0>
       loop <loop_0>
       lovins_stemmer(Representation) <lovins_stemmer_1>
+      lp_format <lp_format_0>
       lru_cache <lru_cache_0>
       lt_language_profile <lt_language_profile_0>
       lv_language_profile <lv_language_profile_0>
@@ -992,6 +998,7 @@ Objects
       sat_program <sat_program_0>
       sbom <sbom_0>
       schulze_ranker <schulze_ranker_0>
+      scip <scip_0>
       scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
       script_language_detector <script_language_detector_0>
       sdbm_32 <sdbm_32_0>
@@ -1521,6 +1528,7 @@ Objects
    * :doc:`gl_language_profile <gl_language_profile_0>`
    * :doc:`glicko2_periodic_ranker <glicko2_periodic_ranker_0>`
    * :doc:`glicko2_ranker <glicko2_ranker_0>`
+   * :doc:`glpk <glpk_0>`
    * :doc:`gomory_hu <gomory_hu_0>`
    * :doc:`gomory_hu(Dictionary) <gomory_hu_1>`
    * :doc:`gpx <gpx_0>`
@@ -1546,6 +1554,7 @@ Objects
    * :doc:`heuristic_expansion(Mode) <heuristic_expansion_1>`
    * :doc:`hi_language_profile <hi_language_profile_0>`
    * :doc:`hierarchical_clustering <hierarchical_clustering_0>`
+   * :doc:`highs <highs_0>`
    * :doc:`hmac <hmac_0>`
    * :doc:`hodge_rank <hodge_rank_0>`
    * :doc:`hook_pipeline(Pipeline) <hook_pipeline_1>`
@@ -1735,6 +1744,7 @@ Objects
    * :doc:`library_load_diagram(Format) <library_load_diagram_1>`
    * :doc:`linda <linda_0>`
    * :doc:`linear_algebra <linear_algebra_0>`
+   * :doc:`linear_programming_process <linear_programming_process_0>`
    * :doc:`linear_regression <linear_regression_0>`
    * :doc:`linear_svm_classifier <linear_svm_classifier_0>`
    * :doc:`lines_metric <lines_metric_0>`
@@ -1748,6 +1758,7 @@ Objects
    * :doc:`logtalk <logtalk_0>`
    * :doc:`loop <loop_0>`
    * :doc:`lovins_stemmer(Representation) <lovins_stemmer_1>`
+   * :doc:`lp_format <lp_format_0>`
    * :doc:`lru_cache <lru_cache_0>`
    * :doc:`lt_language_profile <lt_language_profile_0>`
    * :doc:`lv_language_profile <lv_language_profile_0>`
@@ -1948,6 +1959,7 @@ Objects
    * :doc:`sat_program <sat_program_0>`
    * :doc:`sbom <sbom_0>`
    * :doc:`schulze_ranker <schulze_ranker_0>`
+   * :doc:`scip <scip_0>`
    * :doc:`scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>`
    * :doc:`script_language_detector <script_language_detector_0>`
    * :doc:`sdbm_32 <sdbm_32_0>`

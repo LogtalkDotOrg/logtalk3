@@ -24,9 +24,9 @@
 	extends(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-11-27,
 		comment is 'Shared immutable model construction, validation, matrix conversion, result inspection, and printing for linear-programming solvers.'
 	]).
 
@@ -174,11 +174,13 @@
 
 	objective_value(Result, Value) :-
 		check_result(Result),
-		Result = linear_programming_result(optimal, Value, _Values, _Statistics).
+		Result = linear_programming_result(Status, Value, _Values, _Statistics),
+		has_solution(Status).
 
 	variable_value(Result, Variable, Value) :-
 		check_result(Result),
-		Result = linear_programming_result(optimal, _Objective, Values, _Statistics),
+		Result = linear_programming_result(Status, _Objective, Values, _Statistics),
+		has_solution(Status),
 		memberchk(Variable-Value, Values).
 
 	statistics(Result, Statistics) :-
@@ -258,12 +260,20 @@
 	valid_status(iteration_limit).
 	valid_status(node_limit).
 	valid_status(numerical_error).
+	valid_status(feasible).
+	valid_status(time_limit).
+	valid_status(infeasible_or_unbounded).
 
-	valid_result_data(optimal, Objective, Values) :-
+	valid_result_data(Status, Objective, Values) :-
+		has_solution(Status),
+		!,
 		number(Objective),
 		valid_values(Values).
-	valid_result_data(Status, none, []) :-
-		Status \== optimal.
+	valid_result_data(_Status, none, []).
+
+	% statuses of results that include a solution
+	has_solution(optimal).
+	has_solution(feasible).
 
 	valid_values([]).
 	valid_values([Name-Value| Values]) :-

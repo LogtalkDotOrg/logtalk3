@@ -23,9 +23,9 @@
 	imports(linear_programming_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-11-27,
 		comment is 'Portable depth-first branch-and-bound solver for small mixed-integer linear programs.',
 		remarks is [
 			'Discrete domains' - 'Integer and binary variables must have finite bounds. No cutting planes or primal heuristics are used.',
@@ -156,8 +156,12 @@
 				),
 				branch_on_value(Problem, Name, Lower, Upper, Floor, Ceiling, Options, State0, State)
 			;	snap_discrete_values(DiscreteVariables, Values, SnappedValues),
-				evaluate_problem_objective(Problem, SnappedValues, SnappedObjective),
-				update_incumbent(Sense, SnappedObjective, SnappedValues, State0, State)
+				ValidationTolerance is min(ObjectiveTolerance, 1.0e-12),
+				(	candidate_feasible(Problem, SnappedValues, ValidationTolerance) ->
+					evaluate_problem_objective(Problem, SnappedValues, SnappedObjective),
+					update_incumbent(Sense, SnappedObjective, SnappedValues, State0, State)
+				;	branch_rejected_candidate(BranchingRule, Problem, DiscreteVariables, Values, Options, State0, State)
+				)
 			)
 		).
 
@@ -274,6 +278,85 @@
 	replace_value([Pair| Values0], Name, Integer, [Pair| Values]) :-
 		replace_value(Values0, Name, Integer, Values).
 
+	candidate_feasible(linear_program(Variables, Constraints, _Objective), Values, Tolerance) :-
+		values_within_bounds(Variables, Values, Tolerance),
+		constraints_satisfied(Constraints, Values, Tolerance).
+
+	values_within_bounds([], _Values, _Tolerance).
+	values_within_bounds([variable(Name, _Type, Lower, Upper)| Variables], Values, Tolerance) :-
+		memberchk(Name-Value, Values),
+		lower_bound_satisfied(Lower, Value, Tolerance),
+		upper_bound_satisfied(Value, Upper, Tolerance),
+		values_within_bounds(Variables, Values, Tolerance).
+
+	lower_bound_satisfied(-inf, _Value, _Tolerance) :-
+		!.
+	lower_bound_satisfied(Lower, Value, Tolerance) :-
+		Value >= Lower - Tolerance.
+
+	upper_bound_satisfied(_Value, inf, _Tolerance) :-
+		!.
+	upper_bound_satisfied(Value, Upper, Tolerance) :-
+		Value =< Upper + Tolerance.
+
+	constraints_satisfied([], _Values, _Tolerance).
+	constraints_satisfied([constraint(Expression, Sense, RightHandSide)| Constraints], Values, Tolerance) :-
+		evaluate_expression(Expression, Values, 0, Value),
+		constraint_satisfied(Sense, Value, RightHandSide, Tolerance),
+		constraints_satisfied(Constraints, Values, Tolerance).
+
+	constraint_satisfied((=<), Value, RightHandSide, Tolerance) :-
+		Value =< RightHandSide + Tolerance.
+	constraint_satisfied((>=), Value, RightHandSide, Tolerance) :-
+		Value >= RightHandSide - Tolerance.
+	constraint_satisfied((=), Value, RightHandSide, Tolerance) :-
+		abs(Value - RightHandSide) =< Tolerance.
+
+	branch_rejected_candidate(BranchingRule, Problem, DiscreteVariables, Values, Options, State0, State) :-
+		(	fractional_variable(BranchingRule, DiscreteVariables, Values, 0, Name, Lower, Upper, Value) ->
+			(	integer(Value) ->
+				Floor is Value,
+				Ceiling is Value
+			;	Floor is floor(Value),
+				Ceiling is ceiling(Value)
+			),
+			branch_on_value(Problem, Name, Lower, Upper, Floor, Ceiling, Options, State0, State)
+		;	integer_candidate_branch(DiscreteVariables, Values, Name, Lower, LeftUpper, RightLower, Upper) ->
+			branch_on_bounds(Problem, Name, Lower, LeftUpper, RightLower, Upper, Options, State0, State)
+		;	all_discrete_domains_fixed(DiscreteVariables) ->
+			increment_infeasible(State0, State)
+		;	set_stop_status(State0, numerical_error, State)
+		).
+
+	integer_candidate_branch([variable(Name, _Type, Lower, Upper)| _Variables], Values, Name, Lower, LeftUpper, RightLower, Upper) :-
+		(	integer(Lower) ->
+			IntegerLower is Lower
+		;	IntegerLower is ceiling(Lower)
+		),
+		(	integer(Upper) ->
+			IntegerUpper is Upper
+		;	IntegerUpper is floor(Upper)
+		),
+		IntegerLower < IntegerUpper,
+		memberchk(Name-Value, Values),
+		IntegerValue is round(Value),
+		(	IntegerValue > IntegerLower ->
+			LeftUpper is IntegerValue - 1,
+			RightLower is IntegerValue
+		;	IntegerValue < IntegerUpper ->
+			LeftUpper is IntegerValue,
+			RightLower is IntegerValue + 1
+		;	fail
+		),
+		!.
+	integer_candidate_branch([_Variable| Variables], Values, Name, Lower, LeftUpper, RightLower, Upper) :-
+		integer_candidate_branch(Variables, Values, Name, Lower, LeftUpper, RightLower, Upper).
+
+	all_discrete_domains_fixed([]).
+	all_discrete_domains_fixed([variable(_Name, _Type, Lower, Upper)| Variables]) :-
+		Lower =:= Upper,
+		all_discrete_domains_fixed(Variables).
+
 	evaluate_problem_objective(linear_program(_Variables, _Constraints, objective(Expression, _Sense)), Values, Objective) :-
 		evaluate_expression(Expression, Values, 0, Objective).
 
@@ -312,6 +395,11 @@
 
 	set_stop_status(search_state(Incumbent, Values, Nodes, Iterations, Pruned, Infeasible, Updates, _Stop), Stop, search_state(Incumbent, Values, Nodes, Iterations, Pruned, Infeasible, Updates, Stop)).
 
+	result_from_state(_Problem, search_state(Objective, Values, Nodes, Iterations, Pruned, Infeasible, Updates, Stop), linear_programming_result(feasible, Objective, Values, Statistics)) :-
+		number(Objective),
+		incumbent_preserving_stop(Stop),
+		!,
+		Statistics = [nodes(Nodes),lp_iterations(Iterations),bound_pruned_nodes(Pruned),infeasible_nodes(Infeasible),incumbent_updates(Updates),stop_status(Stop)].
 	result_from_state(_Problem, search_state(_Incumbent, _Values, Nodes, Iterations, Pruned, Infeasible, Updates, Stop), linear_programming_result(Stop, none, [], Statistics)) :-
 		Stop \== none,
 		!,
@@ -321,5 +409,9 @@
 		Statistics = [nodes(Nodes),lp_iterations(Iterations),bound_pruned_nodes(Pruned),infeasible_nodes(Infeasible),incumbent_updates(Updates)].
 	result_from_state(_Problem, search_state(Objective, Values, Nodes, Iterations, Pruned, Infeasible, Updates, none), linear_programming_result(optimal, Objective, Values, Statistics)) :-
 		Statistics = [nodes(Nodes),lp_iterations(Iterations),bound_pruned_nodes(Pruned),infeasible_nodes(Infeasible),incumbent_updates(Updates)].
+
+	incumbent_preserving_stop(node_limit).
+	incumbent_preserving_stop(iteration_limit).
+	incumbent_preserving_stop(numerical_error).
 
 :- end_object.

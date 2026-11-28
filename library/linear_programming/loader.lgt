@@ -19,18 +19,61 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(types(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(format(loader)),
-	logtalk_load(linear_algebra(loader)),
-	logtalk_load([
-		linear_programming_protocol,
-		linear_programming_types,
-		linear_programming_common,
-		simplex,
-		milp_branch_and_bound
-	], [
-		optimize(on)
-	])
+:- if((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(	Dialect == eclipse
+	;	Dialect == gnu
+	;	Dialect == sicstus
+	;	Dialect == shumway
+	;	Dialect == swi
+	;	Dialect == trealla
+	;	Dialect == xvm
+	)
 )).
+
+	:- initialization((
+		logtalk_load(types(loader)),
+		logtalk_load(character_sets(loader)),
+		logtalk_load(format(loader)),
+		logtalk_load(options(loader)),
+		logtalk_load(os(loader)),
+		logtalk_load(process(loader)),
+		logtalk_load(reader(loader)),
+		logtalk_load(linear_algebra(loader)),
+		logtalk_load([
+			lp_format,
+			linear_programming_protocol,
+			linear_programming_types,
+			linear_programming_common,
+			linear_programming_process,
+			linear_programming_cli,
+			cbc,
+			glpk,
+			highs,
+			scip,
+			simplex,
+			milp_branch_and_bound
+		], [
+			optimize(on)
+		])
+	)).
+
+:- else.
+
+	:- initialization((
+		logtalk_load(types(loader)),
+		logtalk_load(format(loader)),
+		logtalk_load(options(loader)),
+		logtalk_load(linear_algebra(loader)),
+		logtalk_load([
+			linear_programming_protocol,
+			linear_programming_types,
+			linear_programming_common,
+			simplex,
+			milp_branch_and_bound
+		], [
+			optimize(on)
+		])
+	)).
+
+:- endif.

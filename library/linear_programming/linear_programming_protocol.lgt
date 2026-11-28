@@ -22,9 +22,9 @@
 :- protocol(linear_programming_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-11-27,
 		comment is 'Protocol for immutable linear-program construction, solving, and result inspection.'
 	]).
 
@@ -118,7 +118,7 @@
 	:- public(solve/2).
 	:- mode(solve(+compound, -compound), one_or_error).
 	:- info(solve/2, [
-		comment is 'Solves a linear-program problem using default options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.',
+		comment is 'Solves a linear-program problem using default options and returns a result term. Solver statuses include ``optimal``, ``feasible`` (a solution that is not proven optimal, e.g., after reaching a time limit), ``infeasible``, ``unbounded``, ``infeasible_or_unbounded``, ``iteration_limit``, ``node_limit``, ``time_limit``, and ``numerical_error`` as applicable to the backend.',
 		argnames is ['Problem', 'Result'],
 		exceptions is [
 			'``Problem`` is a variable' - instantiation_error,
@@ -134,7 +134,7 @@
 	:- public(solve/3).
 	:- mode(solve(+compound, -compound, +list(compound)), one_or_error).
 	:- info(solve/3, [
-		comment is 'Solves a linear-program problem using the specified options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.',
+		comment is 'Solves a linear-program problem using the specified options and returns a result term. Solver statuses include ``optimal``, ``feasible`` (a solution that is not proven optimal, e.g., after reaching a time limit), ``infeasible``, ``unbounded``, ``infeasible_or_unbounded``, ``iteration_limit``, ``node_limit``, ``time_limit``, and ``numerical_error`` as applicable to the backend.',
 		argnames is ['Problem', 'Result', 'Options'],
 		exceptions is [
 			'``Problem`` is a variable' - instantiation_error,
@@ -166,7 +166,7 @@
 	:- public(objective_value/2).
 	:- mode(objective_value(+compound, -number), zero_or_one_or_error).
 	:- info(objective_value/2, [
-		comment is 'Returns the optimal objective value. Fails when the result status is not ``optimal``.',
+		comment is 'Returns the objective value of the solution. Fails when the result status is neither ``optimal`` nor ``feasible``.',
 		argnames is ['Result', 'Value'],
 		exceptions is [
 			'``Result`` is a variable' - instantiation_error,
@@ -177,7 +177,7 @@
 	:- public(variable_value/3).
 	:- mode(variable_value(+compound, +term, -number), zero_or_one_or_error).
 	:- info(variable_value/3, [
-		comment is 'Returns an optimal variable value. Fails when the result status is not ``optimal`` or the variable is absent.',
+		comment is 'Returns a variable value of the solution. Fails when the result status is neither ``optimal`` nor ``feasible`` or the variable is absent.',
 		argnames is ['Result', 'Variable', 'Value'],
 		exceptions is [
 			'``Result`` is a variable' - instantiation_error,

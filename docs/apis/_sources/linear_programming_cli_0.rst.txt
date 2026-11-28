@@ -1,0 +1,320 @@
+.. index:: single: linear_programming_cli
+.. _linear_programming_cli/0:
+
+.. rst-class:: right
+
+**category**
+
+``linear_programming_cli``
+==========================
+
+Support for linear programming backends that run an external solver command-line tool: the problem is written using the CPLEX LP format, the solver is run in an isolated directory, and its output is decoded into a result term. Importing objects must define the ``solver_name/1``, ``default_executable/1``, ``solver_arguments/2``, and ``decode_output/6`` protected predicates.
+
+| **Availability:** 
+|    ``logtalk_load(linear_programming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-11-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`linear_programming_common <linear_programming_common/0>`
+| **Uses:**
+|    :ref:`linear_programming_process <linear_programming_process/0>`
+|    :ref:`list <list/0>`
+|    :ref:`lp_format <lp_format/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`linear_programming_protocol/0::constraint/5`  :ref:`linear_programming_protocol/0::constraints/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`linear_programming_protocol/0::new_problem/1`  :ref:`linear_programming_protocol/0::objective/4`  :ref:`linear_programming_protocol/0::objective_value/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`linear_programming_protocol/0::print_problem/1`  :ref:`linear_programming_protocol/0::print_solution/1`  :ref:`linear_programming_protocol/0::problem_from_matrices/8`  :ref:`linear_programming_protocol/0::solve/2`  :ref:`linear_programming_protocol/0::solve/3`  :ref:`linear_programming_protocol/0::statistics/2`  :ref:`linear_programming_protocol/0::status/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`linear_programming_protocol/0::variable/4`  :ref:`linear_programming_protocol/0::variable/6`  :ref:`linear_programming_protocol/0::variable_value/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: solver_name/1
+.. _linear_programming_cli/0::solver_name/1:
+
+``solver_name/1``
+^^^^^^^^^^^^^^^^^
+
+Name of the solver.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solver_name(Name)``
+| **Mode and number of proofs:**
+|    ``solver_name(-atom)`` - ``one``
+
+
+------------
+
+.. index:: default_executable/1
+.. _linear_programming_cli/0::default_executable/1:
+
+``default_executable/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Default name of the solver executable, resolved using the system path.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``default_executable(Executable)``
+| **Mode and number of proofs:**
+|    ``default_executable(-atom)`` - ``one``
+
+
+------------
+
+.. index:: solver_arguments/2
+.. _linear_programming_cli/0::solver_arguments/2:
+
+``solver_arguments/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Command-line arguments given the merged options. An argument is an atom or a list of atoms to be concatenated where ``$input`` is the path of the LP file and ``$solution`` the path of a file that the solver can write its solution to.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solver_arguments(Options,Arguments)``
+| **Mode and number of proofs:**
+|    ``solver_arguments(+list(compound),-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An option is unsupported by the selected solver:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: decode_output/6
+.. _linear_programming_cli/0::decode_output/6:
+
+``decode_output/6``
+^^^^^^^^^^^^^^^^^^^
+
+Decodes the solver standard output and solution file contents into a status (``optimal``, ``feasible``, ``infeasible``, ``unbounded``, ``infeasible_or_unbounded``, ``time_limit``, ``iteration_limit``, ``node_limit``, or ``numerical_error``), an objective value (or ``none``), solution data represented as ``solution(Pairs)`` when a solution section was parsed or ``none`` otherwise, and the status text reported by the solver. The pairs use the one-based variable index; absent variables in a parsed solution have value zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_output(Output,Solution,Status,Objective,SolutionData,Text)``
+| **Mode and number of proofs:**
+|    ``decode_output(+list(code),+list(code),-atom,-term,-term,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The solver output is missing required data or cannot be decoded:
+|        ``domain_error(linear_programming_output,Reason)``
+
+
+------------
+
+.. index:: assemble_result/9
+.. _linear_programming_cli/0::assemble_result/9:
+
+``assemble_result/9``
+^^^^^^^^^^^^^^^^^^^^^
+
+Assembles a validated result from already decoded solver data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``assemble_result(Solver,Problem,RawStatus,NormalizedStatus,Status,ReportedObjective,SolutionData,Text,Result)``
+| **Mode and number of proofs:**
+|    ``assemble_result(+atom,+compound,+term,+compound,+atom,+term,+term,+atom,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An ``optimal`` or ``feasible`` result has no complete decoded solution:
+|        ``domain_error(linear_programming_output,missing_solution)``
+|    The decoded solution is inconsistent with the problem or objective:
+|        ``domain_error(linear_programming_output,inconsistent_solution)``
+
+
+------------
+
+.. index:: split_lines/2
+.. _linear_programming_cli/0::split_lines/2:
+
+``split_lines/2``
+^^^^^^^^^^^^^^^^^
+
+Splits character codes into lines (removing carriage returns).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_lines(Codes,Lines)``
+| **Mode and number of proofs:**
+|    ``split_lines(+list(code),-list(list(code)))`` - ``one``
+
+
+------------
+
+.. index:: words/2
+.. _linear_programming_cli/0::words/2:
+
+``words/2``
+^^^^^^^^^^^
+
+Splits a line into blank-separated words.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``words(Line,Words)``
+| **Mode and number of proofs:**
+|    ``words(+list(code),-list(list(code)))`` - ``one``
+
+
+------------
+
+.. index:: parse_number/2
+.. _linear_programming_cli/0::parse_number/2:
+
+``parse_number/2``
+^^^^^^^^^^^^^^^^^^
+
+Parses a decimal number (optional sign, fraction, and exponent). Fails if the codes are not a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_number(Codes,Number)``
+| **Mode and number of proofs:**
+|    ``parse_number(+list(code),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: has_text/2
+.. _linear_programming_cli/0::has_text/2:
+
+``has_text/2``
+^^^^^^^^^^^^^^
+
+True if some line contains the given text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``has_text(Lines,Text)``
+| **Mode and number of proofs:**
+|    ``has_text(+list(list(code)),+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: line_after/3
+.. _linear_programming_cli/0::line_after/3:
+
+``line_after/3``
+^^^^^^^^^^^^^^^^
+
+Finds the first line starting with the given prefix and returns the rest of the line without leading blanks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``line_after(Lines,Prefix,Rest)``
+| **Mode and number of proofs:**
+|    ``line_after(+list(list(code)),+atom,-list(code))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normalized_text/2
+.. _linear_programming_cli/0::normalized_text/2:
+
+``normalized_text/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts character codes to an atom with the blanks normalized to single spaces and without leading and trailing blanks.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalized_text(Codes,Atom)``
+| **Mode and number of proofs:**
+|    ``normalized_text(+list(code),-atom)`` - ``one``
+
+
+------------
+
+.. index:: number_atom/2
+.. _linear_programming_cli/0::number_atom/2:
+
+``number_atom/2``
+^^^^^^^^^^^^^^^^^
+
+Converts a number to an atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``number_atom(Number,Atom)``
+| **Mode and number of proofs:**
+|    ``number_atom(+number,-atom)`` - ``one``
+
+
+------------
+
+.. index:: first_number/2
+.. _linear_programming_cli/0::first_number/2:
+
+``first_number/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the first word of a list of words that is a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``first_number(Words,Number)``
+| **Mode and number of proofs:**
+|    ``first_number(+list(list(code)),-number)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

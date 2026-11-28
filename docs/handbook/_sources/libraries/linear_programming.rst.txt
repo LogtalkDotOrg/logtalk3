@@ -16,6 +16,17 @@ throws a ``domain_error(simplex_variable_type, Variable-Type)`` error
 for other variable types. Use ``milp_branch_and_bound`` to solve models
 containing integer or binary variables.
 
+The ``glpk``, ``cbc``, ``highs``, and ``scip`` backends solve continuous
+and mixed-integer models by running the corresponding external solver's
+command-line tool (see the "External solvers" section). Unlike the
+``milp_branch_and_bound`` backend, they can solve models with unbounded
+integer variables, and their production LP/MIP algorithms can handle
+larger and harder problems than the portable reference solvers. Limits
+on problem size and model features are determined by the selected
+external solver. These backends use the ``process`` library and thus are
+currently only supported when using the ECLiPSe, GNU Prolog, SICStus
+Prolog, Shumway Prolog, SWI-Prolog, Trealla Prolog, and XVM backends.
+
 API documentation
 -----------------
 
@@ -80,6 +91,98 @@ are:
   objective_value(Result, Value) ). Status = optimal, X = 14.0, Y = 0,
   Value = 42.0.
 
+External solvers
+----------------
+
+The ``glpk``, ``cbc``, ``highs``, and ``scip`` backends implement the
+same protocol as the ``simplex`` and ``milp_branch_and_bound`` backends
+but delegate the solving to an external solver command-line tool. They
+follow the design of the similar libraries (e.g., ``sat``): the model is
+written as a CPLEX LP format file, the solver is run in an isolated
+directory (with the problem, solution, and output files removed
+afterwards), and its output is decoded into the usual result term.
+Variables of any type can be used, and integer and binary variables are
+supported by all four backends.
+
++-----------+-----------------------------------------------+------------------+------------------+
+| Backend   | Solver                                        | Default          | Notes            |
+|           |                                               | executable       |                  |
++===========+===============================================+==================+==================+
+| ``cbc``   | `COIN-OR                                      | ``cbc``          | -                |
+|           | CBC <https://github.com/coin-or/Cbc>`__       |                  |                  |
++-----------+-----------------------------------------------+------------------+------------------+
+| ``glpk``  | `GLPK <https://www.gnu.org/software/glpk/>`__ | ``glpsol``       | ``time_limit/1`` |
+|           |                                               |                  | is rounded up to |
+|           |                                               |                  | whole seconds    |
++-----------+-----------------------------------------------+------------------+------------------+
+| ``highs`` | `HiGHS <https://highs.dev/>`__                | ``highs``        | ``mip_gap/1`` is |
+|           |                                               |                  | rejected (not    |
+|           |                                               |                  | supported by the |
+|           |                                               |                  | CLI)             |
++-----------+-----------------------------------------------+------------------+------------------+
+| ``scip``  | `SCIP <https://www.scipopt.org/>`__           | ``scip``         | -                |
++-----------+-----------------------------------------------+------------------+------------------+
+
+The solver executables must be installed and available in the system
+path (or their location given using the ``executable/1`` option). Tests
+of these backends are conditional on the solver executables being
+available.
+
+These backends accept the following options:
+
+- ``executable(Path)``: solver executable (default: the solver default
+  executable resolved using the system path)
+- ``time_limit(Seconds)``: time limit (default: ``0``, i.e., no limit)
+- ``mip_gap(Gap)``: relative MIP gap (default: ``none``, i.e., the
+  solver default)
+
+Example:
+
+::
+
+   | ?- simplex::new_problem(P0),
+        simplex::variable(x, continuous, P0, P1),
+        simplex::variable(y, continuous, P1, P2),
+        simplex::constraint([1*x, 2*y], =<, 14, P2, P3),
+        simplex::constraint([3*x, -1*y], >=, 0, P3, P4),
+        simplex::constraint([1*x, -1*y], =<, 2, P4, P5),
+        simplex::objective([3*x, 4*y], maximize, P5, P),
+        highs::solve(P, Result),
+        highs::objective_value(Result, Objective).
+   Objective = 34
+
+The result statuses for these backends include, besides ``optimal``,
+``infeasible``, and ``unbounded``:
+
+- ``feasible``: a solution that is not proven optimal (e.g., after
+  reaching the time limit); the ``objective_value/2`` and
+  ``variable_value/3`` predicates succeed for results with this status
+- ``infeasible_or_unbounded``: reported by solvers that cannot tell
+  which is the case
+- ``time_limit``: the time limit was reached without finding a solution
+
+The result statistics are ``solver/1``, ``solver_status/1`` (the status
+text reported by the solver), ``process_status/1``, and
+``raw_status/1``. A reported solution must be present and must be
+consistent with the model before a result with status ``optimal`` or
+``feasible`` is constructed. Variables omitted from a valid solution
+section have the value zero, and values of integer and binary variables
+are rounded to the closest integer when within ``1.0e-6`` of it. Values
+are numbers as reported by the solver (not necessarily floats) and are
+subject to the solver feasibility and optimality tolerances.
+
+Notes:
+
+- The LP format uses generated variable names (``x1``, ``x2``, ...),
+  thus any ground terms can be used as variable names in the model.
+- The solvers write their solution to a file in the isolated directory
+  (when they cannot print it to the standard output) and are run with
+  that directory as the working directory on POSIX systems, as some of
+  them (e.g., HiGHS) write log files to the working directory.
+- The ``lp_format::generate/2`` predicate can be used to generate the LP
+  source of a model, e.g., to use it with a solver that is not
+  supported.
+
 Dense matrix conversion
 -----------------------
 
@@ -102,12 +205,13 @@ one-based column indices.
 Results and errors
 ------------------
 
-Solver statuses are ``optimal``, ``infeasible``, ``unbounded``,
-``iteration_limit``, ``node_limit``, and ``numerical_error``. Only an
-optimal result contains variable values and an objective value. The
-corresponding inspector predicates fail for other statuses. Malformed
-problems and unsupported backend capabilities throw errors instead of
-being reported as mathematical solver statuses.
+Solver statuses are ``optimal``, ``feasible``, ``infeasible``,
+``unbounded``, ``infeasible_or_unbounded``, ``iteration_limit``,
+``node_limit``, ``time_limit``, and ``numerical_error``. Only
+``optimal`` and ``feasible`` results contain variable values and an
+objective value. The corresponding inspector predicates fail for other
+statuses. Malformed problems and unsupported backend capabilities throw
+errors instead of being reported as mathematical solver statuses.
 
 Mixed-integer solving
 ---------------------
@@ -116,7 +220,11 @@ The ``milp_branch_and_bound`` backend supports mixed continuous,
 integer, and binary models. Integer and binary variables must have
 finite bounds and each integer domain must contain at least one integer.
 The solver proves optimality by exhausting or bounding the search tree;
-it does not use cutting planes or primal heuristics.
+it does not use cutting planes or primal heuristics. A limit or
+numerical termination returns the best validated incumbent as a
+``feasible`` result and records the original termination reason as
+``stop_status/1`` in the statistics. Without a validated incumbent, the
+limit or error status is returned directly.
 
 The supported options are:
 
@@ -152,9 +260,13 @@ The supported options are:
 Limitations
 -----------
 
-Both backends use dense lists and are intended for small problems.
+Both portable backends use dense lists and are intended for small
+problems.
 
-The library does not currently implement presolve beyond bound and
-standard-form normalization, sparse storage, cutting planes, dual
-values, reduced costs, basis export, warm starts, time limits,
-callbacks, or parallel search.
+The portable backends do not currently implement presolve beyond bound
+and standard-form normalization, sparse storage, cutting planes, warm
+starts, time limits, callbacks, or parallel search. They also do not
+expose dual values, reduced costs, or basis data.
+
+External solver capabilities and options remain limited to the features
+supported by the common CLI interface described above.
