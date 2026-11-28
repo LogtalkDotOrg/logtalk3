@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Shumway (Prolog on .NET) 0.9.3 and later versions
-%  Last updated on November 27, 2026
+%  Last updated on November 28, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 2026 Gustavo Brown
@@ -681,6 +681,63 @@
 
 '$lgt_assertz_entity_clause'(Clause, _Kind) :-
 	assertz(Clause).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  dummy definitions just to avoid errors when generating executables and
+%  WebAssembly bundles
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- if(\+ current_predicate(thread_create/3)).
+	thread_create(_, _, _) :-
+		throw(error(existence_error(procedure, thread_create/3), thread_create/3)).
+:- endif.
+
+
+:- if(\+ current_predicate(thread_join/1)).
+	thread_join(_, _) :-
+		throw(error(existence_error(procedure, thread_join/2), thread_join/2)).
+:- endif.
+
+
+:- if(\+ current_predicate(thread_self/1)).
+	thread_self(_) :-
+		throw(error(existence_error(procedure, thread_self/1), thread_self/1)).
+:- endif.
+
+
+:- if(\+ current_predicate(thread_signal/2)).
+	thread_signal(_, _) :-
+		throw(error(existence_error(procedure, thread_signal/2), thread_signal/2)).
+:- endif.
+
+
+:- if(\+ current_predicate(thread_property/2)).
+	thread_property(_, _) :-
+		throw(error(existence_error(procedure, thread_property/2), thread_property/2)).
+:- endif.
+
+
+:- if(\+ current_predicate(thread_get_message/1)).
+	thread_get_message(_) :-
+		throw(error(existence_error(procedure, thread_get_message/1), thread_get_message/1)).
+:- endif.
+
+
+:- if(\+ current_predicate(thread_detach/1)).
+	thread_detach(_) :-
+		throw(error(existence_error(procedure, thread_detach/1), thread_detach/1)).
+:- endif.
+
+
+:- if(\+ current_predicate(mutex_property/2)).
+	mutex_property(_, _) :-
+		throw(error(existence_error(procedure, mutex_property/2), mutex_property/2)).
+:- endif.
 
 
 
