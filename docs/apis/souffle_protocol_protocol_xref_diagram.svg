@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1047,-140 1047,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol souffle_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:04</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:28</text>
 <g id="clust1" class="cluster">
 <title>cluster_souffle_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="souffle_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1023,-46 1023,-46 1029,-46 1035,-52 1035,-58 1035,-58 1035,-116 1035,-116 1035,-122 1029,-128 1023,-128 1023,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">souffle_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Solves a source with default options using the external Souffle CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. No ``.output``/``.printsize`` relations are decoded unless requested via the ``outputs/1``/``printsizes/1`` options of ``solve/3``.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">solve/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Solves a source using executable, parallelism, warning, compilation, EDB facts, and decoded&#45;relation options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``. The ``outputs/1`` option lists which ``.output`` relations to decode and their column types; the ``printsizes/1`` option lists which ``.printsize`` relations to decode.">
 <polygon fill="springgreen" stroke="black" points="182.5,-92 109.5,-92 109.5,-56 182.5,-56 182.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L58">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="122.9" y="-75.71" font-family="monospace" font-size="11.00">solve/3</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Generates and prints Datalog source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking Souffle.">
 <polygon fill="springgreen" stroke="black" points="287.11,-92 200.89,-92 200.89,-56 287.11,-56 287.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="208.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L92">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="214.3" y="-75.71" font-family="monospace" font-size="11.00">program/1</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Returns Datalog source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking Souffle.">
 <polygon fill="springgreen" stroke="black" points="391.11,-92 304.89,-92 304.89,-56 391.11,-56 391.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="312.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L113">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="318.3" y="-75.71" font-family="monospace" font-size="11.00">program/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Prints Datalog character codes to the current output without adding a newline or invoking Souffle.">
 <polygon fill="springgreen" stroke="black" points="534.91,-92 409.09,-92 409.09,-56 534.91,-56 534.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="417.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L133">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L133">
 <text xml:space="preserve" text-anchor="start" x="422.49" y="-75.71" font-family="monospace" font-size="11.00">print_program/1</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Enumerates, by backtracking, decoded ``.output`` relations collected in a result: the relation name, its requested column types, and its rows (each row a list of decoded Prolog values, one per column).">
 <polygon fill="springgreen" stroke="black" points="645.41,-92 552.59,-92 552.59,-56 645.41,-56 645.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="560.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L147">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L147">
 <text xml:space="preserve" text-anchor="start" x="565.99" y="-75.71" font-family="monospace" font-size="11.00">relation/4</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Enumerates, by backtracking, decoded ``.printsize`` relation counts collected in a result.">
 <polygon fill="springgreen" stroke="black" points="730.2,-92 663.8,-92 663.8,-56 730.2,-56 730.2,-92"/>
 <text xml:space="preserve" text-anchor="start" x="671.8" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L158">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="677.2" y="-75.71" font-family="monospace" font-size="11.00">size/3</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Enumerates, by backtracking, the stored result properties (``raw_status/1``, ``process_status/1``, and ``diagnostics/1``).">
 <polygon fill="springgreen" stroke="black" points="887.51,-92 748.49,-92 748.49,-56 887.51,-56 887.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="756.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L169">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L169" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L169">
 <text xml:space="preserve" text-anchor="start" x="761.89" y="-75.71" font-family="monospace" font-size="11.00">result_property/2</text>
 </a>
 </g>
@@ -166,7 +166,7 @@
 <g id="a_node9"><a xlink:title="Prints collected relations and printsize counts to the current output, without invoking Souffle.">
 <polygon fill="springgreen" stroke="black" points="1024.61,-92 905.39,-92 905.39,-56 1024.61,-56 1024.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="913.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/souffle/souffle_protocol.lgt#L180">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/souffle/souffle_protocol.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="918.79" y="-75.71" font-family="monospace" font-size="11.00">print_result/1</text>
 </a>
 </g>

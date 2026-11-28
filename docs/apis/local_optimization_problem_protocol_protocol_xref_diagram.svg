@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 918,-140 918,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol local_optimization_problem_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_local_optimization_problem_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="local_optimization_problem_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 894,-46 894,-46 900,-46 906,-52 906,-58 906,-58 906,-116 906,-116 906,-122 900,-128 894,-128 894,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">local_optimization_problem_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Returns a starting point for the local search. The point must be a non&#45;empty list of numbers. When position bounds are defined, the point must lie inside those bounds.">
 <polygon fill="springgreen" stroke="black" points="143.91,-92 18.09,-92 18.09,-56 143.91,-56 143.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="31.49" y="-75.71" font-family="monospace" font-size="11.00">initial_point/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Computes the objective (cost) value of a point. Solvers minimize this value by default; use the ``objective(maximize)`` option to maximize it instead. The returned value must be a number.">
 <polygon fill="springgreen" stroke="black" points="261.71,-92 162.29,-92 162.29,-56 261.71,-56 261.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="170.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="175.69" y="-75.71" font-family="monospace" font-size="11.00">objective/2</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Optional. Computes the gradient of the objective at a point. Required by gradient&#45;based solvers (gradient descent, conjugate gradient, BFGS, ...). When not defined those solvers raise an existence error. The returned vector must have the same length as the point.">
 <polygon fill="springgreen" stroke="black" points="372.41,-92 279.59,-92 279.59,-56 372.41,-56 372.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="287.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L53">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="292.99" y="-75.71" font-family="monospace" font-size="11.00">gradient/2</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Optional for most solvers. Computes the Hessian matrix of the objective at a point (list of rows). Required by trust&#45;region Newton&#45;CG; when not defined that solver raises an existence error. Not used by any other solver.">
 <polygon fill="springgreen" stroke="black" points="477.11,-92 390.89,-92 390.89,-56 477.11,-56 477.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="398.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L60">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="404.3" y="-75.71" font-family="monospace" font-size="11.00">hessian/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Optional. Returns one ``Lower&#45;Upper`` numeric bound pair per dimension, with ``Lower =&lt; Upper``. When defined, solvers that support bounds project or clamp trial points onto the box. When not defined the search is treated as unbounded.">
 <polygon fill="springgreen" stroke="black" points="634.51,-92 495.49,-92 495.49,-56 634.51,-56 634.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="503.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L69">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="508.89" y="-75.71" font-family="monospace" font-size="11.00">position_bounds/1</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Optional. True when the search should stop given the completed iteration count, the current best point, and its objective value. When not defined the solver runs until its own termination criteria (maximum iterations, tolerances, ...) are met.">
 <polygon fill="springgreen" stroke="black" points="785.21,-92 652.79,-92 652.79,-56 785.21,-56 785.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="660.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L78">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="666.19" y="-75.71" font-family="monospace" font-size="11.00">stop_condition/3</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Optional. Called periodically to report progress. Arguments are the completed iteration count, current best point, best objective value, a solver&#45;specific measure of step size or gradient norm, and the number of objective evaluations so far. A final call is made when the solver terminates if progress reporting is enabled.">
 <polygon fill="springgreen" stroke="black" points="896.41,-92 803.59,-92 803.59,-56 896.41,-56 896.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="811.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/local_optimization/local_optimization_problem_protocol.lgt#L85">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/local_optimization/local_optimization_problem_protocol.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="816.99" y="-75.71" font-family="monospace" font-size="11.00">progress/5</text>
 </a>
 </g>

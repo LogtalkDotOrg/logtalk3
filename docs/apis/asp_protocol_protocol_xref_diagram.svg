@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 942,-140 942,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol asp_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_asp_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="asp_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 918,-46 918,-46 924,-46 930,-52 930,-58 930,-58 930,-116 930,-116 930,-122 924,-128 918,-128 918,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">asp_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Solves a source with default options using the external Clingo CLI and returns a collected result after cleanup. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.">
 <polygon fill="springgreen" stroke="black" points="91.5,-92 18.5,-92 18.5,-56 91.5,-56 91.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.9" y="-75.71" font-family="monospace" font-size="11.00">solve/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Solves a source using solver selection, executable, enumeration, optimization, resource, and statistics options. Repeated options use the first occurrence. Valid sources are ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, and ``file(Path)``.">
 <polygon fill="springgreen" stroke="black" points="182.5,-92 109.5,-92 109.5,-56 182.5,-56 182.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="117.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L58">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="122.9" y="-75.71" font-family="monospace" font-size="11.00">solve/3</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Generates and prints ASP source to the current output, equivalent to ``program/2`` followed by ``print_program/1``, without invoking Clingo.">
 <polygon fill="springgreen" stroke="black" points="287.11,-92 200.89,-92 200.89,-56 287.11,-56 287.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="208.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L91">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="214.3" y="-75.71" font-family="monospace" font-size="11.00">program/1</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Returns ASP source codes from ``object(Object)``, ``terms(Statements)``, ``codes(Codes)``, or ``file(Path)`` without invoking Clingo.">
 <polygon fill="springgreen" stroke="black" points="391.11,-92 304.89,-92 304.89,-56 391.11,-56 391.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="312.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L112">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="318.3" y="-75.71" font-family="monospace" font-size="11.00">program/2</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Prints ASP character codes to the current output without adding a newline or invoking Clingo.">
 <polygon fill="springgreen" stroke="black" points="534.91,-92 409.09,-92 409.09,-56 534.91,-56 534.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="417.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L132">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="422.49" y="-75.71" font-family="monospace" font-size="11.00">print_program/1</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Enumerates, by backtracking, collected ``model(Symbols, Costs, RawValues)`` records without starting a process.">
 <polygon fill="springgreen" stroke="black" points="625.5,-92 552.5,-92 552.5,-56 625.5,-56 625.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="560.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L146">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="565.9" y="-75.71" font-family="monospace" font-size="11.00">model/2</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Enumerates, by backtracking, ``status(Status)`` and the stored result properties.">
 <polygon fill="springgreen" stroke="black" points="782.51,-92 643.49,-92 643.49,-56 782.51,-56 782.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="651.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L157">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L157">
 <text xml:space="preserve" text-anchor="start" x="656.89" y="-75.71" font-family="monospace" font-size="11.00">result_property/2</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <g id="a_node8"><a xlink:title="Prints collected answers, optimization costs, solver status, and summary metadata to the current output using Clingo&#45;style labels, without invoking the solver.">
 <polygon fill="springgreen" stroke="black" points="919.61,-92 800.39,-92 800.39,-56 919.61,-56 919.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="808.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/asp/asp_protocol.lgt#L168">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/asp/asp_protocol.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="813.79" y="-75.71" font-family="monospace" font-size="11.00">print_result/1</text>
 </a>
 </g>

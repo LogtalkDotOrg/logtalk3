@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 727,-140 727,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol open_api_provider_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_open_api_provider_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="open_api_provider_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 703,-46 703,-46 709,-46 715,-52 715,-58 715,-58 715,-116 715,-116 715,-122 709,-128 703,-128 703,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">open_api_provider_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Returns the API metadata descriptor. The descriptor must be the compound term ``info(Title, Version, Summary, Properties)`` where ``Title``, ``Version``, and ``Summary`` are atoms and ``Properties`` is a list of optional metadata terms. Currently recognized properties: ``description(Description)`` where ``Description`` is an atom.">
 <polygon fill="springgreen" stroke="black" points="110.41,-92 17.59,-92 17.59,-56 110.41,-56 110.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="30.99" y="-75.71" font-family="monospace" font-size="11.00">api_info/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Returns a list of server descriptors available for this API. Each descriptor must be a compound term ``server(URL, Description)`` where ``URL`` is a valid OpenAPI Server Object URL atom, allowing absolute URLs, relative references, and templated variables, and ``Description`` is a human&#45;readable atom.">
 <polygon fill="springgreen" stroke="black" points="215.11,-92 128.89,-92 128.89,-56 215.11,-56 215.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="136.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="142.3" y="-75.71" font-family="monospace" font-size="11.00">servers/1</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Returns the top&#45;level OpenAPI security requirement alternatives for this API. The returned list uses the same representation as operation ``security(Requirements)`` properties: each element is a requirement alternative represented as a list of ``Scheme&#45;Scopes`` pairs and ``[]`` denotes an empty security requirement object. Scheme names must be declared by ``security_scheme/2``.">
 <polygon fill="springgreen" stroke="black" points="326.41,-92 233.59,-92 233.59,-56 326.41,-56 326.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="241.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L45">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="246.99" y="-75.71" font-family="monospace" font-size="11.00">security/1</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Returns a list of operation descriptors exposed by this API. Each descriptor must be a compound term ``operation(Id, Method, Path, Summary, Parameters, RequestBody, Responses, Properties)`` where ``Id`` is an atom and unique across the returned descriptors, ``Method`` is a lowercase HTTP method atom, ``Path`` is a path&#45;template atom, ``Summary`` is an atom, ``Parameters`` is a list of ``parameter(Name, In, Description, Required, Schema)`` terms, ``RequestBody`` is either ``none`` or ``request_body(Description, Required, MediaTypes)``, ``Responses`` is a list of ``response(Status, Description, MediaTypes)`` terms, and ``Properties`` is a list of optional operation property terms. ``Status`` may be an integer HTTP status code, ``default``, or a wildcard range atom such as ``&#39;2XX&#39;``. Path parameters must use ``In = path``, match a template expression in ``Path``, and use ``Required = true``. Currently recognized property terms are ``description(Description)``, ``tags(Tags)``, ``deprecated(Boolean)``, and ``security(Requirements)`` where ``Requirements`` is a list whose elements are requirement alternatives represented as lists of ``Scheme&#45;Scopes`` pairs; the empty list element ``[]`` denotes an empty security requirement object, scheme names must be declared by ``security_scheme/2``, and referenced OAuth flow scopes must be declared by the corresponding security scheme when locally available.">
 <polygon fill="springgreen" stroke="black" points="450.01,-92 343.99,-92 343.99,-56 450.01,-56 450.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="351.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L52">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="357.39" y="-75.71" font-family="monospace" font-size="11.00">operations/1</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Maps reusable schema names to JSON Schema terms. ``Name`` must be an atom and ``Schema`` must be a JSON Schema curly term compatible with the ``json_schema`` library. This predicate is intended both for lookup by name and for enumeration of all reusable schemas referenced from ``schema_ref(Name)`` terms.">
 <polygon fill="springgreen" stroke="black" points="547.81,-92 468.19,-92 468.19,-56 547.81,-56 547.81,-92"/>
 <text xml:space="preserve" text-anchor="start" x="476.19" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L59">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="481.6" y="-75.71" font-family="monospace" font-size="11.00">schema/2</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Maps reusable security scheme names to security descriptor terms. ``Name`` must be an atom matching scheme names referenced from operation ``security(Requirements)`` properties and ``Scheme`` must use one of the supported descriptor shapes: ``api_key/2&#45;3``, ``http/1&#45;2``, ``mutual_tls/0&#45;1``, ``oauth2/1&#45;2``, or ``openid_connect/1&#45;2``. OAuth flow descriptors are expressed using ``implicit/2&#45;3``, ``password/2&#45;3``, ``client_credentials/2&#45;3``, and ``authorization_code/3&#45;4`` with ``scope/2`` terms. ``openid_connect/2`` also accepts a provider&#45;only ``flows(Flows)`` option for local scope declarations used during security&#45;reference validation; those local flow declarations are not emitted into the derived OpenAPI document. Provider&#45;side validation checks required fields, valid ``apiKey`` locations, and URL&#45;valued fields in OAuth or OpenID Connect descriptors.">
 <polygon fill="springgreen" stroke="black" points="704.51,-92 565.49,-92 565.49,-56 704.51,-56 704.51,-92"/>
 <text xml:space="preserve" text-anchor="start" x="573.49" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/open_api/open_api_provider_protocol.lgt#L66">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/open_api/open_api_provider_protocol.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="578.89" y="-75.71" font-family="monospace" font-size="11.00">security_scheme/2</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1310 1095,-1310 1095,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object tabu_search/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:04</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:28</text>
 <g id="clust1" class="cluster">
 <title>cluster_tabu_search_2_object</title>
 <g id="a_clust1"><a xlink:title="tabu_search(Problem,Random)">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1071,-46 1071,-46 1077,-46 1083,-52 1083,-58 1083,-58 1083,-1286 1083,-1286 1083,-1292 1077,-1298 1071,-1298 1071,-1298 20,-1298 20,-1298 14,-1298 8,-1292 8,-1286 8,-1286 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-1282.46" font-family="monospace" font-size="10.00" fill="dimgray">tabu_search(Problem,Random)</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Runs the tabu search algorithm using default options and returns the best state found and its energy.">
 <polygon fill="springgreen" stroke="black" points="562.9,-1262 503.1,-1262 503.1,-1226 562.9,-1226 562.9,-1262"/>
 <text xml:space="preserve" text-anchor="start" x="511.1" y="-1246.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="516.5" y="-1245.71" font-family="monospace" font-size="11.00">run/2</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node3"><a xlink:title="Runs the tabu search algorithm using the given options, returns the best state found and its energy, and returns run statistics.">
 <polygon fill="springgreen" stroke="black" points="611.9,-1145 552.1,-1145 552.1,-1109 611.9,-1109 611.9,-1145"/>
 <text xml:space="preserve" text-anchor="start" x="560.1" y="-1129.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L69">
+<g id="a_node3_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="565.5" y="-1128.71" font-family="monospace" font-size="11.00">run/4</text>
 </a>
 </g>
@@ -61,12 +61,12 @@
 <!-- run/2&#45;&gt;run/4 -->
 <g id="edge1" class="edge">
 <title>run/2&#45;&gt;run/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L152" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L152" xlink:title="calls">
 <path fill="none" stroke="black" d="M540.44,-1225.53C548.33,-1207.02 560.9,-1177.52 570.15,-1155.8"/>
 <polygon fill="black" stroke="black" points="573.36,-1157.22 574.06,-1146.65 566.92,-1154.47 573.36,-1157.22"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L152">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L152" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L152">
 <text xml:space="preserve" text-anchor="start" x="558.97" y="-1183.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -77,7 +77,7 @@
 <g id="a_node2"><a xlink:title="Runs the tabu search algorithm using the given options and returns the best state found and its energy.">
 <polygon fill="springgreen" stroke="black" points="640.9,-1262 581.1,-1262 581.1,-1226 640.9,-1226 640.9,-1262"/>
 <text xml:space="preserve" text-anchor="start" x="589.1" y="-1246.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L47">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L47">
 <text xml:space="preserve" text-anchor="start" x="594.5" y="-1245.71" font-family="monospace" font-size="11.00">run/3</text>
 </a>
 </g>
@@ -91,12 +91,12 @@
 <!-- run/3&#45;&gt;run/4 -->
 <g id="edge2" class="edge">
 <title>run/3&#45;&gt;run/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L155" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M606.6,-1225.53C601.97,-1207.19 594.62,-1178.06 589.16,-1156.4"/>
 <polygon fill="black" stroke="black" points="592.56,-1155.56 586.72,-1146.72 585.77,-1157.27 592.56,-1155.56"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L155">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L155">
 <text xml:space="preserve" text-anchor="start" x="597.37" y="-1183.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -107,7 +107,7 @@
 <g id="a_node5"><a xlink:title="Checks the implementation required for exhaustive evaluation.">
 <polygon fill="#ff6a6a" stroke="black" points="190.01,-1028 17.99,-1028 17.99,-992 190.01,-992 190.01,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="25.99" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L112">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="31.39" y="-1011.71" font-family="monospace" font-size="11.00">require_neighborhood/2</text>
 </a>
 </g>
@@ -121,12 +121,12 @@
 <!-- run/4&#45;&gt;require_neighborhood/2 -->
 <g id="edge4" class="edge">
 <title>run/4&#45;&gt;require_neighborhood/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M551.74,-1118.72C479.61,-1101.37 295.56,-1057.09 187.21,-1031.02"/>
 <polygon fill="black" stroke="black" points="188.33,-1027.69 177.79,-1028.75 186.69,-1034.5 188.33,-1027.69"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="357.33" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,7 +136,7 @@
 <title>active_tabu_size/3</title>
 <polygon fill="cornsilk" stroke="black" points="353.81,-1028 208.19,-1028 208.19,-992 353.81,-992 353.81,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="216.19" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L492" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L492">
+<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L492" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L492">
 <text xml:space="preserve" text-anchor="start" x="221.59" y="-1011.71" font-family="monospace" font-size="11.00">active_tabu_size/3</text>
 </a>
 </g>
@@ -148,12 +148,12 @@
 <!-- run/4&#45;&gt;active_tabu_size/3 -->
 <g id="edge6" class="edge">
 <title>run/4&#45;&gt;active_tabu_size/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M551.76,-1114.45C501.66,-1095.31 400.68,-1056.73 337.2,-1032.47"/>
 <polygon fill="black" stroke="black" points="338.58,-1029.25 327.99,-1028.95 336.08,-1035.79 338.58,-1029.25"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="440.53" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,7 +163,7 @@
 <title>restart_loop/20</title>
 <polygon fill="cornsilk" stroke="black" points="497.91,-1028 372.09,-1028 372.09,-992 497.91,-992 497.91,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="380.09" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node11_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L213">
+<g id="a_node11_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="385.49" y="-1011.71" font-family="monospace" font-size="11.00">restart_loop/20</text>
 </a>
 </g>
@@ -175,12 +175,12 @@
 <!-- run/4&#45;&gt;restart_loop/20 -->
 <g id="edge5" class="edge">
 <title>run/4&#45;&gt;restart_loop/20</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M559.67,-1108.53C534.71,-1089 494.1,-1057.23 466.05,-1035.29"/>
 <polygon fill="black" stroke="black" points="468.28,-1032.59 458.25,-1029.19 463.97,-1038.1 468.28,-1032.59"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="512.91" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,7 +190,7 @@
 <title>hook_available/3</title>
 <polygon fill="cornsilk" stroke="black" points="648.21,-1028 515.79,-1028 515.79,-992 648.21,-992 648.21,-1028"/>
 <text xml:space="preserve" text-anchor="start" x="523.79" y="-1012.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node18_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L388">
+<g id="a_node18_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L388" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L388">
 <text xml:space="preserve" text-anchor="start" x="529.19" y="-1011.71" font-family="monospace" font-size="11.00">hook_available/3</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- run/4&#45;&gt;hook_available/3 -->
 <g id="edge3" class="edge">
 <title>run/4&#45;&gt;hook_available/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M582,-1108.53C582,-1090.28 582,-1061.33 582,-1039.7"/>
 <polygon fill="black" stroke="black" points="585.5,-1039.77 582,-1029.77 578.5,-1039.77 585.5,-1039.77"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="582" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -226,12 +226,12 @@
 <!-- run/4&#45;&gt;^^check_options/1 -->
 <g id="edge29" class="edge">
 <title>run/4&#45;&gt;^^check_options/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M605.39,-1108.53C631.58,-1088.97 674.21,-1057.14 703.6,-1035.19"/>
 <polygon fill="black" stroke="black" points="705.51,-1038.13 711.43,-1029.35 701.32,-1032.53 705.51,-1038.13"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="663.62" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -250,12 +250,12 @@
 <!-- run/4&#45;&gt;^^merge_options/2 -->
 <g id="edge30" class="edge">
 <title>run/4&#45;&gt;^^merge_options/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M612.39,-1114.76C663.93,-1095.7 769.31,-1056.74 835.25,-1032.36"/>
 <polygon fill="black" stroke="black" points="836.29,-1035.7 844.46,-1028.95 833.86,-1029.14 836.29,-1035.7"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="746.83" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -274,12 +274,12 @@
 <!-- run/4&#45;&gt;^^option/2 -->
 <g id="edge31" class="edge">
 <title>run/4&#45;&gt;^^option/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M611.99,-1119.04C675.91,-1104.09 830.44,-1067.29 969.41,-1028.66"/>
 <polygon fill="black" stroke="black" points="970.09,-1032.11 978.78,-1026.05 968.21,-1025.36 970.09,-1032.11"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L158">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="833.11" y="-1066.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -290,7 +290,7 @@
 <g id="a_node4"><a xlink:title="Selects the best admissible candidate using the cached run policy.">
 <polygon fill="#ff6a6a" stroke="black" points="442.11,-794 289.89,-794 289.89,-758 442.11,-758 442.11,-794"/>
 <text xml:space="preserve" text-anchor="start" x="297.89" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L101">
+<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="303.29" y="-777.71" font-family="monospace" font-size="11.00">select_candidate/10</text>
 </a>
 </g>
@@ -306,7 +306,7 @@
 <title>evaluate_candidates/8</title>
 <polygon fill="cornsilk" stroke="black" points="320.71,-677 155.29,-677 155.29,-641 320.71,-641 320.71,-677"/>
 <text xml:space="preserve" text-anchor="start" x="163.29" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node10_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L333">
+<g id="a_node10_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="168.69" y="-660.71" font-family="monospace" font-size="11.00">evaluate_candidates/8</text>
 </a>
 </g>
@@ -318,12 +318,12 @@
 <!-- select_candidate/10&#45;&gt;evaluate_candidates/8 -->
 <g id="edge13" class="edge">
 <title>select_candidate/10&#45;&gt;evaluate_candidates/8</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L311" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M346.56,-757.53C325.01,-738.17 290.07,-706.79 265.67,-684.86"/>
 <polygon fill="black" stroke="black" points="268.11,-682.34 258.33,-678.27 263.43,-687.55 268.11,-682.34"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L311">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L311">
 <text xml:space="preserve" text-anchor="start" x="305.84" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -333,7 +333,7 @@
 <title>sample_neighbors/13</title>
 <polygon fill="cornsilk" stroke="black" points="491.11,-677 338.89,-677 338.89,-641 491.11,-641 491.11,-677"/>
 <text xml:space="preserve" text-anchor="start" x="346.89" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node14_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L347">
+<g id="a_node14_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L347" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L347">
 <text xml:space="preserve" text-anchor="start" x="352.29" y="-660.71" font-family="monospace" font-size="11.00">sample_neighbors/13</text>
 </a>
 </g>
@@ -345,12 +345,12 @@
 <!-- select_candidate/10&#45;&gt;sample_neighbors/13 -->
 <g id="edge14" class="edge">
 <title>select_candidate/10&#45;&gt;sample_neighbors/13</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L318" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L318" xlink:title="calls">
 <path fill="none" stroke="black" d="M373.44,-757.53C381.33,-739.02 393.9,-709.52 403.15,-687.8"/>
 <polygon fill="black" stroke="black" points="406.36,-689.22 407.06,-678.65 399.92,-686.47 406.36,-689.22"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L318">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="391.97" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -372,12 +372,12 @@
 <!-- select_candidate/10&#45;&gt;list::length/2 -->
 <g id="edge32" class="edge">
 <title>select_candidate/10&#45;&gt;list::length/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L318" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L318" xlink:title="calls">
 <path fill="none" stroke="black" d="M322.26,-757.53C271.36,-737.21 187.3,-703.64 132.28,-681.67"/>
 <polygon fill="black" stroke="black" points="133.67,-678.46 123.09,-678 131.07,-684.96 133.67,-678.46"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L318">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L318">
 <text xml:space="preserve" text-anchor="start" x="230.64" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -388,7 +388,7 @@
 <g id="a_node6"><a xlink:title="Resolves a restart state and updates the global best independently.">
 <polygon fill="#ff6a6a" stroke="black" points="691.11,-911 538.89,-911 538.89,-875 691.11,-875 691.11,-911"/>
 <text xml:space="preserve" text-anchor="start" x="546.89" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L122">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="552.29" y="-894.71" font-family="monospace" font-size="11.00">restart_candidate/7</text>
 </a>
 </g>
@@ -405,7 +405,7 @@
 <g id="a_node7"><a xlink:title="Resolves an optional tabu key without copying the state.">
 <polygon fill="#ff6a6a" stroke="black" points="683.71,-92 584.29,-92 584.29,-56 683.71,-56 683.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="592.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L132">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="597.69" y="-75.71" font-family="monospace" font-size="11.00">state_key/3</text>
 </a>
 </g>
@@ -422,7 +422,7 @@
 <g id="a_node8"><a xlink:title="Resolves tenure with hook, range, then fixed&#45;option precedence.">
 <polygon fill="#ff6a6a" stroke="black" points="785.21,-677 652.79,-677 652.79,-641 785.21,-641 785.21,-677"/>
 <text xml:space="preserve" text-anchor="start" x="660.79" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L142">
+<g id="a_node8_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="666.19" y="-660.71" font-family="monospace" font-size="11.00">resolve_tenure/6</text>
 </a>
 </g>
@@ -450,12 +450,12 @@
 <!-- resolve_tenure/6&#45;&gt;type::valid/2 -->
 <g id="edge33" class="edge">
 <title>resolve_tenure/6&#45;&gt;type::valid/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L474" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L474" xlink:title="calls">
 <path fill="none" stroke="black" d="M719,-640.53C719,-622.28 719,-593.33 719,-571.7"/>
 <polygon fill="black" stroke="black" points="722.5,-571.77 719,-561.77 715.5,-571.77 722.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L474" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L474">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L474" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L474">
 <text xml:space="preserve" text-anchor="start" x="719" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -465,7 +465,7 @@
 <title>active_tabu_size/4</title>
 <polygon fill="cornsilk" stroke="black" points="353.81,-911 208.19,-911 208.19,-875 353.81,-875 353.81,-911"/>
 <text xml:space="preserve" text-anchor="start" x="216.19" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node23_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L495" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L495">
+<g id="a_node23_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L495" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L495">
 <text xml:space="preserve" text-anchor="start" x="221.59" y="-894.71" font-family="monospace" font-size="11.00">active_tabu_size/4</text>
 </a>
 </g>
@@ -477,12 +477,12 @@
 <!-- active_tabu_size/3&#45;&gt;active_tabu_size/4 -->
 <g id="edge26" class="edge">
 <title>active_tabu_size/3&#45;&gt;active_tabu_size/4</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L492" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L492" xlink:title="calls">
 <path fill="none" stroke="black" d="M281,-991.53C281,-973.28 281,-944.33 281,-922.7"/>
 <polygon fill="black" stroke="black" points="284.5,-922.77 281,-912.77 277.5,-922.77 284.5,-922.77"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L492" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L492">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L492" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L492">
 <text xml:space="preserve" text-anchor="start" x="281" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -492,7 +492,7 @@
 <title>evaluate_candidates_/11</title>
 <polygon fill="cornsilk" stroke="black" points="321.31,-560 142.69,-560 142.69,-524 321.31,-524 321.31,-560"/>
 <text xml:space="preserve" text-anchor="start" x="150.69" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node13_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L336" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L336">
+<g id="a_node13_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L336" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L336">
 <text xml:space="preserve" text-anchor="start" x="156.09" y="-543.71" font-family="monospace" font-size="11.00">evaluate_candidates_/11</text>
 </a>
 </g>
@@ -504,12 +504,12 @@
 <!-- evaluate_candidates/8&#45;&gt;evaluate_candidates_/11 -->
 <g id="edge15" class="edge">
 <title>evaluate_candidates/8&#45;&gt;evaluate_candidates_/11</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L333" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L333" xlink:title="calls">
 <path fill="none" stroke="black" d="M237.09,-640.53C236.14,-622.28 234.63,-593.33 233.5,-571.7"/>
 <polygon fill="black" stroke="black" points="237,-571.57 232.98,-561.77 230,-571.93 237,-571.57"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L333">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L333" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L333">
 <text xml:space="preserve" text-anchor="start" x="235.18" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -517,12 +517,12 @@
 <!-- restart_loop/20&#45;&gt;restart_candidate/7 -->
 <g id="edge8" class="edge">
 <title>restart_loop/20&#45;&gt;restart_candidate/7</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L225" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L225" xlink:title="calls">
 <path fill="none" stroke="black" d="M462.34,-991.53C493.22,-971.8 543.64,-939.59 578.02,-917.62"/>
 <polygon fill="black" stroke="black" points="579.88,-920.59 586.42,-912.26 576.11,-914.69 579.88,-920.59"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L225">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L225" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L225">
 <text xml:space="preserve" text-anchor="start" x="530.4" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -532,7 +532,7 @@
 <title>loop/20</title>
 <polygon fill="cornsilk" stroke="black" points="520.5,-911 447.5,-911 447.5,-875 520.5,-875 520.5,-911"/>
 <text xml:space="preserve" text-anchor="start" x="455.5" y="-895.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node12_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L255">
+<g id="a_node12_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="460.9" y="-894.71" font-family="monospace" font-size="11.00">loop/20</text>
 </a>
 </g>
@@ -544,12 +544,12 @@
 <!-- restart_loop/20&#45;&gt;loop/20 -->
 <g id="edge7" class="edge">
 <title>restart_loop/20&#45;&gt;loop/20</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L213" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M442.44,-991.53C450.33,-973.02 462.9,-943.52 472.15,-921.8"/>
 <polygon fill="black" stroke="black" points="475.36,-923.22 476.06,-912.65 468.92,-920.47 475.36,-923.22"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L213">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L213">
 <text xml:space="preserve" text-anchor="start" x="460.97" y="-949.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -557,12 +557,12 @@
 <!-- loop/20&#45;&gt;select_candidate/10 -->
 <g id="edge11" class="edge">
 <title>loop/20&#45;&gt;select_candidate/10</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M466.08,-874.53C446.3,-855.26 414.29,-824.06 391.81,-802.15"/>
 <polygon fill="black" stroke="black" points="394.39,-799.78 384.79,-795.31 389.51,-804.8 394.39,-799.78"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="428.54" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -572,7 +572,7 @@
 <title>update_tabu/8</title>
 <polygon fill="cornsilk" stroke="black" points="621.31,-794 508.69,-794 508.69,-758 621.31,-758 621.31,-794"/>
 <text xml:space="preserve" text-anchor="start" x="516.69" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node21_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457">
+<g id="a_node21_19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457">
 <text xml:space="preserve" text-anchor="start" x="522.09" y="-777.71" font-family="monospace" font-size="11.00">update_tabu/8</text>
 </a>
 </g>
@@ -584,12 +584,12 @@
 <!-- loop/20&#45;&gt;update_tabu/8 -->
 <g id="edge12" class="edge">
 <title>loop/20&#45;&gt;update_tabu/8</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M496.3,-874.53C509.58,-855.68 530.89,-825.43 546.26,-803.61"/>
 <polygon fill="black" stroke="black" points="549.08,-805.68 551.98,-795.49 543.36,-801.65 549.08,-805.68"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="526.93" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -599,7 +599,7 @@
 <title>report_progress/8</title>
 <polygon fill="cornsilk" stroke="black" points="784.51,-794 645.49,-794 645.49,-758 784.51,-758 784.51,-794"/>
 <text xml:space="preserve" text-anchor="start" x="653.49" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node24_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L505" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L505">
+<g id="a_node24_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L505" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L505">
 <text xml:space="preserve" text-anchor="start" x="658.89" y="-777.71" font-family="monospace" font-size="11.00">report_progress/8</text>
 </a>
 </g>
@@ -611,12 +611,12 @@
 <!-- loop/20&#45;&gt;report_progress/8 -->
 <g id="edge10" class="edge">
 <title>loop/20&#45;&gt;report_progress/8</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M519.08,-874.53C559.4,-854.47 625.65,-821.48 669.8,-799.5"/>
 <polygon fill="black" stroke="black" points="671.22,-802.71 678.61,-795.12 668.1,-796.44 671.22,-802.71"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L273">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L273">
 <text xml:space="preserve" text-anchor="start" x="606.43" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -626,7 +626,7 @@
 <title>report_final/7</title>
 <polygon fill="cornsilk" stroke="black" points="924.61,-794 805.39,-794 805.39,-758 924.61,-758 924.61,-794"/>
 <text xml:space="preserve" text-anchor="start" x="813.39" y="-778.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node25_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L514" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L514">
+<g id="a_node25_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L514" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L514">
 <text xml:space="preserve" text-anchor="start" x="818.79" y="-777.71" font-family="monospace" font-size="11.00">report_final/7</text>
 </a>
 </g>
@@ -638,12 +638,12 @@
 <!-- loop/20&#45;&gt;report_final/7 -->
 <g id="edge9" class="edge">
 <title>loop/20&#45;&gt;report_final/7</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L255" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L255" xlink:title="calls">
 <path fill="none" stroke="black" d="M520.83,-878.13C523.92,-877.05 527.01,-875.99 530,-875 620.33,-845.13 725.87,-815.04 793.99,-796.23"/>
 <polygon fill="black" stroke="black" points="794.84,-799.63 803.55,-793.6 792.98,-792.88 794.84,-799.63"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L255">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L255" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L255">
 <text xml:space="preserve" text-anchor="start" x="667.31" y="-832.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -653,7 +653,7 @@
 <title>is_admissible/7</title>
 <polygon fill="cornsilk" stroke="black" points="587.91,-443 462.09,-443 462.09,-407 587.91,-407 587.91,-443"/>
 <text xml:space="preserve" text-anchor="start" x="470.09" y="-427.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L362">
+<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L362">
 <text xml:space="preserve" text-anchor="start" x="475.49" y="-426.71" font-family="monospace" font-size="11.00">is_admissible/7</text>
 </a>
 </g>
@@ -665,12 +665,12 @@
 <!-- evaluate_candidates_/11&#45;&gt;is_admissible/7 -->
 <g id="edge16" class="edge">
 <title>evaluate_candidates_/11&#45;&gt;is_admissible/7</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L338" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M276.5,-523.53C328.39,-503.17 414.16,-469.5 470.13,-447.54"/>
 <polygon fill="black" stroke="black" points="471.12,-450.91 479.15,-443.99 468.57,-444.39 471.12,-450.91"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L338">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L338">
 <text xml:space="preserve" text-anchor="start" x="387.29" y="-481.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -678,12 +678,12 @@
 <!-- sample_neighbors/13&#45;&gt;is_admissible/7 -->
 <g id="edge18" class="edge">
 <title>sample_neighbors/13&#45;&gt;is_admissible/7</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L349" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M435.29,-640.68C455.05,-622.62 484.34,-592.46 500,-560 516.3,-526.21 522,-482.88 523.98,-454.78"/>
 <polygon fill="black" stroke="black" points="527.46,-455.09 524.54,-444.9 520.48,-454.69 527.46,-455.09"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L349">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="512.71" y="-539.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -693,7 +693,7 @@
 <title>generate_neighbor/5</title>
 <polygon fill="cornsilk" stroke="black" points="491.11,-560 338.89,-560 338.89,-524 491.11,-524 491.11,-560"/>
 <text xml:space="preserve" text-anchor="start" x="346.89" y="-544.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node20_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L444" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L444">
+<g id="a_node20_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L444" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L444">
 <text xml:space="preserve" text-anchor="start" x="352.29" y="-543.71" font-family="monospace" font-size="11.00">generate_neighbor/5</text>
 </a>
 </g>
@@ -705,12 +705,12 @@
 <!-- sample_neighbors/13&#45;&gt;generate_neighbor/5 -->
 <g id="edge17" class="edge">
 <title>sample_neighbors/13&#45;&gt;generate_neighbor/5</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L349" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L349" xlink:title="calls">
 <path fill="none" stroke="black" d="M415,-640.53C415,-622.28 415,-593.33 415,-571.7"/>
 <polygon fill="black" stroke="black" points="418.5,-571.77 415,-561.77 411.5,-571.77 418.5,-571.77"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L349">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L349" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L349">
 <text xml:space="preserve" text-anchor="start" x="415" y="-598.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -720,7 +720,7 @@
 <title>admissible_candidate/6</title>
 <polygon fill="cornsilk" stroke="black" points="611.01,-326 438.99,-326 438.99,-290 611.01,-290 611.01,-326"/>
 <text xml:space="preserve" text-anchor="start" x="446.99" y="-310.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L367">
+<g id="a_node16_24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L367">
 <text xml:space="preserve" text-anchor="start" x="452.39" y="-309.71" font-family="monospace" font-size="11.00">admissible_candidate/6</text>
 </a>
 </g>
@@ -732,12 +732,12 @@
 <!-- is_admissible/7&#45;&gt;admissible_candidate/6 -->
 <g id="edge19" class="edge">
 <title>is_admissible/7&#45;&gt;admissible_candidate/6</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L362" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L362" xlink:title="calls">
 <path fill="none" stroke="black" d="M525,-406.53C525,-388.28 525,-359.33 525,-337.7"/>
 <polygon fill="black" stroke="black" points="528.5,-337.77 525,-327.77 521.5,-337.77 528.5,-337.77"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L362">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L362" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L362">
 <text xml:space="preserve" text-anchor="start" x="525" y="-364.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -747,7 +747,7 @@
 <title>candidate_tabu/4</title>
 <polygon fill="cornsilk" stroke="black" points="591.21,-209 458.79,-209 458.79,-173 591.21,-173 591.21,-209"/>
 <text xml:space="preserve" text-anchor="start" x="466.79" y="-193.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382">
+<g id="a_node17_25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382">
 <text xml:space="preserve" text-anchor="start" x="472.19" y="-192.71" font-family="monospace" font-size="11.00">candidate_tabu/4</text>
 </a>
 </g>
@@ -759,12 +759,12 @@
 <!-- admissible_candidate/6&#45;&gt;candidate_tabu/4 -->
 <g id="edge20" class="edge">
 <title>admissible_candidate/6&#45;&gt;candidate_tabu/4</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L367" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L367" xlink:title="calls">
 <path fill="none" stroke="black" d="M525,-289.53C525,-271.28 525,-242.33 525,-220.7"/>
 <polygon fill="black" stroke="black" points="528.5,-220.77 525,-210.77 521.5,-220.77 528.5,-220.77"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L367">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L367">
 <text xml:space="preserve" text-anchor="start" x="525" y="-247.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -772,12 +772,12 @@
 <!-- candidate_tabu/4&#45;&gt;state_key/3 -->
 <g id="edge21" class="edge">
 <title>candidate_tabu/4&#45;&gt;state_key/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M541.55,-172.53C559.75,-153.34 589.13,-122.33 609.89,-100.44"/>
 <polygon fill="black" stroke="black" points="612.27,-103.02 616.61,-93.35 607.19,-98.2 612.27,-103.02"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382">
 <text xml:space="preserve" text-anchor="start" x="582.77" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -787,7 +787,7 @@
 <title>is_tabu/3</title>
 <polygon fill="cornsilk" stroke="black" points="566.11,-92 479.89,-92 479.89,-56 566.11,-56 566.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="487.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L435" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L435">
+<g id="a_node19_26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L435" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L435">
 <text xml:space="preserve" text-anchor="start" x="493.3" y="-75.71" font-family="monospace" font-size="11.00">is_tabu/3</text>
 </a>
 </g>
@@ -799,12 +799,12 @@
 <!-- candidate_tabu/4&#45;&gt;is_tabu/3 -->
 <g id="edge22" class="edge">
 <title>candidate_tabu/4&#45;&gt;is_tabu/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382" xlink:title="calls">
 <path fill="none" stroke="black" d="M524.7,-172.53C524.38,-154.28 523.88,-125.33 523.5,-103.7"/>
 <polygon fill="black" stroke="black" points="527,-103.7 523.33,-93.77 520,-103.83 527,-103.7"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L382">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L382">
 <text xml:space="preserve" text-anchor="start" x="524.06" y="-130.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -812,12 +812,12 @@
 <!-- update_tabu/8&#45;&gt;state_key/3 -->
 <g id="edge25" class="edge">
 <title>update_tabu/8&#45;&gt;state_key/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="calls">
 <path fill="none" stroke="black" d="M583.49,-757.82C603.93,-736.86 634,-699.35 634,-660 634,-660 634,-660 634,-190 634,-160.55 634,-126.86 634,-103.6"/>
 <polygon fill="black" stroke="black" points="637.5,-103.66 634,-93.66 630.5,-103.66 637.5,-103.66"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457">
 <text xml:space="preserve" text-anchor="start" x="634" y="-422.71" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -825,12 +825,12 @@
 <!-- update_tabu/8&#45;&gt;resolve_tenure/6 -->
 <g id="edge23" class="edge">
 <title>update_tabu/8&#45;&gt;resolve_tenure/6</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="calls">
 <path fill="none" stroke="black" d="M589.84,-757.56C604.28,-747.34 622.78,-734.09 639,-722 655.45,-709.74 673.54,-695.77 688.35,-684.19"/>
 <polygon fill="black" stroke="black" points="690.2,-687.19 695.91,-678.26 685.88,-681.68 690.2,-687.19"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457">
 <text xml:space="preserve" text-anchor="start" x="650" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -840,7 +840,7 @@
 <title>prune_tabu/3</title>
 <polygon fill="cornsilk" stroke="black" points="615.01,-677 508.99,-677 508.99,-641 615.01,-641 615.01,-677"/>
 <text xml:space="preserve" text-anchor="start" x="516.99" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node22_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L484" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L484">
+<g id="a_node22_27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L484" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L484">
 <text xml:space="preserve" text-anchor="start" x="522.39" y="-660.71" font-family="monospace" font-size="11.00">prune_tabu/3</text>
 </a>
 </g>
@@ -852,12 +852,12 @@
 <!-- update_tabu/8&#45;&gt;prune_tabu/3 -->
 <g id="edge24" class="edge">
 <title>update_tabu/8&#45;&gt;prune_tabu/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="calls">
 <path fill="none" stroke="black" d="M564.54,-757.53C564.07,-739.28 563.31,-710.33 562.75,-688.7"/>
 <polygon fill="black" stroke="black" points="566.25,-688.67 562.49,-678.77 559.25,-688.85 566.25,-688.67"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L457">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L457">
 <text xml:space="preserve" text-anchor="start" x="563.59" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -867,7 +867,7 @@
 <title>call_progress/6</title>
 <polygon fill="cornsilk" stroke="black" points="928.91,-677 803.09,-677 803.09,-641 928.91,-641 928.91,-677"/>
 <text xml:space="preserve" text-anchor="start" x="811.09" y="-661.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node26_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L520" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L520">
+<g id="a_node26_28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L520" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L520">
 <text xml:space="preserve" text-anchor="start" x="816.49" y="-660.71" font-family="monospace" font-size="11.00">call_progress/6</text>
 </a>
 </g>
@@ -879,12 +879,12 @@
 <!-- report_progress/8&#45;&gt;call_progress/6 -->
 <g id="edge27" class="edge">
 <title>report_progress/8&#45;&gt;call_progress/6</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L505" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L505" xlink:title="calls">
 <path fill="none" stroke="black" d="M737.93,-757.53C763.69,-737.92 805.66,-705.96 834.48,-684"/>
 <polygon fill="black" stroke="black" points="836.31,-687.01 842.14,-678.17 832.07,-681.45 836.31,-687.01"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L505" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L505">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L505" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L505">
 <text xml:space="preserve" text-anchor="start" x="795.03" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -892,12 +892,12 @@
 <!-- report_final/7&#45;&gt;call_progress/6 -->
 <g id="edge28" class="edge">
 <title>report_final/7&#45;&gt;call_progress/6</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L514" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L514" xlink:title="calls">
 <path fill="none" stroke="black" d="M865.15,-757.53C865.31,-739.28 865.56,-710.33 865.75,-688.7"/>
 <polygon fill="black" stroke="black" points="869.25,-688.8 865.84,-678.77 862.25,-688.74 869.25,-688.8"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L514" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L514">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L514" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L514">
 <text xml:space="preserve" text-anchor="start" x="865.53" y="-715.21" font-family="monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -907,7 +907,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="877.21,-1262 744.79,-1262 744.79,-1226 877.21,-1226 877.21,-1262"/>
 <text xml:space="preserve" text-anchor="start" x="752.79" y="-1246.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node27_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L532" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L532">
+<g id="a_node27_29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L532" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L532">
 <text xml:space="preserve" text-anchor="start" x="758.19" y="-1245.71" font-family="monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -921,7 +921,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1057.61,-1262 938.39,-1262 938.39,-1226 1057.61,-1226 1057.61,-1262"/>
 <text xml:space="preserve" text-anchor="start" x="946.39" y="-1246.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node28_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L541" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/tabu_search/tabu_search.lgt#L541">
+<g id="a_node28_30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L541" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/tabu_search/tabu_search.lgt#L541">
 <text xml:space="preserve" text-anchor="start" x="951.79" y="-1245.71" font-family="monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>

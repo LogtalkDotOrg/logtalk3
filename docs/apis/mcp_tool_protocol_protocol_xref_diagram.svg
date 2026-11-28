@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 767,-140 767,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol mcp_tool_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_mcp_tool_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="mcp_tool_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 743,-46 743,-46 749,-46 755,-52 755,-58 755,-58 755,-116 755,-116 755,-122 749,-128 743,-128 743,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">mcp_tool_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Returns a list of additional MCP features used by this provider. ``prompts``, ``resources``, and ``completions`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.">
 <polygon fill="springgreen" stroke="black" points="137.61,-92 18.39,-92 18.39,-56 137.61,-56 137.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="26.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L39">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="31.79" y="-75.71" font-family="monospace" font-size="11.00">capabilities/1</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Returns a list of tool descriptors available from this object. Each descriptor is a compound term ``tool(Name, Functor, Arity)`` where ``Name`` is the MCP tool name (an atom), ``Functor`` is the predicate functor, and ``Arity`` is the predicate arity. By default, the tool name is the predicate functor. Tool titles are derived from ``info/2`` ``title`` keys (falling back to the predicate name). Tool descriptions and parameter schemas are derived from the ``info/2`` and ``mode/2`` directives of the corresponding predicates.">
 <polygon fill="springgreen" stroke="black" points="228.5,-92 155.5,-92 155.5,-56 228.5,-56 228.5,-92"/>
 <text xml:space="preserve" text-anchor="start" x="163.5" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L46">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="168.9" y="-75.71" font-family="monospace" font-size="11.00">tools/1</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Handles a tool call. ``Name`` is the MCP tool name (as declared in ``tools/1``), ``Arguments`` is a list of ``ArgumentName&#45;Value`` pairs, and ``Result`` is unified with the tool result. The result must be one of: ``text(Atom)`` for a text result, ``error(Atom)`` for an error result, ``results(List)`` for a list of content items where each item is ``text(Atom)``, ``error(Atom)``, ``resource_link(URI, Name)``, or ``resource_link(URI, Name, Description, MimeType)``, ``structured(StructuredContent)`` for structured output with auto&#45;generated text, or ``structured(ContentItems, StructuredContent)`` for structured output with explicit content items. If this predicate is not defined for a tool, the MCP server will use auto&#45;dispatch: it calls the tool predicate as a message to the implementing object, collects output arguments, and returns them as a text result.">
 <polygon fill="springgreen" stroke="black" points="345.71,-92 246.29,-92 246.29,-56 345.71,-56 345.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="254.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L53">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="259.69" y="-75.71" font-family="monospace" font-size="11.00">tool_call/3</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Handles a tool call with elicitation support under the 2025&#45;06&#45;18 adapter only. Same as ``tool_call/3`` but receives an ``Elicit`` closure as the third argument. The closure can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is a prompt text (an atom), ``Schema`` is a curly&#45;term JSON Schema describing the requested input (e.g., ``{type&#45;object, properties&#45;{answer&#45;{type&#45;string, enum&#45;[yes, no]}}, required&#45;[answer]}``), and ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly&#45;term), ``decline``, or ``cancel``. Only available when the application declares ``elicitation`` in its ``capabilities/1`` and the client advertises elicitation support during initialization. Falls back to ``tool_call/3`` and then auto&#45;dispatch if not defined. The 2026&#45;07&#45;28 adapter never calls this predicate; use ``tool_call_round/4`` from ``mcp_multiround_protocol`` instead.">
 <polygon fill="springgreen" stroke="black" points="462.71,-92 363.29,-92 363.29,-56 462.71,-56 462.71,-92"/>
 <text xml:space="preserve" text-anchor="start" x="371.29" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L60">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="376.69" y="-75.71" font-family="monospace" font-size="11.00">tool_call/4</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Returns the JSON output schema for the given tool name. Optional; when defined, the schema overrides the one inferred from the tool predicate ``info/2`` and ``mode/2`` directives. The tool can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The schema must be a curly&#45;term following JSON Schema format (e.g. ``{type&#45;object, properties&#45;{temperature&#45;{type&#45;number}}, required&#45;[temperature]}``).">
 <polygon fill="springgreen" stroke="black" points="606.91,-92 481.09,-92 481.09,-56 606.91,-56 606.91,-92"/>
 <text xml:space="preserve" text-anchor="start" x="489.09" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L67">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="494.49" y="-75.71" font-family="monospace" font-size="11.00">output_schema/2</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Returns the JSON input schema for the given tool name. Optional; when defined, the schema overrides the one inferred from the tool predicate ``info/2`` and ``mode/2`` directives. The schema must be a curly&#45;term following JSON Schema format (e.g. ``{type&#45;object, properties&#45;{temperature&#45;{type&#45;number}}, required&#45;[temperature]}``).">
 <polygon fill="springgreen" stroke="black" points="744.61,-92 625.39,-92 625.39,-56 744.61,-56 744.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="633.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/mcp_server/mcp_tool_protocol.lgt#L74">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/mcp_server/mcp_tool_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="638.79" y="-75.71" font-family="monospace" font-size="11.00">input_schema/2</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-140 1088,-140 1088,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-26" font-family="monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-16" font-family="monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol max_flow_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;25, 23:03</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-6" font-family="monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;11&#45;28, 01:27</text>
 <g id="clust1" class="cluster">
 <title>cluster_max_flow_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="max_flow_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-46C20,-46 1064,-46 1064,-46 1070,-46 1076,-52 1076,-58 1076,-58 1076,-116 1076,-116 1076,-122 1070,-128 1064,-128 1064,-128 20,-128 20,-128 14,-128 8,-122 8,-116 8,-116 8,-58 8,-58 8,-52 14,-46 20,-46"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-112.46" font-family="monospace" font-size="10.00" fill="dimgray">max_flow_protocol</text>
 </a>
 </g>
@@ -30,7 +30,7 @@
 <g id="a_node1"><a xlink:title="Computes a maximum flow from ``Source`` to ``Sink``. ``Flow`` is a list of ``flow(ArcId, From, To, Amount)`` terms with a positive amount, one per arc carrying flow, in the order of the network arcs. ``ArcId`` is the one&#45;based position of the arc in the input list used to construct the network. Maximum flow currently requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="110.41,-92 17.59,-92 17.59,-56 110.41,-56 110.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="25.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="30.99" y="-75.71" font-family="monospace" font-size="11.00">max_flow/5</text>
 </a>
 </g>
@@ -47,7 +47,7 @@
 <g id="a_node2"><a xlink:title="Computes a maximum flow from a non&#45;empty set of distinct sources to a non&#45;empty, disjoint set of distinct sinks. ``Flow`` uses the original network arc IDs and endpoints. Requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="307.31,-92 128.69,-92 128.69,-56 307.31,-56 307.31,-92"/>
 <text xml:space="preserve" text-anchor="start" x="136.69" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L45">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="142.09" y="-75.71" font-family="monospace" font-size="11.00">multi_source_max_flow/5</text>
 </a>
 </g>
@@ -64,7 +64,7 @@
 <g id="a_node3"><a xlink:title="Computes a maximum flow subject to the given intermediate vertex capacities, represented as ``Vertex&#45;Capacity`` pairs. Source and sink capacities are not constrained. ``Flow`` uses the original network arc IDs and endpoints. Requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="510.61,-92 325.39,-92 325.39,-56 510.61,-56 510.61,-92"/>
 <text xml:space="preserve" text-anchor="start" x="333.39" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L60">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="338.79" y="-75.71" font-family="monospace" font-size="11.00">node_capacity_max_flow/6</text>
 </a>
 </g>
@@ -81,7 +81,7 @@
 <g id="a_node4"><a xlink:title="Computes a minimum cut separating ``Source`` from ``Sink``. ``Cut`` is a ``cut(SourceSide, SinkSide, Arcs)`` term where ``SourceSide`` and ``SinkSide`` are sorted lists of vertices and ``Arcs`` is the list of ``arc(From, To, Capacity)`` terms for the arcs with positive capacity going from the source side to the sink side. ``Value`` is both the maximum flow value and the capacity of the cut. Minimum cut currently requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="615.11,-92 528.89,-92 528.89,-56 615.11,-56 615.11,-92"/>
 <text xml:space="preserve" text-anchor="start" x="536.89" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L75">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L75">
 <text xml:space="preserve" text-anchor="start" x="542.3" y="-75.71" font-family="monospace" font-size="11.00">min_cut/5</text>
 </a>
 </g>
@@ -98,7 +98,7 @@
 <g id="a_node5"><a xlink:title="Computes the sink&#45;closest minimum cut. Its source side contains exactly the vertices that cannot reach the sink in the final residual graph. Requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="805.01,-92 632.99,-92 632.99,-56 805.01,-56 805.01,-92"/>
 <text xml:space="preserve" text-anchor="start" x="640.99" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L88">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L88">
 <text xml:space="preserve" text-anchor="start" x="646.39" y="-75.71" font-family="monospace" font-size="11.00">sink_closest_min_cut/5</text>
 </a>
 </g>
@@ -115,7 +115,7 @@
 <g id="a_node6"><a xlink:title="Checks whether the minimum cut separating the given source and sink is unique. ``Unique`` is ``true`` or ``false``. Requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="955.21,-92 822.79,-92 822.79,-56 955.21,-56 955.21,-92"/>
 <text xml:space="preserve" text-anchor="start" x="830.79" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L101">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="836.19" y="-75.71" font-family="monospace" font-size="11.00">unique_min_cut/4</text>
 </a>
 </g>
@@ -132,7 +132,7 @@
 <g id="a_node7"><a xlink:title="Enumerates all minimum cuts on backtracking as ``cut(SourceSide, SinkSide, Arcs)`` terms. Enumeration uses the strongly connected components of the final residual graph. Requires zero lower bounds.">
 <polygon fill="springgreen" stroke="black" points="1066.41,-92 973.59,-92 973.59,-56 1066.41,-56 1066.41,-92"/>
 <text xml:space="preserve" text-anchor="start" x="981.59" y="-76.21" font-family="monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/1174e6fc2795c638b1676dea95a5e7ed96b0b132/library/flow_networks/max_flow_protocol.lgt#L114">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/78b07e7d02889a0fcc879f2f6e6f63e5ca25883d/library/flow_networks/max_flow_protocol.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="986.99" y="-75.71" font-family="monospace" font-size="11.00">min_cuts/5</text>
 </a>
 </g>
